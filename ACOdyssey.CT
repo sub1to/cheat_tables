@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="27">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>18</ID>
+      <Description>"Enable"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Activated="1"/>
+      <Color>C08000</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : ACOdyssey.exe
+  Version: 1.5.4
+  Date   : 2020-07-23
+  Author : sub1to
+}
+
+[ENABLE]
+// Hooks
+aobscanmodule(_set_health, ACOdyssey.exe, F8 89 BB 30 01 00 00)
+registersymbol(_set_health)
+
+aobscanmodule(_set_adrenaline, ACOdyssey.exe, CE 00 33 D2 89 BB A8 02 00 00)
+registersymbol(_set_adrenaline)
+
+aobscanmodule(_read_assassin_damage, ACOdyssey.exe, 8B 81 94 01 00 00 C3)
+registersymbol(_read_assassin_damage)
+
+aobscanmodule(_read_hunter_damage, ACOdyssey.exe, 8B 81 90 01 00 00 48 83)
+registersymbol(_read_hunter_damage)
+
+aobscanmodule(_ability_cooldown, ACOdyssey.exe, 48 8B 51 20 48 85 D2 75 04)
+registersymbol(_ability_cooldown)
+
+aobscanmodule(_horse_speed_limit, ACOdyssey.exe, F3 0F 11 4C 24 30 49 8B CF E8)
+registersymbol(_horse_speed_limit)
+
+// Vars
+alloc(lAssassinDmgMult, 4, "ACOdyssey.exe")
+registersymbol(lAssassinDmgMult)
+lAssassinDmgMult:
+  dd 5
+
+alloc(lHunterDmgMult, 4, "ACOdyssey.exe")
+registersymbol(lHunterDmgMult)
+lHunterDmgMult:
+  dd 2
+
+// Pointers
+alloc(pAdrenaline, 8, "ACOdyssey.exe")
+alloc(pHealth, 8, "ACOdyssey.exe")
+alloc(pAssassinDmg, 8, "ACOdyssey.exe")
+alloc(pHunterDmg, 8, "ACOdyssey.exe")
+
+registersymbol(pAdrenaline)
+registersymbol(pHealth)
+registersymbol(pAssassinDmg)
+registersymbol(pHunterDmg)
+
+
+[DISABLE]
+// Hooks
+unregistersymbol(_set_health)
+unregistersymbol(_set_adrenaline)
+unregistersymbol(_read_assassin_damage)
+unregistersymbol(_read_hunter_damage)
+unregistersymbol(_ability_cooldown)
+unregistersymbol(_horse_speed_limit)
+
+// Vars
+unregistersymbol(lAssassinDmgMult)
+dealloc(lAssassinDmgMult)
+
+unregistersymbol(lHunterDmgMult)
+dealloc(lHunterDmgMult)
+
+// Pointers
+unregistersymbol(pAdrenaline)
+unregistersymbol(pHealth)
+unregistersymbol(pAssassinDmg)
+unregistersymbol(pHunterDmg)
+
+dealloc(pAdrenaline)
+dealloc(pHealth)
+dealloc(pAssassinDmg)
+dealloc(pHunterDmg)
+
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>31</ID>
+          <Description>"Infinite Health"</Description>
+          <LastState/>
+          <Color>C08000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : ACOdyssey.exe
+  Version: 1.5.4
+  Date   : 2020-07-23
+  Author : sub1to
+
+  This script sets health to max
+}
+
+[ENABLE]
+alloc(newmem, 1000, ACOdyssey.exe)
+
+// Script Labels
+label(code)
+label(return)
+
+// Offsets
+define(m_curHealth,130)
+define(m_maxHealth,134)
+
+newmem:
+  mov [pHealth], rbx
+  mov edi, [rbx+m_maxHealth]
+
+code:
+  mov [rbx+m_curHealth],edi
+  jmp return
+
+_set_health+01:
+  jmp newmem
+  nop
+return:
+
+[DISABLE]
+
+_set_health+01:
+  db 89 BB 30 01 00 00
+
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "ACOdyssey.exe"+22C7471
+
+"ACOdyssey.exe"+22C7455: 57                             -  push rdi
+"ACOdyssey.exe"+22C7456: 48 83 EC 20                    -  sub rsp,20
+"ACOdyssey.exe"+22C745A: 8B FA                          -  mov edi,edx
+"ACOdyssey.exe"+22C745C: 48 8B D9                       -  mov rbx,rcx
+"ACOdyssey.exe"+22C745F: E8 EC 9B 04 00                 -  call ACOdyssey.exe+2311050
+"ACOdyssey.exe"+22C7464: 83 C9 FF                       -  or ecx,-01
+"ACOdyssey.exe"+22C7467: 3B F9                          -  cmp edi,ecx
+"ACOdyssey.exe"+22C7469: 0F 4E F9                       -  cmovle edi,ecx
+"ACOdyssey.exe"+22C746C: 3B C7                          -  cmp eax,edi
+"ACOdyssey.exe"+22C746E: 0F 4E F8                       -  cmovle edi,eax
+// ---------- INJECTING HERE ----------
+"ACOdyssey.exe"+22C7471: 89 BB 30 01 00 00              -  mov [rbx+00000130],edi
+// ---------- DONE INJECTING  ----------
+"ACOdyssey.exe"+22C7477: 48 8B 5C 24 30                 -  mov rbx,[rsp+30]
+"ACOdyssey.exe"+22C747C: 48 83 C4 20                    -  add rsp,20
+"ACOdyssey.exe"+22C7480: 5F                             -  pop rdi
+"ACOdyssey.exe"+22C7481: C3                             -  ret 
+"ACOdyssey.exe"+22C7482: CC                             -  int 3 
+"ACOdyssey.exe"+22C7483: CC                             -  int 3 
+"ACOdyssey.exe"+22C7484: CC                             -  int 3 
+"ACOdyssey.exe"+22C7485: CC                             -  int 3 
+"ACOdyssey.exe"+22C7486: CC                             -  int 3 
+"ACOdyssey.exe"+22C7487: CC                             -  int 3 
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17</ID>
+          <Description>"Infinite  Adrenaline"</Description>
+          <LastState Activated="1"/>
+          <Color>C08000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : ACOdyssey.exe
+  Version: 1.5.4
+  Date   : 2020-07-23
+  Author : sub1to
+
+  This script sets adrenaline to max
+  Visually it will always be a "step" behind
+}
+
+[ENABLE]
+alloc(newmem, 1000, ACOdyssey.exe)
+
+// Script Labels
+label(code)
+label(return)
+
+// Offsets
+define(m_curAdrenaline,2A8)
+define(m_maxAdrenaline,2AC)
+
+
+newmem:
+  mov [pAdrenaline], rbx
+  mov edi, [rbx+m_maxAdrenaline]
+
+code:
+  mov [rbx+m_curAdrenaline],edi
+  jmp return
+
+_set_adrenaline+4:
+  jmp newmem
+  nop
+return:
+
+[DISABLE]
+
+_set_adrenaline+4:
+  db 89 BB A8 02 00 00
+
+
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "ACOdyssey.exe"+22C7B19
+
+"ACOdyssey.exe"+22C7AF3: 74 7B                 -  je ACOdyssey.exe+22C7B70
+"ACOdyssey.exe"+22C7AF5: 44 8B 81 AC 02 00 00  -  mov r8d,[rcx+000002AC]
+"ACOdyssey.exe"+22C7AFC: 41 3B D0              -  cmp edx,r8d
+"ACOdyssey.exe"+22C7AFF: 8B 89 A8 02 00 00     -  mov ecx,[rcx+000002A8]
+"ACOdyssey.exe"+22C7B05: 48 89 7C 24 30        -  mov [rsp+30],rdi
+"ACOdyssey.exe"+22C7B0A: 41 8B F8              -  mov edi,r8d
+"ACOdyssey.exe"+22C7B0D: 0F 46 FA              -  cmovbe edi,edx
+"ACOdyssey.exe"+22C7B10: 8B D7                 -  mov edx,edi
+"ACOdyssey.exe"+22C7B12: E8 09 09 CE 00        -  call ACOdyssey.exe+2FA8420
+"ACOdyssey.exe"+22C7B17: 33 D2                 -  xor edx,edx
+// ---------- INJECTING HERE ----------
+"ACOdyssey.exe"+22C7B19: 89 BB A8 02 00 00     -  mov [rbx+000002A8],edi
+// ---------- DONE INJECTING  ----------
+"ACOdyssey.exe"+22C7B1F: 8B C7                 -  mov eax,edi
+"ACOdyssey.exe"+22C7B21: F7 B3 CC 01 00 00     -  div [rbx+000001CC]
+"ACOdyssey.exe"+22C7B27: 3B 83 B0 02 00 00     -  cmp eax,[rbx+000002B0]
+"ACOdyssey.exe"+22C7B2D: 75 04                 -  jne ACOdyssey.exe+22C7B33
+"ACOdyssey.exe"+22C7B2F: 85 FF                 -  test edi,edi
+"ACOdyssey.exe"+22C7B31: 75 19                 -  jne ACOdyssey.exe+22C7B4C
+"ACOdyssey.exe"+22C7B33: 85 FF                 -  test edi,edi
+"ACOdyssey.exe"+22C7B35: 89 83 B0 02 00 00     -  mov [rbx+000002B0],eax
+"ACOdyssey.exe"+22C7B3B: 8B D0                 -  mov edx,eax
+"ACOdyssey.exe"+22C7B3D: 48 8B CB              -  mov rcx,rbx
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>37</ID>
+          <Description>"Assassin Damage Multiplier"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Activated="1"/>
+          <Color>C08000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : ACOdyssey.exe
+  Version: 1.5.4
+  Date   : 2020-07-23
+  Author : sub1to
+
+  This script multiplies the assassin damage (as displayed in the inventory menu)
+}
+
+[ENABLE]
+alloc(newmem, 1000, ACOdyssey.exe)
+
+// Script Labels
+label(return)
+
+// Offsets
+define(m_hunterDmg,190)
+define(m_assassinDmg,194)
+
+newmem:
+  mov [pAssassinDmg], rcx
+  mov eax, [rcx+m_assassinDmg]
+  mov ecx, [lAssassinDmgMult]
+  mul ecx
+  jmp return
+
+_read_assassin_damage:
+  jmp newmem
+  nop
+return:
+
+[DISABLE]
+_read_assassin_damage:
+  db 8B 81 94 01 00 00
+
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "ACOdyssey.exe"+28A7DB0
+
+"ACOdyssey.exe"+28A7DA6: CC                       -  int 3 
+"ACOdyssey.exe"+28A7DA7: CC                       -  int 3 
+"ACOdyssey.exe"+28A7DA8: CC                       -  int 3 
+"ACOdyssey.exe"+28A7DA9: CC                       -  int 3 
+"ACOdyssey.exe"+28A7DAA: CC                       -  int 3 
+"ACOdyssey.exe"+28A7DAB: CC                       -  int 3 
+"ACOdyssey.exe"+28A7DAC: CC                       -  int 3 
+"ACOdyssey.exe"+28A7DAD: CC                       -  int 3 
+"ACOdyssey.exe"+28A7DAE: CC                       -  int 3 
+"ACOdyssey.exe"+28A7DAF: CC                       -  int 3 
+// ---------- INJECTING HERE ----------
+"ACOdyssey.exe"+28A7DB0: 8B 81 94 01 00 00        -  mov eax,[rcx+00000194]
+// ---------- DONE INJECTING  ----------
+"ACOdyssey.exe"+28A7DB6: C3                       -  ret 
+"ACOdyssey.exe"+28A7DB7: CC                       -  int 3 
+"ACOdyssey.exe"+28A7DB8: CC                       -  int 3 
+"ACOdyssey.exe"+28A7DB9: CC                       -  int 3 
+"ACOdyssey.exe"+28A7DBA: CC                       -  int 3 
+"ACOdyssey.exe"+28A7DBB: CC                       -  int 3 
+"ACOdyssey.exe"+28A7DBC: CC                       -  int 3 
+"ACOdyssey.exe"+28A7DBD: CC                       -  int 3 
+"ACOdyssey.exe"+28A7DBE: CC                       -  int 3 
+"ACOdyssey.exe"+28A7DBF: CC                       -  int 3 
+}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>38</ID>
+              <Description>"Multiplier"</Description>
+              <LastState Value="5" RealAddress="7FF751E60000"/>
+              <Color>C08000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>lAssassinDmgMult</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>49</ID>
+          <Description>"Hunter Damage Multiplier"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Activated="1"/>
+          <Color>C08000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : ACOdyssey.exe
+  Version: 1.5.4
+  Date   : 2020-07-23
+  Author : sub1to
+
+  This script multiplies the hunter damage (as displayed in the inventory menu)
+}
+
+[ENABLE]
+alloc(newmem, 1000,ACOdyssey.exe)
+
+// Script Labels
+label(return)
+
+// Offsets
+define(m_hunterDmg,190)
+define(m_assassinDmg,194)
+
+newmem:
+  mov [pHunterDmg], rcx
+  mov eax, [rcx+m_hunterDmg]
+  mov ecx, [lHunterDmgMult]
+  mul ecx
+  jmp return
+
+_read_hunter_damage:
+  jmp newmem
+  nop
+return:
+
+[DISABLE]
+_read_hunter_damage:
+  db 8B 81 90 01 00 00
+
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "ACOdyssey.exe"+28A7E2F
+
+"ACOdyssey.exe"+28A7E12: 8B 83 9C 01 00 00        -  mov eax,[rbx+0000019C]
+"ACOdyssey.exe"+28A7E18: 48 83 C4 20              -  add rsp,20
+"ACOdyssey.exe"+28A7E1C: 5B                       -  pop rbx
+"ACOdyssey.exe"+28A7E1D: C3                       -  ret 
+"ACOdyssey.exe"+28A7E1E: 8B 83 A0 01 00 00        -  mov eax,[rbx+000001A0]
+"ACOdyssey.exe"+28A7E24: 48 83 C4 20              -  add rsp,20
+"ACOdyssey.exe"+28A7E28: 5B                       -  pop rbx
+"ACOdyssey.exe"+28A7E29: C3                       -  ret 
+"ACOdyssey.exe"+28A7E2A: 83 FA 01                 -  cmp edx,01
+"ACOdyssey.exe"+28A7E2D: 75 0C                    -  jne ACOdyssey.exe+28A7E3B
+// ---------- INJECTING HERE ----------
+"ACOdyssey.exe"+28A7E2F: 8B 81 90 01 00 00        -  mov eax,[rcx+00000190]
+// ---------- DONE INJECTING  ----------
+"ACOdyssey.exe"+28A7E35: 48 83 C4 20              -  add rsp,20
+"ACOdyssey.exe"+28A7E39: 5B                       -  pop rbx
+"ACOdyssey.exe"+28A7E3A: C3                       -  ret 
+"ACOdyssey.exe"+28A7E3B: 83 FA 02                 -  cmp edx,02
+"ACOdyssey.exe"+28A7E3E: 75 0C                    -  jne ACOdyssey.exe+28A7E4C
+"ACOdyssey.exe"+28A7E40: 8B 81 94 01 00 00        -  mov eax,[rcx+00000194]
+"ACOdyssey.exe"+28A7E46: 48 83 C4 20              -  add rsp,20
+"ACOdyssey.exe"+28A7E4A: 5B                       -  pop rbx
+"ACOdyssey.exe"+28A7E4B: C3                       -  ret 
+"ACOdyssey.exe"+28A7E4C: 83 FA 03                 -  cmp edx,03
+}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>51</ID>
+              <Description>"Multiplier"</Description>
+              <LastState Value="5" RealAddress="7FF751E60004"/>
+              <Color>C08000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>lHunterDmgMult</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>4463</ID>
+          <Description>"No Ability Cooldowns"</Description>
+          <LastState Activated="1"/>
+          <Color>C08000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : ACOdyssey.exe
+  Version: 1.5.4
+  Date   : 2020-07-23
+  Author : sub1to
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+alloc(newmem, 1000, ACOdyssey.exe)
+
+label(code)
+label(return)
+
+newmem:
+  lea rdx,[rcx+8]
+  mov rdx,[rdx+10]
+  mov [rcx+8],rdx
+
+code:
+  mov rdx,[rcx+20]
+  test rdx,rdx
+  jmp return
+
+_ability_cooldown:
+  jmp newmem
+  nop
+  nop
+return:
+
+[DISABLE]
+_ability_cooldown:
+  db 48 8B 51 20 48 85 D2
+
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "ACOdyssey.exe"+100F9530
+
+"ACOdyssey.exe"+100F950B: 3B 9C 41 53 49 F7 D3     -  cmp ebx,[rcx+rax*2-2C08B6AD]
+"ACOdyssey.exe"+100F9512: 44 21 1C 24              -  and [rsp],r11d
+"ACOdyssey.exe"+100F9516: 41 5B                    -  pop r11
+"ACOdyssey.exe"+100F9518: 41 81 C3 B0 D2 18 75     -  add r11d,7518D2B0
+"ACOdyssey.exe"+100F951F: 9D                       -  popfq 
+"ACOdyssey.exe"+100F9520: 41 C1 DB 0F              -  rcr r11d,0F
+"ACOdyssey.exe"+100F9524: 41 C1 FB 1D              -  sar r11d,1D
+"ACOdyssey.exe"+100F9528: E9 D1 4C 43 00           -  jmp ACOdyssey.exe+1052E1FE
+"ACOdyssey.exe"+100F952D: 68 66                    - db 68 66  // SHORTENED TO HIT INJECTION FROM:  push 8B489066
+"ACOdyssey.exe"+100F952F: 90                       -  nop 
+// ---------- INJECTING HERE ----------
+"ACOdyssey.exe"+100F9530: 48 8B 51 20              -  mov rdx,[rcx+20]
+"ACOdyssey.exe"+100F9534: 48 85 D2                 -  test rdx,rdx
+// ---------- DONE INJECTING  ----------
+"ACOdyssey.exe"+100F9537: 75 04                    -  jne ACOdyssey.exe+100F953D
+"ACOdyssey.exe"+100F9539: 48 8B 51 08              -  mov rdx,[rcx+08]
+"ACOdyssey.exe"+100F953D: 80 79 28 00              -  cmp byte ptr [rcx+28],00
+"ACOdyssey.exe"+100F9541: 74 27                    -  je ACOdyssey.exe+100F956A
+"ACOdyssey.exe"+100F9543: 48 8B 41 18              -  mov rax,[rcx+18]
+"ACOdyssey.exe"+100F9547: 48 39 D0                 -  cmp rax,rdx
+"ACOdyssey.exe"+100F954A: 76 1E                    -  jna ACOdyssey.exe+100F956A
+"ACOdyssey.exe"+100F954C: 48 29 D0                 -  sub rax,rdx
+"ACOdyssey.exe"+100F954F: 0F 57 C0                 -  xorps xmm0,xmm0
+"ACOdyssey.exe"+100F9552: F3 48 0F 2A C0           -  cvtsi2ss xmm0,rax
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>4470</ID>
+          <Description>"No Horse Speed Limit"</Description>
+          <LastState Activated="1"/>
+          <Color>C08000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : ACOdyssey.exe
+  Version: 
+  Date   : 2020-07-23
+  Author : sub1to
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+_horse_speed_limit:
+  db 90 90 90 90 90 90
+
+[DISABLE]
+_horse_speed_limit:
+  db F3 0F 11 4C 24 30
+
+{
+// ORIGINAL CODE - INJECTION POINT: "ACOdyssey.exe"+1F06652
+
+"ACOdyssey.exe"+1F0662C: 48 8D 54 24 40              -  lea rdx,[rsp+40]
+"ACOdyssey.exe"+1F06631: 44 0F B6 C8                 -  movzx r9d,al
+"ACOdyssey.exe"+1F06635: 4D 8B C7                    -  mov r8,r15
+"ACOdyssey.exe"+1F06638: E8 43 80 FE FF              -  call ACOdyssey.exe+1EEE680
+"ACOdyssey.exe"+1F0663D: 84 C0                       -  test al,al
+"ACOdyssey.exe"+1F0663F: 74 17                       -  je ACOdyssey.exe+1F06658
+"ACOdyssey.exe"+1F06641: F3 0F 10 4C 24 40           -  movss xmm1,[rsp+40]
+"ACOdyssey.exe"+1F06647: F3 0F 10 44 24 30           -  movss xmm0,[rsp+30]
+"ACOdyssey.exe"+1F0664D: 0F 2F C1                    -  comiss xmm0,xmm1
+"ACOdyssey.exe"+1F06650: 76 06                       -  jna ACOdyssey.exe+1F06658
+// ---------- INJECTING HERE ----------
+"ACOdyssey.exe"+1F06652: F3 0F 11 4C 24 30           -  movss [rsp+30],xmm1
+// ---------- DONE INJECTING  ----------
+"ACOdyssey.exe"+1F06658: 49 8B CF                    -  mov rcx,r15
+"ACOdyssey.exe"+1F0665B: E8 00 3B 78 00              -  call ACOdyssey.exe+268A160
+"ACOdyssey.exe"+1F06660: 48 8B D8                    -  mov rbx,rax
+"ACOdyssey.exe"+1F06663: 48 85 C0                    -  test rax,rax
+"ACOdyssey.exe"+1F06666: 0F 84 9B 00 00 00           -  je ACOdyssey.exe+1F06707
+"ACOdyssey.exe"+1F0666C: 4D 85 FF                    -  test r15,r15
+"ACOdyssey.exe"+1F0666F: 0F 84 92 00 00 00           -  je ACOdyssey.exe+1F06707
+"ACOdyssey.exe"+1F06675: 65 48 8B 0C 25 58 00 00 00  -  mov rcx,gs:[00000058]
+"ACOdyssey.exe"+1F0667E: B8 14 00 00 00              -  mov eax,00000014
+"ACOdyssey.exe"+1F06683: 4E 8B 34 E9                 -  mov r14,[rcx+r13*8]
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>33</ID>
+          <Description>"Symbols"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" Activated="1" RealAddress="00000000"/>
+          <Color>000080</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>4464</ID>
+              <Description>"_set_health"</Description>
+              <LastState Value="89 BB 30 01 00 00 48 8B 5C 24" RealAddress="7FF754137471"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>000080</Color>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>10</ByteLength>
+              <Address>_set_health+1</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>4465</ID>
+              <Description>"_set_adrenaline"</Description>
+              <LastState Value="E9 E2 84 CE FD 90 8B C7 F7 B3" RealAddress="7FF754137B19"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>000080</Color>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>10</ByteLength>
+              <Address>_set_adrenaline+4</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>4466</ID>
+              <Description>"_read_assassin_damage"</Description>
+              <LastState Value="E9 4B 82 71 FD 90 C3 CC CC CC" RealAddress="7FF754717DB0"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>000080</Color>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>10</ByteLength>
+              <Address>_read_assassin_damage</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>4467</ID>
+              <Description>"_read_hunter_damage"</Description>
+              <LastState Value="E9 CC 81 72 FD 90 48 83 C4 20" RealAddress="7FF754717E2F"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>000080</Color>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>10</ByteLength>
+              <Address>_read_hunter_damage</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>4468</ID>
+              <Description>"_ability_cooldown"</Description>
+              <LastState Value="E9 CB 6A EE EF 90 90 75 04 48" RealAddress="7FF761F69530"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>000080</Color>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>10</ByteLength>
+              <Address>_ability_cooldown</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>4471</ID>
+              <Description>"_horse_speed_limit"</Description>
+              <LastState Value="90 90 90 90 90 90 49 8B CF E8" RealAddress="7FF753D76652"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>000080</Color>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>10</ByteLength>
+              <Address>_horse_speed_limit</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>32</ID>
+              <Description>"pHealth [Enable Infinite Health]"</Description>
+              <LastState Value="0000000000000000" RealAddress="7FF751E60010"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>000080</Color>
+              <VariableType>8 Bytes</VariableType>
+              <Address>pHealth</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>20</ID>
+              <Description>"pAdrenaline [Enable Infinite Adrenaline]"</Description>
+              <LastState Value="000002CA122F1D40" RealAddress="7FF751E60008"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>000080</Color>
+              <VariableType>8 Bytes</VariableType>
+              <Address>pAdrenaline</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>39</ID>
+              <Description>"pAssassinDmg [Enable Assassin Damage Multiplier]"</Description>
+              <LastState Value="000002C7929BE530" RealAddress="7FF751E60018"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>000080</Color>
+              <VariableType>8 Bytes</VariableType>
+              <Address>pAssassinDmg</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>4469</ID>
+              <Description>"pHunterDmg [Enable Hunter Damage Multiplier]"</Description>
+              <LastState Value="000002C7929BE530" RealAddress="7FF751E60020"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>000080</Color>
+              <VariableType>8 Bytes</VariableType>
+              <Address>pHunterDmg</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
