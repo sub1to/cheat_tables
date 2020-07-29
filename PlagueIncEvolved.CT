@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="27">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>56</ID>
+      <Description>"Enable"</Description>
+      <Options moHideChildren="1"/>
+      <LastState/>
+      <Color>008000</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : PlagueIncEvolved.exe
+  Version: 5.5.5.4689
+  Date   : 2020-07-22
+  Author : sub1to
+}
+
+[ENABLE]
+registersymbol(pBase)
+registersymbol(pDisease)
+registersymbol(toggle_inf_dna)
+registersymbol(toggle_free_travel)
+registersymbol(toggle_no_gov_action)
+registersymbol(toggle_no_cure)
+
+alloc(pBase, 4)
+alloc(pDisease, 4)
+alloc(toggle_inf_dna, 1)
+alloc(toggle_free_travel, 1)
+alloc(toggle_no_gov_action, 1)
+alloc(toggle_no_cure, 1)
+
+[DISABLE]
+unregistersymbol(pBase)
+unregistersymbol(pDisease)
+unregistersymbol(toggle_inf_dna)
+unregistersymbol(toggle_free_travel)
+unregistersymbol(toggle_no_gov_action)
+unregistersymbol(toggle_no_cure)
+
+dealloc(pBase)
+dealloc(pDisease)
+dealloc(toggle_inf_dna)
+dealloc(toggle_free_travel)
+dealloc(toggle_no_gov_action)
+dealloc(toggle_no_cure)
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>55</ID>
+          <Description>"Main Hook"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <Color>008000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : PlagueIncEvolved.exe
+  Version: 5.5.5.4689
+  Date   : 2020-07-22
+  Author : sub1to
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+aobscan(_tick,8B 89 A4 00 00 00 3B C1 74)
+alloc(newmem,$1000)
+
+// Script Labels
+label(inf_dna_end)
+label(free_travel_next)
+label(free_travel_end)
+label(no_gov_action_next)
+label(no_gov_action_end)
+label(no_cure_end)
+
+label(cleanup)
+label(originalcode)
+label(return)
+
+// Decease data offsets
+define(m_dna,0C)
+define(m_cureResearch,44)
+define(m_cureResearchThisTurn,48)
+define(m_curePercentage,4C)
+define(m_dnaSpent,80)
+define(m_diseaseDiscovered,f4)
+
+// Script Start
+newmem:
+  push rax
+  push rbx
+  push rdx
+  mov [pBase], ecx
+
+// Set Disease Pointer Start
+  xor ebx, ebx
+  mov [pDisease], ebx
+
+  mov ebx, [ecx+0C]
+  test ebx, ebx
+  jz cleanup
+
+  mov ebx, [ebx+08]
+  test ebx, ebx
+  jz cleanup
+
+  mov ebx, [ebx+10]
+  test ebx, ebx
+  jz cleanup
+
+  mov ebx, [ebx+250]
+  test ebx, ebx
+  jz cleanup
+
+  mov [pDisease], ebx
+
+
+// Infinite DNA Start
+  // Check if enabled
+  mov bl, [toggle_inf_dna]
+  test bl, bl
+  jz inf_dna_end
+
+  // Sanity check
+  mov ebx, [pDisease]
+  test ebx, ebx
+  jz inf_dna_end
+
+  // Set DNA
+  cmp [ebx+m_dna], #9999
+  jg inf_dna_end
+  mov [ebx+m_dna], #9999
+inf_dna_end:
+
+
+// No Cure Start
+  // Check if enabled
+  mov bl, [toggle_no_cure]
+  test bl, bl
+  jz no_cure_end
+
+  // Sanity check
+  mov ebx, [pDisease]
+  test ebx, ebx
+  jz no_cure_end
+
+  // Set cure progress
+  mov [ebx+m_cureResearch], 0
+  mov [ebx+m_cureResearchThisTurn], 0
+  mov [ebx+m_curePercentage], 0
+  mov [ebx+m_diseaseDiscovered], 0
+no_cure_end:
+
+
+// Unrestricted Travel Start
+  // Check if enabled
+  mov bl, [toggle_free_travel]
+  test bl, bl
+  jz free_travel_end
+
+  mov ebx, [ecx+08]
+  test ebx, ebx
+  jz free_travel_end
+
+  mov ebx, [ebx+08]
+  test ebx, ebx
+  jz free_travel_end
+
+  // Loop start
+  mov edx, [ebx+0C] // Max
+  test edx, edx
+  jz free_travel_end
+
+free_travel_next:
+  dec edx
+
+  // Get country obj
+  mov eax, [ebx+edx*4+10]     // Pointer array starts at +10h
+  test eax, eax
+  jz free_travel_next
+
+  // Get obj ptr
+  mov eax, [eax+9C]
+  test eax, eax
+  jz free_travel_next
+
+  mov [eax+98], 1    // land
+  mov [eax+9c], 1    // air
+  mov [eax+a0], 1    // sea
+
+  // Break when edx is 0
+  test edx, edx
+  jnz free_travel_next
+
+free_travel_end:
+
+// Unrestricted Travel Start
+  // Check if enabled
+  mov bl, [toggle_no_gov_action]
+  test bl, bl
+  jz no_gov_action_end
+
+  mov ebx, [ecx+08]
+  test ebx, ebx
+  jz no_gov_action_end
+
+  mov ebx, [ebx+08]
+  test ebx, ebx
+  jz no_gov_action_end
+
+  // Loop start
+  mov edx, [ebx+0C] // Max
+
+no_gov_action_next:
+  dec edx
+
+  // Get country obj
+  mov eax, [ebx+edx*4+10]     // Pointer array starts at +10h
+  test eax, eax
+  jz no_gov_action_next
+
+  // Get obj ptr
+  mov eax, [eax+9C]
+  test eax, eax
+  jz no_gov_action_next
+
+  mov [eax+A4], 0
+
+  // Check if break condition is true
+  test edx, edx
+  jnz no_gov_action_next
+
+no_gov_action_end:
+
+// Script End
+cleanup:
+  pop rdx
+  pop rbx
+  pop rax
+  mov ecx, [pBase]
+
+originalcode:
+  mov ecx,[ecx+000000A4]
+  jmp return
+
+_tick:
+  jmp newmem
+  nop
+return:
+registersymbol(_tick)
+
+[DISABLE]
+_tick:
+  db 8B 89 A4 00 00 00
+
+unregistersymbol(_tick)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 39D64B41
+
+39D64B18: C7 47 14 01 00 00 00  -  mov [edi+14],00000001
+39D64B1F: E9 04 0A 00 00        -  jmp 39D65528
+39D64B24: 8B 05 B0 B7 EB 05     -  mov eax,[05EBB7B0]
+39D64B2A: 85 C0                 -  test eax,eax
+39D64B2C: 74 1D                 -  je 39D64B4B
+39D64B2E: 8B 47 08              -  mov eax,[edi+08]
+39D64B31: 8B 80 C0 00 00 00     -  mov eax,[eax+000000C0]
+39D64B37: 8B 0D B0 B7 EB 05     -  mov ecx,[05EBB7B0]
+39D64B3D: 8B D1                 -  mov edx,ecx
+39D64B3F: 39 12                 -  cmp [edx],edx
+// ---------- INJECTING HERE ----------
+39D64B41: 8B 89 A4 00 00 00     -  mov ecx,[ecx+000000A4]
+// ---------- DONE INJECTING  ----------
+39D64B47: 3B C1                 -  cmp eax,ecx
+39D64B49: 74 BA                 -  je 39D64B05
+39D64B4B: 8B 05 B0 B7 EB 05     -  mov eax,[05EBB7B0]
+39D64B51: 85 C0                 -  test eax,eax
+39D64B53: 0F 84 B3 09 00 00     -  je 39D6550C
+39D64B59: 8B 47 08              -  mov eax,[edi+08]
+39D64B5C: 8B 40 0C              -  mov eax,[eax+0C]
+39D64B5F: 85 C0                 -  test eax,eax
+39D64B61: 0F 84 A5 09 00 00     -  je 39D6550C
+39D64B67: 8B 47 08              -  mov eax,[edi+08]
+}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>58</ID>
+              <Description>"Infinite DNA"</Description>
+              <LastState/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+toggle_inf_dna:
+  db 1
+
+[DISABLE]
+toggle_inf_dna:
+  db 0
+
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>62</ID>
+              <Description>"Unrestricted Travel"</Description>
+              <LastState/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+toggle_free_travel:
+  db 1
+
+[DISABLE]
+toggle_free_travel:
+  db 0
+
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>68</ID>
+              <Description>"No Goverment Actions"</Description>
+              <LastState/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+toggle_no_gov_action:
+  db 1
+
+[DISABLE]
+toggle_no_gov_action:
+  db 0
+
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>64</ID>
+              <Description>"No Cure"</Description>
+              <LastState/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>[ENABLE]
+toggle_no_cure:
+  db 1
+
+[DISABLE]
+toggle_no_cure:
+  db 0
+
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>30</ID>
+          <Description>"Infect Countries By Selecting"</Description>
+          <Options moHideChildren="1"/>
+          <LastState/>
+          <Color>008000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : PlagueIncEvolved.exe
+  Version: 5.5.5.4689
+  Date   : 2020-07-22
+  Author : sub1to
+}
+
+[ENABLE]
+aobscan(_country_select,89 46 58 8B 46 28)
+alloc(newmem,$1000)
+
+//script labels
+label(cleanup)
+label(code)
+label(return)
+
+// _G offsets
+define(pSelectedCountry,20)
+
+define(btInfect,24)
+
+// Decease data offsets
+define(m_countryId,08)
+define(m_deadCount,10)
+define(m_infectedCount,18)
+define(m_populationCount,F0)
+define(m_uninfectedCount,F8)
+
+newmem:
+  push ecx
+  push edx
+  mov ecx, [eax+AC]
+  mov edx, [ecx+m_infectedCount]
+  test edx, edx
+  jnz cleanup
+  mov [ecx+m_infectedCount], 1
+  dec [ecx+m_uninfectedCount]
+
+cleanup:
+  pop edx
+  pop ecx
+
+code:
+  mov [esi+58],eax
+  mov eax,[esi+28]
+  jmp return
+
+_country_select:
+  jmp newmem
+  nop
+return:
+registersymbol(_country_select)
+
+[DISABLE]
+
+_country_select:
+  db 89 46 58 8B 46 28
+
+unregistersymbol(_country_select)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: 38018CA2
+
+38018C85: 83 C4 10              -  add esp,10
+38018C88: E9 E5 00 00 00        -  jmp 38018D72
+38018C8D: 89 7E 40              -  mov [esi+40],edi
+38018C90: 8B 46 54              -  mov eax,[esi+54]
+38018C93: 83 EC 08              -  sub esp,08
+38018C96: 57                    -  push edi
+38018C97: 50                    -  push eax
+38018C98: 39 00                 -  cmp [eax],eax
+38018C9A: E8 99 3D FB FF        -  call 37FCCA38
+38018C9F: 83 C4 10              -  add esp,10
+// ---------- INJECTING HERE ----------
+38018CA2: 89 46 58              -  mov [esi+58],eax
+38018CA5: 8B 46 28              -  mov eax,[esi+28]
+// ---------- DONE INJECTING  ----------
+38018CA8: 89 45 B0              -  mov [ebp-50],eax
+38018CAB: 8B 47 0C              -  mov eax,[edi+0C]
+38018CAE: 83 EC 08              -  sub esp,08
+38018CB1: 6A 00                 -  push 00
+38018CB3: 50                    -  push eax
+38018CB4: E8 4F 21 53 CE        -  call 0654AE08
+38018CB9: 83 C4 10              -  add esp,10
+38018CBC: 8B C8                 -  mov ecx,eax
+38018CBE: 8B 45 B0              -  mov eax,[ebp-50]
+38018CC1: 83 EC 08              -  sub esp,08
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>66</ID>
+          <Description>"Symbols"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <Color>C08000</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>57</ID>
+              <Description>"pBase"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>C08000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>pBase</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>60</ID>
+              <Description>"pDisease"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>C08000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>pDisease</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>59</ID>
+              <Description>"toggle_inf_dna"</Description>
+              <Color>C08000</Color>
+              <VariableType>Byte</VariableType>
+              <Address>toggle_inf_dna</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>61</ID>
+              <Description>"toggle_free_travel"</Description>
+              <Color>C08000</Color>
+              <VariableType>Byte</VariableType>
+              <Address>toggle_free_travel</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>67</ID>
+              <Description>"toggle_no_gov_action"</Description>
+              <Color>C08000</Color>
+              <VariableType>Byte</VariableType>
+              <Address>toggle_no_gov_action</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>65</ID>
+              <Description>"toggle_no_cure"</Description>
+              <Color>C08000</Color>
+              <VariableType>Byte</VariableType>
+              <Address>toggle_no_cure</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+</CheatTable>
