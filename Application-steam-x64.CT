@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="27">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>23</ID>
+      <Description>"Enable"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Activated="1"/>
+      <Color>C08000</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : Application-steam-x64.exe (Banished)
+  Version: 1.0.7
+  Date   : 2020-08-01
+  Author : sub1to
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+globalalloc(pTmp, 8, Application-steam-x64.exe)
+
+// Hooks
+aobscanmodule(_set_build_amount, Application-steam-x64.exe, ff 41 48 f3 c3) // ff 41 ? f3 c3 cc cc cc cc cc cc cc 48 89 4c 24
+registersymbol(_set_build_amount)
+
+aobscanmodule(_read_required_build_materials, Application-steam-x64.exe, 8b 44 3e ? 41 0f af 46)
+registersymbol(_read_required_build_materials)
+
+aobscanmodule(_read_required_build_materials_popup_window, Application-steam-x64.exe, 44 8B 44 3E 08)
+registersymbol(_read_required_build_materials_popup_window)
+
+aobscanmodule(_read_inventory_stack_count, Application-steam-x64.exe, 0f af 47 ? f7 41)
+registersymbol(_read_inventory_stack_count)
+
+aobscanmodule(_read_stockpile_capacity, Application-steam-x64.exe, 66 44 0f 6e 40)
+registersymbol(_read_stockpile_capacity)
+
+aobscanmodule(_read_stockpile_capacity_2, Application-steam-x64.exe, 8b 51 ? 85 d2 75)
+registersymbol(_read_stockpile_capacity_2)
+
+aobscanmodule(_read_stockpile_capacity_3, Application-steam-x64.exe, 41 3b 57 ? 0f 9e c0)
+registersymbol(_read_stockpile_capacity_3)
+
+aobscanmodule(_read_stockpile_capacity_4, Application-steam-x64.exe, 8b 48 ? 01 4b ? 45 84 f6)
+registersymbol(_read_stockpile_capacity_4)
+
+aobscanmodule(_read_cart_capacity, Application-steam-x64.exe, 8b 48 ? 01 4b ? 48 8b 4d)
+registersymbol(_read_cart_capacity)
+
+[DISABLE]
+
+// Hooks
+unregistersymbol(_set_build_amount)
+unregistersymbol(_read_required_build_materials)
+unregistersymbol(_read_required_build_materials_popup_window)
+unregistersymbol(_read_inventory_stack_count)
+unregistersymbol(_read_stockpile_capacity)
+unregistersymbol(_read_stockpile_capacity_2)
+unregistersymbol(_read_stockpile_capacity_3)
+unregistersymbol(_read_stockpile_capacity_4)
+unregistersymbol(_read_cart_capacity)
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>35</ID>
+          <Description>"No Building Materials Required"</Description>
+          <LastState Activated="1"/>
+          <Color>C08000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Application-steam-x64.exe
+  Version: 1.0.7
+  Date   : 2020-08-01
+  Author : sub1to
+
+  This script makes building require no materials
+}
+
+[ENABLE]
+_read_required_build_materials:
+  // xor eax, eax
+  db 31 c0 90 90 90 90 90 90 90
+
+_read_required_build_materials_popup_window:
+  // xor r8d, r8d
+  db 45 31 c0 90 90
+
+[DISABLE]
+
+_read_required_build_materials:
+  db 8B 44 3E 08 41 0F AF 46 4C
+
+_read_required_build_materials_popup_window:
+  db 44 8B 44 3E 08
+
+// _read_required_build_materials
+{
+// ORIGINAL CODE - INJECTION POINT: "Application-steam-x64.exe"+10DB93
+
+"Application-steam-x64.exe"+10DB74: 4C 8B 49 28        -  mov r9,[rcx+28]
+"Application-steam-x64.exe"+10DB78: 49 8B C9           -  mov rcx,r9
+"Application-steam-x64.exe"+10DB7B: 0F 1F 44 00 00     -  nop [rax+rax+00]
+"Application-steam-x64.exe"+10DB80: 48 39 01           -  cmp [rcx],rax
+"Application-steam-x64.exe"+10DB83: 74 3B              -  je Application-steam-x64.exe+10DBC0
+"Application-steam-x64.exe"+10DB85: 48 FF C2           -  inc rdx
+"Application-steam-x64.exe"+10DB88: 48 83 C1 10        -  add rcx,10
+"Application-steam-x64.exe"+10DB8C: 49 3B D0           -  cmp rdx,r8
+"Application-steam-x64.exe"+10DB8F: 7C EF              -  jl Application-steam-x64.exe+10DB80
+"Application-steam-x64.exe"+10DB91: 33 C9              -  xor ecx,ecx
+// ---------- INJECTING HERE ----------
+"Application-steam-x64.exe"+10DB93: 8B 44 3E 08        -  mov eax,[rsi+rdi+08]
+"Application-steam-x64.exe"+10DB97: 41 0F AF 46 4C     -  imul eax,[r14+4C]
+// ---------- DONE INJECTING  ----------
+"Application-steam-x64.exe"+10DB9C: 3B C8              -  cmp ecx,eax
+"Application-steam-x64.exe"+10DB9E: 7C 34              -  jl Application-steam-x64.exe+10DBD4
+"Application-steam-x64.exe"+10DBA0: FF C3              -  inc ebx
+"Application-steam-x64.exe"+10DBA2: 48 83 C7 10        -  add rdi,10
+"Application-steam-x64.exe"+10DBA6: 3B 5D 28           -  cmp ebx,[rbp+28]
+"Application-steam-x64.exe"+10DBA9: 7C A6              -  jl Application-steam-x64.exe+10DB51
+"Application-steam-x64.exe"+10DBAB: B0 01              -  mov al,01
+"Application-steam-x64.exe"+10DBAD: 48 8B 5C 24 48     -  mov rbx,[rsp+48]
+"Application-steam-x64.exe"+10DBB2: 48 8B 6C 24 50     -  mov rbp,[rsp+50]
+"Application-steam-x64.exe"+10DBB7: 48 83 C4 20        -  add rsp,20
+}
+
+
+//_read_required_build_materials_popup_window
+{
+// ORIGINAL CODE - INJECTION POINT: "Application-steam-x64.exe"+B7AA9
+
+"Application-steam-x64.exe"+B7A7F: 33 DB                    -  xor ebx,ebx
+"Application-steam-x64.exe"+B7A81: 84 C0                    -  test al,al
+"Application-steam-x64.exe"+B7A83: 48 0F 45 DF              -  cmovne rbx,rdi
+"Application-steam-x64.exe"+B7A87: EB 03                    -  jmp Application-steam-x64.exe+B7A8C
+"Application-steam-x64.exe"+B7A89: 49 8B DB                 -  mov rbx,r11
+"Application-steam-x64.exe"+B7A8C: 49 8B 7D 20              -  mov rdi,[r13+20]
+"Application-steam-x64.exe"+B7A90: 48 8D 8D F0 00 00 00     -  lea rcx,[rbp+000000F0]
+"Application-steam-x64.exe"+B7A97: FF 15 03 11 0A 00        -  call qword ptr [Application-steam-x64.exe+158BA0]
+"Application-steam-x64.exe"+B7A9D: 48 8B 85 F0 00 00 00     -  mov rax,[rbp+000000F0]
+"Application-steam-x64.exe"+B7AA4: 48 8B 74 24 60           -  mov rsi,[rsp+60]
+// ---------- INJECTING HERE ----------
+"Application-steam-x64.exe"+B7AA9: 44 8B 44 3E 08           -  mov r8d,[rsi+rdi+08]
+// ---------- DONE INJECTING  ----------
+"Application-steam-x64.exe"+B7AAE: 44 0F AF 40 4C           -  imul r8d,[rax+4C]
+"Application-steam-x64.exe"+B7AB3: 48 8D 15 CE 96 0A 00     -  lea rdx,[Application-steam-x64.exe+161188]
+"Application-steam-x64.exe"+B7ABA: 48 8D 4D 98              -  lea rcx,[rbp-68]
+"Application-steam-x64.exe"+B7ABE: FF 15 9C FA 09 00        -  call qword ptr [Application-steam-x64.exe+157560]
+"Application-steam-x64.exe"+B7AC4: 48 8B F8                 -  mov rdi,rax
+"Application-steam-x64.exe"+B7AC7: 48 8D 4C 24 28           -  lea rcx,[rsp+28]
+"Application-steam-x64.exe"+B7ACC: FF 15 CE 10 0A 00        -  call qword ptr [Application-steam-x64.exe+158BA0]
+"Application-steam-x64.exe"+B7AD2: 4C 8B C7                 -  mov r8,rdi
+"Application-steam-x64.exe"+B7AD5: BA 01 00 00 00           -  mov edx,00000001
+"Application-steam-x64.exe"+B7ADA: 48 8B 4C 24 28           -  mov rcx,[rsp+28]
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>42</ID>
+          <Description>"Quick Build"</Description>
+          <LastState Activated="1"/>
+          <Color>C08000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Application-steam-x64.exe
+  Version: 1.0.7
+  Date   : 2020-08-01
+  Author : sub1to
+
+  This script makes building progress instant
+}
+
+[ENABLE]
+
+aobscanmodule(_set_build_amount,Application-steam-x64.exe,FF 41 48 F3 C3) // should be unique
+alloc(newmem,$1000,Application-steam-x64.exe)
+
+label(code)
+label(return)
+
+newmem:
+  mov [rcx+48], #999
+
+code:
+  inc [rcx+48]
+  repe ret 
+  jmp return
+
+_set_build_amount:
+  jmp newmem
+return:
+registersymbol(_set_build_amount)
+
+[DISABLE]
+
+_set_build_amount:
+  db FF 41 48 F3 C3
+
+unregistersymbol(_set_build_amount)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Application-steam-x64.exe"+10DBE4
+
+"Application-steam-x64.exe"+10DBD8: CC                 -  int 3 
+"Application-steam-x64.exe"+10DBD9: CC                 -  int 3 
+"Application-steam-x64.exe"+10DBDA: CC                 -  int 3 
+"Application-steam-x64.exe"+10DBDB: CC                 -  int 3 
+"Application-steam-x64.exe"+10DBDC: CC                 -  int 3 
+"Application-steam-x64.exe"+10DBDD: CC                 -  int 3 
+"Application-steam-x64.exe"+10DBDE: CC                 -  int 3 
+"Application-steam-x64.exe"+10DBDF: CC                 -  int 3 
+"Application-steam-x64.exe"+10DBE0: 85 D2              -  test edx,edx
+"Application-steam-x64.exe"+10DBE2: 75 03              -  jne Application-steam-x64.exe+10DBE7
+// ---------- INJECTING HERE ----------
+"Application-steam-x64.exe"+10DBE4: FF 41 48           -  inc [rcx+48]
+"Application-steam-x64.exe"+10DBE7: F3 C3              - repe  ret 
+// ---------- DONE INJECTING  ----------
+"Application-steam-x64.exe"+10DBE9: CC                 -  int 3 
+"Application-steam-x64.exe"+10DBEA: CC                 -  int 3 
+"Application-steam-x64.exe"+10DBEB: CC                 -  int 3 
+"Application-steam-x64.exe"+10DBEC: CC                 -  int 3 
+"Application-steam-x64.exe"+10DBED: CC                 -  int 3 
+"Application-steam-x64.exe"+10DBEE: CC                 -  int 3 
+"Application-steam-x64.exe"+10DBEF: CC                 -  int 3 
+"Application-steam-x64.exe"+10DBF0: 48 89 4C 24 08     -  mov [rsp+08],rcx
+"Application-steam-x64.exe"+10DBF5: 55                 -  push rbp
+"Application-steam-x64.exe"+10DBF6: 53                 -  push rbx
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>44</ID>
+          <Description>"Infinite Items (999)"</Description>
+          <LastState Activated="1"/>
+          <Color>C08000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Application-steam-x64.exe
+  Version: 1.0.7
+  Date   : 2020-08-01
+  Author : sub1to
+
+  This script sets all stored items to 999
+}
+
+[ENABLE]
+alloc(newmem,1000,Application-steam-x64.exe)
+
+label(code)
+label(return)
+
+define(new_value,#999)
+
+newmem:
+  cmp [rdi+08], new_value
+  ja code
+  mov [rdi+08], new_value
+
+code:
+  imul eax,[rdi+08]
+  test [rcx+5C],1C40
+  jmp return
+
+_read_inventory_stack_count:
+  jmp newmem
+  nop
+  nop
+  nop
+  nop
+  nop
+  nop
+return:
+
+[DISABLE]
+_read_inventory_stack_count:
+  db 0F AF 47 08 F7 41 5C 40 1C 00 00
+
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Application-steam-x64.exe"+8F550
+
+"Application-steam-x64.exe"+8F531: FF 50 10                             -  call qword ptr [rax+10]
+"Application-steam-x64.exe"+8F534: 3B C3                                -  cmp eax,ebx
+"Application-steam-x64.exe"+8F536: 74 64                                -  je Application-steam-x64.exe+8F59C
+"Application-steam-x64.exe"+8F538: 41 FF C6                             -  inc r14d
+"Application-steam-x64.exe"+8F53B: 49 FF C7                             -  inc r15
+"Application-steam-x64.exe"+8F53E: 45 3B 75 30                          -  cmp r14d,[r13+30]
+"Application-steam-x64.exe"+8F542: 7C DC                                -  jl Application-steam-x64.exe+8F520
+"Application-steam-x64.exe"+8F544: 33 C9                                -  xor ecx,ecx
+"Application-steam-x64.exe"+8F546: 8B 41 48                             -  mov eax,[rcx+48]
+"Application-steam-x64.exe"+8F549: 48 8B 96 80 01 00 00                 -  mov rdx,[rsi+00000180]
+// ---------- INJECTING HERE ----------
+"Application-steam-x64.exe"+8F550: 0F AF 47 08                          -  imul eax,[rdi+08]
+"Application-steam-x64.exe"+8F554: F7 41 5C 40 1C 00 00                 -  test [rcx+5C],1C40
+// ---------- DONE INJECTING  ----------
+"Application-steam-x64.exe"+8F55B: 74 60                                -  je Application-steam-x64.exe+8F5BD
+"Application-steam-x64.exe"+8F55D: 01 42 10                             -  add [rdx+10],eax
+"Application-steam-x64.exe"+8F560: 44 0F B6 75 18                       -  movzx r14d,byte ptr [rbp+18]
+"Application-steam-x64.exe"+8F565: B3 01                                -  mov bl,01
+"Application-steam-x64.exe"+8F567: 88 5D 20                             -  mov [rbp+20],bl
+"Application-steam-x64.exe"+8F56A: EB 5E                                -  jmp Application-steam-x64.exe+8F5CA
+"Application-steam-x64.exe"+8F56C: 48 8B 43 30                          -  mov rax,[rbx+30]
+"Application-steam-x64.exe"+8F570: 4A 8D 1C F8                          -  lea rbx,[rax+r15*8]
+"Application-steam-x64.exe"+8F574: 48 8B CB                             -  mov rcx,rbx
+"Application-steam-x64.exe"+8F577: FF 15 23 96 0C 00                    -  call qword ptr [Application-steam-x64.exe+158BA0]
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>51</ID>
+          <Description>"Increase Storage Capacity (999999)"</Description>
+          <LastState Activated="1"/>
+          <Color>C08000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Application-steam-x64.exe
+  Version: 1.0.7
+  Date   : 2020-08-01
+  Author : sub1to
+
+  This script increases the storage space for stockpiles, barns, etc
+}
+
+[ENABLE]
+alloc(newmem,$140,Application-steam-x64.exe)
+
+label(return)
+label(return_2)
+label(return_3)
+label(return_4)
+label(return_5)
+
+define(new_capacity,#999999)
+
+
+newmem:
+  push rax
+  mov rax, new_capacity
+  movd xmm8, rax
+  pop rax
+
+  //movd xmm8,[rax+38]
+  jmp return
+
+
+
+newmem+40:
+  mov edx, new_capacity
+  mov [pTmp], rcx
+
+  //mov edx,[rcx+38]
+  test edx,edx
+  jmp return_2
+
+
+
+newmem+80:
+  cmp edx, new_capacity
+  //mov al, 1
+
+  //cmp edx,[r15+38]
+  setle al
+  jmp return_3
+
+
+
+newmem+C0:
+  mov ecx, new_capacity
+
+  //mov ecx,[rax+38]
+  add [rbx+14],ecx
+  jmp return_4
+
+
+
+newmem+100:
+  mov ecx, new_capacity
+
+  //mov ecx,[rax+38]
+  add [rbx+04],ecx
+  jmp return_5
+
+
+
+
+// This controls the actual capacity. Changing this will make the stockpile
+// re-adjust the stack size for each material
+_read_stockpile_capacity:
+  jmp newmem
+  nop
+  return:
+
+// This is for the popup window capacity percentage
+_read_stockpile_capacity_2:
+  jmp newmem+40
+  return_2:
+
+// This is for the AI is_storage_full test
+_read_stockpile_capacity_3:
+  jmp newmem+80
+  nop
+  nop
+  return_3:
+
+// This is for the stockpile capacity warnings
+_read_stockpile_capacity_4:
+  jmp newmem+C0
+  nop
+  return_4:
+
+// This is for the production goods capacity warning
+_read_cart_capacity:
+  jmp newmem+100
+  nop
+  return_5:
+
+
+[DISABLE]
+_read_stockpile_capacity:
+  db 66 44 0F 6E 40 38
+
+_read_stockpile_capacity_2:
+  db 8B 51 38 85 D2
+
+_read_stockpile_capacity_3:
+  db 41 3B 57 38 0F 9E C0
+
+_read_stockpile_capacity_4:
+  db 8B 48 38 01 4B 14
+
+_read_cart_capacity:
+  db 8B 48 38 01 4B 04
+
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Application-steam-x64.exe"+56DC9
+
+"Application-steam-x64.exe"+56D8A: 48 8D 94 24 A0 00 00 00        -  lea rdx,[rsp+000000A0]
+"Application-steam-x64.exe"+56D92: E8 D9 F4 FA FF                 -  call Application-steam-x64.exe+6270
+"Application-steam-x64.exe"+56D97: 48 8D 8C 24 A0 00 00 00        -  lea rcx,[rsp+000000A0]
+"Application-steam-x64.exe"+56D9F: 33 F6                          -  xor esi,esi
+"Application-steam-x64.exe"+56DA1: FF 15 F9 1D 10 00              -  call qword ptr [Application-steam-x64.exe+158BA0]
+"Application-steam-x64.exe"+56DA7: 48 8B 84 24 A0 00 00 00        -  mov rax,[rsp+000000A0]
+"Application-steam-x64.exe"+56DAF: 48 8D 8C 24 A0 00 00 00        -  lea rcx,[rsp+000000A0]
+"Application-steam-x64.exe"+56DB7: 48 63 58 30                    -  movsxd  rbx,dword ptr [rax+30]
+"Application-steam-x64.exe"+56DBB: FF 15 DF 1D 10 00              -  call qword ptr [Application-steam-x64.exe+158BA0]
+"Application-steam-x64.exe"+56DC1: 48 8B 84 24 A0 00 00 00        -  mov rax,[rsp+000000A0]
+// ---------- INJECTING HERE ----------
+"Application-steam-x64.exe"+56DC9: 66 44 0F 6E 40 38              -  movd xmm8,[rax+38]
+// ---------- DONE INJECTING  ----------
+"Application-steam-x64.exe"+56DCF: 33 FF                          -  xor edi,edi
+"Application-steam-x64.exe"+56DD1: 48 89 9C 24 B0 00 00 00        -  mov [rsp+000000B0],rbx
+"Application-steam-x64.exe"+56DD9: 45 0F 5B C0                    -  cvtdq2ps xmm8,xmm8
+"Application-steam-x64.exe"+56DDD: 48 89 BC 24 A8 00 00 00        -  mov [rsp+000000A8],rdi
+"Application-steam-x64.exe"+56DE5: 85 DB                          -  test ebx,ebx
+"Application-steam-x64.exe"+56DE7: 0F 8E 9B 01 00 00              -  jng Application-steam-x64.exe+56F88
+"Application-steam-x64.exe"+56DED: 48 89 6C 24 78                 -  mov [rsp+78],rbp
+"Application-steam-x64.exe"+56DF2: 4C 89 64 24 68                 -  mov [rsp+68],r12
+"Application-steam-x64.exe"+56DF7: 4C 89 6C 24 60                 -  mov [rsp+60],r13
+"Application-steam-x64.exe"+56DFC: 4C 89 74 24 58                 -  mov [rsp+58],r14
+}
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Application-steam-x64.exe"+80A23
+
+"Application-steam-x64.exe"+809F2: 48 8B 4C 24 58              -  mov rcx,[rsp+58]
+"Application-steam-x64.exe"+809F7: E8 74 58 F8 FF              -  call Application-steam-x64.exe+6270
+"Application-steam-x64.exe"+809FC: 48 8D 4C 24 50              -  lea rcx,[rsp+50]
+"Application-steam-x64.exe"+80A01: FF 15 99 81 0D 00           -  call qword ptr [Application-steam-x64.exe+158BA0]
+"Application-steam-x64.exe"+80A07: 48 8B 4C 24 50              -  mov rcx,[rsp+50]
+"Application-steam-x64.exe"+80A0C: E8 CF 19 0B 00              -  call Application-steam-x64.exe+1323E0
+"Application-steam-x64.exe"+80A11: 8B D8                       -  mov ebx,eax
+"Application-steam-x64.exe"+80A13: 48 8D 4C 24 50              -  lea rcx,[rsp+50]
+"Application-steam-x64.exe"+80A18: FF 15 82 81 0D 00           -  call qword ptr [Application-steam-x64.exe+158BA0]
+"Application-steam-x64.exe"+80A1E: 48 8B 4C 24 50              -  mov rcx,[rsp+50]
+// ---------- INJECTING HERE ----------
+"Application-steam-x64.exe"+80A23: 8B 51 38                    -  mov edx,[rcx+38]
+"Application-steam-x64.exe"+80A26: 85 D2                       -  test edx,edx
+// ---------- DONE INJECTING  ----------
+"Application-steam-x64.exe"+80A28: 75 05                       -  jne Application-steam-x64.exe+80A2F
+"Application-steam-x64.exe"+80A2A: 0F 57 F6                    -  xorps xmm6,xmm6
+"Application-steam-x64.exe"+80A2D: EB 12                       -  jmp Application-steam-x64.exe+80A41
+"Application-steam-x64.exe"+80A2F: 66 0F 6E F3                 -  movd xmm6,ebx
+"Application-steam-x64.exe"+80A33: 0F 5B F6                    -  cvtdq2ps xmm6,xmm6
+"Application-steam-x64.exe"+80A36: 66 0F 6E C2                 -  movd xmm0,edx
+"Application-steam-x64.exe"+80A3A: 0F 5B C0                    -  cvtdq2ps xmm0,xmm0
+"Application-steam-x64.exe"+80A3D: F3 0F 5E F0                 -  divss xmm6,xmm0
+"Application-steam-x64.exe"+80A41: 0F 28 C6                    -  movaps xmm0,xmm6
+"Application-steam-x64.exe"+80A44: F3 0F 59 05 BC 7E 0F 00     -  mulss xmm0,[Application-steam-x64.exe+178908]
+}
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Application-steam-x64.exe"+1322FE
+
+"Application-steam-x64.exe"+1322D3: 48 8B CD           -  mov rcx,rbp
+"Application-steam-x64.exe"+1322D6: 8B 51 48           -  mov edx,[rcx+48]
+"Application-steam-x64.exe"+1322D9: 4C 8B 74 24 20     -  mov r14,[rsp+20]
+"Application-steam-x64.exe"+1322DE: 48 8B 7C 24 30     -  mov rdi,[rsp+30]
+"Application-steam-x64.exe"+1322E3: 41 0F AF D5        -  imul edx,r13d
+"Application-steam-x64.exe"+1322E7: 48 8B 74 24 68     -  mov rsi,[rsp+68]
+"Application-steam-x64.exe"+1322EC: 48 8B 6C 24 60     -  mov rbp,[rsp+60]
+"Application-steam-x64.exe"+1322F1: 48 8B 5C 24 50     -  mov rbx,[rsp+50]
+"Application-steam-x64.exe"+1322F6: 41 03 D4           -  add edx,r12d
+"Application-steam-x64.exe"+1322F9: 4C 8B 64 24 28     -  mov r12,[rsp+28]
+// ---------- INJECTING HERE ----------
+"Application-steam-x64.exe"+1322FE: 41 3B 57 38        -  cmp edx,[r15+38]
+"Application-steam-x64.exe"+132302: 0F 9E C0           -  setle al
+// ---------- DONE INJECTING  ----------
+"Application-steam-x64.exe"+132305: 48 83 C4 38        -  add rsp,38
+"Application-steam-x64.exe"+132309: 41 5F              -  pop r15
+"Application-steam-x64.exe"+13230B: 41 5D              -  pop r13
+"Application-steam-x64.exe"+13230D: C3                 -  ret
+"Application-steam-x64.exe"+13230E: 48 8B 43 28        -  mov rax,[rbx+28]
+"Application-steam-x64.exe"+132312: 8B 15 A0 D9 09 00  -  mov edx,[Application-steam-x64.exe+1CFCB8]
+"Application-steam-x64.exe"+132318: 48 63 CE           -  movsxd  rcx,esi
+"Application-steam-x64.exe"+13231B: 48 8B 1C C8        -  mov rbx,[rax+rcx*8]
+"Application-steam-x64.exe"+13231F: 48 8B CB           -  mov rcx,rbx
+"Application-steam-x64.exe"+132322: FF 15 60 68 02 00  -  call qword ptr [Application-steam-x64.exe+158B88]
+}
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Application-steam-x64.exe"+8F806
+
+"Application-steam-x64.exe"+8F7D9: 01 81 80 02 00 00        -  add [rcx+00000280],eax
+"Application-steam-x64.exe"+8F7DF: 49 83 C4 10              -  add r12,10
+"Application-steam-x64.exe"+8F7E3: 48 FF 4D A8              -  dec [rbp-58]
+"Application-steam-x64.exe"+8F7E7: 0F 85 03 FD FF FF        -  jne Application-steam-x64.exe+8F4F0
+"Application-steam-x64.exe"+8F7ED: 84 DB                    -  test bl,bl
+"Application-steam-x64.exe"+8F7EF: 74 1B                    -  je Application-steam-x64.exe+8F80C
+"Application-steam-x64.exe"+8F7F1: 48 8B 9E 80 01 00 00     -  mov rbx,[rsi+00000180]
+"Application-steam-x64.exe"+8F7F8: 48 8D 4D 28              -  lea rcx,[rbp+28]
+"Application-steam-x64.exe"+8F7FC: FF 15 9E 93 0C 00        -  call qword ptr [Application-steam-x64.exe+158BA0]
+"Application-steam-x64.exe"+8F802: 48 8B 45 28              -  mov rax,[rbp+28]
+// ---------- INJECTING HERE ----------
+"Application-steam-x64.exe"+8F806: 8B 48 38                 -  mov ecx,[rax+38]
+"Application-steam-x64.exe"+8F809: 01 4B 14                 -  add [rbx+14],ecx
+// ---------- DONE INJECTING  ----------
+"Application-steam-x64.exe"+8F80C: 45 84 F6                 -  test r14l,r14l
+"Application-steam-x64.exe"+8F80F: 74 1B                    -  je Application-steam-x64.exe+8F82C
+"Application-steam-x64.exe"+8F811: 48 8B 9E 80 01 00 00     -  mov rbx,[rsi+00000180]
+"Application-steam-x64.exe"+8F818: 48 8D 4D 28              -  lea rcx,[rbp+28]
+"Application-steam-x64.exe"+8F81C: FF 15 7E 93 0C 00        -  call qword ptr [Application-steam-x64.exe+158BA0]
+"Application-steam-x64.exe"+8F822: 48 8B 45 28              -  mov rax,[rbp+28]
+"Application-steam-x64.exe"+8F826: 8B 48 38                 -  mov ecx,[rax+38]
+"Application-steam-x64.exe"+8F829: 01 4B 04                 -  add [rbx+04],ecx
+"Application-steam-x64.exe"+8F82C: 48 8B 4D B0              -  mov rcx,[rbp-50]
+"Application-steam-x64.exe"+8F830: 48 FF C1                 -  inc rcx
+}
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Application-steam-x64.exe"+8F826
+
+"Application-steam-x64.exe"+8F7FC: FF 15 9E 93 0C 00        -  call qword ptr [Application-steam-x64.exe+158BA0]
+"Application-steam-x64.exe"+8F802: 48 8B 45 28              -  mov rax,[rbp+28]
+"Application-steam-x64.exe"+8F806: E9 F5 07 F4 FF           -  jmp 7FF6FA5B0000
+"Application-steam-x64.exe"+8F80B: 90                       -  nop
+"Application-steam-x64.exe"+8F80C: 45 84 F6                 -  test r14l,r14l
+"Application-steam-x64.exe"+8F80F: 74 1B                    -  je Application-steam-x64.exe+8F82C
+"Application-steam-x64.exe"+8F811: 48 8B 9E 80 01 00 00     -  mov rbx,[rsi+00000180]
+"Application-steam-x64.exe"+8F818: 48 8D 4D 28              -  lea rcx,[rbp+28]
+"Application-steam-x64.exe"+8F81C: FF 15 7E 93 0C 00        -  call qword ptr [Application-steam-x64.exe+158BA0]
+"Application-steam-x64.exe"+8F822: 48 8B 45 28              -  mov rax,[rbp+28]
+// ---------- INJECTING HERE ----------
+"Application-steam-x64.exe"+8F826: 8B 48 38                 -  mov ecx,[rax+38]
+"Application-steam-x64.exe"+8F829: 01 4B 04                 -  add [rbx+04],ecx
+// ---------- DONE INJECTING  ----------
+"Application-steam-x64.exe"+8F82C: 48 8B 4D B0              -  mov rcx,[rbp-50]
+"Application-steam-x64.exe"+8F830: 48 FF C1                 -  inc rcx
+"Application-steam-x64.exe"+8F833: 48 89 4D B0              -  mov [rbp-50],rcx
+"Application-steam-x64.exe"+8F837: 48 3B 4D B8              -  cmp rcx,[rbp-48]
+"Application-steam-x64.exe"+8F83B: 0F 8C 0F FC FF FF        -  jl Application-steam-x64.exe+8F450
+"Application-steam-x64.exe"+8F841: 48 63 46 18              -  movsxd  rax,dword ptr [rsi+18]
+"Application-steam-x64.exe"+8F845: 33 C9                    -  xor ecx,ecx
+"Application-steam-x64.exe"+8F847: 48 89 4D 30              -  mov [rbp+30],rcx
+"Application-steam-x64.exe"+8F84B: 48 89 45 B8              -  mov [rbp-48],rax
+"Application-steam-x64.exe"+8F84F: 48 85 C0                 -  test rax,rax
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>52</ID>
+          <Description>"Symbols"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" Activated="1" RealAddress="00000000"/>
+          <Color>0080FF</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>14</ID>
+              <Description>"pTmp"</Description>
+              <LastState Value="0000021A317979B8" RealAddress="7FF6FA5D0000"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>0080FF</Color>
+              <VariableType>8 Bytes</VariableType>
+              <Address>pTmp</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>53</ID>
+              <Description>"_set_build_amount"</Description>
+              <LastState Value="E9 17 24 ED FF CC CC CC CC CC" RealAddress="7FF6FA6EDBE4"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>0080FF</Color>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>10</ByteLength>
+              <Address>_set_build_amount</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>54</ID>
+              <Description>"_read_required_build_materials"</Description>
+              <LastState Value="31 C0 90 90 90 90 90 90 90 3B" RealAddress="7FF6FA6EDB93"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>0080FF</Color>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>10</ByteLength>
+              <Address>_read_required_build_materials</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>55</ID>
+              <Description>"_read_required_build_materials_popup_window"</Description>
+              <LastState Value="45 31 C0 90 90 44 0F AF 40 4C" RealAddress="7FF6FA697AA9"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>0080FF</Color>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>10</ByteLength>
+              <Address>_read_required_build_materials_popup_window</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>56</ID>
+              <Description>"_read_inventory_stack_count"</Description>
+              <LastState Value="E9 AB 0A F4 FF 90 90 90 90 90" RealAddress="7FF6FA66F550"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>0080FF</Color>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>10</ByteLength>
+              <Address>_read_inventory_stack_count</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>57</ID>
+              <Description>"_read_stockpile_capacity"</Description>
+              <LastState Value="E9 32 92 F6 FF 90 33 FF 48 89" RealAddress="7FF6FA636DC9"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>0080FF</Color>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>10</ByteLength>
+              <Address>_read_stockpile_capacity</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>58</ID>
+              <Description>"_read_stockpile_capacity_2"</Description>
+              <LastState Value="E9 18 F6 F3 FF 75 05 0F 57 F6" RealAddress="7FF6FA660A23"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>0080FF</Color>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>10</ByteLength>
+              <Address>_read_stockpile_capacity_2</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>59</ID>
+              <Description>"_read_stockpile_capacity_3"</Description>
+              <LastState Value="E9 7D DD E8 FF 90 90 48 83 C4" RealAddress="7FF6FA7122FE"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>0080FF</Color>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>10</ByteLength>
+              <Address>_read_stockpile_capacity_3</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>63</ID>
+              <Description>"_read_stockpile_capacity_4"</Description>
+              <LastState Value="E9 B5 08 F3 FF 90 45 84 F6 74" RealAddress="7FF6FA66F806"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>0080FF</Color>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>10</ByteLength>
+              <Address>_read_stockpile_capacity_4</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>64</ID>
+              <Description>"_read_cart_capacity"</Description>
+              <LastState Value="E9 D5 08 F3 FF 90 48 8B 4D B0" RealAddress="7FF6FA66F826"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>0080FF</Color>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>10</ByteLength>
+              <Address>_read_cart_capacity</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>pTmp</Name>
+      <Address>7FF6FA5D0000</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>tmp</Name>
+      <Address>20B386C0010</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>asdf</Name>
+      <Address>20B386C0020</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+</CheatTable>
