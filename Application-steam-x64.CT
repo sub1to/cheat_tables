@@ -47,6 +47,84 @@ registersymbol(_read_stockpile_capacity_4)
 aobscanmodule(_read_cart_capacity, Application-steam-x64.exe, 8b 48 ? 01 4b ? 48 8b 4d)
 registersymbol(_read_cart_capacity)
 
+aobscanmodule(_read_mine_resources_popup_window, Application-steam-x64.exe, 66 0f 6e 48)
+registersymbol(_read_mine_resources_popup_window)
+
+aobscanmodule(_read_mine_resources, Application-steam-x64.exe, 41 39 4f ? 0f 9c c0)
+registersymbol(_read_mine_resources)
+
+aobscanmodule(_read_citizen_health, Application-steam-x64.exe, f3 0f 58 70 ? 48 8d 4d)
+registersymbol(_read_citizen_health)
+
+aobscanmodule(_read_citizen_age, Application-steam-x64.exe, f3 0f 10 40 ? 0f 2f 41 ? 72 ? 48 83 b8 ? ? ? ? ? 75 ? ff c3)
+registersymbol(_read_citizen_age)
+
+aobscanmodule(_read_house_inventory, Application-steam-x64.exe, 43 0f af 4c 3d)
+registersymbol(_read_house_inventory)
+
+aobscanmodule(_read_game_speed, Application-steam-x64.exe, 75 ? 8b 68 ? 85 ed)
+registersymbol(_read_game_speed)
+
+aobscanmodule(_read_game_speed_jne, Application-steam-x64.exe, 85 ed 0f 8e ? ? ? ? 48 8b 06)
+registersymbol(_read_game_speed_jne)
+
+// Variables
+globalalloc(btCitizenHealth,1,Application-steam-x64.exe)
+globalalloc(fCitizenHealth,4,Application-steam-x64.exe)
+btCitizenHealth:
+  db 0
+fCitizenHealth:
+  dd (float)10
+
+
+globalalloc(btCitizenHappiness,1,Application-steam-x64.exe)
+globalalloc(fCitizenHappiness,4,Application-steam-x64.exe)
+btCitizenHappiness:
+  db 0
+fCitizenHappiness:
+  dd (float)10
+
+
+globalalloc(btCitizenHunger,1,Application-steam-x64.exe)
+globalalloc(fCitizenHunger,4,Application-steam-x64.exe)
+btCitizenHunger:
+  db 0
+fCitizenHunger:
+  dd 0
+
+
+globalalloc(btCitizenCold,1,Application-steam-x64.exe)
+globalalloc(fCitizenCold,4,Application-steam-x64.exe)
+btCitizenCold:
+  db 0
+fCitizenCold:
+  dd 0
+
+
+globalalloc(btCitizenAge,1,Application-steam-x64.exe)
+globalalloc(fCitizenAge,4,Application-steam-x64.exe)
+btCitizenAge:
+  db 0
+fCitizenAge:
+  dd (float)25
+
+
+globalalloc(btCitizenAgeLimit,1,Application-steam-x64.exe)
+globalalloc(fCitizenAgeLimit,4,Application-steam-x64.exe)
+btCitizenAgeLimit:
+  db 0
+fCitizenAgeLimit:
+  dd (float)50
+
+
+globalalloc(btCitizenAgeInstantAdult,1,Application-steam-x64.exe)
+btCitizenAgeInstantAdult:
+  db 0
+
+globalalloc(lGameSpeed,4,Application-steam-x64.exe)
+lGameSpeed:
+  dd #25
+
 [DISABLE]
 
 // Hooks
@@ -59,16 +137,30 @@ unregistersymbol(_read_stockpile_capacity_2)
 unregistersymbol(_read_stockpile_capacity_3)
 unregistersymbol(_read_stockpile_capacity_4)
 unregistersymbol(_read_cart_capacity)
+unregistersymbol(_read_mine_resources_popup_window)
+unregistersymbol(_read_mine_resources)
+unregistersymbol(_read_citizen_health)
+unregistersymbol(_read_citizen_age)
+unregistersymbol(_read_house_inventory)
+unregistersymbol(_read_game_speed)
+unregistersymbol(_read_game_speed_jne)
 
 </AssemblerScript>
       <CheatEntries>
         <CheatEntry>
-          <ID>35</ID>
-          <Description>"No Building Materials Required"</Description>
-          <LastState Activated="1"/>
-          <Color>C08000</Color>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>{ Game   : Application-steam-x64.exe
+          <ID>82</ID>
+          <Description>"Building"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <Color>008000</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>35</ID>
+              <Description>"No Building Materials Required"</Description>
+              <LastState/>
+              <Color>C08000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Application-steam-x64.exe
   Version: 1.0.7
   Date   : 2020-08-01
   Author : sub1to
@@ -153,14 +245,14 @@ _read_required_build_materials_popup_window:
 "Application-steam-x64.exe"+B7ADA: 48 8B 4C 24 28           -  mov rcx,[rsp+28]
 }
 </AssemblerScript>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>42</ID>
-          <Description>"Quick Build"</Description>
-          <LastState Activated="1"/>
-          <Color>C08000</Color>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>{ Game   : Application-steam-x64.exe
+            </CheatEntry>
+            <CheatEntry>
+              <ID>42</ID>
+              <Description>"Quick Build"</Description>
+              <LastState/>
+              <Color>C08000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Application-steam-x64.exe
   Version: 1.0.7
   Date   : 2020-08-01
   Author : sub1to
@@ -226,14 +318,23 @@ dealloc(newmem)
 "Application-steam-x64.exe"+10DBF6: 53                 -  push rbx
 }
 </AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
         </CheatEntry>
         <CheatEntry>
-          <ID>44</ID>
-          <Description>"Infinite Items (999)"</Description>
-          <LastState Activated="1"/>
-          <Color>C08000</Color>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>{ Game   : Application-steam-x64.exe
+          <ID>83</ID>
+          <Description>"Resources"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <Color>008000</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>44</ID>
+              <Description>"Infinite Storage Resources (99 minimum)"</Description>
+              <LastState/>
+              <Color>C08000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Application-steam-x64.exe
   Version: 1.0.7
   Date   : 2020-08-01
   Author : sub1to
@@ -247,7 +348,7 @@ alloc(newmem,1000,Application-steam-x64.exe)
 label(code)
 label(return)
 
-define(new_value,#999)
+define(new_value,#99)
 
 newmem:
   cmp [rdi+08], new_value
@@ -304,14 +405,14 @@ dealloc(newmem)
 "Application-steam-x64.exe"+8F577: FF 15 23 96 0C 00                    -  call qword ptr [Application-steam-x64.exe+158BA0]
 }
 </AssemblerScript>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>51</ID>
-          <Description>"Increase Storage Capacity (999999)"</Description>
-          <LastState Activated="1"/>
-          <Color>C08000</Color>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>{ Game   : Application-steam-x64.exe
+            </CheatEntry>
+            <CheatEntry>
+              <ID>51</ID>
+              <Description>"Increase Storage Capacity (999999)"</Description>
+              <LastState/>
+              <Color>C08000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Application-steam-x64.exe
   Version: 1.0.7
   Date   : 2020-08-01
   Author : sub1to
@@ -344,7 +445,7 @@ newmem:
 
 newmem+40:
   mov edx, new_capacity
-  mov [pTmp], rcx
+  //mov [pTmp], rcx
 
   //mov edx,[rcx+38]
   test edx,edx
@@ -575,30 +676,880 @@ dealloc(newmem)
 "Application-steam-x64.exe"+8F84F: 48 85 C0                 -  test rax,rax
 }
 </AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>74</ID>
+              <Description>"Infinite Mine/Quarry Resources"</Description>
+              <LastState/>
+              <Color>C08000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Application-steam-x64.exe
+  Version: 1.0.7
+  Date   : 2020-08-01
+  Author : sub1to
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+alloc(newmem,1000,Application-steam-x64.exe)
+
+label(code)
+label(return)
+
+newmem:
+  mov [r15+68], 0
+
+code:
+  cmp [r15+68],ecx
+  setl al
+  jmp return
+
+_read_mine_resources:
+  jmp newmem
+  nop
+  nop
+return:
+
+[DISABLE]
+_read_mine_resources:
+  db 41 39 4F 68 0F 9C C0
+
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Application-steam-x64.exe"+11E924
+
+"Application-steam-x64.exe"+11E900: 8B 15 82 0A 0B 00     -  mov edx,[Application-steam-x64.exe+1CF388]
+"Application-steam-x64.exe"+11E906: 48 63 CB              -  movsxd  rcx,ebx
+"Application-steam-x64.exe"+11E909: 48 8B 1C C8           -  mov rbx,[rax+rcx*8]
+"Application-steam-x64.exe"+11E90D: 48 8B CB              -  mov rcx,rbx
+"Application-steam-x64.exe"+11E910: FF 15 72 A2 03 00     -  call qword ptr [Application-steam-x64.exe+158B88]
+"Application-steam-x64.exe"+11E916: 0F B6 C8              -  movzx ecx,al
+"Application-steam-x64.exe"+11E919: 49 8B C6              -  mov rax,r14
+"Application-steam-x64.exe"+11E91C: 84 C9                 -  test cl,cl
+"Application-steam-x64.exe"+11E91E: 48 0F 45 C3           -  cmovne rax,rbx
+"Application-steam-x64.exe"+11E922: EB B2                 -  jmp Application-steam-x64.exe+11E8D6
+// ---------- INJECTING HERE ----------
+"Application-steam-x64.exe"+11E924: 41 39 4F 68           -  cmp [r15+68],ecx
+"Application-steam-x64.exe"+11E928: 0F 9C C0              -  setl al
+// ---------- DONE INJECTING  ----------
+"Application-steam-x64.exe"+11E92B: 48 83 C4 28           -  add rsp,28
+"Application-steam-x64.exe"+11E92F: 41 5F                 -  pop r15
+"Application-steam-x64.exe"+11E931: 41 5E                 -  pop r14
+"Application-steam-x64.exe"+11E933: C3                    -  ret 
+"Application-steam-x64.exe"+11E934: CC                    -  int 3 
+"Application-steam-x64.exe"+11E935: CC                    -  int 3 
+"Application-steam-x64.exe"+11E936: CC                    -  int 3 
+"Application-steam-x64.exe"+11E937: CC                    -  int 3 
+"Application-steam-x64.exe"+11E938: CC                    -  int 3 
+"Application-steam-x64.exe"+11E939: CC                    -  int 3 
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>73</ID>
+              <Description>"Reset Mines/Quarries (by selecting)"</Description>
+              <LastState/>
+              <Color>C08000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Application-steam-x64.exe
+  Version: 1.0.7
+  Date   : 2020-08-01
+  Author : sub1to
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+alloc(newmem,1000,Application-steam-x64.exe)
+
+label(code)
+label(return)
+
+newmem:
+  mov [rax+68], 0 // Set the amount mined to 0
+  mov [rax+48], 0 // Set flag to allow production to be enabled
+  //mov [pTmp], rax
+
+code:
+  movd xmm1,[rax+68]
+  jmp return
+
+_read_mine_resources_popup_window:
+  jmp newmem
+return:
+
+[DISABLE]
+_read_mine_resources_popup_window:
+  db 66 0F 6E 48 68
+
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Application-steam-x64.exe"+5FBEF
+
+"Application-steam-x64.exe"+5FBC1: 48 8B 44 24 60           -  mov rax,[rsp+60]
+"Application-steam-x64.exe"+5FBC6: 48 8B 58 18              -  mov rbx,[rax+18]
+"Application-steam-x64.exe"+5FBCA: 8B 15 B8 F7 16 00        -  mov edx,[Application-steam-x64.exe+1CF388]
+"Application-steam-x64.exe"+5FBD0: 48 8B CB                 -  mov rcx,rbx
+"Application-steam-x64.exe"+5FBD3: FF 15 AF 8F 0F 00        -  call qword ptr [Application-steam-x64.exe+158B88]
+"Application-steam-x64.exe"+5FBD9: 84 C0                    -  test al,al
+"Application-steam-x64.exe"+5FBDB: 48 0F 45 FB              -  cmovne rdi,rbx
+"Application-steam-x64.exe"+5FBDF: 48 8D 4C 24 60           -  lea rcx,[rsp+60]
+"Application-steam-x64.exe"+5FBE4: FF 15 B6 8F 0F 00        -  call qword ptr [Application-steam-x64.exe+158BA0]
+"Application-steam-x64.exe"+5FBEA: 48 8B 44 24 60           -  mov rax,[rsp+60]
+// ---------- INJECTING HERE ----------
+"Application-steam-x64.exe"+5FBEF: 66 0F 6E 48 68           -  movd xmm1,[rax+68]
+// ---------- DONE INJECTING  ----------
+"Application-steam-x64.exe"+5FBF4: 0F 5B C9                 -  cvtdq2ps xmm1,xmm1
+"Application-steam-x64.exe"+5FBF7: 66 0F 6E 47 48           -  movd xmm0,[rdi+48]
+"Application-steam-x64.exe"+5FBFC: 0F 5B C0                 -  cvtdq2ps xmm0,xmm0
+"Application-steam-x64.exe"+5FBFF: F3 0F 5E C8              -  divss xmm1,xmm0
+"Application-steam-x64.exe"+5FC03: F3 0F 10 35 41 8C 11 00  -  movss xmm6,[Application-steam-x64.exe+17884C]
+"Application-steam-x64.exe"+5FC0B: F3 0F 5C F1              -  subss xmm6,xmm1
+"Application-steam-x64.exe"+5FC0F: 48 8B CE                 -  mov rcx,rsi
+"Application-steam-x64.exe"+5FC12: FF 15 88 8F 0F 00        -  call qword ptr [Application-steam-x64.exe+158BA0]
+"Application-steam-x64.exe"+5FC18: 48 8B 06                 -  mov rax,[rsi]
+"Application-steam-x64.exe"+5FC1B: F3 0F 11 B0 28 01 00 00  -  movss [rax+00000128],xmm6
+}
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>85</ID>
+          <Description>"Citizens"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <Color>008000</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>84</ID>
+              <Description>"Overwrite Citizen Stats"</Description>
+              <Options moHideChildren="1"/>
+              <LastState/>
+              <Color>C08000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Application-steam-x64.exe
+  Version: 1.0.7
+  Date   : 2020-08-01
+  Author : sub1to
+
+  This script sets citizen stats (health, happiness, hunger, cold, age)
+}
+
+[ENABLE]
+alloc(newmem,1000,Application-steam-x64.exe)
+
+label(code)
+label(return)
+label(health_end)
+label(happiness_end)
+label(hunger_end)
+label(cold_end)
+label(age_end)
+
+newmem:
+  // rcx is overwritten right after the code injection
+
+  // Citizen Health
+  mov cx, [btCitizenHealth]
+  test cx, cx
+  jz health_end
+  mov ecx, [fCitizenHealth]
+  mov [rax+50], ecx
+health_end:
+
+  // Citizen Happiness
+  mov cx, [btCitizenHappiness]
+  test cx, cx
+  jz happiness_end
+  mov ecx, [fCitizenHappiness]
+  mov [rax+80], ecx
+happiness_end:
+
+  // Citizen Hunger
+  mov cx, [btCitizenHunger]
+  test cx, cx
+  jz hunger_end
+  mov ecx, [fCitizenHunger]
+  mov [rax+44], ecx
+hunger_end:
+
+  // Citizen Cold
+  mov cx, [btCitizenCold]
+  test cx, cx
+  jz cold_end
+  mov ecx, [fCitizenCold]
+  mov [rax+48], ecx
+cold_end:
+
+  // Citizen Age
+  mov cx, [btCitizenAge]
+  test cx, cx
+  jz age_end
+
+  lea rsp, [rsp-20]
+  movdqu [rsp+00], xmm0
+  movdqu [rsp+10], xmm1
+
+  mov ecx, (float)5
+  movd xmm0, ecx
+  movss xmm1, [fCitizenAge]
+  divss xmm1, xmm0
+  movss [rax+3C], xmm1
+
+  movdqu xmm0, [rsp+00]
+  movdqu xmm1, [rsp+10]
+  lea rsp, [rsp+20]
+age_end:
+
+  mov [pTmp], rax
+
+code:
+  addss xmm6,dword ptr [rax+50]
+  jmp return
+
+_read_citizen_health:
+  jmp newmem
+  return:
+
+[DISABLE]
+_read_citizen_health:
+  db F3 0F 58 70 50
+
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Application-steam-x64.exe"+7EFA5
+
+"Application-steam-x64.exe"+7EF83: 8B C1                    -  mov eax,ecx
+"Application-steam-x64.exe"+7EF85: C1 E8 04                 -  shr eax,04
+"Application-steam-x64.exe"+7EF88: 83 E0 01                 -  and eax,01
+"Application-steam-x64.exe"+7EF8B: 01 45 B7                 -  add [rbp-49],eax
+"Application-steam-x64.exe"+7EF8E: C1 E9 05                 -  shr ecx,05
+"Application-steam-x64.exe"+7EF91: 83 E1 01                 -  and ecx,01
+"Application-steam-x64.exe"+7EF94: 01 4D BB                 -  add [rbp-45],ecx
+"Application-steam-x64.exe"+7EF97: 48 8D 4D 87              -  lea rcx,[rbp-79]
+"Application-steam-x64.exe"+7EF9B: FF 15 FF 9B 0D 00        -  call qword ptr [Application-steam-x64.exe+158BA0]
+"Application-steam-x64.exe"+7EFA1: 48 8B 45 87              -  mov rax,[rbp-79]
+// ---------- INJECTING HERE ----------
+"Application-steam-x64.exe"+7EFA5: F3 0F 58 70 50           -  addss xmm6,dword ptr [rax+50]
+// ---------- DONE INJECTING  ----------
+"Application-steam-x64.exe"+7EFAA: 48 8D 4D 87              -  lea rcx,[rbp-79]
+"Application-steam-x64.exe"+7EFAE: FF 15 EC 9B 0D 00        -  call qword ptr [Application-steam-x64.exe+158BA0]
+"Application-steam-x64.exe"+7EFB4: 48 8B 45 87              -  mov rax,[rbp-79]
+"Application-steam-x64.exe"+7EFB8: F3 0F 58 B8 80 00 00 00  -  addss xmm7,dword ptr [rax+00000080]
+"Application-steam-x64.exe"+7EFC0: 49 FF C4                 -  inc r12
+"Application-steam-x64.exe"+7EFC3: 4C 3B 65 D7              -  cmp r12,[rbp-29]
+"Application-steam-x64.exe"+7EFC7: 8B 5D 77                 -  mov ebx,[rbp+77]
+"Application-steam-x64.exe"+7EFCA: 44 8B 75 8F              -  mov r14d,[rbp-71]
+"Application-steam-x64.exe"+7EFCE: B9 00 00 00 00           -  mov ecx,00000000
+"Application-steam-x64.exe"+7EFD3: 0F 8C 57 FE FF FF        -  jl Application-steam-x64.exe+7EE30
+}
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>88</ID>
+                  <Description>"Health"</Description>
+                  <LastState/>
+                  <Color>C08000</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+btCitizenHealth:
+  db 1
+
+[DISABLE]
+btCitizenHealth:
+  db 0
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>90</ID>
+                  <Description>"Happiness"</Description>
+                  <LastState/>
+                  <Color>C08000</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+btCitizenHappiness:
+  db 1
+
+[DISABLE]
+btCitizenHappiness:
+  db 0
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>99</ID>
+                  <Description>"Hunger"</Description>
+                  <LastState/>
+                  <Color>C08000</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+btCitizenHunger:
+  db 1
+
+[DISABLE]
+btCitizenHunger:
+  db 0
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>100</ID>
+                  <Description>"Cold"</Description>
+                  <LastState/>
+                  <Color>C08000</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+btCitizenCold:
+  db 1
+
+[DISABLE]
+btCitizenCold:
+  db 0
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>105</ID>
+                  <Description>"Age"</Description>
+                  <LastState/>
+                  <Color>C08000</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+btCitizenAge:
+  db 1
+
+[DISABLE]
+btCitizenAge:
+  db 0
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>89</ID>
+                  <Description>"Values"</Description>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <Color>A00000</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>86</ID>
+                      <Description>"fCitizenHealth"</Description>
+                      <LastState Value="10" RealAddress="7FF697670020"/>
+                      <Color>A00000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>fCitizenHealth</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>91</ID>
+                      <Description>"fCitizenHappiness"</Description>
+                      <LastState Value="10" RealAddress="7FF697670040"/>
+                      <Color>A00000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>fCitizenHappiness</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>97</ID>
+                      <Description>"fCitizenHunger"</Description>
+                      <LastState Value="0" RealAddress="7FF697670060"/>
+                      <Color>A00000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>fCitizenHunger</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>98</ID>
+                      <Description>"fCitizenCold"</Description>
+                      <LastState Value="0" RealAddress="7FF697670080"/>
+                      <Color>A00000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>fCitizenCold</Address>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>108</ID>
+                      <Description>"fCitizenAge"</Description>
+                      <LastState Value="25" RealAddress="7FF6976700A0"/>
+                      <Color>A00000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>fCitizenAge</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>110</ID>
+              <Description>"Age Options"</Description>
+              <Options moHideChildren="1"/>
+              <LastState/>
+              <Color>C08000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Application-steam-x64.exe
+  Version: 1.0.7
+  Date   : 2020-08-01
+  Author : sub1to
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+alloc(newmem,1000,Application-steam-x64.exe)
+
+label(code)
+label(return)
+label(age_limit_end)
+label(age_labourer_end)
+
+newmem:
+  push rcx
+  lea rsp, [rsp-20]
+  movdqu [rsp+00], xmm0
+  movdqu [rsp+10], xmm1
+
+  // Citizen Age Limit
+  mov cx, [btCitizenAgeLimit]
+  test cx, cx
+  jz age_limit_end
+
+  mov ecx, [fCitizenAgeLimit]
+  movd xmm0, ecx
+  mov ecx, (float)5
+  movd xmm1, ecx
+  divss xmm0, xmm1
+  comiss xmm0, [rax+3C]
+  jae age_limit_end
+
+  mov [rax+3C], (float)50
+age_limit_end:
+
+  // Citizen Instant Adults
+  mov cx, [btCitizenAgeInstantAdult]
+  test cx, cx
+  jz age_labourer_end
+
+  mov ecx, (float)2  // Citizens become labourer at age 10
+  movd xmm1, ecx
+  comiss xmm0, [rax+3C]
+  jbe age_labourer_end
+
+  mov [rax+3C], (float)2
+age_labourer_end:
+
+  movdqu xmm0, [rsp+00]
+  movdqu xmm1, [rsp+10]
+  lea rsp, [rsp+20]
+  pop rcx
+
+code:
+  movss xmm0,[rax+3C]
+  jmp return
+
+_read_citizen_age:
+  jmp newmem
+  return:
+
+[DISABLE]
+_read_citizen_age:
+  db F3 0F 10 40 3C
+
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Application-steam-x64.exe"+7EE58
+
+"Application-steam-x64.exe"+7EE24: 4C 8B EF                    -  mov r13,rdi
+"Application-steam-x64.exe"+7EE27: 66 0F 1F 84 00 00 00 00 00  -  nop [rax+rax+00000000]
+"Application-steam-x64.exe"+7EE30: 49 8B 85 A0 00 00 00        -  mov rax,[r13+000000A0]
+"Application-steam-x64.exe"+7EE37: 48 89 4D 87                 -  mov [rbp-79],rcx
+"Application-steam-x64.exe"+7EE3B: 4A 8B 04 E0                 -  mov rax,[rax+r12*8]
+"Application-steam-x64.exe"+7EE3F: 48 89 45 87                 -  mov [rbp-79],rax
+"Application-steam-x64.exe"+7EE43: 48 8D 4D 87                 -  lea rcx,[rbp-79]
+"Application-steam-x64.exe"+7EE47: FF 15 53 9D 0D 00           -  call qword ptr [Application-steam-x64.exe+158BA0]
+"Application-steam-x64.exe"+7EE4D: 48 8B 45 87                 -  mov rax,[rbp-79]
+"Application-steam-x64.exe"+7EE51: 48 8B 88 88 02 00 00        -  mov rcx,[rax+00000288]
+// ---------- INJECTING HERE ----------
+"Application-steam-x64.exe"+7EE58: F3 0F 10 40 3C              -  movss xmm0,[rax+3C]
+// ---------- DONE INJECTING  ----------
+"Application-steam-x64.exe"+7EE5D: 0F 2F 41 44                 -  comiss xmm0,[rcx+44]
+"Application-steam-x64.exe"+7EE61: 72 11                       -  jb Application-steam-x64.exe+7EE74
+"Application-steam-x64.exe"+7EE63: 48 83 B8 08 02 00 00 00     -  cmp qword ptr [rax+00000208],00
+"Application-steam-x64.exe"+7EE6B: 75 07                       -  jne Application-steam-x64.exe+7EE74
+"Application-steam-x64.exe"+7EE6D: FF C3                       -  inc ebx
+"Application-steam-x64.exe"+7EE6F: 89 5D 77                    -  mov [rbp+77],ebx
+"Application-steam-x64.exe"+7EE72: EB 24                       -  jmp Application-steam-x64.exe+7EE98
+"Application-steam-x64.exe"+7EE74: 48 8D 4D 87                 -  lea rcx,[rbp-79]
+"Application-steam-x64.exe"+7EE78: FF 15 22 9D 0D 00           -  call qword ptr [Application-steam-x64.exe+158BA0]
+"Application-steam-x64.exe"+7EE7E: 48 8B 45 87                 -  mov rax,[rbp-79]
+}
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>111</ID>
+                  <Description>"Age Limit"</Description>
+                  <LastState/>
+                  <Color>C08000</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+btCitizenAgeLimit:
+  db 1
+
+[DISABLE]
+btCitizenAgeLimit:
+  db 0
+</AssemblerScript>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>112</ID>
+                      <Description>"Age Limit"</Description>
+                      <LastState Value="50" RealAddress="7FF6976700C0"/>
+                      <Color>A00000</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>fCitizenAgeLimit</Address>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>120</ID>
+                  <Description>"Instant Adult (Skip Child Ages)"</Description>
+                  <LastState/>
+                  <Color>C08000</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+btCitizenAgeInstantAdult:
+  db 1
+
+[DISABLE]
+btCitizenAgeInstantAdult:
+  db 0
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>128</ID>
+          <Description>"Houses"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <Color>008000</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>127</ID>
+              <Description>"Infinite House Resources (99 minimum)"</Description>
+              <LastState/>
+              <Color>C08000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Application-steam-x64.exe
+  Version: 1.0.7
+  Date   : 2020-08-01
+  Author : sub1to
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+alloc(newmem,1000,Application-steam-x64.exe)
+
+label(code)
+label(return)
+
+define(new_value,#99)
+
+newmem:
+  cmp [r13+r15-08], new_value
+  ja code
+  mov [r13+r15-08], new_value
+
+code:
+  imul ecx,[r13+r15-08]
+  jmp return
+
+_read_house_inventory:
+  jmp newmem
+  nop
+return:
+
+[DISABLE]
+_read_house_inventory:
+  db 43 0F AF 4C 3D F8
+
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Application-steam-x64.exe"+132465
+
+"Application-steam-x64.exe"+132448: 74 54              -  je Application-steam-x64.exe+13249E
+"Application-steam-x64.exe"+13244A: FF C3              -  inc ebx
+"Application-steam-x64.exe"+13244C: 48 FF C6           -  inc rsi
+"Application-steam-x64.exe"+13244F: 3B 5D 30           -  cmp ebx,[rbp+30]
+"Application-steam-x64.exe"+132452: 7C DE              -  jl Application-steam-x64.exe+132432
+"Application-steam-x64.exe"+132454: 33 C0              -  xor eax,eax
+"Application-steam-x64.exe"+132456: 8B 48 48           -  mov ecx,[rax+48]
+"Application-steam-x64.exe"+132459: 48 8B 44 24 50     -  mov rax,[rsp+50]
+"Application-steam-x64.exe"+13245E: 41 FF C6           -  inc r14d
+"Application-steam-x64.exe"+132461: 49 83 C7 10        -  add r15,10
+// ---------- INJECTING HERE ----------
+"Application-steam-x64.exe"+132465: 43 0F AF 4C 3D F8  -  imul ecx,[r13+r15-08]
+// ---------- DONE INJECTING  ----------
+"Application-steam-x64.exe"+13246B: 44 03 E1           -  add r12d,ecx
+"Application-steam-x64.exe"+13246E: 44 3B 70 30        -  cmp r14d,[rax+30]
+"Application-steam-x64.exe"+132472: 7C AC              -  jl Application-steam-x64.exe+132420
+"Application-steam-x64.exe"+132474: 4C 8B 7C 24 20     -  mov r15,[rsp+20]
+"Application-steam-x64.exe"+132479: 4C 8B 6C 24 28     -  mov r13,[rsp+28]
+"Application-steam-x64.exe"+13247E: 48 8B 7C 24 30     -  mov rdi,[rsp+30]
+"Application-steam-x64.exe"+132483: 48 8B 74 24 68     -  mov rsi,[rsp+68]
+"Application-steam-x64.exe"+132488: 48 8B 6C 24 60     -  mov rbp,[rsp+60]
+"Application-steam-x64.exe"+13248D: 48 8B 5C 24 58     -  mov rbx,[rsp+58]
+"Application-steam-x64.exe"+132492: 41 8B C4           -  mov eax,r12d
+}
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>136</ID>
+          <Description>"Misc"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <Color>008000</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>135</ID>
+              <Description>"Overwrite Game Speed"</Description>
+              <Options moHideChildren="1"/>
+              <LastState/>
+              <Color>C08000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Application-steam-x64.exe
+  Version: 1.0.7
+  Date   : 2020-08-01
+  Author : sub1to
+
+  This script overwrites the game speed
+}
+
+[ENABLE]
+alloc(newmem,1000,Application-steam-x64.exe)
+
+label(return)
+
+newmem:
+  jne _read_game_speed_jne
+  mov ebp, [lGameSpeed]
+  jmp return
+
+_read_game_speed:
+  jmp newmem
+  return:
+
+[DISABLE]
+_read_game_speed:
+  db 75 03 8B 68 34
+
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "Application-steam-x64.exe"+9B89C
+
+"Application-steam-x64.exe"+9B873: 48 8B F2                    -  mov rsi,rdx
+"Application-steam-x64.exe"+9B876: 48 8B F9                    -  mov rdi,rcx
+"Application-steam-x64.exe"+9B879: 48 8B 89 98 00 00 00        -  mov rcx,[rcx+00000098]
+"Application-steam-x64.exe"+9B880: FF 15 B2 BD 0B 00           -  call qword ptr [Application-steam-x64.exe+157638]
+"Application-steam-x64.exe"+9B886: 84 C0                       -  test al,al
+"Application-steam-x64.exe"+9B888: 0F 85 AF 01 00 00           -  jne Application-steam-x64.exe+9BA3D
+"Application-steam-x64.exe"+9B88E: 48 8B 87 20 01 00 00        -  mov rax,[rdi+00000120]
+"Application-steam-x64.exe"+9B895: 33 DB                       -  xor ebx,ebx
+"Application-steam-x64.exe"+9B897: 38 58 30                    -  cmp [rax+30],bl
+"Application-steam-x64.exe"+9B89A: 8B EB                       -  mov ebp,ebx
+// ---------- INJECTING HERE ----------
+"Application-steam-x64.exe"+9B89C: 75 03                       -  jne Application-steam-x64.exe+9B8A1
+"Application-steam-x64.exe"+9B89E: 8B 68 34                    -  mov ebp,[rax+34]
+// ---------- DONE INJECTING  ----------
+"Application-steam-x64.exe"+9B8A1: 85 ED                       -  test ebp,ebp
+"Application-steam-x64.exe"+9B8A3: 0F 8E BA 00 00 00           -  jng Application-steam-x64.exe+9B963
+"Application-steam-x64.exe"+9B8A9: 48 8B 06                    -  mov rax,[rsi]
+"Application-steam-x64.exe"+9B8AC: 48 01 47 38                 -  add [rdi+38],rax
+"Application-steam-x64.exe"+9B8B0: 85 ED                       -  test ebp,ebp
+"Application-steam-x64.exe"+9B8B2: 0F 8E AB 00 00 00           -  jng Application-steam-x64.exe+9B963
+"Application-steam-x64.exe"+9B8B8: 44 8D 75 FF                 -  lea r14d,[rbp-01]
+"Application-steam-x64.exe"+9B8BC: 0F 1F 40 00                 -  nop [rax+00]
+"Application-steam-x64.exe"+9B8C0: 48 8B 8F F8 00 00 00        -  mov rcx,[rdi+000000F8]
+"Application-steam-x64.exe"+9B8C7: 48 8B D6                    -  mov rdx,rsi
+}
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>137</ID>
+                  <Description>"Game Speed"</Description>
+                  <LastState Value="100" RealAddress="7FF6976700F0"/>
+                  <Color>A00000</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>lGameSpeed</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
         </CheatEntry>
         <CheatEntry>
           <ID>52</ID>
-          <Description>"Symbols"</Description>
+          <Description>"Symbols (Debug)"</Description>
           <Options moHideChildren="1"/>
           <LastState Value="" Activated="1" RealAddress="00000000"/>
           <Color>0080FF</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
-              <ID>14</ID>
-              <Description>"pTmp"</Description>
-              <LastState Value="0000021A317979B8" RealAddress="7FF6FA5D0000"/>
-              <ShowAsHex>1</ShowAsHex>
+              <ID>118</ID>
+              <Description>"Dbg"</Description>
+              <LastState Value="" RealAddress="00000000"/>
               <Color>0080FF</Color>
-              <VariableType>8 Bytes</VariableType>
-              <Address>pTmp</Address>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>14</ID>
+                  <Description>"pTmp"</Description>
+                  <LastState Value="0000000000000000" RealAddress="7FF697670000"/>
+                  <ShowAsHex>1</ShowAsHex>
+                  <Color>0080FF</Color>
+                  <VariableType>8 Bytes</VariableType>
+                  <Address>pTmp</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>116</ID>
+                  <Description>"pTmp"</Description>
+                  <LastState Value="0" RealAddress="7FF697670000"/>
+                  <Color>0080FF</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>pTmp</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>117</ID>
+                  <Description>"pTmp"</Description>
+                  <LastState Value="0" RealAddress="7FF697670004"/>
+                  <Color>0080FF</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>pTmp+4</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>93</ID>
+              <Description>"btCitizenHealth"</Description>
+              <LastState Value="0" RealAddress="7FF697670010"/>
+              <Color>A00000</Color>
+              <VariableType>Byte</VariableType>
+              <Address>btCitizenHealth</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>96</ID>
+              <Description>"fCitizenHealth"</Description>
+              <LastState Value="10" RealAddress="7FF697670020"/>
+              <Color>A00000</Color>
+              <VariableType>Float</VariableType>
+              <Address>fCitizenHealth</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>95</ID>
+              <Description>"btCitizenHappiness"</Description>
+              <LastState Value="0" RealAddress="7FF697670030"/>
+              <Color>A00000</Color>
+              <VariableType>Byte</VariableType>
+              <Address>btCitizenHappiness</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>94</ID>
+              <Description>"fCitizenHappiness"</Description>
+              <LastState Value="10" RealAddress="7FF697670040"/>
+              <Color>A00000</Color>
+              <VariableType>Float</VariableType>
+              <Address>fCitizenHappiness</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>101</ID>
+              <Description>"btCitizenHunger"</Description>
+              <LastState Value="0" RealAddress="7FF697670050"/>
+              <Color>A00000</Color>
+              <VariableType>Byte</VariableType>
+              <Address>btCitizenHunger</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>102</ID>
+              <Description>"fCitizenHunger"</Description>
+              <LastState Value="0" RealAddress="7FF697670060"/>
+              <Color>A00000</Color>
+              <VariableType>Float</VariableType>
+              <Address>fCitizenHunger</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>103</ID>
+              <Description>"btCitizenCold"</Description>
+              <LastState Value="0" RealAddress="7FF697670070"/>
+              <Color>A00000</Color>
+              <VariableType>Byte</VariableType>
+              <Address>btCitizenCold</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>104</ID>
+              <Description>"fCitizenCold"</Description>
+              <LastState Value="0" RealAddress="7FF697670080"/>
+              <Color>A00000</Color>
+              <VariableType>Float</VariableType>
+              <Address>fCitizenCold</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>106</ID>
+              <Description>"btCitizenAge"</Description>
+              <LastState Value="0" RealAddress="7FF697670090"/>
+              <Color>A00000</Color>
+              <VariableType>Byte</VariableType>
+              <Address>btCitizenAge</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>107</ID>
+              <Description>"fCitizenAge"</Description>
+              <LastState Value="25" RealAddress="7FF6976700A0"/>
+              <Color>A00000</Color>
+              <VariableType>Float</VariableType>
+              <Address>fCitizenAge</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>113</ID>
+              <Description>"btCitizenAgeLimit"</Description>
+              <LastState Value="0" RealAddress="7FF6976700B0"/>
+              <Color>A00000</Color>
+              <VariableType>Byte</VariableType>
+              <Address>btCitizenAgeLimit</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>114</ID>
+              <Description>"fCitizenAgeLimit"</Description>
+              <LastState Value="50" RealAddress="7FF6976700C0"/>
+              <Color>A00000</Color>
+              <VariableType>Float</VariableType>
+              <Address>fCitizenAgeLimit</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>119</ID>
+              <Description>"btCitizenAgeInstantAdult"</Description>
+              <LastState Value="0" RealAddress="7FF6976700D0"/>
+              <Color>A00000</Color>
+              <VariableType>Byte</VariableType>
+              <Address>btCitizenAgeInstantAdult</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>138</ID>
+              <Description>"lGameSpeed"</Description>
+              <LastState Value="100" RealAddress="7FF6976700F0"/>
+              <Color>A00000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>lGameSpeed</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>53</ID>
               <Description>"_set_build_amount"</Description>
-              <LastState Value="E9 17 24 ED FF CC CC CC CC CC" RealAddress="7FF6FA6EDBE4"/>
+              <LastState Value="FF 41 48 F3 C3 CC CC CC CC CC" RealAddress="7FF69778DBE4"/>
               <ShowAsHex>1</ShowAsHex>
-              <Color>0080FF</Color>
+              <Color>004080</Color>
               <VariableType>Array of byte</VariableType>
               <ByteLength>10</ByteLength>
               <Address>_set_build_amount</Address>
@@ -606,9 +1557,9 @@ dealloc(newmem)
             <CheatEntry>
               <ID>54</ID>
               <Description>"_read_required_build_materials"</Description>
-              <LastState Value="31 C0 90 90 90 90 90 90 90 3B" RealAddress="7FF6FA6EDB93"/>
+              <LastState Value="8B 44 3E 08 41 0F AF 46 4C 3B" RealAddress="7FF69778DB93"/>
               <ShowAsHex>1</ShowAsHex>
-              <Color>0080FF</Color>
+              <Color>004080</Color>
               <VariableType>Array of byte</VariableType>
               <ByteLength>10</ByteLength>
               <Address>_read_required_build_materials</Address>
@@ -616,9 +1567,9 @@ dealloc(newmem)
             <CheatEntry>
               <ID>55</ID>
               <Description>"_read_required_build_materials_popup_window"</Description>
-              <LastState Value="45 31 C0 90 90 44 0F AF 40 4C" RealAddress="7FF6FA697AA9"/>
+              <LastState Value="44 8B 44 3E 08 44 0F AF 40 4C" RealAddress="7FF697737AA9"/>
               <ShowAsHex>1</ShowAsHex>
-              <Color>0080FF</Color>
+              <Color>004080</Color>
               <VariableType>Array of byte</VariableType>
               <ByteLength>10</ByteLength>
               <Address>_read_required_build_materials_popup_window</Address>
@@ -626,9 +1577,9 @@ dealloc(newmem)
             <CheatEntry>
               <ID>56</ID>
               <Description>"_read_inventory_stack_count"</Description>
-              <LastState Value="E9 AB 0A F4 FF 90 90 90 90 90" RealAddress="7FF6FA66F550"/>
+              <LastState Value="0F AF 47 08 F7 41 5C 40 1C 00" RealAddress="7FF69770F550"/>
               <ShowAsHex>1</ShowAsHex>
-              <Color>0080FF</Color>
+              <Color>004080</Color>
               <VariableType>Array of byte</VariableType>
               <ByteLength>10</ByteLength>
               <Address>_read_inventory_stack_count</Address>
@@ -636,9 +1587,9 @@ dealloc(newmem)
             <CheatEntry>
               <ID>57</ID>
               <Description>"_read_stockpile_capacity"</Description>
-              <LastState Value="E9 32 92 F6 FF 90 33 FF 48 89" RealAddress="7FF6FA636DC9"/>
+              <LastState Value="66 44 0F 6E 40 38 33 FF 48 89" RealAddress="7FF6976D6DC9"/>
               <ShowAsHex>1</ShowAsHex>
-              <Color>0080FF</Color>
+              <Color>004080</Color>
               <VariableType>Array of byte</VariableType>
               <ByteLength>10</ByteLength>
               <Address>_read_stockpile_capacity</Address>
@@ -646,9 +1597,9 @@ dealloc(newmem)
             <CheatEntry>
               <ID>58</ID>
               <Description>"_read_stockpile_capacity_2"</Description>
-              <LastState Value="E9 18 F6 F3 FF 75 05 0F 57 F6" RealAddress="7FF6FA660A23"/>
+              <LastState Value="8B 51 38 85 D2 75 05 0F 57 F6" RealAddress="7FF697700A23"/>
               <ShowAsHex>1</ShowAsHex>
-              <Color>0080FF</Color>
+              <Color>004080</Color>
               <VariableType>Array of byte</VariableType>
               <ByteLength>10</ByteLength>
               <Address>_read_stockpile_capacity_2</Address>
@@ -656,9 +1607,9 @@ dealloc(newmem)
             <CheatEntry>
               <ID>59</ID>
               <Description>"_read_stockpile_capacity_3"</Description>
-              <LastState Value="E9 7D DD E8 FF 90 90 48 83 C4" RealAddress="7FF6FA7122FE"/>
+              <LastState Value="41 3B 57 38 0F 9E C0 48 83 C4" RealAddress="7FF6977B22FE"/>
               <ShowAsHex>1</ShowAsHex>
-              <Color>0080FF</Color>
+              <Color>004080</Color>
               <VariableType>Array of byte</VariableType>
               <ByteLength>10</ByteLength>
               <Address>_read_stockpile_capacity_3</Address>
@@ -666,9 +1617,9 @@ dealloc(newmem)
             <CheatEntry>
               <ID>63</ID>
               <Description>"_read_stockpile_capacity_4"</Description>
-              <LastState Value="E9 B5 08 F3 FF 90 45 84 F6 74" RealAddress="7FF6FA66F806"/>
+              <LastState Value="8B 48 38 01 4B 14 45 84 F6 74" RealAddress="7FF69770F806"/>
               <ShowAsHex>1</ShowAsHex>
-              <Color>0080FF</Color>
+              <Color>004080</Color>
               <VariableType>Array of byte</VariableType>
               <ByteLength>10</ByteLength>
               <Address>_read_stockpile_capacity_4</Address>
@@ -676,12 +1627,82 @@ dealloc(newmem)
             <CheatEntry>
               <ID>64</ID>
               <Description>"_read_cart_capacity"</Description>
-              <LastState Value="E9 D5 08 F3 FF 90 48 8B 4D B0" RealAddress="7FF6FA66F826"/>
+              <LastState Value="8B 48 38 01 4B 04 48 8B 4D B0" RealAddress="7FF69770F826"/>
               <ShowAsHex>1</ShowAsHex>
-              <Color>0080FF</Color>
+              <Color>004080</Color>
               <VariableType>Array of byte</VariableType>
               <ByteLength>10</ByteLength>
               <Address>_read_cart_capacity</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>75</ID>
+              <Description>"_read_mine_resources_popup_window"</Description>
+              <LastState Value="66 0F 6E 48 68 0F 5B C9 66 0F" RealAddress="7FF6976DFBEF"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>004080</Color>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>10</ByteLength>
+              <Address>_read_mine_resources_popup_window</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>76</ID>
+              <Description>"_read_mine_resources"</Description>
+              <LastState Value="41 39 4F 68 0F 9C C0 48 83 C4" RealAddress="7FF69779E924"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>004080</Color>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>10</ByteLength>
+              <Address>_read_mine_resources</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>92</ID>
+              <Description>"_read_citizen_health"</Description>
+              <LastState Value="F3 0F 58 70 50 48 8D 4D 87 FF" RealAddress="7FF6976FEFA5"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>004080</Color>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>10</ByteLength>
+              <Address>_read_citizen_health</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>129</ID>
+              <Description>"_read_citizen_age"</Description>
+              <LastState Value="F3 0F 10 40 3C 0F 2F 41 44 72" RealAddress="7FF6976FEE58"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>004080</Color>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>10</ByteLength>
+              <Address>_read_citizen_age</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>130</ID>
+              <Description>"_read_house_inventory"</Description>
+              <LastState Value="43 0F AF 4C 3D F8 44 03 E1 44" RealAddress="7FF6977B2465"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>004080</Color>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>10</ByteLength>
+              <Address>_read_house_inventory</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>140</ID>
+              <Description>"_read_game_speed"</Description>
+              <LastState Value="75 03 8B 68 34 85 ED 0F 8E BA" RealAddress="7FF69771B89C"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>004080</Color>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>10</ByteLength>
+              <Address>_read_game_speed</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>139</ID>
+              <Description>"_read_game_speed_jne"</Description>
+              <LastState Value="85 ED 0F 8E BA 00 00 00 48 8B" RealAddress="7FF69771B8A1"/>
+              <ShowAsHex>1</ShowAsHex>
+              <Color>004080</Color>
+              <VariableType>Array of byte</VariableType>
+              <ByteLength>10</ByteLength>
+              <Address>_read_game_speed_jne</Address>
             </CheatEntry>
           </CheatEntries>
         </CheatEntry>
@@ -691,7 +1712,7 @@ dealloc(newmem)
   <UserdefinedSymbols>
     <SymbolEntry>
       <Name>pTmp</Name>
-      <Address>7FF6FA5D0000</Address>
+      <Address>7FF697670000</Address>
     </SymbolEntry>
     <SymbolEntry>
       <Name>tmp</Name>
@@ -700,6 +1721,70 @@ dealloc(newmem)
     <SymbolEntry>
       <Name>asdf</Name>
       <Address>20B386C0020</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>fCitizenHealth</Name>
+      <Address>7FF697670020</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>btCitizenHealth</Name>
+      <Address>7FF697670010</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>btCitizenHappiness</Name>
+      <Address>7FF697670030</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>fCitizenHappiness</Name>
+      <Address>7FF697670040</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>btCitizenHunger</Name>
+      <Address>7FF697670050</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>fCitizenHunger</Name>
+      <Address>7FF697670060</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>btCitizenCold</Name>
+      <Address>7FF697670070</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>fCitizenCold</Name>
+      <Address>7FF697670080</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>btCitizenAge</Name>
+      <Address>7FF697670090</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>fCitizenAge</Name>
+      <Address>7FF6976700A0</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>btCitizenAgeLimit</Name>
+      <Address>7FF6976700B0</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>fCitizenAgeLimit</Name>
+      <Address>7FF6976700C0</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>btCitizenAgeInstantLabour</Name>
+      <Address>7FF6976700D0</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>btCitizenAgeInstantAdult</Name>
+      <Address>7FF6976700D0</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>btGameSpeed</Name>
+      <Address>7FF6976700E0</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>lGameSpeed</Name>
+      <Address>7FF6976700F0</Address>
     </SymbolEntry>
   </UserdefinedSymbols>
 </CheatTable>
