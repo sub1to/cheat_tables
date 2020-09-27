@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="27">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"inf bullet in clip"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : mafiadefinitiveedition.exe
+  Version: 
+  Date   : 2020-09-26
+  Author : sub1to
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+//code from here to '[DISABLE]' will be used to enable the cheat
+
+ 
+ 
+aobscanmodule(_write_ammo,mafiadefinitiveedition.exe,44 89 40 18 48 8B 01) // should be unique
+alloc(newmem,$1000,"mafiadefinitiveedition.exe"+25EBB3D)
+
+label(code)
+label(return)
+
+newmem:
+  mov r8d, [rax+18]
+
+code:
+  mov [rax+18],r8d
+  mov rax,[rcx]
+  jmp return
+
+_write_ammo:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(_write_ammo)
+
+[DISABLE]
+//code from here till the end of the code will be used to disable the cheat
+_write_ammo:
+  db 44 89 40 18 48 8B 01
+
+unregistersymbol(_write_ammo)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "mafiadefinitiveedition.exe"+25EBB3D
+
+"mafiadefinitiveedition.exe"+25EBB2A: CC                    -  int 3 
+"mafiadefinitiveedition.exe"+25EBB2B: CC                    -  int 3 
+"mafiadefinitiveedition.exe"+25EBB2C: CC                    -  int 3 
+"mafiadefinitiveedition.exe"+25EBB2D: CC                    -  int 3 
+"mafiadefinitiveedition.exe"+25EBB2E: CC                    -  int 3 
+"mafiadefinitiveedition.exe"+25EBB2F: CC                    -  int 3 
+"mafiadefinitiveedition.exe"+25EBB30: 48 8B 41 08           -  mov rax,[rcx+08]
+"mafiadefinitiveedition.exe"+25EBB34: 45 33 C0              -  xor r8d,r8d
+"mafiadefinitiveedition.exe"+25EBB37: 85 D2                 -  test edx,edx
+"mafiadefinitiveedition.exe"+25EBB39: 44 0F 4F C2           -  cmovg r8d,edx
+// ---------- INJECTING HERE ----------
+"mafiadefinitiveedition.exe"+25EBB3D: 44 89 40 18           -  mov [rax+18],r8d
+"mafiadefinitiveedition.exe"+25EBB41: 48 8B 01              -  mov rax,[rcx]
+// ---------- DONE INJECTING  ----------
+"mafiadefinitiveedition.exe"+25EBB44: 48 FF 60 18           -  jmp qword ptr [rax+18]
+"mafiadefinitiveedition.exe"+25EBB48: CC                    -  int 3 
+"mafiadefinitiveedition.exe"+25EBB49: CC                    -  int 3 
+"mafiadefinitiveedition.exe"+25EBB4A: CC                    -  int 3 
+"mafiadefinitiveedition.exe"+25EBB4B: CC                    -  int 3 
+"mafiadefinitiveedition.exe"+25EBB4C: CC                    -  int 3 
+"mafiadefinitiveedition.exe"+25EBB4D: CC                    -  int 3 
+"mafiadefinitiveedition.exe"+25EBB4E: CC                    -  int 3 
+"mafiadefinitiveedition.exe"+25EBB4F: CC                    -  int 3 
+"mafiadefinitiveedition.exe"+25EBB50: 48 63 C2              -  movsxd  rax,edx
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>26</ID>
+      <Description>"inf ammo"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : mafiadefinitiveedition.exe
+  Version: 
+  Date   : 2020-09-26
+  Author : sub1to
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(_write_ammo_reload,mafiadefinitiveedition.exe,41 8B 40 04 41 3B C2) // should be unique
+alloc(newmem,$1000,"mafiadefinitiveedition.exe"+25EA7F3)
+
+label(code)
+label(return)
+
+newmem:
+  // r10d = amount subtracted
+  mov r10d, 0
+
+code:
+  mov eax,[r8+04]
+  cmp eax,r10d
+  jmp return
+
+_write_ammo_reload:
+  jmp newmem
+  nop
+  nop
+return:
+registersymbol(_write_ammo_reload)
+
+[DISABLE]
+
+_write_ammo_reload:
+  db 41 8B 40 04 41 3B C2
+
+unregistersymbol(_write_ammo_reload)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "mafiadefinitiveedition.exe"+25EA7F3
+
+"mafiadefinitiveedition.exe"+25EA7D7: 4C 8B 41 10              -  mov r8,[rcx+10]
+"mafiadefinitiveedition.exe"+25EA7DB: 4D 3B C1                 -  cmp r8,r9
+"mafiadefinitiveedition.exe"+25EA7DE: 74 23                    -  je mafiadefinitiveedition.exe+25EA803
+"mafiadefinitiveedition.exe"+25EA7E0: 41 39 10                 -  cmp [r8],edx
+"mafiadefinitiveedition.exe"+25EA7E3: 74 09                    -  je mafiadefinitiveedition.exe+25EA7EE
+"mafiadefinitiveedition.exe"+25EA7E5: 49 83 C0 08              -  add r8,08
+"mafiadefinitiveedition.exe"+25EA7E9: 4D 3B C1                 -  cmp r8,r9
+"mafiadefinitiveedition.exe"+25EA7EC: 75 F2                    -  jne mafiadefinitiveedition.exe+25EA7E0
+"mafiadefinitiveedition.exe"+25EA7EE: 4D 3B C1                 -  cmp r8,r9
+"mafiadefinitiveedition.exe"+25EA7F1: 74 10                    -  je mafiadefinitiveedition.exe+25EA803
+// ---------- INJECTING HERE ----------
+"mafiadefinitiveedition.exe"+25EA7F3: 41 8B 40 04              -  mov eax,[r8+04]
+"mafiadefinitiveedition.exe"+25EA7F7: 41 3B C2                 -  cmp eax,r10d
+// ---------- DONE INJECTING  ----------
+"mafiadefinitiveedition.exe"+25EA7FA: 76 0B                    -  jna mafiadefinitiveedition.exe+25EA807
+"mafiadefinitiveedition.exe"+25EA7FC: 41 2B C2                 -  sub eax,r10d
+"mafiadefinitiveedition.exe"+25EA7FF: 41 89 40 04              -  mov [r8+04],eax
+"mafiadefinitiveedition.exe"+25EA803: 41 8B C2                 -  mov eax,r10d
+"mafiadefinitiveedition.exe"+25EA806: C3                       -  ret 
+"mafiadefinitiveedition.exe"+25EA807: 41 C7 40 04 00 00 00 00  -  mov [r8+04],00000000
+"mafiadefinitiveedition.exe"+25EA80F: C3                       -  ret 
+"mafiadefinitiveedition.exe"+25EA810: 48 89 5C 24 10           -  mov [rsp+10],rbx
+"mafiadefinitiveedition.exe"+25EA815: 48 89 6C 24 18           -  mov [rsp+18],rbp
+"mafiadefinitiveedition.exe"+25EA81A: 48 89 7C 24 20           -  mov [rsp+20],rdi
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>22</ID>
+      <Description>"inf health"</Description>
+      <LastState Activated="1"/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : mafiadefinitiveedition.exe
+  Version: 
+  Date   : 2020-09-26
+  Author : sub1to
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(_write_health,mafiadefinitiveedition.exe,F3 0F 11 46 0C 0F 87 BF) // should be unique
+alloc(newmem,$1000,"mafiadefinitiveedition.exe"+2BF236D)
+
+label(code)
+label(return)
+
+newmem:
+  push rax
+  mov eax, (float)100
+  movd xmm0, eax
+  pop rax
+
+code:
+  movss [rsi+0C],xmm0
+  jmp return
+
+_write_health:
+  jmp newmem
+return:
+registersymbol(_write_health)
+
+[DISABLE]
+
+_write_health:
+  db F3 0F 11 46 0C
+
+unregistersymbol(_write_health)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "mafiadefinitiveedition.exe"+2BF236D
+
+"mafiadefinitiveedition.exe"+2BF2346: 48 8D 34 C8                 -  lea rsi,[rax+rcx*8]
+"mafiadefinitiveedition.exe"+2BF234A: EB 07                       -  jmp mafiadefinitiveedition.exe+2BF2353
+"mafiadefinitiveedition.exe"+2BF234C: 48 8B 01                    -  mov rax,[rcx]
+"mafiadefinitiveedition.exe"+2BF234F: 48 8D 34 D0                 -  lea rsi,[rax+rdx*8]
+"mafiadefinitiveedition.exe"+2BF2353: 48 8B 36                    -  mov rsi,[rsi]
+"mafiadefinitiveedition.exe"+2BF2356: F3 0F 10 46 0C              -  movss xmm0,[rsi+0C]
+"mafiadefinitiveedition.exe"+2BF235B: 41 0F 2F C1                 -  comiss xmm0,xmm9
+"mafiadefinitiveedition.exe"+2BF235F: 76 2B                       -  jna mafiadefinitiveedition.exe+2BF238C
+"mafiadefinitiveedition.exe"+2BF2361: F3 41 0F 5C C1              -  subss xmm0,xmm9
+"mafiadefinitiveedition.exe"+2BF2366: 0F 2F 05 AF F5 F2 01        -  comiss xmm0,[mafiadefinitiveedition.exe+4B2191C]
+// ---------- INJECTING HERE ----------
+"mafiadefinitiveedition.exe"+2BF236D: F3 0F 11 46 0C              -  movss [rsi+0C],xmm0
+// ---------- DONE INJECTING  ----------
+"mafiadefinitiveedition.exe"+2BF2372: 0F 87 BF 02 00 00           -  ja mafiadefinitiveedition.exe+2BF2637
+"mafiadefinitiveedition.exe"+2BF2378: 48 8B D6                    -  mov rdx,rsi
+"mafiadefinitiveedition.exe"+2BF237B: 48 8B CF                    -  mov rcx,rdi
+"mafiadefinitiveedition.exe"+2BF237E: E8 8D 75 01 00              -  call mafiadefinitiveedition.exe+2C09910
+"mafiadefinitiveedition.exe"+2BF2383: 41 C6 06 01                 -  mov byte ptr [r14],01
+"mafiadefinitiveedition.exe"+2BF2387: E9 AB 02 00 00              -  jmp mafiadefinitiveedition.exe+2BF2637
+"mafiadefinitiveedition.exe"+2BF238C: 44 0F 29 44 24 50           -  movaps [rsp+50],xmm8
+"mafiadefinitiveedition.exe"+2BF2392: 41 0F 28 F9                 -  movaps xmm7,xmm9
+"mafiadefinitiveedition.exe"+2BF2396: 45 0F 57 C0                 -  xorps xmm8,xmm8
+"mafiadefinitiveedition.exe"+2BF239A: 45 0F 2F C8                 -  comiss xmm9,xmm8
+}
+</AssemblerScript>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>25</ID>
+      <Description>"_write_clips_empty"</Description>
+      <LastState/>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : mafiadefinitiveedition.exe
+  Version: 
+  Date   : 2020-09-26
+  Author : sub1to
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(_write_clips_empty,mafiadefinitiveedition.exe,41 C7 40 04 00 00 00 00 C3) // should be unique
+alloc(newmem,$1000,"mafiadefinitiveedition.exe"+25EA807)
+
+label(code)
+label(return)
+
+newmem:
+
+code:
+  mov [r8+04],00000000
+  jmp return
+
+_write_clips_empty:
+  jmp newmem
+  nop
+  nop
+  nop
+return:
+registersymbol(_write_clips_empty)
+
+[DISABLE]
+
+_write_clips_empty:
+  db 41 C7 40 04 00 00 00 00
+
+unregistersymbol(_write_clips_empty)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "mafiadefinitiveedition.exe"+25EA807
+
+"mafiadefinitiveedition.exe"+25EA7EC: 75 F2                    -  jne mafiadefinitiveedition.exe+25EA7E0
+"mafiadefinitiveedition.exe"+25EA7EE: 4D 3B C1                 -  cmp r8,r9
+"mafiadefinitiveedition.exe"+25EA7F1: 74 10                    -  je mafiadefinitiveedition.exe+25EA803
+"mafiadefinitiveedition.exe"+25EA7F3: 41 8B 40 04              -  mov eax,[r8+04]
+"mafiadefinitiveedition.exe"+25EA7F7: 41 3B C2                 -  cmp eax,r10d
+"mafiadefinitiveedition.exe"+25EA7FA: 76 0B                    -  jna mafiadefinitiveedition.exe+25EA807
+"mafiadefinitiveedition.exe"+25EA7FC: 41 2B C2                 -  sub eax,r10d
+"mafiadefinitiveedition.exe"+25EA7FF: 41 89 40 04              -  mov [r8+04],eax
+"mafiadefinitiveedition.exe"+25EA803: 41 8B C2                 -  mov eax,r10d
+"mafiadefinitiveedition.exe"+25EA806: C3                       -  ret 
+// ---------- INJECTING HERE ----------
+"mafiadefinitiveedition.exe"+25EA807: 41 C7 40 04 00 00 00 00  -  mov [r8+04],00000000
+// ---------- DONE INJECTING  ----------
+"mafiadefinitiveedition.exe"+25EA80F: C3                       -  ret 
+"mafiadefinitiveedition.exe"+25EA810: 48 89 5C 24 10           -  mov [rsp+10],rbx
+"mafiadefinitiveedition.exe"+25EA815: 48 89 6C 24 18           -  mov [rsp+18],rbp
+"mafiadefinitiveedition.exe"+25EA81A: 48 89 7C 24 20           -  mov [rsp+20],rdi
+"mafiadefinitiveedition.exe"+25EA81F: 41 54                    -  push r12
+"mafiadefinitiveedition.exe"+25EA821: 41 56                    -  push r14
+"mafiadefinitiveedition.exe"+25EA823: 41 57                    -  push r15
+"mafiadefinitiveedition.exe"+25EA825: 48 83 EC 30              -  sub rsp,30
+"mafiadefinitiveedition.exe"+25EA829: 49 8B 78 18              -  mov rdi,[r8+18]
+"mafiadefinitiveedition.exe"+25EA82D: 33 ED                    -  xor ebp,ebp
+}
+</AssemblerScript>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>tmp</Name>
+      <Address>11BFA0000</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+</CheatTable>
