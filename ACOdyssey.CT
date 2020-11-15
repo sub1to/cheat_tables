@@ -34,6 +34,9 @@ registersymbol(_ability_cooldown)
 aobscanmodule(_horse_speed_limit, ACOdyssey.exe, F3 0F 11 4C 24 30 49 8B CF E8)
 registersymbol(_horse_speed_limit)
 
+aobscanmodule(_read_ship_power,ACOdyssey.exe,20 48 8B 01 F3 0F 10 71 50)
+registersymbol(_read_ship_power)
+
 // Vars
 alloc(lAssassinDmgMult, 4, "ACOdyssey.exe")
 registersymbol(lAssassinDmgMult)
@@ -65,6 +68,7 @@ unregistersymbol(_read_assassin_damage)
 unregistersymbol(_read_hunter_damage)
 unregistersymbol(_ability_cooldown)
 unregistersymbol(_horse_speed_limit)
+unregistersymbol(_read_ship_power)
 
 // Vars
 unregistersymbol(lAssassinDmgMult)
@@ -313,7 +317,7 @@ dealloc(newmem)
             <CheatEntry>
               <ID>38</ID>
               <Description>"Multiplier"</Description>
-              <LastState Value="5" RealAddress="7FF751E60000"/>
+              <LastState Value="5" RealAddress="7FF77CC10000"/>
               <Color>C08000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>lAssassinDmgMult</Address>
@@ -324,7 +328,7 @@ dealloc(newmem)
           <ID>49</ID>
           <Description>"Hunter Damage Multiplier"</Description>
           <Options moHideChildren="1"/>
-          <LastState Activated="1"/>
+          <LastState/>
           <Color>C08000</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{ Game   : ACOdyssey.exe
@@ -395,7 +399,7 @@ dealloc(newmem)
             <CheatEntry>
               <ID>51</ID>
               <Description>"Multiplier"</Description>
-              <LastState Value="5" RealAddress="7FF751E60004"/>
+              <LastState Value="2" RealAddress="7FF77CC10004"/>
               <Color>C08000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>lHunterDmgMult</Address>
@@ -405,7 +409,7 @@ dealloc(newmem)
         <CheatEntry>
           <ID>4463</ID>
           <Description>"No Ability Cooldowns"</Description>
-          <LastState Activated="1"/>
+          <LastState/>
           <Color>C08000</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{ Game   : ACOdyssey.exe
@@ -526,17 +530,83 @@ _horse_speed_limit:
 </AssemblerScript>
         </CheatEntry>
         <CheatEntry>
+          <ID>4477</ID>
+          <Description>"Infinite Ship Power"</Description>
+          <LastState Activated="1"/>
+          <Color>C08000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : ACOdyssey.exe
+  Version: 
+  Date   : 2020-11-01
+  Author : sub1to
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+alloc(newmem,$1000,"ACOdyssey.exe"+30A97A7)
+
+label(code)
+label(return)
+
+newmem:
+  mov dword ptr [rcx+50], (float)9000
+
+code:
+  movss xmm6,[rcx+50]
+  jmp return
+
+_read_ship_power+04:
+  jmp newmem
+return:
+
+[DISABLE]
+_read_ship_power+04:
+  db F3 0F 10 71 50
+
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "ACOdyssey.exe"+30A97A7
+
+"ACOdyssey.exe"+30A9782: 48 8B 41 78              -  mov rax,[rcx+78]
+"ACOdyssey.exe"+30A9786: F3 0F 10 05 46 F7 F9 00  -  movss xmm0,[ACOdyssey.exe+4048ED4]
+"ACOdyssey.exe"+30A978E: 0F 2F 40 50              -  comiss xmm0,[rax+50]
+"ACOdyssey.exe"+30A9792: 76 57                    -  jna ACOdyssey.exe+30A97EB
+"ACOdyssey.exe"+30A9794: 32 C0                    -  xor al,al
+"ACOdyssey.exe"+30A9796: 48 83 C4 38              -  add rsp,38
+"ACOdyssey.exe"+30A979A: C3                       -  ret 
+"ACOdyssey.exe"+30A979B: 48 8B 49 78              -  mov rcx,[rcx+78]
+"ACOdyssey.exe"+30A979F: 0F 29 74 24 20           -  movaps [rsp+20],xmm6
+"ACOdyssey.exe"+30A97A4: 48 8B 01                 -  mov rax,[rcx]
+// ---------- INJECTING HERE ----------
+"ACOdyssey.exe"+30A97A7: F3 0F 10 71 50           -  movss xmm6,[rcx+50]
+// ---------- DONE INJECTING  ----------
+"ACOdyssey.exe"+30A97AC: FF 50 20                 -  call qword ptr [rax+20]
+"ACOdyssey.exe"+30A97AF: F3 0F 5E F0              -  divss xmm6,xmm0
+"ACOdyssey.exe"+30A97B3: F3 0F 2C CE              -  cvttss2si ecx,xmm6
+"ACOdyssey.exe"+30A97B7: 81 F9 00 00 00 80        -  cmp ecx,80000000
+"ACOdyssey.exe"+30A97BD: 74 1E                    -  je ACOdyssey.exe+30A97DD
+"ACOdyssey.exe"+30A97BF: 66 0F 6E C1              -  movd xmm0,ecx
+"ACOdyssey.exe"+30A97C3: 0F 5B C0                 -  cvtdq2ps xmm0,xmm0
+"ACOdyssey.exe"+30A97C6: 0F 2E C6                 -  ucomiss xmm0,xmm6
+"ACOdyssey.exe"+30A97C9: 74 12                    -  je ACOdyssey.exe+30A97DD
+"ACOdyssey.exe"+30A97CB: 0F 14 F6                 -  unpcklps xmm6,xmm6
+}
+</AssemblerScript>
+        </CheatEntry>
+        <CheatEntry>
           <ID>33</ID>
           <Description>"Symbols"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" Activated="1" RealAddress="00000000"/>
+          <LastState Value="" RealAddress="00000000"/>
           <Color>000080</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
               <ID>4464</ID>
               <Description>"_set_health"</Description>
-              <LastState Value="89 BB 30 01 00 00 48 8B 5C 24" RealAddress="7FF754137471"/>
+              <LastState Value="89 BB 30 01 00 00 48 8B 5C 24" RealAddress="7FF77EEE7471"/>
               <ShowAsHex>1</ShowAsHex>
               <Color>000080</Color>
               <VariableType>Array of byte</VariableType>
@@ -546,7 +616,7 @@ _horse_speed_limit:
             <CheatEntry>
               <ID>4465</ID>
               <Description>"_set_adrenaline"</Description>
-              <LastState Value="E9 E2 84 CE FD 90 8B C7 F7 B3" RealAddress="7FF754137B19"/>
+              <LastState Value="E9 E2 84 D1 FD 90 8B C7 F7 B3" RealAddress="7FF77EEE7B19"/>
               <ShowAsHex>1</ShowAsHex>
               <Color>000080</Color>
               <VariableType>Array of byte</VariableType>
@@ -556,7 +626,7 @@ _horse_speed_limit:
             <CheatEntry>
               <ID>4466</ID>
               <Description>"_read_assassin_damage"</Description>
-              <LastState Value="E9 4B 82 71 FD 90 C3 CC CC CC" RealAddress="7FF754717DB0"/>
+              <LastState Value="E9 4B 82 72 FD 90 C3 CC CC CC" RealAddress="7FF77F4C7DB0"/>
               <ShowAsHex>1</ShowAsHex>
               <Color>000080</Color>
               <VariableType>Array of byte</VariableType>
@@ -566,7 +636,7 @@ _horse_speed_limit:
             <CheatEntry>
               <ID>4467</ID>
               <Description>"_read_hunter_damage"</Description>
-              <LastState Value="E9 CC 81 72 FD 90 48 83 C4 20" RealAddress="7FF754717E2F"/>
+              <LastState Value="8B 81 90 01 00 00 48 83 C4 20" RealAddress="7FF77F4C7E2F"/>
               <ShowAsHex>1</ShowAsHex>
               <Color>000080</Color>
               <VariableType>Array of byte</VariableType>
@@ -576,7 +646,7 @@ _horse_speed_limit:
             <CheatEntry>
               <ID>4468</ID>
               <Description>"_ability_cooldown"</Description>
-              <LastState Value="E9 CB 6A EE EF 90 90 75 04 48" RealAddress="7FF761F69530"/>
+              <LastState Value="48 8B 51 20 48 85 D2 75 04 48" RealAddress="7FF78CD19530"/>
               <ShowAsHex>1</ShowAsHex>
               <Color>000080</Color>
               <VariableType>Array of byte</VariableType>
@@ -586,7 +656,7 @@ _horse_speed_limit:
             <CheatEntry>
               <ID>4471</ID>
               <Description>"_horse_speed_limit"</Description>
-              <LastState Value="90 90 90 90 90 90 49 8B CF E8" RealAddress="7FF753D76652"/>
+              <LastState Value="90 90 90 90 90 90 49 8B CF E8" RealAddress="7FF77EB26652"/>
               <ShowAsHex>1</ShowAsHex>
               <Color>000080</Color>
               <VariableType>Array of byte</VariableType>
@@ -596,7 +666,7 @@ _horse_speed_limit:
             <CheatEntry>
               <ID>32</ID>
               <Description>"pHealth [Enable Infinite Health]"</Description>
-              <LastState Value="0000000000000000" RealAddress="7FF751E60010"/>
+              <LastState Value="00000189F1446C70" RealAddress="7FF77CC10010"/>
               <ShowAsHex>1</ShowAsHex>
               <Color>000080</Color>
               <VariableType>8 Bytes</VariableType>
@@ -605,7 +675,7 @@ _horse_speed_limit:
             <CheatEntry>
               <ID>20</ID>
               <Description>"pAdrenaline [Enable Infinite Adrenaline]"</Description>
-              <LastState Value="000002CA122F1D40" RealAddress="7FF751E60008"/>
+              <LastState Value="00000189B2A4B3A0" RealAddress="7FF77CC10008"/>
               <ShowAsHex>1</ShowAsHex>
               <Color>000080</Color>
               <VariableType>8 Bytes</VariableType>
@@ -614,7 +684,7 @@ _horse_speed_limit:
             <CheatEntry>
               <ID>39</ID>
               <Description>"pAssassinDmg [Enable Assassin Damage Multiplier]"</Description>
-              <LastState Value="000002C7929BE530" RealAddress="7FF751E60018"/>
+              <LastState Value="00000188780DD2D0" RealAddress="7FF77CC10018"/>
               <ShowAsHex>1</ShowAsHex>
               <Color>000080</Color>
               <VariableType>8 Bytes</VariableType>
@@ -623,7 +693,7 @@ _horse_speed_limit:
             <CheatEntry>
               <ID>4469</ID>
               <Description>"pHunterDmg [Enable Hunter Damage Multiplier]"</Description>
-              <LastState Value="000002C7929BE530" RealAddress="7FF751E60020"/>
+              <LastState Value="0000000000000000" RealAddress="7FF77CC10020"/>
               <ShowAsHex>1</ShowAsHex>
               <Color>000080</Color>
               <VariableType>8 Bytes</VariableType>
