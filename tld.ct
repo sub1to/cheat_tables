@@ -5,7 +5,7 @@
       <ID>8642</ID>
       <Description>"L"</Description>
       <Options moHideChildren="1"/>
-      <LastState Value="" Activated="1" RealAddress="00000000"/>
+      <LastState Value="" RealAddress="00000000"/>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
@@ -64,7 +64,7 @@
               <ID>8709</ID>
               <Description>"Temperature"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -181,7 +181,6 @@ player_temp_toggle:
                     <CheatEntry>
                       <ID>8713</ID>
                       <Description>"Temperature Value"</Description>
-                      <LastState Value="0" RealAddress="7FFFFB5C001D"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_temp_value</Address>
@@ -191,7 +190,6 @@ player_temp_toggle:
                 <CheatEntry>
                   <ID>8655</ID>
                   <Description>"Temperature"</Description>
-                  <LastState Value="0" RealAddress="1EB06FA7860"/>
                   <Color>FF0000</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_temp_base_ptr</Address>
@@ -202,7 +200,6 @@ player_temp_toggle:
                 <CheatEntry>
                   <ID>8719</ID>
                   <Description>"Temperature Max"</Description>
-                  <LastState Value="100" RealAddress="1EB06FA7864"/>
                   <Color>FF0000</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_temp_base_ptr</Address>
@@ -216,7 +213,7 @@ player_temp_toggle:
               <ID>8714</ID>
               <Description>"Fatigue"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -338,7 +335,6 @@ player_fatigue_toggle:
                     <CheatEntry>
                       <ID>8716</ID>
                       <Description>"Fatigue Value"</Description>
-                      <LastState Value="0" RealAddress="7FFFFB5B001F"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_fatigue_value</Address>
@@ -348,7 +344,6 @@ player_fatigue_toggle:
                 <CheatEntry>
                   <ID>8717</ID>
                   <Description>"Fatigue"</Description>
-                  <LastState Value="0.1490956992" RealAddress="1E98B101D48"/>
                   <Color>FF0000</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_fatigue_base_ptr</Address>
@@ -359,7 +354,6 @@ player_fatigue_toggle:
                 <CheatEntry>
                   <ID>8718</ID>
                   <Description>"Fatigue Max"</Description>
-                  <LastState Value="100" RealAddress="1E98B101D4C"/>
                   <Color>FF0000</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_fatigue_base_ptr</Address>
@@ -373,7 +367,7 @@ player_fatigue_toggle:
               <ID>8720</ID>
               <Description>"Thirst"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -489,7 +483,6 @@ player_thirst_toggle:
                     <CheatEntry>
                       <ID>8722</ID>
                       <Description>"Thirst Value"</Description>
-                      <LastState Value="0" RealAddress="7FFFFB5A001C"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_thirst_value</Address>
@@ -499,7 +492,6 @@ player_thirst_toggle:
                 <CheatEntry>
                   <ID>8723</ID>
                   <Description>"Thirst"</Description>
-                  <LastState Value="0.4066543281" RealAddress="1EB04926B5C"/>
                   <Color>FF0000</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_thirst_base_ptr</Address>
@@ -510,7 +502,6 @@ player_thirst_toggle:
                 <CheatEntry>
                   <ID>8724</ID>
                   <Description>"Thirst Max"</Description>
-                  <LastState Value="100" RealAddress="1EB04926B60"/>
                   <Color>FF0000</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_thirst_base_ptr</Address>
@@ -524,7 +515,7 @@ player_thirst_toggle:
               <ID>8725</ID>
               <Description>"Hunger"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -640,7 +631,6 @@ player_hunger_toggle:
                     <CheatEntry>
                       <ID>8727</ID>
                       <Description>"Hunger Value"</Description>
-                      <LastState Value="2500" RealAddress="7FFFFB59001C"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_hunger_value</Address>
@@ -650,7 +640,6 @@ player_hunger_toggle:
                 <CheatEntry>
                   <ID>8728</ID>
                   <Description>"Hunger"</Description>
-                  <LastState Value="2496.73584" RealAddress="1EB07175F18"/>
                   <Color>FF0000</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_hunger_base_ptr</Address>
@@ -661,7 +650,6 @@ player_hunger_toggle:
                 <CheatEntry>
                   <ID>8729</ID>
                   <Description>"Hunger Max"</Description>
-                  <LastState Value="2500" RealAddress="1EB07175F78"/>
                   <Color>FF0000</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_hunger_base_ptr</Address>
@@ -675,7 +663,7 @@ player_hunger_toggle:
               <ID>8730</ID>
               <Description>"Sprint"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -792,7 +780,6 @@ player_sprint_toggle:
                     <CheatEntry>
                       <ID>8732</ID>
                       <Description>"Sprint Value"</Description>
-                      <LastState Value="100" RealAddress="7FFFFB58001C"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_sprint_value</Address>
@@ -802,7 +789,6 @@ player_sprint_toggle:
                 <CheatEntry>
                   <ID>8733</ID>
                   <Description>"Sprint"</Description>
-                  <LastState Value="57" RealAddress="1EB26D4B96C"/>
                   <Color>FF0000</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_sprint_base_ptr</Address>
@@ -813,7 +799,6 @@ player_sprint_toggle:
                 <CheatEntry>
                   <ID>8734</ID>
                   <Description>"Sprint Max"</Description>
-                  <LastState Value="100" RealAddress="1EB26D4B968"/>
                   <Color>FF0000</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_sprint_base_ptr</Address>
@@ -827,7 +812,7 @@ player_sprint_toggle:
               <ID>8738</ID>
               <Description>"Health"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -944,7 +929,6 @@ player_health_toggle:
                     <CheatEntry>
                       <ID>8740</ID>
                       <Description>"Health Value"</Description>
-                      <LastState Value="100" RealAddress="7FFFFB57001C"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_health_value</Address>
@@ -954,7 +938,6 @@ player_health_toggle:
                 <CheatEntry>
                   <ID>8741</ID>
                   <Description>"Health"</Description>
-                  <LastState Value="100.0652237" RealAddress="1EB26CE0398"/>
                   <Color>FF0000</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_health_base_ptr</Address>
@@ -965,7 +948,6 @@ player_health_toggle:
                 <CheatEntry>
                   <ID>8742</ID>
                   <Description>"Health Max"</Description>
-                  <LastState Value="100" RealAddress="1EB26CE039C"/>
                   <Color>FF0000</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_health_base_ptr</Address>
@@ -980,7 +962,7 @@ player_health_toggle:
         <CheatEntry>
           <ID>8654</ID>
           <Description>"Skill (Open journal skill tab to activate)"</Description>
-          <LastState Activated="1"/>
+          <LastState/>
           <Color>008000</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{ Game   : tld.exe
@@ -1205,7 +1187,6 @@ dealloc(newmem)
             <CheatEntry>
               <ID>8711</ID>
               <Description>"Fire Starting"</Description>
-              <LastState Value="171" RealAddress="1EB06DEF5F8"/>
               <Color>FF0000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>fire_skill_base_ptr</Address>
@@ -1216,7 +1197,6 @@ dealloc(newmem)
             <CheatEntry>
               <ID>8657</ID>
               <Description>"Carcass Harvesting"</Description>
-              <LastState Value="100" RealAddress="1EB06DEF7A8"/>
               <Color>FF0000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>carcass_skill_base_ptr</Address>
@@ -1227,7 +1207,6 @@ dealloc(newmem)
             <CheatEntry>
               <ID>8658</ID>
               <Description>"Fishing"</Description>
-              <LastState Value="250" RealAddress="1EB26CF0858"/>
               <Color>FF0000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>fish_skill_base_ptr</Address>
@@ -1238,7 +1217,6 @@ dealloc(newmem)
             <CheatEntry>
               <ID>8659</ID>
               <Description>"Cooking"</Description>
-              <LastState Value="350" RealAddress="1EB06DEF688"/>
               <Color>FF0000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>cook_skill_base_ptr</Address>
@@ -1249,7 +1227,6 @@ dealloc(newmem)
             <CheatEntry>
               <ID>8660</ID>
               <Description>"Rifle"</Description>
-              <LastState Value="100" RealAddress="1EB26D4B738"/>
               <Color>FF0000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>rifle_skill_base_ptr</Address>
@@ -1260,7 +1237,6 @@ dealloc(newmem)
             <CheatEntry>
               <ID>8656</ID>
               <Description>"Archery"</Description>
-              <LastState Value="125" RealAddress="1EB049267D8"/>
               <Color>FF0000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>archery_skill_base_ptr</Address>
@@ -1271,7 +1247,6 @@ dealloc(newmem)
             <CheatEntry>
               <ID>8661</ID>
               <Description>"Mending"</Description>
-              <LastState Value="89" RealAddress="1EB06DEF568"/>
               <Color>FF0000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>mending_skill_base_ptr</Address>
@@ -1292,7 +1267,6 @@ dealloc(newmem)
             <CheatEntry>
               <ID>8663</ID>
               <Description>"Revolver"</Description>
-              <LastState Value="72" RealAddress="1EB26D4B528"/>
               <Color>FF0000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>revolver_skill_base_ptr</Address>
@@ -1303,7 +1277,6 @@ dealloc(newmem)
             <CheatEntry>
               <ID>8664</ID>
               <Description>"Gunsmithing"</Description>
-              <LastState Value="20" RealAddress="1EB01A97138"/>
               <Color>FF0000</Color>
               <VariableType>4 Bytes</VariableType>
               <Address>gunsmith_skill_base_ptr</Address>
@@ -1316,7 +1289,7 @@ dealloc(newmem)
         <CheatEntry>
           <ID>8603</ID>
           <Description>"Backpack (Weight / Scent)"</Description>
-          <LastState Activated="1"/>
+          <LastState/>
           <Color>008000</Color>
           <VariableType>Auto Assembler Script</VariableType>
           <AssemblerScript>{ Game   : tld.exe
@@ -1454,7 +1427,6 @@ backpack_weight_toggle:
                 <CheatEntry>
                   <ID>8649</ID>
                   <Description>"Weight Value"</Description>
-                  <LastState Value="15" RealAddress="7FFFFB4F001E"/>
                   <Color>800080</Color>
                   <VariableType>Float</VariableType>
                   <Address>backpack_weight_value</Address>
@@ -1479,7 +1451,6 @@ backpack_scent_toggle:
                 <CheatEntry>
                   <ID>8639</ID>
                   <Description>"Scent Value"</Description>
-                  <LastState Value="0" RealAddress="7FFFFB4F0022"/>
                   <Color>800080</Color>
                   <VariableType>Float</VariableType>
                   <Address>backpack_scent_value</Address>
@@ -1489,7 +1460,6 @@ backpack_scent_toggle:
             <CheatEntry>
               <ID>8640</ID>
               <Description>"Weight"</Description>
-              <LastState Value="187.8900757" RealAddress="1EB06DEF9F0"/>
               <Color>FF0000</Color>
               <VariableType>Float</VariableType>
               <Address>backpack_base_ptr</Address>
@@ -1500,7 +1470,6 @@ backpack_scent_toggle:
             <CheatEntry>
               <ID>8641</ID>
               <Description>"Scent"</Description>
-              <LastState Value="0" RealAddress="1EB06DEFA0C"/>
               <Color>FF0000</Color>
               <VariableType>Float</VariableType>
               <Address>backpack_base_ptr</Address>
@@ -1511,12 +1480,20 @@ backpack_scent_toggle:
           </CheatEntries>
         </CheatEntry>
         <CheatEntry>
-          <ID>8512</ID>
-          <Description>"Lantern"</Description>
-          <LastState Activated="1"/>
-          <Color>008000</Color>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>{ Game   : tld.exe
+          <ID>8627</ID>
+          <Description>"Light"</Description>
+          <Options moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
+          <LastState Value="" RealAddress="00000000"/>
+          <Color>FF8000</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>8512</ID>
+              <Description>"Lantern"</Description>
+              <LastState/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : tld.exe
   Version: 1.95 83861 S
   Date   : 2021-10-18
   Author : sub1to
@@ -1583,14 +1560,14 @@ unregistersymbol(lamp_oil_inf_toggle)
 dealloc(newmem)
 
 </AssemblerScript>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>8636</ID>
-              <Description>"Infinite Lantern Oil"</Description>
-              <LastState/>
-              <Color>800080</Color>
-              <VariableType>Auto Assembler Script</VariableType>
-              <AssemblerScript>[ENABLE]
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>8636</ID>
+                  <Description>"Infinite Lantern Oil"</Description>
+                  <LastState/>
+                  <Color>800080</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
 lamp_oil_inf_toggle:
   db 01
 
@@ -1598,22 +1575,286 @@ lamp_oil_inf_toggle:
 lamp_oil_inf_toggle:
   db 00
 </AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>8647</ID>
+                  <Description>"Lantern Oil"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>lamp_oil_base_ptr</Address>
+                  <Offsets>
+                    <Offset>64</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
             </CheatEntry>
             <CheatEntry>
-              <ID>8647</ID>
-              <Description>"Lantern Oil"</Description>
-              <LastState Value="0.8534777761" RealAddress="1EAC6B5DD84"/>
-              <Color>FF0000</Color>
-              <VariableType>Float</VariableType>
-              <Address>lamp_oil_base_ptr</Address>
-              <Offsets>
-                <Offset>64</Offset>
-              </Offsets>
+              <ID>8768</ID>
+              <Description>"Flare"</Description>
+              <LastState/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : tld.exe
+  Version: 1.95 83861 S
+  Date   : 2021-10-26
+  Author : sub1to
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+alloc(newmem,$ff,GameAssembly.dll)
+label(returnhere)
+label(code)
+label(flare_burn_hook)
+label(flare_burn_bytes)
+label(flare_burn_base_ptr)
+label(flare_burn_toggle)
+label(flare_burn_value)
+registersymbol(flare_burn_hook)
+registersymbol(flare_burn_bytes)
+registersymbol(flare_burn_base_ptr)
+registersymbol(flare_burn_toggle)
+registersymbol(flare_burn_value)
+aobScanModule(hook,GameAssembly.dll,33 d2 48 8b cf e8 ? ? ? ? 45 33 c0 0f 28 c8 48 8b cb e8 ? ? ? ? 33 d2)
+
+newmem:
+flare_burn_bytes:
+  //xor edx,edx
+  //mov rcx,rdi
+  readMem(hook, 5)
+  jmp returnhere
+
+flare_burn_base_ptr:
+  dq 0
+
+flare_burn_toggle:
+  db 0
+
+flare_burn_value:
+  dd 0
+
+code:
+  mov [flare_burn_base_ptr], rdi
+
+  cmp byte ptr [flare_burn_toggle], 0
+  jz flare_burn_bytes
+  mov ecx, [flare_burn_value]
+  mov [rdi+9C], ecx
+  jmp flare_burn_bytes
+
+hook:
+flare_burn_hook:
+  jmp code
+  returnhere:
+
+
+
+[DISABLE]
+flare_burn_hook:
+  //db 33 D2 48 8B CF
+  readMem(flare_burn_bytes, 5)
+
+unregistersymbol(flare_burn_hook)
+unregistersymbol(flare_burn_bytes)
+unregistersymbol(flare_burn_base_ptr)
+unregistersymbol(flare_burn_toggle)
+unregistersymbol(flare_burn_value)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "GameAssembly.dll"+10005BC
+
+"GameAssembly.dll"+1000590: 48 8B CF                 -  mov rcx,rdi
+"GameAssembly.dll"+1000593: E8 58 1E 8C 01           -  call GameAssembly.dll+28C23F0
+"GameAssembly.dll"+1000598: 84 C0                    -  test al,al
+"GameAssembly.dll"+100059A: 0F 84 E0 02 00 00        -  je GameAssembly.dll+1000880
+"GameAssembly.dll"+10005A0: 80 7B 1C 00              -  cmp byte ptr [rbx+1C],00
+"GameAssembly.dll"+10005A4: 74 2E                    -  je GameAssembly.dll+10005D4
+"GameAssembly.dll"+10005A6: 48 85 FF                 -  test rdi,rdi
+"GameAssembly.dll"+10005A9: 0F 84 17 03 00 00        -  je GameAssembly.dll+10008C6
+"GameAssembly.dll"+10005AF: 83 BF 94 00 00 00 01     -  cmp dword ptr [rdi+00000094],01
+"GameAssembly.dll"+10005B6: 0F 85 E1 02 00 00        -  jne GameAssembly.dll+100089D
+// ---------- INJECTING HERE ----------
+"GameAssembly.dll"+10005BC: 33 D2                    -  xor edx,edx
+"GameAssembly.dll"+10005BE: 48 8B CF                 -  mov rcx,rdi
+// ---------- DONE INJECTING  ----------
+"GameAssembly.dll"+10005C1: E8 EA 3A 00 00           -  call GameAssembly.dll+10040B0
+"GameAssembly.dll"+10005C6: 45 33 C0                 -  xor r8d,r8d
+"GameAssembly.dll"+10005C9: 0F 28 C8                 -  movaps xmm1,xmm0
+"GameAssembly.dll"+10005CC: 48 8B CB                 -  mov rcx,rbx
+"GameAssembly.dll"+10005CF: E8 4C 03 00 00           -  call GameAssembly.dll+1000920
+"GameAssembly.dll"+10005D4: 33 D2                    -  xor edx,edx
+"GameAssembly.dll"+10005D6: 48 8B CB                 -  mov rcx,rbx
+"GameAssembly.dll"+10005D9: E8 12 04 00 00           -  call GameAssembly.dll+10009F0
+"GameAssembly.dll"+10005DE: F3 0F 10 7B 18           -  movss xmm7,[rbx+18]
+"GameAssembly.dll"+10005E3: 48 8B 0D CE 7B 4C 03     -  mov rcx,[GameAssembly.dll+44C81B8]
+}
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>8772</ID>
+                  <Description>"Infinite Flare Burn Time"</Description>
+                  <LastState/>
+                  <Color>800080</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+flare_burn_toggle:
+  db 01
+
+[DISABLE]
+flare_burn_toggle:
+  db 00
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>8773</ID>
+                  <Description>"Flare Burn Time"</Description>
+                  <Color>FF0000</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>flare_burn_base_ptr</Address>
+                  <Offsets>
+                    <Offset>9C</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>8777</ID>
+              <Description>"Torch"</Description>
+              <LastState Activated="1"/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : tld.exe
+  Version: 1.95 83861 S
+  Date   : 2021-10-26
+  Author : sub1to
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+alloc(newmem,$ff,GameAssembly.dll)
+label(returnhere)
+label(code)
+label(torch_burn_hook)
+label(torch_burn_bytes)
+label(torch_burn_base_ptr)
+label(torch_burn_toggle)
+label(torch_burn_value)
+registersymbol(torch_burn_hook)
+registersymbol(torch_burn_bytes)
+registersymbol(torch_burn_base_ptr)
+registersymbol(torch_burn_toggle)
+registersymbol(torch_burn_value)
+aobScanModule(hook,GameAssembly.dll,f3 0f 58 93 ? ? ? ? f3 0f 11 93 ? ? ? ? 33 d2)
+
+newmem:
+torch_burn_bytes:
+  //addss xmm2,dword ptr [rbx+000000AC]
+  readMem(hook, 8)
+  jmp returnhere
+
+torch_burn_base_ptr:
+  dq 0
+
+torch_burn_toggle:
+  db 0
+
+torch_burn_value:
+  dd 0
+
+code:
+  mov [torch_burn_base_ptr], rbx
+
+  cmp byte ptr [torch_burn_toggle], 0
+  jz torch_burn_bytes
+  mov dword ptr [rbx+AC], 0
+  jmp returnhere
+
+hook:
+torch_burn_hook:
+  jmp code
+  nop
+  nop
+  nop
+  returnhere:
+
+
+
+[DISABLE]
+torch_burn_hook:
+  //db F3 0F 58 93 AC 00 00 00
+  readMem(torch_burn_bytes, 8)
+
+unregistersymbol(torch_burn_hook)
+unregistersymbol(torch_burn_bytes)
+unregistersymbol(torch_burn_base_ptr)
+unregistersymbol(torch_burn_toggle)
+unregistersymbol(torch_burn_value)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "GameAssembly.dll"+1531FE2
+
+"GameAssembly.dll"+1531FAC: 48 85 FF                    -  test rdi,rdi
+"GameAssembly.dll"+1531FAF: 0F 84 30 04 00 00           -  je GameAssembly.dll+15323E5
+"GameAssembly.dll"+1531FB5: 48 8B 87 80 00 00 00        -  mov rax,[rdi+00000080]
+"GameAssembly.dll"+1531FBC: 48 85 C0                    -  test rax,rax
+"GameAssembly.dll"+1531FBF: 0F 84 1A 04 00 00           -  je GameAssembly.dll+15323DF
+"GameAssembly.dll"+1531FC5: F3 0F 10 88 90 02 00 00     -  movss xmm1,[rax+00000290]
+"GameAssembly.dll"+1531FCD: F3 0F 59 48 78              -  mulss xmm1,[rax+78]
+"GameAssembly.dll"+1531FD2: F3 0F 10 15 F6 09 47 02     -  movss xmm2,[GameAssembly.dll+39A29D0]
+"GameAssembly.dll"+1531FDA: F3 0F 5E D1                 -  divss xmm2,xmm1
+"GameAssembly.dll"+1531FDE: F3 0F 59 D0                 -  mulss xmm2,xmm0
+// ---------- INJECTING HERE ----------
+"GameAssembly.dll"+1531FE2: F3 0F 58 93 AC 00 00 00     -  addss xmm2,dword ptr [rbx+000000AC]
+// ---------- DONE INJECTING  ----------
+"GameAssembly.dll"+1531FEA: F3 0F 11 93 AC 00 00 00     -  movss [rbx+000000AC],xmm2
+"GameAssembly.dll"+1531FF2: 33 D2                       -  xor edx,edx
+"GameAssembly.dll"+1531FF4: 48 8B CB                    -  mov rcx,rbx
+"GameAssembly.dll"+1531FF7: E8 24 45 00 00              -  call GameAssembly.dll+1536520
+"GameAssembly.dll"+1531FFC: 48 8B F8                    -  mov rdi,rax
+"GameAssembly.dll"+1531FFF: 48 85 C0                    -  test rax,rax
+"GameAssembly.dll"+1532002: 0F 84 4C 04 00 00           -  je GameAssembly.dll+1532454
+"GameAssembly.dll"+1532008: F3 44 0F 10 90 04 03 00 00  -  movss xmm10,[rax+00000304]
+"GameAssembly.dll"+1532011: F3 0F 10 B3 AC 00 00 00     -  movss xmm6,[rbx+000000AC]
+"GameAssembly.dll"+1532019: 33 D2                       -  xor edx,edx
+}
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>8778</ID>
+                  <Description>"Infinite Torch Burn Time"</Description>
+                  <LastState Activated="1"/>
+                  <Color>800080</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+torch_burn_toggle:
+  db 01
+
+[DISABLE]
+torch_burn_toggle:
+  db 00
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>8779</ID>
+                  <Description>"Torch Burn Time"</Description>
+                  <LastState Value="0.001193120028" RealAddress="25A049ABBEC"/>
+                  <Color>FF0000</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>torch_burn_base_ptr</Address>
+                  <Offsets>
+                    <Offset>AC</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
             </CheatEntry>
           </CheatEntries>
         </CheatEntry>
         <CheatEntry>
-          <ID>8627</ID>
+          <ID>8769</ID>
           <Description>"Survey"</Description>
           <Options moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
           <LastState Value="" RealAddress="00000000"/>
@@ -1621,7 +1862,7 @@ lamp_oil_inf_toggle:
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
-              <ID>8561</ID>
+              <ID>8770</ID>
               <Description>"Infinite Charcoal"</Description>
               <LastState/>
               <Color>008000</Color>
@@ -1710,7 +1951,7 @@ dealloc(newmem)
 </AssemblerScript>
             </CheatEntry>
             <CheatEntry>
-              <ID>8567</ID>
+              <ID>8771</ID>
               <Description>"Super Survey"</Description>
               <LastState/>
               <Color>008000</Color>
@@ -2160,6 +2401,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8748</ID>
                   <Description>"Selected Item Stack"</Description>
+                  <LastState Value="1" RealAddress="259D500A7F8"/>
                   <Color>FF0000</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>item_select_base_ptr</Address>
@@ -2171,7 +2413,6 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8750</ID>
                   <Description>"Selected Item Wet %"</Description>
-                  <LastState Value="0" RealAddress="1EB03F5CCF4"/>
                   <Color>FF0000</Color>
                   <VariableType>Float</VariableType>
                   <Address>item_select_base_ptr</Address>
@@ -2183,7 +2424,6 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8753</ID>
                   <Description>"Selected Item Frozen %"</Description>
-                  <LastState Value="0" RealAddress="1EB03F5CCF8"/>
                   <Color>FF0000</Color>
                   <VariableType>Float</VariableType>
                   <Address>item_select_base_ptr</Address>
@@ -2195,7 +2435,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8619</ID>
                   <Description>"Selected Item Quality"</Description>
-                  <LastState Value="96.82991028" RealAddress="1EB04084300"/>
+                  <LastState Value="56.83205032" RealAddress="25A04C03840"/>
                   <Color>FF0000</Color>
                   <VariableType>Float</VariableType>
                   <Address>item_select_base_ptr</Address>
@@ -2206,7 +2446,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8620</ID>
                   <Description>"Selected Item Max Quality"</Description>
-                  <LastState Value="100" RealAddress="1EB04084304"/>
+                  <LastState Value="100" RealAddress="25A04C03844"/>
                   <Color>FF0000</Color>
                   <VariableType>Float</VariableType>
                   <Address>item_select_base_ptr</Address>
@@ -2228,7 +2468,7 @@ dealloc(newmem)
             <CheatEntry>
               <ID>8686</ID>
               <Description>"Campfire Tick"</Description>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{
@@ -2381,7 +2621,6 @@ fire_burn_temp_toggle:
                     <CheatEntry>
                       <ID>8706</ID>
                       <Description>"Temp"</Description>
-                      <LastState Value="20" RealAddress="7FFFFB500020"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>fire_burn_temp_value</Address>
@@ -2391,7 +2630,6 @@ fire_burn_temp_toggle:
                 <CheatEntry>
                   <ID>8688</ID>
                   <Description>"Ember Time Limit"</Description>
-                  <LastState Value="0" RealAddress="1EB026AE7C0"/>
                   <Color>FF0000</Color>
                   <VariableType>Float</VariableType>
                   <Address>fire_burn_base_ptr</Address>
@@ -2402,7 +2640,6 @@ fire_burn_temp_toggle:
                 <CheatEntry>
                   <ID>8687</ID>
                   <Description>"Ember Time"</Description>
-                  <LastState Value="0" RealAddress="1EB026AE7C4"/>
                   <Color>FF0000</Color>
                   <VariableType>Float</VariableType>
                   <Address>fire_burn_base_ptr</Address>
@@ -2413,7 +2650,6 @@ fire_burn_temp_toggle:
                 <CheatEntry>
                   <ID>8689</ID>
                   <Description>"Burn Time"</Description>
-                  <LastState Value="0" RealAddress="1EB026AE7D8"/>
                   <Color>FF0000</Color>
                   <VariableType>Float</VariableType>
                   <Address>fire_burn_base_ptr</Address>
@@ -2424,7 +2660,6 @@ fire_burn_temp_toggle:
                 <CheatEntry>
                   <ID>8690</ID>
                   <Description>"Burn Time 2"</Description>
-                  <LastState Value="0" RealAddress="1EB026AE7DC"/>
                   <Color>FF0000</Color>
                   <VariableType>Float</VariableType>
                   <Address>fire_burn_base_ptr</Address>
@@ -2435,7 +2670,6 @@ fire_burn_temp_toggle:
                 <CheatEntry>
                   <ID>8691</ID>
                   <Description>"Burn Time Limit"</Description>
-                  <LastState Value="0" RealAddress="1EB026AE7E0"/>
                   <Color>FF0000</Color>
                   <VariableType>Float</VariableType>
                   <Address>fire_burn_base_ptr</Address>
@@ -2446,7 +2680,6 @@ fire_burn_temp_toggle:
                 <CheatEntry>
                   <ID>8692</ID>
                   <Description>"Temperature"</Description>
-                  <LastState Value="0" RealAddress="1EB026AE7F0"/>
                   <Color>FF0000</Color>
                   <VariableType>Float</VariableType>
                   <Address>fire_burn_base_ptr</Address>
@@ -3345,5 +3578,10 @@ dealloc(newmem)
       </CheatEntries>
     </CheatEntry>
   </CheatEntries>
-  <UserdefinedSymbols/>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>tmp</Name>
+      <Address>7FFA0BE00000</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
 </CheatTable>
