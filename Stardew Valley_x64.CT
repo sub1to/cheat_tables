@@ -4,10 +4,50 @@
     <CheatEntry>
       <ID>18</ID>
       <Description>"Enable"</Description>
-      <LastState/>
+      <Options moHideChildren="1"/>
+      <LastState Activated="1"/>
       <Color>008000</Color>
       <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>[ENABLE]
+      <AssemblerScript>{$lua}
+-- thanks to aSwedishMagyar
+if syntaxcheck then return end
+function getStructureByName(structName)
+	local numStructs = getStructureCount() - 1
+	for i = 0,numStructs do
+		local struct = getStructure(i)
+		if struct.Name == structName then return struct end
+	end
+	return nil
+end
+
+function updateStructures(nameList)
+  for i = 1,#nameList do
+    local struct = getStructureByName(nameList[i][1])
+    if struct then
+      struct.removeFromGlobalStructureList()
+    end
+
+    struct = createStructure(nameList[i][1])
+
+    struct.addToGlobalStructureList()
+    struct.fillFromDotNetAddress(getAddressSafe(nameList[i][2]),false)
+  end
+end
+
+function checkDotNetSymbol(hook)
+  errorOnLookupFailure(false)
+  if getAddress(hook)==0 then
+    reinitializeDotNetSymbolhandler()
+
+    if getAddress(hook)==0 then
+      showMessage('This function is not available yet. Please try again later')
+      error() --prevents the aa entry from activating
+    end
+  end
+end
+
+[ENABLE]
+
 [DISABLE]
 </AssemblerScript>
       <CheatEntries>
@@ -17,11 +57,11 @@
           <LastState Value="" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
-          <Address/>
           <CheatEntries>
             <CheatEntry>
               <ID>44</ID>
               <Description>"movement speed multiplier"</Description>
+              <Options moHideChildren="1"/>
               <LastState Activated="1"/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
@@ -35,16 +75,7 @@
 
 [ENABLE]
 {$lua}
-errorOnLookupFailure(false)
-local hook = 'StardewValley.Farmer::getMovementSpeed'
-if getAddress(hook)==0 then
-  reinitializeDotNetSymbolhandler()
-
-  if getAddress(hook)==0 then
-    showMessage('This function is not available yet. Please try again later')
-    error() --prevents the aa entry from activating
-  end
-end
+checkDotNetSymbol('StardewValley.Farmer::getMovementSpeed')
 
 {$asm}
 define(hook,StardewValley.Farmer::getMovementSpeed+2E8)
@@ -122,6 +153,7 @@ StardewValley.Farmer::getMovementSpeed+2FE: CC                 - int 3
                 <CheatEntry>
                   <ID>45</ID>
                   <Description>"Multiplier"</Description>
+                  <LastState Value="2" RealAddress="7FFB53D2000F"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>800080</Color>
                   <VariableType>Float</VariableType>
@@ -132,7 +164,8 @@ StardewValley.Farmer::getMovementSpeed+2FE: CC                 - int 3
             <CheatEntry>
               <ID>53</ID>
               <Description>"farmer"</Description>
-              <LastState/>
+              <Options moHideChildren="1"/>
+              <LastState Activated="1"/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : Stardew Valley.exe
@@ -145,16 +178,7 @@ StardewValley.Farmer::getMovementSpeed+2FE: CC                 - int 3
 
 [ENABLE]
 {$lua}
-errorOnLookupFailure(false)
-local hook = 'StardewValley.Farmer::Update'
-if getAddress(hook)==0 then
-  reinitializeDotNetSymbolhandler()
-
-  if getAddress(hook)==0 then
-    showMessage('This function is not available yet. Please try again later')
-    error() --prevents the aa entry from activating
-  end
-end
+checkDotNetSymbol('StardewValley.Farmer::Update')
 
 {$asm}
 define(hook,StardewValley.Farmer::Update)
@@ -224,8 +248,34 @@ StardewValley.Farmer::Update+16: 48 8D AC 24 60 01 00 00  - lea rbp,[rsp+0000016
 </AssemblerScript>
               <CheatEntries>
                 <CheatEntry>
+                  <ID>14</ID>
+                  <Description>"re-init structs"</Description>
+                  <LastState/>
+                  <Color>008000</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{$lua}
+[ENABLE]
+if getAddressSafe('[farmer_base_ptr]')==0 then
+  showMessage('Failed to update structs, base pointer is 0')
+  error()
+end
+updateStructures({
+  {'Farmer','[farmer_base_ptr]'},
+  {'teamRoot','[[farmer_base_ptr]+Farmer.teamRoot]'},
+  {'Team','[[[farmer_base_ptr]+Farmer.teamRoot]+teamRoot.value]'},
+  {'netInt','[[[[farmer_base_ptr]+Farmer.teamRoot]+teamRoot.value]+Team.money]'},
+  {'netBool','[[farmer_base_ptr]+Farmer.Exhausted]'},
+  {'netString','[[farmer_base_ptr]+Farmer.name]'}
+})
+showMessage('Done updating structures')
+error()
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
                   <ID>54</ID>
                   <Description>"farmer_base_ptr"</Description>
+                  <LastState Value="000001DACDABC588" RealAddress="7FFB53D3000A"/>
                   <ShowAsHex>1</ShowAsHex>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>808080</Color>
@@ -233,73 +283,365 @@ StardewValley.Farmer::Update+16: 48 8D AC 24 60 01 00 00  - lea rbp,[rsp+0000016
                   <Address>farmer_base_ptr</Address>
                 </CheatEntry>
                 <CheatEntry>
-                  <ID>55</ID>
-                  <Description>"Health"</Description>
-                  <ShowAsSigned>0</ShowAsSigned>
-                  <Color>FF8080</Color>
-                  <VariableType>4 Bytes</VariableType>
-                  <Address>farmer_base_ptr</Address>
-                  <Offsets>
-                    <Offset>6bc</Offset>
-                  </Offsets>
-                </CheatEntry>
-                <CheatEntry>
-                  <ID>56</ID>
-                  <Description>"Max Health"</Description>
+                  <ID>88</ID>
+                  <Description>"Player Name"</Description>
+                  <LastState RealAddress="1DACDC8F2FC"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>808080</Color>
-                  <VariableType>4 Bytes</VariableType>
+                  <VariableType>String</VariableType>
+                  <Length>32</Length>
+                  <Unicode>1</Unicode>
+                  <CodePage>0</CodePage>
+                  <ZeroTerminate>1</ZeroTerminate>
                   <Address>farmer_base_ptr</Address>
                   <Offsets>
-                    <Offset>6c0</Offset>
+                    <Offset>String._firstchar</Offset>
+                    <Offset>netstring.value</Offset>
+                    <Offset>Farmer.name</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
-                  <ID>57</ID>
-                  <Description>"Stamina"</Description>
-                  <ShowAsSigned>0</ShowAsSigned>
-                  <Color>FF8080</Color>
-                  <VariableType>Float</VariableType>
-                  <Address>farmer_base_ptr</Address>
-                  <Offsets>
-                    <Offset>0x44</Offset>
-                    <Offset>0x450</Offset>
-                  </Offsets>
-                </CheatEntry>
-                <CheatEntry>
-                  <ID>58</ID>
-                  <Description>"Max Stamina"</Description>
+                  <ID>89</ID>
+                  <Description>"Farm Name"</Description>
+                  <LastState RealAddress="1DACDE7DC24"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>808080</Color>
-                  <VariableType>4 Bytes</VariableType>
+                  <VariableType>String</VariableType>
+                  <Length>32</Length>
+                  <Unicode>1</Unicode>
+                  <CodePage>0</CodePage>
+                  <ZeroTerminate>1</ZeroTerminate>
                   <Address>farmer_base_ptr</Address>
                   <Offsets>
-                    <Offset>0x44</Offset>
-                    <Offset>430</Offset>
+                    <Offset>String._firstchar</Offset>
+                    <Offset>netstring.value</Offset>
+                    <Offset>Farmer.farmname</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
-                  <ID>59</ID>
-                  <Description>"Club Coins"</Description>
+                  <ID>90</ID>
+                  <Description>"Horse Name"</Description>
+                  <LastState RealAddress="1DACDE7DC7C"/>
                   <ShowAsSigned>0</ShowAsSigned>
-                  <Color>FF8080</Color>
-                  <VariableType>4 Bytes</VariableType>
+                  <Color>808080</Color>
+                  <VariableType>String</VariableType>
+                  <Length>32</Length>
+                  <Unicode>1</Unicode>
+                  <CodePage>0</CodePage>
+                  <ZeroTerminate>1</ZeroTerminate>
                   <Address>farmer_base_ptr</Address>
                   <Offsets>
-                    <Offset>68c</Offset>
+                    <Offset>String._firstchar</Offset>
+                    <Offset>netstring.value</Offset>
+                    <Offset>Farmer.horsename</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
-                  <ID>60</ID>
-                  <Description>"Qi Gems"</Description>
-                  <ShowAsSigned>0</ShowAsSigned>
-                  <Color>FF8080</Color>
-                  <VariableType>4 Bytes</VariableType>
-                  <Address>farmer_base_ptr</Address>
-                  <Offsets>
-                    <Offset>44</Offset>
-                    <Offset>580</Offset>
-                  </Offsets>
+                  <ID>78</ID>
+                  <Description>"HP/SP"</Description>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <Color>C08000</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>65</ID>
+                      <Description>"Health"</Description>
+                      <LastState Value="180" RealAddress="1DACDABCC44"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>farmer_base_ptr</Address>
+                      <Offsets>
+                        <Offset>Farmer.Health</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>56</ID>
+                      <Description>"Max Health"</Description>
+                      <LastState Value="180" RealAddress="1DACDABCC48"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>808080</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>farmer_base_ptr</Address>
+                      <Offsets>
+                        <Offset>Farmer.MaxHealth</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>57</ID>
+                      <Description>"Stamina"</Description>
+                      <LastState Value="439" RealAddress="1DACDE8E64C"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>farmer_base_ptr</Address>
+                      <Offsets>
+                        <Offset>NetInt.Value</Offset>
+                        <Offset>Farmer.netStamina</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>58</ID>
+                      <Description>"Max Stamina"</Description>
+                      <LastState Value="474" RealAddress="1DACDE8BB7C"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>808080</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>farmer_base_ptr</Address>
+                      <Offsets>
+                        <Offset>NetInt.Value</Offset>
+                        <Offset>Farmer.MaxStamina</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>86</ID>
+                      <Description>"Exhausted"</Description>
+                      <DropDownList DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                      <LastState Value="0" RealAddress="1DACDE8B2C5"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>Byte</VariableType>
+                      <Address>farmer_base_ptr</Address>
+                      <Offsets>
+                        <Offset>NetBool.Value</Offset>
+                        <Offset>Farmer.Exhausted</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>79</ID>
+                  <Description>"Currencies"</Description>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <Color>C08000</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>63</ID>
+                      <Description>"Money"</Description>
+                      <LastState Value="1199343" RealAddress="1DACDE8E8DC"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>8 Bytes</VariableType>
+                      <Address>farmer_base_ptr</Address>
+                      <Offsets>
+                        <Offset>NetInt.Value</Offset>
+                        <Offset>team.money</Offset>
+                        <Offset>teamRoot.value</Offset>
+                        <Offset>Farmer.teamRoot</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>83</ID>
+                      <Description>"Money Earned"</Description>
+                      <LastState Value="9736351" RealAddress="1DACDE8EAB4"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>8 Bytes</VariableType>
+                      <Address>farmer_base_ptr</Address>
+                      <Offsets>
+                        <Offset>NetInt.Value</Offset>
+                        <Offset>team.totalMoneyEarned</Offset>
+                        <Offset>teamRoot.value</Offset>
+                        <Offset>Farmer.teamRoot</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>59</ID>
+                      <Description>"Club Coins"</Description>
+                      <LastState Value="16910" RealAddress="1DACDABCC14"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>farmer_base_ptr</Address>
+                      <Offsets>
+                        <Offset>Farmer.clubCoins</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>60</ID>
+                      <Description>"Qi Gems"</Description>
+                      <LastState Value="138" RealAddress="1DACD9A80DC"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>farmer_base_ptr</Address>
+                      <Offsets>
+                        <Offset>NetInt.Value</Offset>
+                        <Offset>Farmer.netQiGems</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>80</ID>
+                  <Description>"Modifiers"</Description>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <Color>C08000</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>71</ID>
+                      <Description>"Attack Increase Modifier"</Description>
+                      <LastState Value="0" RealAddress="1DACDABCBFC"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>farmer_base_ptr</Address>
+                      <Offsets>
+                        <Offset>Farmer.attackIncreaseModifier</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>72</ID>
+                      <Description>"Knockback Modifier"</Description>
+                      <LastState Value="0" RealAddress="1DACDABCC00"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>farmer_base_ptr</Address>
+                      <Offsets>
+                        <Offset>farmer.KnockbackModifier</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>73</ID>
+                      <Description>"Weapon Speed Modifier"</Description>
+                      <LastState Value="0" RealAddress="1DACDABCC04"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>farmer_base_ptr</Address>
+                      <Offsets>
+                        <Offset>Farmer.WeaponSpeedModifier</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>74</ID>
+                      <Description>"Crit Chance Modifier"</Description>
+                      <LastState Value="0" RealAddress="1DACDABCC08"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>farmer_base_ptr</Address>
+                      <Offsets>
+                        <Offset>Farmer.CritChanceModifier</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>75</ID>
+                      <Description>"Crit Power Modifier"</Description>
+                      <LastState Value="0" RealAddress="1DACDABCC0C"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>farmer_base_ptr</Address>
+                      <Offsets>
+                        <Offset>Farmer.CritPowerModifier</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>76</ID>
+                      <Description>"Weapon Precision Modifier"</Description>
+                      <LastState Value="0" RealAddress="1DACDABCC10"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>farmer_base_ptr</Address>
+                      <Offsets>
+                        <Offset>Farmer.WeaponPrecisionModifier</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>77</ID>
+                  <Description>"Levels"</Description>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <Color>C08000</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>64</ID>
+                      <Description>"Farming Level"</Description>
+                      <LastState Value="10" RealAddress="1DACDE8B69C"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>farmer_base_ptr</Address>
+                      <Offsets>
+                        <Offset>NetInt.Value</Offset>
+                        <Offset>Farmer.FarmingLevel</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>66</ID>
+                      <Description>"Mining Level"</Description>
+                      <LastState Value="10" RealAddress="1DACDE8B6FC"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>farmer_base_ptr</Address>
+                      <Offsets>
+                        <Offset>NetInt.Value</Offset>
+                        <Offset>Farmer.MiningLevel</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>67</ID>
+                      <Description>"Combat Level"</Description>
+                      <LastState Value="10" RealAddress="1DACDE8B75C"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>farmer_base_ptr</Address>
+                      <Offsets>
+                        <Offset>NetInt.Value</Offset>
+                        <Offset>Farmer.CombatLevel</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>68</ID>
+                      <Description>"Foraging Level"</Description>
+                      <LastState Value="10" RealAddress="1DACDE8B7BC"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>farmer_base_ptr</Address>
+                      <Offsets>
+                        <Offset>NetInt.Value</Offset>
+                        <Offset>Farmer.ForagingLevel</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>69</ID>
+                      <Description>"Fishing Level"</Description>
+                      <LastState Value="10" RealAddress="1DACDE8B81C"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>farmer_base_ptr</Address>
+                      <Offsets>
+                        <Offset>NetInt.Value</Offset>
+                        <Offset>Farmer.FishingLevel</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>70</ID>
+                      <Description>"Luck Level"</Description>
+                      <LastState Value="0" RealAddress="1DACDE8B87C"/>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>farmer_base_ptr</Address>
+                      <Offsets>
+                        <Offset>NetInt.Value</Offset>
+                        <Offset>Farmer.LuckLevel</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
                 </CheatEntry>
               </CheatEntries>
             </CheatEntry>
@@ -313,9 +655,9 @@ StardewValley.Farmer::Update+16: 48 8D AC 24 60 01 00 00  - lea rbp,[rsp+0000016
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
-              <ID>14</ID>
+              <ID>82</ID>
               <Description>"instant fish bite"</Description>
-              <LastState/>
+              <LastState Activated="1"/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : Stardew Valley.exe
@@ -328,15 +670,7 @@ StardewValley.Farmer::Update+16: 48 8D AC 24 60 01 00 00  - lea rbp,[rsp+0000016
 
 [ENABLE]
 {$lua}
-errorOnLookupFailure(false)
-if getAddress('StardewValley.Tools.FishingRod::calculateTimeUntilFishingBite')==0 then
-  reinitializeDotNetSymbolhandler()
-
-  if getAddress('StardewValley.Tools.FishingRod::calculateTimeUntilFishingBite')==0 then
-    showMessage('This function is not available yet. Please try again later')
-    error() --prevents the aa entry from activating
-  end
-end
+checkDotNetSymbol('StardewValley.Tools.FishingRod::calculateTimeUntilFishingBite')
 
 {$asm}
 define(hook, StardewValley.Tools.FishingRod::calculateTimeUntilFishingBite)
@@ -403,7 +737,7 @@ StardewValley.Tools.FishingRod::calculateTimeUntilFishingBite+1A: 48 8B F1      
             <CheatEntry>
               <ID>17</ID>
               <Description>"instant fish catch"</Description>
-              <LastState/>
+              <LastState Activated="1"/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : Stardew Valley.exe
@@ -416,15 +750,7 @@ StardewValley.Tools.FishingRod::calculateTimeUntilFishingBite+1A: 48 8B F1      
 
 [ENABLE]
 {$lua}
-errorOnLookupFailure(false)
-if getAddress('StardewValley.Menus.BobberBar::update')==0 then
-  reinitializeDotNetSymbolhandler()
-
-  if getAddress('StardewValley.Menus.BobberBar::update')==0 then
-    showMessage('This function is not available yet. Please try again later')
-    error() --prevents the aa entry from activating
-  end
-end
+checkDotNetSymbol('StardewValley.Menus.BobberBar::update')
 
 {$asm}
 define(hook,StardewValley.Menus.BobberBar::update+19B9)
@@ -499,7 +825,8 @@ StardewValley.Menus.BobberBar::update+19FC: 48 B9 08 60 09 B1 A2 01 00 00  - mov
             <CheatEntry>
               <ID>39</ID>
               <Description>"fishing modifiers"</Description>
-              <LastState/>
+              <Options moHideChildren="1"/>
+              <LastState Activated="1"/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : Stardew Valley.exe
@@ -535,16 +862,7 @@ StardewValley.Menus.BobberBar::update+19FC: 48 B9 08 60 09 B1 A2 01 00 00  - mov
 
 [ENABLE]
 {$lua}
-errorOnLookupFailure(false)
-local hook = 'StardewValley.Tools.FishingRod::doPullFishFromWater'
-if getAddress(hook)==0 then
-  reinitializeDotNetSymbolhandler()
-
-  if getAddress(hook)==0 then
-    showMessage('This function is not available yet. Please try again later')
-    error() --prevents the aa entry from activating
-  end
-end
+checkDotNetSymbol('StardewValley.Tools.FishingRod::doPullFishFromWater')
 
 {$asm}
 define(hook,StardewValley.Tools.FishingRod::doPullFishFromWater+FE)
@@ -646,6 +964,7 @@ StardewValley.Tools.FishingRod::doPullFishFromWater+13D: E8 4E 61 AB 5E        -
                   <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Off
 1:On
 </DropDownList>
+                  <LastState Value="1" RealAddress="7FFB53DD000C"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>800080</Color>
                   <VariableType>Byte</VariableType>
@@ -657,6 +976,7 @@ StardewValley.Tools.FishingRod::doPullFishFromWater+13D: E8 4E 61 AB 5E        -
                   <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Off
 1:On
 </DropDownList>
+                  <LastState Value="1" RealAddress="7FFB53DD000D"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>800080</Color>
                   <VariableType>Byte</VariableType>
@@ -670,6 +990,7 @@ StardewValley.Tools.FishingRod::doPullFishFromWater+13D: E8 4E 61 AB 5E        -
 2:Gold
 4:Iridium
 </DropDownList>
+                  <LastState Value="4" RealAddress="7FFB53DD000E"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>800080</Color>
                   <VariableType>4 Bytes</VariableType>
@@ -1381,6 +1702,7 @@ StardewValley.Tools.FishingRod::doPullFishFromWater+13D: E8 4E 61 AB 5E        -
 928:Golden Egg
 929:Hedge
 </DropDownList>
+                  <LastState Value="-1" RealAddress="7FFB53DD0012"/>
                   <ShowAsSigned>1</ShowAsSigned>
                   <Color>800080</Color>
                   <VariableType>4 Bytes</VariableType>
@@ -1394,7 +1716,7 @@ StardewValley.Tools.FishingRod::doPullFishFromWater+13D: E8 4E 61 AB 5E        -
           <ID>36</ID>
           <Description>"Behaviour"</Description>
           <Options moActivateChildrenAsWell="1" moDeactivateChildrenAsWell="1"/>
-          <LastState Value="" Activated="1" RealAddress="00000000"/>
+          <LastState Value="" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -1414,15 +1736,7 @@ StardewValley.Tools.FishingRod::doPullFishFromWater+13D: E8 4E 61 AB 5E        -
 
 [ENABLE]
 {$lua}
-errorOnLookupFailure(false)
-if getAddress('StardewValley.Objects.Cask::IsValidCaskLocation')==0 then
-  reinitializeDotNetSymbolhandler()
-
-  if getAddress('StardewValley.Objects.Cask::IsValidCaskLocation')==0 then
-    showMessage('This function is not available yet. Please try again later')
-    error() --prevents the aa entry from activating
-  end
-end
+checkDotNetSymbol('StardewValley.Objects.Cask::IsValidCaskLocation')
 
 {$asm}
 define(hook,StardewValley.Objects.Cask::IsValidCaskLocation)
@@ -1491,15 +1805,7 @@ StardewValley.Objects.Cask::IsValidCaskLocation+26: B8 01 00 00 00              
 
 [ENABLE]
 {$lua}
-errorOnLookupFailure(false)
-if getAddress('StardewValley.Buildings.JunimoHut::updateWhenFarmNotCurrentLocation')==0 then
-  reinitializeDotNetSymbolhandler()
-
-  if getAddress('StardewValley.Buildings.JunimoHut::updateWhenFarmNotCurrentLocation')==0 then
-    showMessage('This function is not available yet. Please try again later')
-    error() --prevents the aa entry from activating
-  end
-end
+checkDotNetSymbol('StardewValley.Buildings.JunimoHut::updateWhenFarmNotCurrentLocation')
 
 {$asm}
 define(hook,StardewValley.Buildings.JunimoHut::updateWhenFarmNotCurrentLocation+199)
@@ -1582,15 +1888,7 @@ StardewValley.Buildings.JunimoHut::updateWhenFarmNotCurrentLocation+1D0: 48 8B C
 
 [ENABLE]
 {$lua}
-errorOnLookupFailure(false)
-if getAddress('StardewValley.FarmAnimal::updateWhenNotCurrentLocation')==0 then
-  reinitializeDotNetSymbolhandler()
-
-  if getAddress('StardewValley.FarmAnimal::updateWhenNotCurrentLocation')==0 then
-    showMessage('This function is not available yet. Please try again later')
-    error() --prevents the aa entry from activating
-  end
-end
+checkDotNetSymbol('StardewValley.FarmAnimal::updateWhenNotCurrentLocation')
 
 {$asm}
 define(hook,StardewValley.FarmAnimal::updateWhenNotCurrentLocation+168)
@@ -1673,15 +1971,7 @@ StardewValley.FarmAnimal::updateWhenNotCurrentLocation+1A5: 0F 85 8A 08 00 00   
 
 [ENABLE]
 {$lua}
-errorOnLookupFailure(false)
-if getAddress('StardewValley.FarmAnimal::behaviors')==0 then
-  reinitializeDotNetSymbolhandler()
-
-  if getAddress('StardewValley.FarmAnimal::behaviors')==0 then
-    showMessage('This function is not available yet. Please try again later')
-    error() --prevents the aa entry from activating
-  end
-end
+checkDotNetSymbol('StardewValley.FarmAnimal::behaviors')
 
 {$asm}
 define(hook,StardewValley.FarmAnimal::behaviors+B15)
@@ -1773,15 +2063,7 @@ StardewValley.FarmAnimal::behaviors+B50: 85 C0                          - test e
 
 [ENABLE]
 {$lua}
-errorOnLookupFailure(false)
-if getAddress('StardewValley.Farmer::checkDamage')==0 then
-  reinitializeDotNetSymbolhandler()
-
-  if getAddress('StardewValley.Farmer::checkDamage')==0 then
-    showMessage('This function is not available yet. Please try again later')
-    error() --prevents the aa entry from activating
-  end
-end
+checkDotNetSymbol('StardewValley.Farmer::checkDamage')
 
 {$asm}
 define(hook,StardewValley.Farmer::checkDamage)
@@ -1857,15 +2139,7 @@ StardewValley.Farmer::checkDamage+13: 48 8B FA     - mov rdi,rdx
 
 [ENABLE]
 {$lua}
-errorOnLookupFailure(false)
-if getAddress('StardewValley.Tools.Slingshot::PerformFire')==0 then
-  reinitializeDotNetSymbolhandler()
-
-  if getAddress('StardewValley.Tools.Slingshot::PerformFire')==0 then
-    showMessage('This function is not available yet. Please try again later')
-    error() --prevents the aa entry from activating
-  end
-end
+checkDotNetSymbol('StardewValley.Tools.Slingshot::PerformFire')
 
 {$asm}
 define(hook,StardewValley.Tools.Slingshot::PerformFire+211)
@@ -1936,15 +2210,7 @@ StardewValley.Tools.Slingshot::PerformFire+237: 48 8B C8                       -
 
 [ENABLE]
 {$lua}
-errorOnLookupFailure(false)
-if getAddress('StardewValley.Tools.Slingshot::GetSlingshotChargeTime')==0 then
-  reinitializeDotNetSymbolhandler()
-
-  if getAddress('StardewValley.Tools.Slingshot::GetSlingshotChargeTime')==0 then
-    showMessage('This function is not available yet. Please try again later')
-    error() --prevents the aa entry from activating
-  end
-end
+checkDotNetSymbol('StardewValley.Tools.Slingshot::GetSlingshotChargeTime')
 
 {$asm}
 define(hook,StardewValley.Tools.Slingshot::GetSlingshotChargeTime)
@@ -2034,15 +2300,7 @@ StardewValley.Tools.Slingshot::GetSlingshotChargeTime+6B: CC                    
 
 [ENABLE]
 {$lua}
-errorOnLookupFailure(false)
-if getAddress('StardewValley.Menus.InventoryMenu::rightClick')==0 then
-  reinitializeDotNetSymbolhandler()
-
-  if getAddress('StardewValley.Menus.InventoryMenu::rightClick')==0 then
-    showMessage('This function is not available yet. Please try again later')
-    error() --prevents the aa entry from activating
-  end
-end
+checkDotNetSymbol('StardewValley.Menus.InventoryMenu::rightClick')
 
 {$asm}
 define(hook,StardewValley.Menus.InventoryMenu::rightClick+6FA)
@@ -2109,6 +2367,7 @@ StardewValley.Menus.InventoryMenu::rightClick+729: 48 85 C0                     
             <CheatEntry>
               <ID>46</ID>
               <Description>"Inventory Item Hover"</Description>
+              <Options moHideChildren="1"/>
               <LastState Activated="1"/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
@@ -2122,16 +2381,7 @@ StardewValley.Menus.InventoryMenu::rightClick+729: 48 85 C0                     
 
 [ENABLE]
 {$lua}
-errorOnLookupFailure(false)
-local hook = 'StardewValley.Object::get_DisplayName'
-if getAddress(hook)==0 then
-  reinitializeDotNetSymbolhandler()
-
-  if getAddress(hook)==0 then
-    showMessage('This function is not available yet. Please try again later')
-    error() --prevents the aa entry from activating
-  end
-end
+checkDotNetSymbol('StardewValley.Object::get_DisplayName')
 
 {$asm}
 define(hook,StardewValley.Object::get_DisplayName)
@@ -2203,8 +2453,30 @@ StardewValley.Object::get_DisplayName+24: 0F 84 7C 00 00 00              - je St
 </AssemblerScript>
               <CheatEntries>
                 <CheatEntry>
+                  <ID>85</ID>
+                  <Description>"re-init structs"</Description>
+                  <LastState/>
+                  <Color>008000</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{$lua}
+[ENABLE]
+if getAddressSafe('[object_base_ptr]')==0 then
+  showMessage('Failed to update structs, base pointer is 0')
+  error()
+end
+updateStructures({
+  {'Object','[object_base_ptr]'},
+  {'String','[[object_base_ptr]+Object.displayName]'}
+})
+showMessage('Done updating structures')
+error()
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
                   <ID>47</ID>
                   <Description>"object_base_ptr"</Description>
+                  <LastState Value="000001DAD52A36B0" RealAddress="7FFB53E3000C"/>
                   <ShowAsHex>1</ShowAsHex>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>808080</Color>
@@ -2214,6 +2486,7 @@ StardewValley.Object::get_DisplayName+24: 0F 84 7C 00 00 00              - je St
                 <CheatEntry>
                   <ID>48</ID>
                   <Description>"Name"</Description>
+                  <LastState RealAddress="1DAD5356C44"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>808080</Color>
                   <VariableType>String</VariableType>
@@ -2223,32 +2496,47 @@ StardewValley.Object::get_DisplayName+24: 0F 84 7C 00 00 00              - je St
                   <ZeroTerminate>1</ZeroTerminate>
                   <Address>object_base_ptr</Address>
                   <Offsets>
-                    <Offset>C</Offset>
-                    <Offset>0x168</Offset>
+                    <Offset>String._FirstChar</Offset>
+                    <Offset>Object.DisplayName</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
                   <ID>50</ID>
-                  <Description>"Stack"</Description>
+                  <Description>"Price"</Description>
+                  <LastState Value="75" RealAddress="1DAD52A3CAC"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>FF8080</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>object_base_ptr</Address>
                   <Offsets>
-                    <Offset>0x44</Offset>
-                    <Offset>0xb8</Offset>
+                    <Offset>NetInt.Value</Offset>
+                    <Offset>Object.Price</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>87</ID>
+                  <Description>"Stack"</Description>
+                  <LastState Value="1" RealAddress="1DAD52A3D6C"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>object_base_ptr</Address>
+                  <Offsets>
+                    <Offset>NetInt.Value</Offset>
+                    <Offset>Object.Stack</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
                   <ID>49</ID>
                   <Description>"Quality"</Description>
+                  <LastState Value="4" RealAddress="1DAD52A3DCC"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>FF8080</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>object_base_ptr</Address>
                   <Offsets>
-                    <Offset>0x44</Offset>
-                    <Offset>0xc0</Offset>
+                    <Offset>NetInt.Value</Offset>
+                    <Offset>Object.Quality</Offset>
                   </Offsets>
                 </CheatEntry>
               </CheatEntries>
@@ -2279,15 +2567,7 @@ StardewValley.Object::get_DisplayName+24: 0F 84 7C 00 00 00              - je St
 
 [ENABLE]
 {$lua}
-errorOnLookupFailure(false)
-if getAddress('&lt;&gt;c::&lt;performTenMinuteClockUpdate&gt;b__670_0')==0 then
-  reinitializeDotNetSymbolhandler()
-
-  if getAddress('&lt;&gt;c::&lt;performTenMinuteClockUpdate&gt;b__670_0')==0 then
-    showMessage('This function is not available yet. Please try again later')
-    error() --prevents the aa entry from activating
-  end
-end
+checkDotNetSymbol('&lt;&gt;c::&lt;performTenMinuteClockUpdate&gt;b__670_0')
 
 {$asm}
 define(hook, &lt;&gt;c::&lt;performTenMinuteClockUpdate&gt;b__670_0+50)
@@ -2360,15 +2640,7 @@ dealloc(newmem)
 
 [ENABLE]
 {$lua}
-errorOnLookupFailure(false)
-if getAddress('StardewValley.Farmer::get_DailyLuck')==0 then
-  reinitializeDotNetSymbolhandler()
-
-  if getAddress('StardewValley.Farmer::get_DailyLuck')==0 then
-    showMessage('This function is not available yet. Please try again later')
-    error() --prevents the aa entry from activating
-  end
-end
+checkDotNetSymbol('StardewValley.Farmer::get_DailyLuck')
 
 {$asm}
 define(hook,StardewValley.Farmer::get_DailyLuck)
@@ -2444,4 +2716,610 @@ StardewValley.Farmer::get_DailyLuck+28: C5 F0 57 C9           - vxorps xmm1,xmm1
       <Address>7FFB0F850000</Address>
     </SymbolEntry>
   </UserdefinedSymbols>
+  <Structures StructVersion="2">
+    <Structure Name="Object" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="8" OffsetHex="00000000" Description="Vtable" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="8" Vartype="Pointer" Bytesize="8" OffsetHex="00000008" Description="specialVariable" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="16" Vartype="Pointer" Bytesize="8" OffsetHex="00000010" Description="category" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="24" Vartype="Pointer" Bytesize="8" OffsetHex="00000018" Description="hasbeenInInventory" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="32" Vartype="Pointer" Bytesize="8" OffsetHex="00000020" Description="_contextTags" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="40" Vartype="Pointer" Bytesize="8" OffsetHex="00000028" Description="modData" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="48" Vartype="Pointer" Bytesize="8" OffsetHex="00000030" Description="&lt;NetFields&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="56" Vartype="Pointer" Bytesize="8" OffsetHex="00000038" Description="netName" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="64" Vartype="Pointer" Bytesize="8" OffsetHex="00000040" Description="parentSheetIndex" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="72" Vartype="Byte" Bytesize="1" OffsetHex="00000048" Description="isLostItem" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="73" Vartype="Byte" Bytesize="1" OffsetHex="00000049" Description="_contextTagsDirty" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="74" Vartype="Byte" Bytesize="1" OffsetHex="0000004A" Description="specialItem" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="75" Vartype="Byte" Bytesize="1" OffsetHex="0000004B" Description="isActive" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="76" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000004C" Description="shakeTimer" DisplayMethod="Signed Integer"/>
+        <Element Offset="80" Vartype="Pointer" Bytesize="8" OffsetHex="00000050" Description="tileLocation" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="88" Vartype="Pointer" Bytesize="8" OffsetHex="00000058" Description="owner" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="96" Vartype="Pointer" Bytesize="8" OffsetHex="00000060" Description="type" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="104" Vartype="Pointer" Bytesize="8" OffsetHex="00000068" Description="canBeSetDown" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="112" Vartype="Pointer" Bytesize="8" OffsetHex="00000070" Description="canBeGrabbed" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="120" Vartype="Pointer" Bytesize="8" OffsetHex="00000078" Description="isHoedirt" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="128" Vartype="Pointer" Bytesize="8" OffsetHex="00000080" Description="isSpawnedObject" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="136" Vartype="Pointer" Bytesize="8" OffsetHex="00000088" Description="questItem" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="144" Vartype="Pointer" Bytesize="8" OffsetHex="00000090" Description="questId" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="152" Vartype="Pointer" Bytesize="8" OffsetHex="00000098" Description="isOn" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="160" Vartype="Pointer" Bytesize="8" OffsetHex="000000A0" Description="fragility" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="168" Vartype="Pointer" Bytesize="8" OffsetHex="000000A8" Description="price" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="176" Vartype="Pointer" Bytesize="8" OffsetHex="000000B0" Description="edibility" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="184" Vartype="Pointer" Bytesize="8" OffsetHex="000000B8" Description="stack" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="192" Vartype="Pointer" Bytesize="8" OffsetHex="000000C0" Description="quality" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="200" Vartype="Pointer" Bytesize="8" OffsetHex="000000C8" Description="bigCraftable" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="208" Vartype="Pointer" Bytesize="8" OffsetHex="000000D0" Description="setOutdoors" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="216" Vartype="Pointer" Bytesize="8" OffsetHex="000000D8" Description="setIndoors" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="224" Vartype="Pointer" Bytesize="8" OffsetHex="000000E0" Description="readyForHarvest" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="232" Vartype="Pointer" Bytesize="8" OffsetHex="000000E8" Description="showNextIndex" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="240" Vartype="Pointer" Bytesize="8" OffsetHex="000000F0" Description="flipped" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="248" Vartype="Pointer" Bytesize="8" OffsetHex="000000F8" Description="hasBeenPickedUpByFarmer" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="256" Vartype="Pointer" Bytesize="8" OffsetHex="00000100" Description="isRecipe" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="264" Vartype="Pointer" Bytesize="8" OffsetHex="00000108" Description="isLamp" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="272" Vartype="Pointer" Bytesize="8" OffsetHex="00000110" Description="heldObject" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="280" Vartype="Pointer" Bytesize="8" OffsetHex="00000118" Description="minutesUntilReady" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="288" Vartype="Pointer" Bytesize="8" OffsetHex="00000120" Description="boundingBox" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="296" Vartype="Pointer" Bytesize="8" OffsetHex="00000128" Description="uses" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="304" Vartype="Pointer" Bytesize="8" OffsetHex="00000130" Description="netLightSource" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="312" Vartype="Pointer" Bytesize="8" OffsetHex="00000138" Description="_destroyOvernight" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="320" Vartype="Pointer" Bytesize="8" OffsetHex="00000140" Description="orderData" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="328" Vartype="Pointer" Bytesize="8" OffsetHex="00000148" Description="internalSound" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="336" Vartype="Pointer" Bytesize="8" OffsetHex="00000150" Description="preserve" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="344" Vartype="Pointer" Bytesize="8" OffsetHex="00000158" Description="preservedParentSheetIndex" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="352" Vartype="Pointer" Bytesize="8" OffsetHex="00000160" Description="honeyType" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="360" Vartype="Pointer" Bytesize="8" OffsetHex="00000168" Description="displayName" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="368" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000170" Description="lastNoteBlockSoundTime" DisplayMethod="Signed Integer"/>
+        <Element Offset="372" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000174" Description="health" DisplayMethod="Signed Integer"/>
+        <Element Offset="376" Vartype="Byte" Bytesize="1" OffsetHex="00000178" Description="isTemporarilyInvisible" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="384" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000180" Description="scale" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="388" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000184" Description="scale_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="392" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000188" Description="scale_3" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="396" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000018C" Description="scale_4" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+    <Structure Name="String" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="8" OffsetHex="00000000" Description="Vtable" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="8" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000008" Description="_stringLength" DisplayMethod="Signed Integer"/>
+        <Element Offset="12" Vartype="Unicode String" Bytesize="256" OffsetHex="0000000C" Description="_firstChar" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+    <Structure Name="Farmer" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="8" OffsetHex="00000000" Description="Vtable" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="8" Vartype="Pointer" Bytesize="8" OffsetHex="00000008" Description="sprite" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="16" Vartype="Pointer" Bytesize="8" OffsetHex="00000010" Description="position" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="24" Vartype="Pointer" Bytesize="8" OffsetHex="00000018" Description="netSpeed" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="32" Vartype="Pointer" Bytesize="8" OffsetHex="00000020" Description="netAddedSpeed" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="40" Vartype="Pointer" Bytesize="8" OffsetHex="00000028" Description="facingDirection" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="48" Vartype="Pointer" Bytesize="8" OffsetHex="00000030" Description="faceTowardFarmerEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="56" Vartype="Pointer" Bytesize="8" OffsetHex="00000038" Description="faceTowardFarmerRadius" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="64" Vartype="Pointer" Bytesize="8" OffsetHex="00000040" Description="name" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="72" Vartype="Pointer" Bytesize="8" OffsetHex="00000048" Description="forceOneTileWide" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="80" Vartype="Pointer" Bytesize="8" OffsetHex="00000050" Description="_displayName" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="88" Vartype="Pointer" Bytesize="8" OffsetHex="00000058" Description="faceAwayFromFarmer" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="96" Vartype="Pointer" Bytesize="8" OffsetHex="00000060" Description="facingDirectionBeforeSpeakingToPlayer" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="104" Vartype="Pointer" Bytesize="8" OffsetHex="00000068" Description="scale" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="112" Vartype="Pointer" Bytesize="8" OffsetHex="00000070" Description="swimming" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="120" Vartype="Pointer" Bytesize="8" OffsetHex="00000078" Description="collidesWithOtherCharacters" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="128" Vartype="Pointer" Bytesize="8" OffsetHex="00000080" Description="whoToFace" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="136" Vartype="Pointer" Bytesize="8" OffsetHex="00000088" Description="controller" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="144" Vartype="Pointer" Bytesize="8" OffsetHex="00000090" Description="_willDestroyObjectsUnderfoot" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="152" Vartype="Pointer" Bytesize="8" OffsetHex="00000098" Description="currentLocationRef" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="160" Vartype="Pointer" Bytesize="8" OffsetHex="000000A0" Description="modData" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="168" Vartype="Pointer" Bytesize="8" OffsetHex="000000A8" Description="&lt;NetFields&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="176" Vartype="Pointer" Bytesize="8" OffsetHex="000000B0" Description="drawOffset" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="184" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000B8" Description="blockedInterval" DisplayMethod="Signed Integer"/>
+        <Element Offset="188" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000BC" Description="faceTowardFarmerTimer" DisplayMethod="Signed Integer"/>
+        <Element Offset="192" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000C0" Description="forceUpdateTimer" DisplayMethod="Signed Integer"/>
+        <Element Offset="196" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000C4" Description="movementPause" DisplayMethod="Signed Integer"/>
+        <Element Offset="200" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000C8" Description="currentEmote" DisplayMethod="Signed Integer"/>
+        <Element Offset="204" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000CC" Description="currentEmoteFrame" DisplayMethod="Signed Integer"/>
+        <Element Offset="208" Vartype="Float" Bytesize="4" OffsetHex="000000D0" Description="emoteInterval" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="212" Vartype="Float" Bytesize="4" OffsetHex="000000D4" Description="xVelocity" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="216" Vartype="Float" Bytesize="4" OffsetHex="000000D8" Description="yVelocity" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="220" Vartype="Float" Bytesize="4" OffsetHex="000000DC" Description="timeBeforeAIMovementAgain" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="224" Vartype="Float" Bytesize="4" OffsetHex="000000E0" Description="glowingTransparency" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="228" Vartype="Float" Bytesize="4" OffsetHex="000000E4" Description="glowRate" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="232" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000E8" Description="yJumpOffset" DisplayMethod="Signed Integer"/>
+        <Element Offset="236" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000EC" Description="ySourceRectOffset" DisplayMethod="Signed Integer"/>
+        <Element Offset="240" Vartype="Float" Bytesize="4" OffsetHex="000000F0" Description="yJumpVelocity" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="244" Vartype="Float" Bytesize="4" OffsetHex="000000F4" Description="yJumpGravity" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="248" Vartype="Byte" Bytesize="1" OffsetHex="000000F8" Description="moveUp" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="249" Vartype="Byte" Bytesize="1" OffsetHex="000000F9" Description="moveRight" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="250" Vartype="Byte" Bytesize="1" OffsetHex="000000FA" Description="moveDown" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="251" Vartype="Byte" Bytesize="1" OffsetHex="000000FB" Description="moveLeft" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="252" Vartype="Byte" Bytesize="1" OffsetHex="000000FC" Description="freezeMotion" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="253" Vartype="Byte" Bytesize="1" OffsetHex="000000FD" Description="isEmoting" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="254" Vartype="Byte" Bytesize="1" OffsetHex="000000FE" Description="isCharging" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="255" Vartype="Byte" Bytesize="1" OffsetHex="000000FF" Description="isGlowing" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="256" Vartype="Byte" Bytesize="1" OffsetHex="00000100" Description="coloredBorder" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="257" Vartype="Byte" Bytesize="1" OffsetHex="00000101" Description="flip" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="258" Vartype="Byte" Bytesize="1" OffsetHex="00000102" Description="drawOnTop" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="259" Vartype="Byte" Bytesize="1" OffsetHex="00000103" Description="faceTowardFarmer" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="260" Vartype="Byte" Bytesize="1" OffsetHex="00000104" Description="ignoreMovementAnimation" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="261" Vartype="Byte" Bytesize="1" OffsetHex="00000105" Description="hasJustStartedFacingPlayer" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="262" Vartype="Byte" Bytesize="1" OffsetHex="00000106" Description="glowUp" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="263" Vartype="Byte" Bytesize="1" OffsetHex="00000107" Description="nextEventcommandAfterEmote" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="264" Vartype="Byte" Bytesize="1" OffsetHex="00000108" Description="eventActor" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="265" Vartype="Byte" Bytesize="1" OffsetHex="00000109" Description="farmerPassesThrough" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="266" Vartype="Byte" Bytesize="1" OffsetHex="0000010A" Description="ignoreMovementAnimations" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="267" Vartype="Byte" Bytesize="1" OffsetHex="0000010B" Description="wasJumpWithSound" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="268" Vartype="Byte" Bytesize="1" OffsetHex="0000010C" Description="emoteFading" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="269" Vartype="Byte" Bytesize="1" OffsetHex="0000010D" Description="shouldShadowBeOffset" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="272" Vartype="Float" Bytesize="4" OffsetHex="00000110" Description="lastClick" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="276" Vartype="Float" Bytesize="4" OffsetHex="00000114" Description="lastClick_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="280" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000118" Description="glowingColor" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="284" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000011C" Description="glowingColor_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="288" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000120" Description="originalSourceRect" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="292" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000124" Description="originalSourceRect_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="296" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000128" Description="originalSourceRect_3" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="300" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000012C" Description="originalSourceRect_4" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="304" Vartype="Pointer" Bytesize="8" OffsetHex="00000130" Description="questLog" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="312" Vartype="Pointer" Bytesize="8" OffsetHex="00000138" Description="professions" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="320" Vartype="Pointer" Bytesize="8" OffsetHex="00000140" Description="newLevels" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="328" Vartype="Pointer" Bytesize="8" OffsetHex="00000148" Description="newLevelSparklingTexts" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="336" Vartype="Pointer" Bytesize="8" OffsetHex="00000150" Description="sparklingText" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="344" Vartype="Pointer" Bytesize="8" OffsetHex="00000158" Description="experiencePoints" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="352" Vartype="Pointer" Bytesize="8" OffsetHex="00000160" Description="items" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="360" Vartype="Pointer" Bytesize="8" OffsetHex="00000168" Description="dialogueQuestionsAnswered" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="368" Vartype="Pointer" Bytesize="8" OffsetHex="00000170" Description="furnitureOwned" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="376" Vartype="Pointer" Bytesize="8" OffsetHex="00000178" Description="cookingRecipes" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="384" Vartype="Pointer" Bytesize="8" OffsetHex="00000180" Description="craftingRecipes" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="392" Vartype="Pointer" Bytesize="8" OffsetHex="00000188" Description="activeDialogueEvents" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="400" Vartype="Pointer" Bytesize="8" OffsetHex="00000190" Description="eventsSeen" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="408" Vartype="Pointer" Bytesize="8" OffsetHex="00000198" Description="secretNotesSeen" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="416" Vartype="Pointer" Bytesize="8" OffsetHex="000001A0" Description="songsHeard" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="424" Vartype="Pointer" Bytesize="8" OffsetHex="000001A8" Description="achievements" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="432" Vartype="Pointer" Bytesize="8" OffsetHex="000001B0" Description="specialItems" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="440" Vartype="Pointer" Bytesize="8" OffsetHex="000001B8" Description="specialBigCraftables" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="448" Vartype="Pointer" Bytesize="8" OffsetHex="000001C0" Description="mailReceived" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="456" Vartype="Pointer" Bytesize="8" OffsetHex="000001C8" Description="mailForTomorrow" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="464" Vartype="Pointer" Bytesize="8" OffsetHex="000001D0" Description="mailbox" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="472" Vartype="Pointer" Bytesize="8" OffsetHex="000001D8" Description="timeWentToBed" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="480" Vartype="Pointer" Bytesize="8" OffsetHex="000001E0" Description="sleptInTemporaryBed" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="488" Vartype="Pointer" Bytesize="8" OffsetHex="000001E8" Description="requestingTimePause" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="496" Vartype="Pointer" Bytesize="8" OffsetHex="000001F0" Description="stats" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="504" Vartype="Pointer" Bytesize="8" OffsetHex="000001F8" Description="personalShippingBin" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="512" Vartype="Pointer" Bytesize="8" OffsetHex="00000200" Description="displayedShippedItems" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="520" Vartype="Pointer" Bytesize="8" OffsetHex="00000208" Description="blueprints" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="528" Vartype="Pointer" Bytesize="8" OffsetHex="00000210" Description="biteChime" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="536" Vartype="Pointer" Bytesize="8" OffsetHex="00000218" Description="_recoveredItem" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="544" Vartype="Pointer" Bytesize="8" OffsetHex="00000220" Description="itemsLostLastDeath" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="552" Vartype="Pointer" Bytesize="8" OffsetHex="00000228" Description="movementDirections" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="560" Vartype="Pointer" Bytesize="8" OffsetHex="00000230" Description="farmName" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="568" Vartype="Pointer" Bytesize="8" OffsetHex="00000238" Description="favoriteThing" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="576" Vartype="Pointer" Bytesize="8" OffsetHex="00000240" Description="horseName" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="584" Vartype="Pointer" Bytesize="8" OffsetHex="00000248" Description="slotName" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="592" Vartype="Pointer" Bytesize="8" OffsetHex="00000250" Description="appliedBuffs" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="600" Vartype="Pointer" Bytesize="8" OffsetHex="00000258" Description="appliedSpecialBuffs" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="608" Vartype="Pointer" Bytesize="8" OffsetHex="00000260" Description="messageQueue" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="616" Vartype="Pointer" Bytesize="8" OffsetHex="00000268" Description="uniqueMultiplayerID" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="624" Vartype="Pointer" Bytesize="8" OffsetHex="00000270" Description="userID" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="632" Vartype="Pointer" Bytesize="8" OffsetHex="00000278" Description="previousLocationName" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="640" Vartype="Pointer" Bytesize="8" OffsetHex="00000280" Description="platformType" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="648" Vartype="Pointer" Bytesize="8" OffsetHex="00000288" Description="platformID" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="656" Vartype="Pointer" Bytesize="8" OffsetHex="00000290" Description="hasMenuOpen" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="664" Vartype="Pointer" Bytesize="8" OffsetHex="00000298" Description="defaultChatColor" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="672" Vartype="Pointer" Bytesize="8" OffsetHex="000002A0" Description="acceptedDailyQuest" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="680" Vartype="Pointer" Bytesize="8" OffsetHex="000002A8" Description="mostRecentlyGrabbedItem" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="688" Vartype="Pointer" Bytesize="8" OffsetHex="000002B0" Description="itemToEat" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="696" Vartype="Pointer" Bytesize="8" OffsetHex="000002B8" Description="farmerRenderer" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="704" Vartype="Pointer" Bytesize="8" OffsetHex="000002C0" Description="emoteFavorites" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="712" Vartype="Pointer" Bytesize="8" OffsetHex="000002C8" Description="performedEmotes" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="720" Vartype="Pointer" Bytesize="8" OffsetHex="000002D0" Description="shirt" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="728" Vartype="Pointer" Bytesize="8" OffsetHex="000002D8" Description="hair" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="736" Vartype="Pointer" Bytesize="8" OffsetHex="000002E0" Description="skin" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="744" Vartype="Pointer" Bytesize="8" OffsetHex="000002E8" Description="shoes" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="752" Vartype="Pointer" Bytesize="8" OffsetHex="000002F0" Description="accessory" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="760" Vartype="Pointer" Bytesize="8" OffsetHex="000002F8" Description="facialHair" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="768" Vartype="Pointer" Bytesize="8" OffsetHex="00000300" Description="pants" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="776" Vartype="Pointer" Bytesize="8" OffsetHex="00000308" Description="netFestivalScore" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="784" Vartype="Pointer" Bytesize="8" OffsetHex="00000310" Description="hairstyleColor" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="792" Vartype="Pointer" Bytesize="8" OffsetHex="00000318" Description="pantsColor" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="800" Vartype="Pointer" Bytesize="8" OffsetHex="00000320" Description="newEyeColor" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="808" Vartype="Pointer" Bytesize="8" OffsetHex="00000328" Description="hat" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="816" Vartype="Pointer" Bytesize="8" OffsetHex="00000330" Description="boots" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="824" Vartype="Pointer" Bytesize="8" OffsetHex="00000338" Description="leftRing" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="832" Vartype="Pointer" Bytesize="8" OffsetHex="00000340" Description="rightRing" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="840" Vartype="Pointer" Bytesize="8" OffsetHex="00000348" Description="shirtItem" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="848" Vartype="Pointer" Bytesize="8" OffsetHex="00000350" Description="pantsItem" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="856" Vartype="Pointer" Bytesize="8" OffsetHex="00000358" Description="dancePartner" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="864" Vartype="Pointer" Bytesize="8" OffsetHex="00000360" Description="exhausted" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="872" Vartype="Pointer" Bytesize="8" OffsetHex="00000368" Description="divorceTonight" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="880" Vartype="Pointer" Bytesize="8" OffsetHex="00000370" Description="changeWalletTypeTonight" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="888" Vartype="Pointer" Bytesize="8" OffsetHex="00000378" Description="toolOverrideFunction" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="896" Vartype="Pointer" Bytesize="8" OffsetHex="00000380" Description="onBridge" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="904" Vartype="Pointer" Bytesize="8" OffsetHex="00000388" Description="bridge" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="912" Vartype="Pointer" Bytesize="8" OffsetHex="00000390" Description="netDeepestMineLevel" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="920" Vartype="Pointer" Bytesize="8" OffsetHex="00000398" Description="currentToolIndex" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="928" Vartype="Pointer" Bytesize="8" OffsetHex="000003A0" Description="temporaryItem" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="936" Vartype="Pointer" Bytesize="8" OffsetHex="000003A8" Description="cursorSlotItem" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="944" Vartype="Pointer" Bytesize="8" OffsetHex="000003B0" Description="netItemStowed" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="952" Vartype="Pointer" Bytesize="8" OffsetHex="000003B8" Description="gameVersion" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="960" Vartype="Pointer" Bytesize="8" OffsetHex="000003C0" Description="caveChoice" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="968" Vartype="Pointer" Bytesize="8" OffsetHex="000003C8" Description="farmingLevel" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="976" Vartype="Pointer" Bytesize="8" OffsetHex="000003D0" Description="miningLevel" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="984" Vartype="Pointer" Bytesize="8" OffsetHex="000003D8" Description="combatLevel" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="992" Vartype="Pointer" Bytesize="8" OffsetHex="000003E0" Description="foragingLevel" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1000" Vartype="Pointer" Bytesize="8" OffsetHex="000003E8" Description="fishingLevel" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1008" Vartype="Pointer" Bytesize="8" OffsetHex="000003F0" Description="luckLevel" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1016" Vartype="Pointer" Bytesize="8" OffsetHex="000003F8" Description="newSkillPointsToSpend" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1024" Vartype="Pointer" Bytesize="8" OffsetHex="00000400" Description="addedFarmingLevel" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1032" Vartype="Pointer" Bytesize="8" OffsetHex="00000408" Description="addedMiningLevel" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1040" Vartype="Pointer" Bytesize="8" OffsetHex="00000410" Description="addedCombatLevel" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1048" Vartype="Pointer" Bytesize="8" OffsetHex="00000418" Description="addedForagingLevel" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1056" Vartype="Pointer" Bytesize="8" OffsetHex="00000420" Description="addedFishingLevel" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1064" Vartype="Pointer" Bytesize="8" OffsetHex="00000428" Description="addedLuckLevel" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1072" Vartype="Pointer" Bytesize="8" OffsetHex="00000430" Description="maxStamina" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1080" Vartype="Pointer" Bytesize="8" OffsetHex="00000438" Description="maxItems" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1088" Vartype="Pointer" Bytesize="8" OffsetHex="00000440" Description="lastSeenMovieWeek" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1096" Vartype="Pointer" Bytesize="8" OffsetHex="00000448" Description="viewingLocation" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1104" Vartype="Pointer" Bytesize="8" OffsetHex="00000450" Description="netStamina" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1112" Vartype="Pointer" Bytesize="8" OffsetHex="00000458" Description="teamRoot" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1120" Vartype="Pointer" Bytesize="8" OffsetHex="00000460" Description="netMillisecondsPlayed" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1128" Vartype="Pointer" Bytesize="8" OffsetHex="00000468" Description="toolBeingUpgraded" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1136" Vartype="Pointer" Bytesize="8" OffsetHex="00000470" Description="daysLeftForToolUpgrade" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1144" Vartype="Pointer" Bytesize="8" OffsetHex="00000478" Description="houseUpgradeLevel" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1152" Vartype="Pointer" Bytesize="8" OffsetHex="00000480" Description="daysUntilHouseUpgrade" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1160" Vartype="Pointer" Bytesize="8" OffsetHex="00000488" Description="enchantments" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1168" Vartype="Pointer" Bytesize="8" OffsetHex="00000490" Description="hasTownKey" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1176" Vartype="Pointer" Bytesize="8" OffsetHex="00000498" Description="magneticRadius" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1184" Vartype="Pointer" Bytesize="8" OffsetHex="000004A0" Description="netTimesReachedMineBottom" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1192" Vartype="Pointer" Bytesize="8" OffsetHex="000004A8" Description="isMale" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1200" Vartype="Pointer" Bytesize="8" OffsetHex="000004B0" Description="usingTool" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1208" Vartype="Pointer" Bytesize="8" OffsetHex="000004B8" Description="isInBed" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1216" Vartype="Pointer" Bytesize="8" OffsetHex="000004C0" Description="bathingClothes" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1224" Vartype="Pointer" Bytesize="8" OffsetHex="000004C8" Description="temporaryPassableTiles" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1232" Vartype="Pointer" Bytesize="8" OffsetHex="000004D0" Description="hidden" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1240" Vartype="Pointer" Bytesize="8" OffsetHex="000004D8" Description="basicShipped" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1248" Vartype="Pointer" Bytesize="8" OffsetHex="000004E0" Description="mineralsFound" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1256" Vartype="Pointer" Bytesize="8" OffsetHex="000004E8" Description="recipesCooked" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1264" Vartype="Pointer" Bytesize="8" OffsetHex="000004F0" Description="fishCaught" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1272" Vartype="Pointer" Bytesize="8" OffsetHex="000004F8" Description="archaeologyFound" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1280" Vartype="Pointer" Bytesize="8" OffsetHex="00000500" Description="callsReceived" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1288" Vartype="Pointer" Bytesize="8" OffsetHex="00000508" Description="giftedItems" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1296" Vartype="Pointer" Bytesize="8" OffsetHex="00000510" Description="tailoredItems" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1304" Vartype="Pointer" Bytesize="8" OffsetHex="00000518" Description="friendships" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1312" Vartype="Pointer" Bytesize="8" OffsetHex="00000520" Description="friendshipData" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1320" Vartype="Pointer" Bytesize="8" OffsetHex="00000528" Description="locationBeforeForcedEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1328" Vartype="Pointer" Bytesize="8" OffsetHex="00000530" Description="currentUpgrade" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1336" Vartype="Pointer" Bytesize="8" OffsetHex="00000538" Description="netSpouse" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1344" Vartype="Pointer" Bytesize="8" OffsetHex="00000540" Description="dateStringForSaveGame" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1352" Vartype="Pointer" Bytesize="8" OffsetHex="00000548" Description="bobber" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1360" Vartype="Pointer" Bytesize="8" OffsetHex="00000550" Description="netMount" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1368" Vartype="Pointer" Bytesize="8" OffsetHex="00000558" Description="sittingFurniture" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1376" Vartype="Pointer" Bytesize="8" OffsetHex="00000560" Description="isSitting" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1384" Vartype="Pointer" Bytesize="8" OffsetHex="00000568" Description="mapChairSitPosition" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1392" Vartype="Pointer" Bytesize="8" OffsetHex="00000570" Description="hasCompletedAllMonsterSlayerQuests" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1400" Vartype="Pointer" Bytesize="8" OffsetHex="00000578" Description="_lastSelectedItem" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1408" Vartype="Pointer" Bytesize="8" OffsetHex="00000580" Description="netQiGems" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1416" Vartype="Pointer" Bytesize="8" OffsetHex="00000588" Description="jotpkProgress" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1424" Vartype="Pointer" Bytesize="8" OffsetHex="00000590" Description="hasUsedDailyRevive" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1432" Vartype="Pointer" Bytesize="8" OffsetHex="00000598" Description="fireToolEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1440" Vartype="Pointer" Bytesize="8" OffsetHex="000005A0" Description="beginUsingToolEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1448" Vartype="Pointer" Bytesize="8" OffsetHex="000005A8" Description="endUsingToolEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1456" Vartype="Pointer" Bytesize="8" OffsetHex="000005B0" Description="sickAnimationEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1464" Vartype="Pointer" Bytesize="8" OffsetHex="000005B8" Description="passOutEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1472" Vartype="Pointer" Bytesize="8" OffsetHex="000005C0" Description="haltAnimationEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1480" Vartype="Pointer" Bytesize="8" OffsetHex="000005C8" Description="drinkAnimationEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1488" Vartype="Pointer" Bytesize="8" OffsetHex="000005D0" Description="eatAnimationEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1496" Vartype="Pointer" Bytesize="8" OffsetHex="000005D8" Description="doEmoteEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1504" Vartype="Pointer" Bytesize="8" OffsetHex="000005E0" Description="kissFarmerEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1512" Vartype="Pointer" Bytesize="8" OffsetHex="000005E8" Description="synchronizedJumpEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1520" Vartype="Pointer" Bytesize="8" OffsetHex="000005F0" Description="renovateEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1528" Vartype="Pointer" Bytesize="8" OffsetHex="000005F8" Description="chestConsumedMineLevels" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1536" Vartype="Pointer" Bytesize="8" OffsetHex="00000600" Description="isCustomized" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1544" Vartype="Pointer" Bytesize="8" OffsetHex="00000608" Description="homeLocation" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1552" Vartype="Pointer" Bytesize="8" OffsetHex="00000610" Description="lastSleepLocation" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1560" Vartype="Pointer" Bytesize="8" OffsetHex="00000618" Description="lastSleepPoint" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1568" Vartype="Pointer" Bytesize="8" OffsetHex="00000620" Description="collisionNPC" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1576" Vartype="Float" Bytesize="4" OffsetHex="00000628" Description="usernameDisplayTime" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1580" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000062C" Description="whichPetBreed" DisplayMethod="Signed Integer"/>
+        <Element Offset="1584" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000630" Description="toolPower" DisplayMethod="Signed Integer"/>
+        <Element Offset="1588" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000634" Description="toolHold" DisplayMethod="Signed Integer"/>
+        <Element Offset="1592" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000638" Description="currentEyes" DisplayMethod="Signed Integer"/>
+        <Element Offset="1596" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000063C" Description="blinkTimer" DisplayMethod="Signed Integer"/>
+        <Element Offset="1600" Vartype="Float" Bytesize="4" OffsetHex="00000640" Description="temporarySpeedBuff" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1604" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000644" Description="woodPieces" DisplayMethod="Signed Integer"/>
+        <Element Offset="1608" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000648" Description="stonePieces" DisplayMethod="Signed Integer"/>
+        <Element Offset="1612" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000064C" Description="copperPieces" DisplayMethod="Signed Integer"/>
+        <Element Offset="1616" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000650" Description="ironPieces" DisplayMethod="Signed Integer"/>
+        <Element Offset="1620" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000654" Description="coalPieces" DisplayMethod="Signed Integer"/>
+        <Element Offset="1624" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000658" Description="goldPieces" DisplayMethod="Signed Integer"/>
+        <Element Offset="1628" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000065C" Description="iridiumPieces" DisplayMethod="Signed Integer"/>
+        <Element Offset="1632" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000660" Description="quartzPieces" DisplayMethod="Signed Integer"/>
+        <Element Offset="1636" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000664" Description="feed" DisplayMethod="Signed Integer"/>
+        <Element Offset="1640" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000668" Description="resilience" DisplayMethod="Signed Integer"/>
+        <Element Offset="1644" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000066C" Description="attack" DisplayMethod="Signed Integer"/>
+        <Element Offset="1648" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000670" Description="immunity" DisplayMethod="Signed Integer"/>
+        <Element Offset="1652" Vartype="Float" Bytesize="4" OffsetHex="00000674" Description="attackIncreaseModifier" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1656" Vartype="Float" Bytesize="4" OffsetHex="00000678" Description="knockbackModifier" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1660" Vartype="Float" Bytesize="4" OffsetHex="0000067C" Description="weaponSpeedModifier" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1664" Vartype="Float" Bytesize="4" OffsetHex="00000680" Description="critChanceModifier" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1668" Vartype="Float" Bytesize="4" OffsetHex="00000684" Description="critPowerModifier" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1672" Vartype="Float" Bytesize="4" OffsetHex="00000688" Description="weaponPrecisionModifier" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1676" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000068C" Description="clubCoins" DisplayMethod="Signed Integer"/>
+        <Element Offset="1680" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000690" Description="trashCanLevel" DisplayMethod="Signed Integer"/>
+        <Element Offset="1684" Vartype="Float" Bytesize="4" OffsetHex="00000694" Description="timeOfLastPositionPacket" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1688" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000698" Description="numUpdatesSinceLastDraw" DisplayMethod="Signed Integer"/>
+        <Element Offset="1692" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000069C" Description="coopUpgradeLevel" DisplayMethod="Signed Integer"/>
+        <Element Offset="1696" Vartype="4 Bytes" Bytesize="4" OffsetHex="000006A0" Description="barnUpgradeLevel" DisplayMethod="Signed Integer"/>
+        <Element Offset="1700" Vartype="4 Bytes" Bytesize="4" OffsetHex="000006A4" Description="temporaryInvincibilityTimer" DisplayMethod="Signed Integer"/>
+        <Element Offset="1704" Vartype="4 Bytes" Bytesize="4" OffsetHex="000006A8" Description="currentTemporaryInvincibilityDuration" DisplayMethod="Signed Integer"/>
+        <Element Offset="1708" Vartype="Float" Bytesize="4" OffsetHex="000006AC" Description="rotation" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1712" Vartype="4 Bytes" Bytesize="4" OffsetHex="000006B0" Description="craftingTime" DisplayMethod="Signed Integer"/>
+        <Element Offset="1716" Vartype="4 Bytes" Bytesize="4" OffsetHex="000006B4" Description="raftPuddleCounter" DisplayMethod="Signed Integer"/>
+        <Element Offset="1720" Vartype="4 Bytes" Bytesize="4" OffsetHex="000006B8" Description="raftBobCounter" DisplayMethod="Signed Integer"/>
+        <Element Offset="1724" Vartype="4 Bytes" Bytesize="4" OffsetHex="000006BC" Description="health" DisplayMethod="Signed Integer"/>
+        <Element Offset="1728" Vartype="4 Bytes" Bytesize="4" OffsetHex="000006C0" Description="maxHealth" DisplayMethod="Signed Integer"/>
+        <Element Offset="1732" Vartype="Float" Bytesize="4" OffsetHex="000006C4" Description="difficultyModifier" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1736" Vartype="Float" Bytesize="4" OffsetHex="000006C8" Description="jitterStrength" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1740" Vartype="Float" Bytesize="4" OffsetHex="000006CC" Description="xOffset" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1744" Vartype="4 Bytes" Bytesize="4" OffsetHex="000006D0" Description="_emoteGracePeriod" DisplayMethod="Signed Integer"/>
+        <Element Offset="1748" Vartype="4 Bytes" Bytesize="4" OffsetHex="000006D4" Description="orientationBeforeEvent" DisplayMethod="Signed Integer"/>
+        <Element Offset="1752" Vartype="4 Bytes" Bytesize="4" OffsetHex="000006D8" Description="swimTimer" DisplayMethod="Signed Integer"/>
+        <Element Offset="1756" Vartype="4 Bytes" Bytesize="4" OffsetHex="000006DC" Description="regenTimer" DisplayMethod="Signed Integer"/>
+        <Element Offset="1760" Vartype="4 Bytes" Bytesize="4" OffsetHex="000006E0" Description="timerSinceLastMovement" DisplayMethod="Signed Integer"/>
+        <Element Offset="1764" Vartype="4 Bytes" Bytesize="4" OffsetHex="000006E4" Description="noMovementPause" DisplayMethod="Signed Integer"/>
+        <Element Offset="1768" Vartype="4 Bytes" Bytesize="4" OffsetHex="000006E8" Description="freezePause" DisplayMethod="Signed Integer"/>
+        <Element Offset="1772" Vartype="Float" Bytesize="4" OffsetHex="000006EC" Description="yOffset" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1776" Vartype="4 Bytes" Bytesize="4" OffsetHex="000006F0" Description="overallsColor" DisplayMethod="Signed Integer"/>
+        <Element Offset="1780" Vartype="4 Bytes" Bytesize="4" OffsetHex="000006F4" Description="shirtColor" DisplayMethod="Signed Integer"/>
+        <Element Offset="1784" Vartype="4 Bytes" Bytesize="4" OffsetHex="000006F8" Description="skinColor" DisplayMethod="Signed Integer"/>
+        <Element Offset="1788" Vartype="4 Bytes" Bytesize="4" OffsetHex="000006FC" Description="hairColor" DisplayMethod="Signed Integer"/>
+        <Element Offset="1792" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000700" Description="eyeColor" DisplayMethod="Signed Integer"/>
+        <Element Offset="1796" Vartype="Float" Bytesize="4" OffsetHex="00000704" Description="lerpPosition" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1800" Vartype="Float" Bytesize="4" OffsetHex="00000708" Description="lerpDuration" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1804" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000070C" Description="saveTime" DisplayMethod="Signed Integer"/>
+        <Element Offset="1808" Vartype="Float" Bytesize="4" OffsetHex="00000710" Description="drawLayerDisambiguator" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1812" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000714" Description="emoteFacingDirection" DisplayMethod="Signed Integer"/>
+        <Element Offset="1816" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000718" Description="daysMarried" DisplayMethod="Signed Integer"/>
+        <Element Offset="1820" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000071C" Description="toolPitchAccumulator" DisplayMethod="Signed Integer"/>
+        <Element Offset="1824" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000720" Description="charactercollisionTimer" DisplayMethod="Signed Integer"/>
+        <Element Offset="1828" Vartype="Float" Bytesize="4" OffsetHex="00000724" Description="movementMultiplier" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1832" Vartype="Byte" Bytesize="1" OffsetHex="00000728" Description="hasMoved" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1833" Vartype="Byte" Bytesize="1" OffsetHex="00000729" Description="slotCanHost" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1834" Vartype="Byte" Bytesize="1" OffsetHex="0000072A" Description="hasReceivedToolUpgradeMessageYet" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1835" Vartype="Byte" Bytesize="1" OffsetHex="0000072B" Description="catPerson" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1836" Vartype="Byte" Bytesize="1" OffsetHex="0000072C" Description="isAnimatingMount" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1837" Vartype="Byte" Bytesize="1" OffsetHex="0000072D" Description="ridingMineElevator" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1838" Vartype="Byte" Bytesize="1" OffsetHex="0000072E" Description="mineMovementDirectionWasUp" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1839" Vartype="Byte" Bytesize="1" OffsetHex="0000072F" Description="cameFromDungeon" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1840" Vartype="Byte" Bytesize="1" OffsetHex="00000730" Description="_itemStowed" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1841" Vartype="Byte" Bytesize="1" OffsetHex="00000731" Description="isFakeEventActor" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1842" Vartype="Byte" Bytesize="1" OffsetHex="00000732" Description="hasGreenhouse" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1843" Vartype="Byte" Bytesize="1" OffsetHex="00000733" Description="hasUnlockedSkullDoor" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1844" Vartype="Byte" Bytesize="1" OffsetHex="00000734" Description="hasDarkTalisman" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1845" Vartype="Byte" Bytesize="1" OffsetHex="00000735" Description="hasMagicInk" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1846" Vartype="Byte" Bytesize="1" OffsetHex="00000736" Description="showChestColorPicker" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1847" Vartype="Byte" Bytesize="1" OffsetHex="00000737" Description="hasMagnifyingGlass" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1848" Vartype="Byte" Bytesize="1" OffsetHex="00000738" Description="hasWateringCanEnchantment" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1849" Vartype="Byte" Bytesize="1" OffsetHex="00000739" Description="canMove" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1850" Vartype="Byte" Bytesize="1" OffsetHex="0000073A" Description="running" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1851" Vartype="Byte" Bytesize="1" OffsetHex="0000073B" Description="ignoreCollisions" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1852" Vartype="Byte" Bytesize="1" OffsetHex="0000073C" Description="isEating" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1853" Vartype="Byte" Bytesize="1" OffsetHex="0000073D" Description="forceTimePass" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1854" Vartype="Byte" Bytesize="1" OffsetHex="0000073E" Description="isRafting" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1855" Vartype="Byte" Bytesize="1" OffsetHex="0000073F" Description="usingSlingshot" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1856" Vartype="Byte" Bytesize="1" OffsetHex="00000740" Description="canOnlyWalk" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1857" Vartype="Byte" Bytesize="1" OffsetHex="00000741" Description="temporarilyInvincible" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1858" Vartype="Byte" Bytesize="1" OffsetHex="00000742" Description="hasBusTicket" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1859" Vartype="Byte" Bytesize="1" OffsetHex="00000743" Description="stardewHero" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1860" Vartype="Byte" Bytesize="1" OffsetHex="00000744" Description="hasClubCard" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1861" Vartype="Byte" Bytesize="1" OffsetHex="00000745" Description="hasSpecialCharm" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1862" Vartype="Byte" Bytesize="1" OffsetHex="00000746" Description="canReleaseTool" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1863" Vartype="Byte" Bytesize="1" OffsetHex="00000747" Description="isCrafting" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1864" Vartype="Byte" Bytesize="1" OffsetHex="00000748" Description="isEmoteAnimating" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1865" Vartype="Byte" Bytesize="1" OffsetHex="00000749" Description="passedOut" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1866" Vartype="Byte" Bytesize="1" OffsetHex="0000074A" Description="hasNutPickupQueued" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1867" Vartype="Byte" Bytesize="1" OffsetHex="0000074B" Description="isStopSitting" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1868" Vartype="Byte" Bytesize="1" OffsetHex="0000074C" Description="_wasSitting" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1872" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000750" Description="DEFAULT_SHIRT_COLOR" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1876" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000754" Description="DEFAULT_SHIRT_COLOR_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1880" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000758" Description="DEFAULT_PANTS_COLOR" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1884" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000075C" Description="DEFAULT_PANTS_COLOR_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1888" Vartype="Float" Bytesize="4" OffsetHex="00000760" Description="mostRecentBed" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1892" Vartype="Float" Bytesize="4" OffsetHex="00000764" Description="mostRecentBed_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1896" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000768" Description="jitter" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1900" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000076C" Description="jitter_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1904" Vartype="Float" Bytesize="4" OffsetHex="00000770" Description="lastPosition" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1908" Vartype="Float" Bytesize="4" OffsetHex="00000774" Description="lastPosition_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1912" Vartype="Float" Bytesize="4" OffsetHex="00000778" Description="lastGrabTile" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1916" Vartype="Float" Bytesize="4" OffsetHex="0000077C" Description="lastGrabTile_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1920" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000780" Description="positionBeforeEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1924" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000784" Description="positionBeforeEvent_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1928" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000788" Description="dayOfMonthForSaveGame" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1932" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000078C" Description="dayOfMonthForSaveGame_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1936" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000790" Description="seasonForSaveGame" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1940" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000794" Description="seasonForSaveGame_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1944" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000798" Description="yearForSaveGame" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1948" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000079C" Description="yearForSaveGame_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1952" Vartype="4 Bytes" Bytesize="4" OffsetHex="000007A0" Description="armOffset" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1956" Vartype="4 Bytes" Bytesize="4" OffsetHex="000007A4" Description="armOffset_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1960" Vartype="4 Bytes" Bytesize="4" OffsetHex="000007A8" Description="lerpStartPosition" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1964" Vartype="4 Bytes" Bytesize="4" OffsetHex="000007AC" Description="lerpStartPosition_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1968" Vartype="4 Bytes" Bytesize="4" OffsetHex="000007B0" Description="lerpEndPosition" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1972" Vartype="4 Bytes" Bytesize="4" OffsetHex="000007B4" Description="lerpEndPosition_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1976" Vartype="4 Bytes" Bytesize="4" OffsetHex="000007B8" Description="lerpEndPosition_3" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="1980" Vartype="4 Bytes" Bytesize="4" OffsetHex="000007BC" Description="lerpEndPosition_4" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+    <Structure Name="teamRoot" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="8" OffsetHex="00000000" Description="Vtable" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="8" Vartype="Pointer" Bytesize="8" OffsetHex="00000008" Description="&lt;Root&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="16" Vartype="Pointer" Bytesize="8" OffsetHex="00000010" Description="parent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="24" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000018" Description="dirtyTick" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="28" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000001C" Description="minNextDirtyTime" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="32" Vartype="2 Bytes" Bytesize="2" OffsetHex="00000020" Description="DeltaAggregateTicks" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="34" Vartype="Byte" Bytesize="1" OffsetHex="00000022" Description="needsTick" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="35" Vartype="Byte" Bytesize="1" OffsetHex="00000023" Description="childNeedsTick" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="40" Vartype="Pointer" Bytesize="8" OffsetHex="00000028" Description="ChangeVersion" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="48" Vartype="Pointer" Bytesize="8" OffsetHex="00000030" Description="fieldChangeEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="56" Vartype="Pointer" Bytesize="8" OffsetHex="00000038" Description="fieldChangeVisibleEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="64" Vartype="Pointer" Bytesize="8" OffsetHex="00000040" Description="value" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="72" Vartype="Pointer" Bytesize="8" OffsetHex="00000048" Description="previousValue" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="80" Vartype="Pointer" Bytesize="8" OffsetHex="00000050" Description="targetValue" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="88" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000058" Description="interpolationStartTick" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="92" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000005C" Description="_bools" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="93" Vartype="Byte" Bytesize="1" OffsetHex="0000005D" Description="xmlInitialized" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="94" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000005E" Description="deltaType" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="96" Vartype="Pointer" Bytesize="8" OffsetHex="00000060" Description="Serializer" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="104" Vartype="Pointer" Bytesize="8" OffsetHex="00000068" Description="OnConflictResolve" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="112" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000070" Description="reassigned" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="116" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000074" Description="reassigned_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="120" Vartype="Pointer" Bytesize="8" OffsetHex="00000078" Description="connections" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="128" Vartype="Pointer" Bytesize="8" OffsetHex="00000080" Description="&lt;Clock&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+    <Structure Name="Team" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="8" OffsetHex="00000000" Description="Vtable" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="8" Vartype="Pointer" Bytesize="8" OffsetHex="00000008" Description="money" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="16" Vartype="Pointer" Bytesize="8" OffsetHex="00000010" Description="individualMoney" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="24" Vartype="Pointer" Bytesize="8" OffsetHex="00000018" Description="totalMoneyEarned" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="32" Vartype="Pointer" Bytesize="8" OffsetHex="00000020" Description="hasRustyKey" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="40" Vartype="Pointer" Bytesize="8" OffsetHex="00000028" Description="hasSkullKey" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="48" Vartype="Pointer" Bytesize="8" OffsetHex="00000030" Description="canUnderstandDwarves" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="56" Vartype="Pointer" Bytesize="8" OffsetHex="00000038" Description="useSeparateWallets" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="64" Vartype="Pointer" Bytesize="8" OffsetHex="00000040" Description="newLostAndFoundItems" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="72" Vartype="Pointer" Bytesize="8" OffsetHex="00000048" Description="toggleMineShrineOvernight" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="80" Vartype="Pointer" Bytesize="8" OffsetHex="00000050" Description="mineShrineActivated" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="88" Vartype="Pointer" Bytesize="8" OffsetHex="00000058" Description="farmPerfect" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="96" Vartype="Pointer" Bytesize="8" OffsetHex="00000060" Description="specialRulesRemovedToday" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="104" Vartype="Pointer" Bytesize="8" OffsetHex="00000068" Description="itemsToRemoveOvernight" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="112" Vartype="Pointer" Bytesize="8" OffsetHex="00000070" Description="mailToRemoveOvernight" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="120" Vartype="Pointer" Bytesize="8" OffsetHex="00000078" Description="cellarAssignments" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="128" Vartype="Pointer" Bytesize="8" OffsetHex="00000080" Description="broadcastedMail" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="136" Vartype="Pointer" Bytesize="8" OffsetHex="00000088" Description="collectedNutTracker" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="144" Vartype="Pointer" Bytesize="8" OffsetHex="00000090" Description="completedSpecialOrders" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="152" Vartype="Pointer" Bytesize="8" OffsetHex="00000098" Description="specialOrders" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="160" Vartype="Pointer" Bytesize="8" OffsetHex="000000A0" Description="availableSpecialOrders" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="168" Vartype="Pointer" Bytesize="8" OffsetHex="000000A8" Description="acceptedSpecialOrderTypes" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="176" Vartype="Pointer" Bytesize="8" OffsetHex="000000B0" Description="returnedDonations" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="184" Vartype="Pointer" Bytesize="8" OffsetHex="000000B8" Description="junimoChest" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="192" Vartype="Pointer" Bytesize="8" OffsetHex="000000C0" Description="announcedSleepingFarmers" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="200" Vartype="Pointer" Bytesize="8" OffsetHex="000000C8" Description="sleepAnnounceMode" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="208" Vartype="Pointer" Bytesize="8" OffsetHex="000000D0" Description="farmhandsCanMoveBuildings" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="216" Vartype="Pointer" Bytesize="8" OffsetHex="000000D8" Description="readyChecks" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="224" Vartype="Pointer" Bytesize="8" OffsetHex="000000E0" Description="proposals" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="232" Vartype="Pointer" Bytesize="8" OffsetHex="000000E8" Description="movieInvitations" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="240" Vartype="Pointer" Bytesize="8" OffsetHex="000000F0" Description="luauIngredients" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="248" Vartype="Pointer" Bytesize="8" OffsetHex="000000F8" Description="grangeDisplay" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="256" Vartype="Pointer" Bytesize="8" OffsetHex="00000100" Description="grangeMutex" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="264" Vartype="Pointer" Bytesize="8" OffsetHex="00000108" Description="returnedDonationsMutex" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="272" Vartype="Pointer" Bytesize="8" OffsetHex="00000110" Description="ordersBoardMutex" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="280" Vartype="Pointer" Bytesize="8" OffsetHex="00000118" Description="qiChallengeBoardMutex" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="288" Vartype="Pointer" Bytesize="8" OffsetHex="00000120" Description="junimoChestMutex" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="296" Vartype="Pointer" Bytesize="8" OffsetHex="00000128" Description="festivalPropRemovalEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="304" Vartype="Pointer" Bytesize="8" OffsetHex="00000130" Description="addQiGemsToTeam" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="312" Vartype="Pointer" Bytesize="8" OffsetHex="00000138" Description="addCharacterEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="320" Vartype="Pointer" Bytesize="8" OffsetHex="00000140" Description="requestAddCharacterEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="328" Vartype="Pointer" Bytesize="8" OffsetHex="00000148" Description="requestLeoMove" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="336" Vartype="Pointer" Bytesize="8" OffsetHex="00000150" Description="kickOutOfMinesEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="344" Vartype="Pointer" Bytesize="8" OffsetHex="00000158" Description="requestSpouseSleepEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="352" Vartype="Pointer" Bytesize="8" OffsetHex="00000160" Description="ringPhoneEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="360" Vartype="Pointer" Bytesize="8" OffsetHex="00000168" Description="requestHorseWarpEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="368" Vartype="Pointer" Bytesize="8" OffsetHex="00000170" Description="requestPetWarpHomeEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="376" Vartype="Pointer" Bytesize="8" OffsetHex="00000178" Description="requestMovieEndEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="384" Vartype="Pointer" Bytesize="8" OffsetHex="00000180" Description="endMovieEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="392" Vartype="Pointer" Bytesize="8" OffsetHex="00000188" Description="demolishStableEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="400" Vartype="Pointer" Bytesize="8" OffsetHex="00000190" Description="limitedNutDrops" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="408" Vartype="Pointer" Bytesize="8" OffsetHex="00000198" Description="requestNutDrop" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="416" Vartype="Pointer" Bytesize="8" OffsetHex="000001A0" Description="friendshipData" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="424" Vartype="Pointer" Bytesize="8" OffsetHex="000001A8" Description="demolishLock" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="432" Vartype="Pointer" Bytesize="8" OffsetHex="000001B0" Description="buildLock" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="440" Vartype="Pointer" Bytesize="8" OffsetHex="000001B8" Description="movieMutex" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="448" Vartype="Pointer" Bytesize="8" OffsetHex="000001C0" Description="goldenCoconutMutex" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="456" Vartype="Pointer" Bytesize="8" OffsetHex="000001C8" Description="synchronizedShopStock" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="464" Vartype="Pointer" Bytesize="8" OffsetHex="000001D0" Description="theaterBuildDate" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="472" Vartype="Pointer" Bytesize="8" OffsetHex="000001D8" Description="lastDayQueenOfSauceRerunUpdated" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="480" Vartype="Pointer" Bytesize="8" OffsetHex="000001E0" Description="queenOfSauceRerunWeek" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="488" Vartype="Pointer" Bytesize="8" OffsetHex="000001E8" Description="sharedDailyLuck" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="496" Vartype="Pointer" Bytesize="8" OffsetHex="000001F0" Description="spawnMonstersAtNight" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="504" Vartype="Pointer" Bytesize="8" OffsetHex="000001F8" Description="junimoKartScores" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="512" Vartype="Pointer" Bytesize="8" OffsetHex="00000200" Description="&lt;NetFields&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="520" Vartype="Pointer" Bytesize="8" OffsetHex="00000208" Description="junimoKartStatus" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="528" Vartype="Pointer" Bytesize="8" OffsetHex="00000210" Description="endOfNightStatus" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="536" Vartype="Pointer" Bytesize="8" OffsetHex="00000218" Description="festivalScoreStatus" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="544" Vartype="Pointer" Bytesize="8" OffsetHex="00000220" Description="sleepStatus" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+    <Structure Name="netInt" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="8" OffsetHex="00000000" Description="Vtable" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="8" Vartype="Pointer" Bytesize="8" OffsetHex="00000008" Description="&lt;Root&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="16" Vartype="Pointer" Bytesize="8" OffsetHex="00000010" Description="parent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="24" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000018" Description="dirtyTick" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="28" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000001C" Description="minNextDirtyTime" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="32" Vartype="2 Bytes" Bytesize="2" OffsetHex="00000020" Description="DeltaAggregateTicks" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="34" Vartype="Byte" Bytesize="1" OffsetHex="00000022" Description="needsTick" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="35" Vartype="Byte" Bytesize="1" OffsetHex="00000023" Description="childNeedsTick" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="40" Vartype="Pointer" Bytesize="8" OffsetHex="00000028" Description="ChangeVersion" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="48" Vartype="Pointer" Bytesize="8" OffsetHex="00000030" Description="fieldChangeEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="56" Vartype="Pointer" Bytesize="8" OffsetHex="00000038" Description="fieldChangeVisibleEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="64" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000040" Description="interpolationStartTick" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="68" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000044" Description="value" DisplayMethod="Signed Integer"/>
+        <Element Offset="72" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000048" Description="previousValue" DisplayMethod="Signed Integer"/>
+        <Element Offset="76" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000004C" Description="targetValue" DisplayMethod="Signed Integer"/>
+        <Element Offset="80" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000050" Description="_bools" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="81" Vartype="Byte" Bytesize="1" OffsetHex="00000051" Description="xmlInitialized" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="84" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000054" Description="networkValue" DisplayMethod="Signed Integer"/>
+        <Element Offset="88" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000058" Description="DirtyThreshold" DisplayMethod="Signed Integer"/>
+        <Element Offset="96" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000060" Description="Minimum" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="100" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000064" Description="Minimum_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="104" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000068" Description="Maximum" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="108" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000006C" Description="Maximum_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="112" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000070" Description="Maximum_3" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="116" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000074" Description="Maximum_4" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+    <Structure Name="netBool" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="8" OffsetHex="00000000" Description="Vtable" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="8" Vartype="Pointer" Bytesize="8" OffsetHex="00000008" Description="&lt;Root&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="16" Vartype="Pointer" Bytesize="8" OffsetHex="00000010" Description="parent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="24" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000018" Description="dirtyTick" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="28" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000001C" Description="minNextDirtyTime" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="32" Vartype="2 Bytes" Bytesize="2" OffsetHex="00000020" Description="DeltaAggregateTicks" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="34" Vartype="Byte" Bytesize="1" OffsetHex="00000022" Description="needsTick" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="35" Vartype="Byte" Bytesize="1" OffsetHex="00000023" Description="childNeedsTick" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="40" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000028" Description="ChangeVersion" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="44" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000002C" Description="ChangeVersion_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="48" Vartype="Pointer" Bytesize="8" OffsetHex="00000030" Description="fieldChangeEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="56" Vartype="Pointer" Bytesize="8" OffsetHex="00000038" Description="fieldChangeVisibleEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="64" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000040" Description="interpolationStartTick" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="68" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000044" Description="_bools" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="69" Vartype="Byte" Bytesize="1" OffsetHex="00000045" Description="value" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="70" Vartype="Byte" Bytesize="1" OffsetHex="00000046" Description="previousValue" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="71" Vartype="Byte" Bytesize="1" OffsetHex="00000047" Description="targetValue" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="72" Vartype="Byte" Bytesize="1" OffsetHex="00000048" Description="xmlInitialized" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+    <Structure Name="netString" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="8" OffsetHex="00000000" Description="Vtable" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="8" Vartype="Pointer" Bytesize="8" OffsetHex="00000008" Description="&lt;Root&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="16" Vartype="Pointer" Bytesize="8" OffsetHex="00000010" Description="parent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="24" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000018" Description="dirtyTick" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="28" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000001C" Description="minNextDirtyTime" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="32" Vartype="2 Bytes" Bytesize="2" OffsetHex="00000020" Description="DeltaAggregateTicks" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="34" Vartype="Byte" Bytesize="1" OffsetHex="00000022" Description="needsTick" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="35" Vartype="Byte" Bytesize="1" OffsetHex="00000023" Description="childNeedsTick" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="40" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000028" Description="ChangeVersion" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="44" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000002C" Description="ChangeVersion_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="48" Vartype="Pointer" Bytesize="8" OffsetHex="00000030" Description="fieldChangeEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="56" Vartype="Pointer" Bytesize="8" OffsetHex="00000038" Description="fieldChangeVisibleEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="64" Vartype="Pointer" Bytesize="8" OffsetHex="00000040" Description="value" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="72" Vartype="Pointer" Bytesize="8" OffsetHex="00000048" Description="previousValue" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="80" Vartype="Pointer" Bytesize="8" OffsetHex="00000050" Description="targetValue" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="88" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000058" Description="interpolationStartTick" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="92" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000005C" Description="_bools" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="93" Vartype="Byte" Bytesize="1" OffsetHex="0000005D" Description="xmlInitialized" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="96" Vartype="Pointer" Bytesize="8" OffsetHex="00000060" Description="FilterStringEvent" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+  </Structures>
 </CheatTable>
