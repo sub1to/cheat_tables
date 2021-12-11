@@ -2,6 +2,57 @@
 <CheatTable CheatEngineTableVersion="38">
   <CheatEntries>
     <CheatEntry>
+      <ID>8642</ID>
+      <Description>"L"</Description>
+      <Options moHideChildren="1"/>
+      <LastState Value="" RealAddress="00000000"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>8644</ID>
+          <Description>"Group"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <Color>C08000</Color>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>8643</ID>
+          <Description>"Script"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <Color>008000</Color>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>8735</ID>
+          <Description>"Game Memory Value"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <Color>FF8080</Color>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>8930</ID>
+          <Description>"Game Memory Value (readonly)"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <Color>808080</Color>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>8645</ID>
+          <Description>"Script Modifier/Config"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <Color>800080</Color>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>8646</ID>
+          <Description>"WIP / Deprecated / Broken"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <Color>4080FF</Color>
+          <GroupHeader>1</GroupHeader>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
       <ID>18</ID>
       <Description>"Enable"</Description>
       <Options moHideChildren="1"/>
@@ -59,7 +110,7 @@ end
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
-              <ID>44</ID>
+              <ID>91</ID>
               <Description>"movement speed multiplier"</Description>
               <Options moHideChildren="1"/>
               <LastState Activated="1"/>
@@ -78,8 +129,8 @@ end
 checkDotNetSymbol('StardewValley.Farmer::getMovementSpeed')
 
 {$asm}
-define(hook,StardewValley.Farmer::getMovementSpeed+2E8)
-assert(hook,C5 F8 28 C6 C5 F8 28 74 24)
+define(hook,StardewValley.Farmer::getMovementSpeed)
+assert(hook,56 48 83 EC)
 
 alloc(newmem,$1000,hook)
 
@@ -94,66 +145,64 @@ registersymbol(get_movement_speed_value)
 
 newmem:
 get_movement_speed_bytes:
-  readMem(hook,10)
+  readMem(hook,5)
   jmp returnhere
 
 get_movement_speed_value:
   dd (float)2.0
 
 code:
-  mulss xmm6, [get_movement_speed_value]
-  jmp get_movement_speed_bytes
+  sub rsp, 28
+  call get_movement_speed_bytes
+  add rsp, 28
+  mulss xmm0, [get_movement_speed_value]
+  ret
 
 hook:
   jmp code
-  nop
-  nop
-  nop
-  nop
-  nop
   returnhere:
 
 [DISABLE]
 hook:
-  readMem(get_movement_speed_bytes,10)
+  readMem(get_movement_speed_bytes,5)
 
 unregistersymbol(get_movement_speed_bytes)
 unregistersymbol(get_movement_speed_value)
 dealloc(newmem)
 
 {
-// ORIGINAL CODE - INJECTION POINT: StardewValley.Farmer::getMovementSpeed+2E8
+// ORIGINAL CODE - INJECTION POINT: StardewValley.Farmer::getMovementSpeed
 
-StardewValley.Farmer::getMovementSpeed+2CB: 8B D0              - mov edx,eax
-StardewValley.Farmer::getMovementSpeed+2CD: C1 EA 1F           - shr edx,1F
-StardewValley.Farmer::getMovementSpeed+2D0: 03 C2              - add eax,edx
-StardewValley.Farmer::getMovementSpeed+2D2: D1 F8              - sar eax,1
-StardewValley.Farmer::getMovementSpeed+2D4: 83 F8 01           - cmp eax,01
-StardewValley.Farmer::getMovementSpeed+2D7: 7E 02              - jle StardewValley.Farmer::getMovementSpeed+2DB
-StardewValley.Farmer::getMovementSpeed+2D9: EB 05              - jmp StardewValley.Farmer::getMovementSpeed+2E0
-StardewValley.Farmer::getMovementSpeed+2DB: B8 01 00 00 00     - mov eax,00000001
-StardewValley.Farmer::getMovementSpeed+2E0: C5 C8 57 F6        - vxorps xmm6,xmm6,xmm6
-StardewValley.Farmer::getMovementSpeed+2E4: C5 CA 2A F0        - vcvtsi2ss xmm6,esi,eax
+7FFB5151626F: 00 00              - add [rax],al
+7FFB51516271: 00 00              - add [rax],al
+7FFB51516273: 00 00              - add [rax],al
+7FFB51516275: 00 00              - add [rax],al
+7FFB51516277: 00 D0              - add al,dl
+7FFB51516279: 1F                 - pop ds
+7FFB5151627A: 72 51              - jb StardewValley.Farmer::getMovementSpeed+4D
+7FFB5151627C: FB                 - sti
+7FFB5151627D: 7F 00              - jg 7FFB5151627F
+7FFB5151627F: 00                 - db 00
 // ---------- INJECTING HERE ----------
-StardewValley.Farmer::getMovementSpeed+2E8: C5 F8 28 C6        - vmovaps xmm0,xmm6
+StardewValley.Farmer::getMovementSpeed: 56                 - push rsi
 // ---------- DONE INJECTING  ----------
-StardewValley.Farmer::getMovementSpeed+2EC: C5 F8 28 74 24 50  - vmovaps xmm6,[rsp+50]
-StardewValley.Farmer::getMovementSpeed+2F2: C5 F8 28 7C 24 40  - vmovaps xmm7,[rsp+40]
-StardewValley.Farmer::getMovementSpeed+2F8: 48 83 C4 60        - add rsp,60
-StardewValley.Farmer::getMovementSpeed+2FC: 5E                 - pop rsi
-StardewValley.Farmer::getMovementSpeed+2FD: C3                 - ret
-StardewValley.Farmer::getMovementSpeed+2FE: CC                 - int 3
-7FF91ACE57EF: CC                 - int 3
-7FF91ACE57F0: CC                 - int 3
-7FF91ACE57F1: CC                 - int 3
-7FF91ACE57F2: CC                 - int 3
+StardewValley.Farmer::getMovementSpeed+1: 48 83 EC 60        - sub rsp,60
+StardewValley.Farmer::getMovementSpeed+5: C5 F8 77           - vzeroupper
+StardewValley.Farmer::getMovementSpeed+8: C5 F8 29 74 24 50  - vmovaps [rsp+50],xmm6
+StardewValley.Farmer::getMovementSpeed+E: C5 F8 29 7C 24 40  - vmovaps [rsp+40],xmm7
+StardewValley.Farmer::getMovementSpeed+14: 33 C0              - xor eax,eax
+StardewValley.Farmer::getMovementSpeed+16: 48 89 44 24 38     - mov [rsp+38],rax
+StardewValley.Farmer::getMovementSpeed+1B: 48 8B F1           - mov rsi,rcx
+StardewValley.Farmer::getMovementSpeed+1E: E8 55 28 04 FF     - call 7FFB50558AF8
+StardewValley.Farmer::getMovementSpeed+23: 48 85 C0           - test rax,rax
+StardewValley.Farmer::getMovementSpeed+26: 74 12              - je StardewValley.Farmer::getMovementSpeed+3A
 }
 </AssemblerScript>
               <CheatEntries>
                 <CheatEntry>
-                  <ID>45</ID>
+                  <ID>92</ID>
                   <Description>"Multiplier"</Description>
-                  <LastState Value="2" RealAddress="7FFB53D2000F"/>
+                  <LastState Value="2" RealAddress="7FFC7F54000A"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>800080</Color>
                   <VariableType>Float</VariableType>
@@ -165,7 +214,7 @@ StardewValley.Farmer::getMovementSpeed+2FE: CC                 - int 3
               <ID>53</ID>
               <Description>"farmer"</Description>
               <Options moHideChildren="1"/>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : Stardew Valley.exe
@@ -275,7 +324,6 @@ error()
                 <CheatEntry>
                   <ID>54</ID>
                   <Description>"farmer_base_ptr"</Description>
-                  <LastState Value="000001DACDABC588" RealAddress="7FFB53D3000A"/>
                   <ShowAsHex>1</ShowAsHex>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>808080</Color>
@@ -285,7 +333,6 @@ error()
                 <CheatEntry>
                   <ID>88</ID>
                   <Description>"Player Name"</Description>
-                  <LastState RealAddress="1DACDC8F2FC"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>808080</Color>
                   <VariableType>String</VariableType>
@@ -303,7 +350,6 @@ error()
                 <CheatEntry>
                   <ID>89</ID>
                   <Description>"Farm Name"</Description>
-                  <LastState RealAddress="1DACDE7DC24"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>808080</Color>
                   <VariableType>String</VariableType>
@@ -321,7 +367,6 @@ error()
                 <CheatEntry>
                   <ID>90</ID>
                   <Description>"Horse Name"</Description>
-                  <LastState RealAddress="1DACDE7DC7C"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>808080</Color>
                   <VariableType>String</VariableType>
@@ -346,7 +391,6 @@ error()
                     <CheatEntry>
                       <ID>65</ID>
                       <Description>"Health"</Description>
-                      <LastState Value="180" RealAddress="1DACDABCC44"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <Color>FF8080</Color>
                       <VariableType>4 Bytes</VariableType>
@@ -358,7 +402,6 @@ error()
                     <CheatEntry>
                       <ID>56</ID>
                       <Description>"Max Health"</Description>
-                      <LastState Value="180" RealAddress="1DACDABCC48"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <Color>808080</Color>
                       <VariableType>4 Bytes</VariableType>
@@ -370,7 +413,6 @@ error()
                     <CheatEntry>
                       <ID>57</ID>
                       <Description>"Stamina"</Description>
-                      <LastState Value="439" RealAddress="1DACDE8E64C"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <Color>FF8080</Color>
                       <VariableType>Float</VariableType>
@@ -383,7 +425,6 @@ error()
                     <CheatEntry>
                       <ID>58</ID>
                       <Description>"Max Stamina"</Description>
-                      <LastState Value="474" RealAddress="1DACDE8BB7C"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <Color>808080</Color>
                       <VariableType>4 Bytes</VariableType>
@@ -399,7 +440,6 @@ error()
                       <DropDownList DisplayValueAsItem="1">0:No
 1:Yes
 </DropDownList>
-                      <LastState Value="0" RealAddress="1DACDE8B2C5"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <Color>FF8080</Color>
                       <VariableType>Byte</VariableType>
@@ -421,7 +461,6 @@ error()
                     <CheatEntry>
                       <ID>63</ID>
                       <Description>"Money"</Description>
-                      <LastState Value="1199343" RealAddress="1DACDE8E8DC"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <Color>FF8080</Color>
                       <VariableType>8 Bytes</VariableType>
@@ -436,7 +475,6 @@ error()
                     <CheatEntry>
                       <ID>83</ID>
                       <Description>"Money Earned"</Description>
-                      <LastState Value="9736351" RealAddress="1DACDE8EAB4"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <Color>FF8080</Color>
                       <VariableType>8 Bytes</VariableType>
@@ -451,7 +489,6 @@ error()
                     <CheatEntry>
                       <ID>59</ID>
                       <Description>"Club Coins"</Description>
-                      <LastState Value="16910" RealAddress="1DACDABCC14"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <Color>FF8080</Color>
                       <VariableType>4 Bytes</VariableType>
@@ -463,7 +500,6 @@ error()
                     <CheatEntry>
                       <ID>60</ID>
                       <Description>"Qi Gems"</Description>
-                      <LastState Value="138" RealAddress="1DACD9A80DC"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <Color>FF8080</Color>
                       <VariableType>4 Bytes</VariableType>
@@ -485,7 +521,6 @@ error()
                     <CheatEntry>
                       <ID>71</ID>
                       <Description>"Attack Increase Modifier"</Description>
-                      <LastState Value="0" RealAddress="1DACDABCBFC"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <Color>FF8080</Color>
                       <VariableType>Float</VariableType>
@@ -497,7 +532,6 @@ error()
                     <CheatEntry>
                       <ID>72</ID>
                       <Description>"Knockback Modifier"</Description>
-                      <LastState Value="0" RealAddress="1DACDABCC00"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <Color>FF8080</Color>
                       <VariableType>Float</VariableType>
@@ -509,7 +543,6 @@ error()
                     <CheatEntry>
                       <ID>73</ID>
                       <Description>"Weapon Speed Modifier"</Description>
-                      <LastState Value="0" RealAddress="1DACDABCC04"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <Color>FF8080</Color>
                       <VariableType>Float</VariableType>
@@ -521,7 +554,6 @@ error()
                     <CheatEntry>
                       <ID>74</ID>
                       <Description>"Crit Chance Modifier"</Description>
-                      <LastState Value="0" RealAddress="1DACDABCC08"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <Color>FF8080</Color>
                       <VariableType>Float</VariableType>
@@ -533,7 +565,6 @@ error()
                     <CheatEntry>
                       <ID>75</ID>
                       <Description>"Crit Power Modifier"</Description>
-                      <LastState Value="0" RealAddress="1DACDABCC0C"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <Color>FF8080</Color>
                       <VariableType>Float</VariableType>
@@ -545,7 +576,6 @@ error()
                     <CheatEntry>
                       <ID>76</ID>
                       <Description>"Weapon Precision Modifier"</Description>
-                      <LastState Value="0" RealAddress="1DACDABCC10"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <Color>FF8080</Color>
                       <VariableType>Float</VariableType>
@@ -566,7 +596,6 @@ error()
                     <CheatEntry>
                       <ID>64</ID>
                       <Description>"Farming Level"</Description>
-                      <LastState Value="10" RealAddress="1DACDE8B69C"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <Color>FF8080</Color>
                       <VariableType>4 Bytes</VariableType>
@@ -579,7 +608,6 @@ error()
                     <CheatEntry>
                       <ID>66</ID>
                       <Description>"Mining Level"</Description>
-                      <LastState Value="10" RealAddress="1DACDE8B6FC"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <Color>FF8080</Color>
                       <VariableType>4 Bytes</VariableType>
@@ -592,7 +620,6 @@ error()
                     <CheatEntry>
                       <ID>67</ID>
                       <Description>"Combat Level"</Description>
-                      <LastState Value="10" RealAddress="1DACDE8B75C"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <Color>FF8080</Color>
                       <VariableType>4 Bytes</VariableType>
@@ -605,7 +632,6 @@ error()
                     <CheatEntry>
                       <ID>68</ID>
                       <Description>"Foraging Level"</Description>
-                      <LastState Value="10" RealAddress="1DACDE8B7BC"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <Color>FF8080</Color>
                       <VariableType>4 Bytes</VariableType>
@@ -618,7 +644,6 @@ error()
                     <CheatEntry>
                       <ID>69</ID>
                       <Description>"Fishing Level"</Description>
-                      <LastState Value="10" RealAddress="1DACDE8B81C"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <Color>FF8080</Color>
                       <VariableType>4 Bytes</VariableType>
@@ -631,7 +656,6 @@ error()
                     <CheatEntry>
                       <ID>70</ID>
                       <Description>"Luck Level"</Description>
-                      <LastState Value="0" RealAddress="1DACDE8B87C"/>
                       <ShowAsSigned>0</ShowAsSigned>
                       <Color>FF8080</Color>
                       <VariableType>4 Bytes</VariableType>
@@ -657,7 +681,7 @@ error()
             <CheatEntry>
               <ID>82</ID>
               <Description>"instant fish bite"</Description>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : Stardew Valley.exe
@@ -737,7 +761,7 @@ StardewValley.Tools.FishingRod::calculateTimeUntilFishingBite+1A: 48 8B F1      
             <CheatEntry>
               <ID>17</ID>
               <Description>"instant fish catch"</Description>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : Stardew Valley.exe
@@ -826,7 +850,7 @@ StardewValley.Menus.BobberBar::update+19FC: 48 B9 08 60 09 B1 A2 01 00 00  - mov
               <ID>39</ID>
               <Description>"fishing modifiers"</Description>
               <Options moHideChildren="1"/>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : Stardew Valley.exe
@@ -964,7 +988,6 @@ StardewValley.Tools.FishingRod::doPullFishFromWater+13D: E8 4E 61 AB 5E        -
                   <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Off
 1:On
 </DropDownList>
-                  <LastState Value="1" RealAddress="7FFB53DD000C"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>800080</Color>
                   <VariableType>Byte</VariableType>
@@ -976,7 +999,6 @@ StardewValley.Tools.FishingRod::doPullFishFromWater+13D: E8 4E 61 AB 5E        -
                   <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Off
 1:On
 </DropDownList>
-                  <LastState Value="1" RealAddress="7FFB53DD000D"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>800080</Color>
                   <VariableType>Byte</VariableType>
@@ -990,7 +1012,6 @@ StardewValley.Tools.FishingRod::doPullFishFromWater+13D: E8 4E 61 AB 5E        -
 2:Gold
 4:Iridium
 </DropDownList>
-                  <LastState Value="4" RealAddress="7FFB53DD000E"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>800080</Color>
                   <VariableType>4 Bytes</VariableType>
@@ -1702,7 +1723,6 @@ StardewValley.Tools.FishingRod::doPullFishFromWater+13D: E8 4E 61 AB 5E        -
 928:Golden Egg
 929:Hedge
 </DropDownList>
-                  <LastState Value="-1" RealAddress="7FFB53DD0012"/>
                   <ShowAsSigned>1</ShowAsSigned>
                   <Color>800080</Color>
                   <VariableType>4 Bytes</VariableType>
@@ -1792,7 +1812,7 @@ StardewValley.Objects.Cask::IsValidCaskLocation+26: B8 01 00 00 00              
             <CheatEntry>
               <ID>33</ID>
               <Description>"junimo hut works during rain"</Description>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : Stardew Valley.exe
@@ -1875,7 +1895,7 @@ StardewValley.Buildings.JunimoHut::updateWhenFarmNotCurrentLocation+1D0: 48 8B C
             <CheatEntry>
               <ID>32</ID>
               <Description>"farm animals go outside during rain"</Description>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : Stardew Valley.exe
@@ -1958,7 +1978,7 @@ StardewValley.FarmAnimal::updateWhenNotCurrentLocation+1A5: 0F 85 8A 08 00 00   
             <CheatEntry>
               <ID>35</ID>
               <Description>"farm animals behaviour during rain (find truffles)"</Description>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : Stardew Valley.exe
@@ -2049,7 +2069,7 @@ StardewValley.FarmAnimal::behaviors+B50: 85 C0                          - test e
           <CheatEntries>
             <CheatEntry>
               <ID>19</ID>
-              <Description>"no damage"</Description>
+              <Description>"no damage (no collision)"</Description>
               <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
@@ -2285,90 +2305,10 @@ StardewValley.Tools.Slingshot::GetSlingshotChargeTime+6B: CC                    
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
-              <ID>6</ID>
-              <Description>"right click inventory to set stack to 999"</Description>
-              <LastState/>
-              <Color>4080FF</Color>
-              <VariableType>Auto Assembler Script</VariableType>
-              <AssemblerScript>{ Game   : Stardew Valley.exe
-  Version: 
-  Date   : 2021-12-06
-  Author : sub1to
-
-  This script does blah blah blah
-}
-
-[ENABLE]
-{$lua}
-checkDotNetSymbol('StardewValley.Menus.InventoryMenu::rightClick')
-
-{$asm}
-define(hook,StardewValley.Menus.InventoryMenu::rightClick+6FA)
-assert(hook,FF CA 48 8B CB)
-
-alloc(newmem,$1000,hook)
-
-label(code)
-label(returnhere)
-
-labeL(inventory_rightclick_bytes)
-registersymbol(inventory_rightclick_bytes)
-
-newmem:
-inventory_rightclick_bytes:
-  readMem(hook,5)
-  jmp returnhere
-
-code:
-  //inc edx
-  mov edx, #999
-  jmp inventory_rightclick_bytes
-
-hook:
-  jmp code
-  returnhere:
-
-[DISABLE]
-hook:
-  readMem(inventory_rightclick_bytes,5)
-
-unregistersymbol(inventory_rightclick_bytes)
-dealloc(newmem)
-
-{
-// ORIGINAL CODE - INJECTION POINT: StardewValley.Menus.InventoryMenu::rightClick+6FA
-
-StardewValley.Menus.InventoryMenu::rightClick+6D0: 41 8B D4                       - mov edx,r12d
-StardewValley.Menus.InventoryMenu::rightClick+6D3: 49 BB C0 3F C9 0D FB 7F 00 00  - mov r11,00007FFB0DC93FC0
-StardewValley.Menus.InventoryMenu::rightClick+6DD: 48 B8 C0 3F C9 0D FB 7F 00 00  - mov rax,00007FFB0DC93FC0
-StardewValley.Menus.InventoryMenu::rightClick+6E7: FF 10                          - call qword ptr [rax]
-StardewValley.Menus.InventoryMenu::rightClick+6E9: 48 8B D8                       - mov rbx,rax
-StardewValley.Menus.InventoryMenu::rightClick+6EC: 48 8B CB                       - mov rcx,rbx
-StardewValley.Menus.InventoryMenu::rightClick+6EF: 48 8B 03                       - mov rax,[rbx]
-StardewValley.Menus.InventoryMenu::rightClick+6F2: 48 8B 40 68                    - mov rax,[rax+68]
-StardewValley.Menus.InventoryMenu::rightClick+6F6: FF 10                          - call qword ptr [rax]
-StardewValley.Menus.InventoryMenu::rightClick+6F8: 8B D0                          - mov edx,eax
-// ---------- INJECTING HERE ----------
-StardewValley.Menus.InventoryMenu::rightClick+6FA: FF CA                          - dec edx
-// ---------- DONE INJECTING  ----------
-StardewValley.Menus.InventoryMenu::rightClick+6FC: 48 8B CB                       - mov rcx,rbx
-StardewValley.Menus.InventoryMenu::rightClick+6FF: 48 8B 03                       - mov rax,[rbx]
-StardewValley.Menus.InventoryMenu::rightClick+702: 48 8B 40 68                    - mov rax,[rax+68]
-StardewValley.Menus.InventoryMenu::rightClick+706: FF 50 08                       - call qword ptr [rax+08]
-StardewValley.Menus.InventoryMenu::rightClick+709: 48 8B 8E 90 00 00 00           - mov rcx,[rsi+00000090]
-StardewValley.Menus.InventoryMenu::rightClick+710: 41 8B D4                       - mov edx,r12d
-StardewValley.Menus.InventoryMenu::rightClick+713: 49 BB C8 3F C9 0D FB 7F 00 00  - mov r11,00007FFB0DC93FC8
-StardewValley.Menus.InventoryMenu::rightClick+71D: 48 B8 C8 3F C9 0D FB 7F 00 00  - mov rax,00007FFB0DC93FC8
-StardewValley.Menus.InventoryMenu::rightClick+727: FF 10                          - call qword ptr [rax]
-StardewValley.Menus.InventoryMenu::rightClick+729: 48 85 C0                       - test rax,rax
-}
-</AssemblerScript>
-            </CheatEntry>
-            <CheatEntry>
               <ID>46</ID>
               <Description>"Inventory Item Hover"</Description>
               <Options moHideChildren="1"/>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : Stardew Valley.exe
@@ -2426,29 +2366,29 @@ dealloc(newmem)
 {
 // ORIGINAL CODE - INJECTION POINT: StardewValley.Object::get_DisplayName
 
-7FF91AD46788: 07                             - pop es
-7FF91AD46789: 50                             - push rax
-7FF91AD4678A: 06                             - push es
-7FF91AD4678B: 60                             - pushad (invalid) 
-7FF91AD4678C: 05 70 04 E0 02                 - add eax,02E00470
-7FF91AD46791: F0 00 00                       - lock add [rax],al
-7FF91AD46794: 40 00 00                       - add [rax],al
-7FF91AD46797: 00 08                          - add [rax],cl
-7FF91AD46799: BC F1 1A F9 7F                 - mov esp,7FF91AF1
-7FF91AD4679E: 00 00                          - add [rax],al
-// ---------- INJECTING HERE ----------
+7FFC8976023D: 70 00                          - jo 7FFC8976023F
+7FFC8976023F: 00 40 00                       - add [rax+00],al
+7FFC89760242: 00 00                          - add [rax],al
+7FFC89760244: 00 00                          - add [rax],al
+7FFC89760246: 00 00                          - add [rax],al
+7FFC89760248: 58                             - pop rax
+7FFC89760249: 0D 92 89 FC 7F                 - or eax,7FFC8992
+7FFC8976024E: 00 00                          - add [rax],al
 StardewValley.Object::get_DisplayName: 57                             - push rdi
-// ---------- DONE INJECTING  ----------
 StardewValley.Object::get_DisplayName+1: 56                             - push rsi
+// ---------- INJECTING HERE ----------
 StardewValley.Object::get_DisplayName+2: 53                             - push rbx
+// ---------- DONE INJECTING  ----------
 StardewValley.Object::get_DisplayName+3: 48 83 EC 40                    - sub rsp,40
 StardewValley.Object::get_DisplayName+7: 33 C0                          - xor eax,eax
 StardewValley.Object::get_DisplayName+9: 48 89 44 24 20                 - mov [rsp+20],rax
 StardewValley.Object::get_DisplayName+E: 48 89 44 24 28                 - mov [rsp+28],rax
 StardewValley.Object::get_DisplayName+13: 48 8B F1                       - mov rsi,rcx
-StardewValley.Object::get_DisplayName+16: 48 B9 28 59 57 F3 0E 02 00 00  - mov rcx,0000020EF3575928
+StardewValley.Object::get_DisplayName+16: 48 B9 28 59 49 43 FF 01 00 00  - mov rcx,000001FF43495928
 StardewValley.Object::get_DisplayName+20: 48 83 39 00                    - cmp qword ptr [rcx],00
 StardewValley.Object::get_DisplayName+24: 0F 84 7C 00 00 00              - je StardewValley.Object::get_DisplayName+A6
+StardewValley.Object::get_DisplayName+2A: 48 8B CE                       - mov rcx,rsi
+StardewValley.Object::get_DisplayName+2D: 48 8B 06                       - mov rax,[rsi]
 }
 </AssemblerScript>
               <CheatEntries>
@@ -2476,7 +2416,6 @@ error()
                 <CheatEntry>
                   <ID>47</ID>
                   <Description>"object_base_ptr"</Description>
-                  <LastState Value="000001DAD52A36B0" RealAddress="7FFB53E3000C"/>
                   <ShowAsHex>1</ShowAsHex>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>808080</Color>
@@ -2486,7 +2425,6 @@ error()
                 <CheatEntry>
                   <ID>48</ID>
                   <Description>"Name"</Description>
-                  <LastState RealAddress="1DAD5356C44"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>808080</Color>
                   <VariableType>String</VariableType>
@@ -2503,7 +2441,6 @@ error()
                 <CheatEntry>
                   <ID>50</ID>
                   <Description>"Price"</Description>
-                  <LastState Value="75" RealAddress="1DAD52A3CAC"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>FF8080</Color>
                   <VariableType>4 Bytes</VariableType>
@@ -2516,7 +2453,6 @@ error()
                 <CheatEntry>
                   <ID>87</ID>
                   <Description>"Stack"</Description>
-                  <LastState Value="1" RealAddress="1DAD52A3D6C"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>FF8080</Color>
                   <VariableType>4 Bytes</VariableType>
@@ -2529,7 +2465,6 @@ error()
                 <CheatEntry>
                   <ID>49</ID>
                   <Description>"Quality"</Description>
-                  <LastState Value="4" RealAddress="1DAD52A3DCC"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>FF8080</Color>
                   <VariableType>4 Bytes</VariableType>
@@ -2537,6 +2472,173 @@ error()
                   <Offsets>
                     <Offset>NetInt.Value</Offset>
                     <Offset>Object.Quality</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>94</ID>
+              <Description>"Inventory Tool Hover"</Description>
+              <Options moHideChildren="1"/>
+              <LastState/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Stardew Valley.exe
+  Version: 
+  Date   : 2021-12-08
+  Author : sub1to
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+{$lua}
+checkDotNetSymbol('StardewValley.Tool::get_DisplayName')
+
+{$asm}
+define(hook,StardewValley.Tool::get_DisplayName)
+
+alloc(newmem,$1000,hook)
+
+label(code)
+label(returnhere)
+
+label(tool_get_displayname_bytes)
+registersymbol(tool_get_displayname_bytes)
+
+label(tool_base_ptr)
+registersymbol(tool_base_ptr)
+
+newmem:
+tool_get_displayname_bytes:
+  readMem(hook, 5)
+  jmp returnhere
+
+tool_base_ptr:
+  dq 0
+
+code:
+  mov [tool_base_ptr], rcx
+  jmp tool_get_displayname_bytes
+
+hook:
+  jmp code
+  returnhere:
+
+[DISABLE]
+hook:
+  readMem(tool_get_displayname_bytes,5)
+
+unregistersymbol(tool_get_displayname_bytes)
+unregistersymbol(tool_base_ptr)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: StardewValley.Tool::get_DisplayName
+
+7FFC8975E616: 05 E0 03 F0 01        - add eax,01F003E0
+7FFC8975E61B: 50                    - push rax
+7FFC8975E61C: 40 00 00              - add [rax],al
+7FFC8975E61F: 00 00                 - add [rax],al
+7FFC8975E621: 00 00                 - add [rax],al
+7FFC8975E623: 00 00                 - add [rax],al
+7FFC8975E625: 00 00                 - add [rax],al
+7FFC8975E627: 00 B8 03 92 89 FC     - add [rax-03766DFD],bh
+7FFC8975E62D: 7F 00                 - jg 7FFC8975E62F
+7FFC8975E62F: 00                    - db 00
+// ---------- INJECTING HERE ----------
+StardewValley.Tool::get_DisplayName: 56                    - push rsi
+// ---------- DONE INJECTING  ----------
+StardewValley.Tool::get_DisplayName+1: 48 83 EC 20           - sub rsp,20
+StardewValley.Tool::get_DisplayName+5: 48 8B F1              - mov rsi,rcx
+StardewValley.Tool::get_DisplayName+8: 48 8B CE              - mov rcx,rsi
+StardewValley.Tool::get_DisplayName+B: 48 8B 06              - mov rax,[rsi]
+StardewValley.Tool::get_DisplayName+E: 48 8B 40 70           - mov rax,[rax+70]
+StardewValley.Tool::get_DisplayName+12: FF 50 08              - call qword ptr [rax+08]
+StardewValley.Tool::get_DisplayName+15: 48 8D 8E B0 00 00 00  - lea rcx,[rsi+000000B0]
+StardewValley.Tool::get_DisplayName+1C: 48 8B D0              - mov rdx,rax
+StardewValley.Tool::get_DisplayName+1F: E8 2C B1 B1 5E        - call coreclr.dll+149780
+StardewValley.Tool::get_DisplayName+24: 48 8B 96 90 00 00 00  - mov rdx,[rsi+00000090]
+}
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>95</ID>
+                  <Description>"re-init structs"</Description>
+                  <LastState/>
+                  <Color>008000</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{$lua}
+[ENABLE]
+if getAddressSafe('[tool_base_ptr]')==0 then
+  showMessage('Failed to update structs, base pointer is 0')
+  error()
+end
+updateStructures({
+  {'Tool','[tool_base_ptr]'},
+  {'String','[[tool_base_ptr]+Tool.displayName]'}
+})
+showMessage('Done updating structures')
+error()
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>96</ID>
+                  <Description>"tool_base_ptr"</Description>
+                  <ShowAsHex>1</ShowAsHex>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>808080</Color>
+                  <VariableType>8 Bytes</VariableType>
+                  <Address>tool_base_ptr</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>97</ID>
+                  <Description>"Name"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>808080</Color>
+                  <VariableType>String</VariableType>
+                  <Length>256</Length>
+                  <Unicode>1</Unicode>
+                  <CodePage>0</CodePage>
+                  <ZeroTerminate>1</ZeroTerminate>
+                  <Address>tool_base_ptr</Address>
+                  <Offsets>
+                    <Offset>String._FirstChar</Offset>
+                    <Offset>Tool.displayName</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>99</ID>
+                  <Description>"Is Efficient (uses no energy)"</Description>
+                  <DropDownList DisplayValueAsItem="1">0:No
+1:Yes
+</DropDownList>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>tool_base_ptr</Address>
+                  <Offsets>
+                    <Offset>NetBool.value</Offset>
+                    <Offset>Tool.isEfficient</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>100</ID>
+                  <Description>"Upgrade Level"</Description>
+                  <DropDownList DisplayValueAsItem="1">0:None
+1:Copper
+2:Steel
+3:Gold
+4:Iridium
+</DropDownList>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>tool_base_ptr</Address>
+                  <Offsets>
+                    <Offset>NetInt.Value</Offset>
+                    <Offset>Tool.UpgradeLevel</Offset>
                   </Offsets>
                 </CheatEntry>
               </CheatEntries>
@@ -2707,13 +2809,894 @@ StardewValley.Farmer::get_DailyLuck+28: C5 F0 57 C9           - vxorps xmm1,xmm1
             </CheatEntry>
           </CheatEntries>
         </CheatEntry>
+        <CheatEntry>
+          <ID>119</ID>
+          <Description>"Arcades"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <Color>C08000</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>101</ID>
+              <Description>"StardewValley.Minigames.AbigailGame::playerDie"</Description>
+              <LastState/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Stardew Valley.exe
+  Version: 
+  Date   : 2021-12-10
+  Author : sub1to
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+{$lua}
+checkDotNetSymbol('StardewValley.Minigames.AbigailGame::playerDie')
+
+{$asm}
+define(hook,StardewValley.Minigames.AbigailGame::playerDie)
+
+alloc(newmem,$1000,hook)
+
+label(abigailgame_die_bytes)
+registersymbol(abigailgame_die_bytes)
+
+newmem:
+abigailgame_die_bytes:
+  readMem(hook,3)
+
+hook:
+  db b0 00 c3
+
+[DISABLE]
+hook:
+  readMem(abigailgame_die_bytes,3)
+
+unregistersymbol(abigailgame_die_bytes)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: StardewValley.Minigames.AbigailGame::playerDie
+
+7FFC897CBA19: 60                          - pushad (invalid) 
+7FFC897CBA1A: 02 70 01                    - add dh,[rax+01]
+7FFC897CBA1D: 50                          - push rax
+7FFC897CBA1E: 00 00                       - add [rax],al
+7FFC897CBA20: 40 00 00                    - add [rax],al
+7FFC897CBA23: 00 00                       - add [rax],al
+7FFC897CBA25: 00 00                       - add [rax],al
+7FFC897CBA27: 00 08                       - add [rax],cl
+7FFC897CBA29: 0A 97 89 FC 7F 00           - or dl,[rdi+007FFC89]
+7FFC897CBA2F: 00                          - db 00 
+// ---------- INJECTING HERE ----------
+StardewValley.Minigames.AbigailGame::playerDie: 55                          - push rbp
+// ---------- DONE INJECTING  ----------
+StardewValley.Minigames.AbigailGame::playerDie+1: 41 57                       - push r15
+StardewValley.Minigames.AbigailGame::playerDie+3: 41 56                       - push r14
+StardewValley.Minigames.AbigailGame::playerDie+5: 41 55                       - push r13
+StardewValley.Minigames.AbigailGame::playerDie+7: 41 54                       - push r12
+StardewValley.Minigames.AbigailGame::playerDie+9: 57                          - push rdi
+StardewValley.Minigames.AbigailGame::playerDie+A: 56                          - push rsi
+StardewValley.Minigames.AbigailGame::playerDie+B: 53                          - push rbx
+StardewValley.Minigames.AbigailGame::playerDie+C: 48 81 EC D8 00 00 00        - sub rsp,000000D8
+StardewValley.Minigames.AbigailGame::playerDie+13: C5 F8 77                    - vzeroupper 
+StardewValley.Minigames.AbigailGame::playerDie+16: C5 F8 29 B4 24 C0 00 00 00  - vmovaps [rsp+000000C0],xmm6
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>103</ID>
+              <Description>"StardewValley.Minigames.AbigailGame::tick"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Activated="1"/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Stardew Valley.exe
+  Version: 
+  Date   : 2021-12-10
+  Author : sub1to
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+{$lua}
+checkDotNetSymbol('StardewValley.Minigames.AbigailGame::tick')
+
+{$asm}
+define(hook,StardewValley.Minigames.AbigailGame::tick)
+
+alloc(newmem,$1000,hook)
+
+label(code)
+label(returnhere)
+
+label(abigailgame_tick_bytes)
+registersymbol(abigailgame_tick_bytes)
+
+label(abigailgame_base_ptr)
+registersymbol(abigailgame_base_ptr)
+
+newmem:
+abigailgame_tick_bytes:
+  readMem(hook,5)
+  jmp returnhere
+
+abigailgame_base_ptr:
+  dq 0
+
+code:
+  mov [abigailgame_base_ptr], rcx
+  jmp abigailgame_tick_bytes
+
+hook:
+  jmp code
+  returnhere:
+
+[DISABLE]
+hook:
+  readMem(abigailgame_tick_bytes,5)
+
+unregistersymbol(abigailgame_tick_bytes)
+unregistersymbol(abigailgame_base_ptr)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: StardewValley.Minigames.AbigailGame::tick
+
+7FFC897BCD88: 38 B4 94 89 FC 7F 00     - cmp [rsp+rdx*4+007FFC89],dh
+7FFC897BCD8F: 00 00                    - add [rax],al
+7FFC897BCD91: 00 00                    - add [rax],al
+7FFC897BCD93: 00 00                    - add [rax],al
+7FFC897BCD95: 00 00                    - add [rax],al
+7FFC897BCD97: 00 68 A7                 - add [rax-59],ch
+7FFC897BCD9A: 96                       - xchg eax,esi
+7FFC897BCD9B: 89 FC                    - mov esp,edi
+7FFC897BCD9D: 7F 00                    - jg 7FFC897BCD9F
+7FFC897BCD9F: 00                       - db 00 
+// ---------- INJECTING HERE ----------
+StardewValley.Minigames.AbigailGame::tick: 55                       - push rbp
+StardewValley.Minigames.AbigailGame::tick+1: 41 57                    - push r15
+StardewValley.Minigames.AbigailGame::tick+3: 41 56                    - push r14
+// ---------- DONE INJECTING  ----------
+StardewValley.Minigames.AbigailGame::tick+5: 41 55                    - push r13
+StardewValley.Minigames.AbigailGame::tick+7: 41 54                    - push r12
+StardewValley.Minigames.AbigailGame::tick+9: 57                       - push rdi
+StardewValley.Minigames.AbigailGame::tick+A: 56                       - push rsi
+StardewValley.Minigames.AbigailGame::tick+B: 53                       - push rbx
+StardewValley.Minigames.AbigailGame::tick+C: 48 81 EC 78 08 00 00     - sub rsp,00000878
+StardewValley.Minigames.AbigailGame::tick+13: C5 F8 77                 - vzeroupper 
+StardewValley.Minigames.AbigailGame::tick+16: 48 8D AC 24 B0 08 00 00  - lea rbp,[rsp+000008B0]
+}
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>105</ID>
+                  <Description>"re-init structs"</Description>
+                  <LastState/>
+                  <Color>008000</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{$lua}
+[ENABLE]
+if getAddressSafe('[abigailgame_base_ptr]')==0 then
+  showMessage('Failed to update structs, base pointer is 0')
+  error()
+end
+updateStructures({
+  {'AbigailGame','[abigailgame_base_ptr]'},
+})
+showMessage('Done updating structures')
+error()
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>104</ID>
+                  <Description>"abigailgame_base_ptr"</Description>
+                  <LastState Value="000002A6AD92CFB8" RealAddress="7FFC7F56000A"/>
+                  <ShowAsHex>1</ShowAsHex>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>808080</Color>
+                  <VariableType>8 Bytes</VariableType>
+                  <Address>abigailgame_base_ptr</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>106</ID>
+                  <Description>"Run Speed Level"</Description>
+                  <LastState Value="2" RealAddress="2A6AD92D040"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>abigailgame_base_ptr</Address>
+                  <Offsets>
+                    <Offset>AbigailGame.runSpeedLevel</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>109</ID>
+                  <Description>"Fire Speed Level"</Description>
+                  <LastState Value="3" RealAddress="2A6AD92D044"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>abigailgame_base_ptr</Address>
+                  <Offsets>
+                    <Offset>AbigailGame.fireSpeedLevel</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>108</ID>
+                  <Description>"Ammo Level"</Description>
+                  <LastState Value="2" RealAddress="2A6AD92D048"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>abigailgame_base_ptr</Address>
+                  <Offsets>
+                    <Offset>AbigailGame.ammoLevel</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>107</ID>
+                  <Description>"Which Round"</Description>
+                  <LastState Value="2" RealAddress="2A6AD92D04C"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>808080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>abigailgame_base_ptr</Address>
+                  <Offsets>
+                    <Offset>AbigailGame.whichRound</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>110</ID>
+                  <Description>"Shooting Delay"</Description>
+                  <LastState Value="300" RealAddress="2A6AD92D050"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>abigailgame_base_ptr</Address>
+                  <Offsets>
+                    <Offset>AbigailGame.shootingDelay</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>111</ID>
+                  <Description>"Bullet Damage"</Description>
+                  <LastState Value="3" RealAddress="2A6AD92D05C"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>abigailgame_base_ptr</Address>
+                  <Offsets>
+                    <Offset>AbigailGame.bulletDamage</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>112</ID>
+                  <Description>"Speed Bonus"</Description>
+                  <LastState Value="0" RealAddress="2A6AD92D060"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>abigailgame_base_ptr</Address>
+                  <Offsets>
+                    <Offset>AbigailGame.speedBonus</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>113</ID>
+                  <Description>"Fire Rate Bonus"</Description>
+                  <LastState Value="0" RealAddress="2A6AD92D064"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>abigailgame_base_ptr</Address>
+                  <Offsets>
+                    <Offset>AbigailGame.fireRateBonus</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>114</ID>
+                  <Description>"Lives"</Description>
+                  <LastState Value="3" RealAddress="2A6AD92D068"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>abigailgame_base_ptr</Address>
+                  <Offsets>
+                    <Offset>AbigailGame.Lives</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>115</ID>
+                  <Description>"Coins"</Description>
+                  <LastState Value="7" RealAddress="2A6AD92D06C"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>abigailgame_base_ptr</Address>
+                  <Offsets>
+                    <Offset>AbigailGame.Coins</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>116</ID>
+                  <Description>"Score"</Description>
+                  <LastState Value="0" RealAddress="2A6AD92D070"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>abigailgame_base_ptr</Address>
+                  <Offsets>
+                    <Offset>AbigailGame.Score</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>117</ID>
+                  <Description>"Spread Pistol"</Description>
+                  <LastState Value="0" RealAddress="2A6AD92D0B0"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>abigailgame_base_ptr</Address>
+                  <Offsets>
+                    <Offset>AbigailGame.spreadpistol</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>118</ID>
+                  <Description>"Died"</Description>
+                  <LastState Value="0" RealAddress="2A6AD92D0B2"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>abigailgame_base_ptr</Address>
+                  <Offsets>
+                    <Offset>AbigailGame.died</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>120</ID>
+              <Description>"StardewValley.Minigames.MineCart::tick"</Description>
+              <Options moHideChildren="1"/>
+              <LastState Activated="1"/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Stardew Valley.exe
+  Version: 
+  Date   : 2021-12-10
+  Author : sub1to
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+{$lua}
+checkDotNetSymbol('StardewValley.Minigames.MineCart::tick')
+
+{$asm}
+define(hook,StardewValley.Minigames.MineCart::tick)
+
+alloc(newmem,$1000,hook)
+
+label(code)
+label(returnhere)
+
+label(minecartgame_tick_bytes)
+registersymbol(minecartgame_tick_bytes)
+
+label(minecartgame_base_ptr)
+registersymbol(minecartgame_base_ptr)
+
+newmem:
+minecartgame_tick_bytes:
+  readMem(hook,5)
+  jmp returnhere
+
+minecartgame_base_ptr:
+  dq 0
+
+code:
+  mov [minecartgame_base_ptr], rcx
+  jmp minecartgame_tick_bytes
+
+hook:
+  jmp code
+  returnhere:
+
+[DISABLE]
+hook:
+  readMem(minecartgame_tick_bytes,5)
+
+unregistersymbol(minecartgame_tick_bytes)
+unregistersymbol(minecartgame_base_ptr)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: StardewValley.Minigames.MineCart::tick
+
+7FFC898375DE: 00 00                       - add [rax],al
+7FFC898375E0: 00 00                       - add [rax],al
+7FFC898375E2: 00 00                       - add [rax],al
+7FFC898375E4: 00 00                       - add [rax],al
+7FFC898375E6: 00 00                       - add [rax],al
+7FFC898375E8: B0 E9                       - mov al,-17
+7FFC898375EA: 9C                          - pushfq 
+7FFC898375EB: 89 FC                       - mov esp,edi
+7FFC898375ED: 7F 00                       - jg 7FFC898375EF
+7FFC898375EF: 00                          - db 00 
+// ---------- INJECTING HERE ----------
+StardewValley.Minigames.MineCart::tick: 55                          - push rbp
+// ---------- DONE INJECTING  ----------
+StardewValley.Minigames.MineCart::tick+1: 41 57                       - push r15
+StardewValley.Minigames.MineCart::tick+3: 41 56                       - push r14
+StardewValley.Minigames.MineCart::tick+5: 41 55                       - push r13
+StardewValley.Minigames.MineCart::tick+7: 41 54                       - push r12
+StardewValley.Minigames.MineCart::tick+9: 57                          - push rdi
+StardewValley.Minigames.MineCart::tick+A: 56                          - push rsi
+StardewValley.Minigames.MineCart::tick+B: 53                          - push rbx
+StardewValley.Minigames.MineCart::tick+C: 48 81 EC 18 01 00 00        - sub rsp,00000118
+StardewValley.Minigames.MineCart::tick+13: C5 F8 77                    - vzeroupper 
+StardewValley.Minigames.MineCart::tick+16: C5 F8 29 B4 24 00 01 00 00  - vmovaps [rsp+00000100],xmm6
+}
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>121</ID>
+                  <Description>"re-init structs"</Description>
+                  <LastState/>
+                  <Color>008000</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{$lua}
+[ENABLE]
+if getAddressSafe('[minecartgame_base_ptr]')==0 then
+  showMessage('Failed to update structs, base pointer is 0')
+  error()
+end
+updateStructures({
+  {'MinecartGame','[minecartgame_base_ptr]'},
+})
+showMessage('Done updating structures')
+error()
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>122</ID>
+                  <Description>"minecartgame_base_ptr"</Description>
+                  <LastState Value="000002A6AD80D0A0" RealAddress="7FFC7F55000A"/>
+                  <ShowAsHex>1</ShowAsHex>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>808080</Color>
+                  <VariableType>8 Bytes</VariableType>
+                  <Address>minecartgame_base_ptr</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>123</ID>
+                  <Description>"Fruit Eat Count"</Description>
+                  <LastState Value="2123997488" RealAddress="2A6AD80D198"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>minecartgame_base_ptr</Address>
+                  <Offsets>
+                    <Offset>MinecartGame.fruitEatCount</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>125</ID>
+                  <Description>"Coin Count"</Description>
+                  <LastState Value="0" RealAddress="2A6AD80D1A4"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>minecartgame_base_ptr</Address>
+                  <Offsets>
+                    <Offset>MinecartGame.coinCount</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>124</ID>
+                  <Description>"Score"</Description>
+                  <LastState Value="2908304992" RealAddress="2A6AD80D1D0"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>minecartgame_base_ptr</Address>
+                  <Offsets>
+                    <Offset>MinecartGame.score</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>126</ID>
+                  <Description>"Lives Left"</Description>
+                  <LastState Value="0" RealAddress="2A6AD80D1DC"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>minecartgame_base_ptr</Address>
+                  <Offsets>
+                    <Offset>MinecartGame.livesLeft</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>136</ID>
+          <Description>"Crops"</Description>
+          <LastState Value="" RealAddress="00000000"/>
+          <Color>C08000</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>146</ID>
+              <Description>"instant grow crops when planting"</Description>
+              <LastState/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Stardew Valley.exe
+  Version: 
+  Date   : 2021-12-10
+  Author : sub1to
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+{$lua}
+checkDotNetSymbol('StardewValley.TerrainFeatures.HoeDirt::plant')
+
+{$asm}
+define(hook,StardewValley.TerrainFeatures.HoeDirt::plant+121)
+assert(hook,49 8B 54 24 ?)
+
+alloc(newmem,$1000,hook)
+
+label(code)
+label(returnhere)
+label(end)
+
+label(hoedirt_plant_bytes)
+registersymbol(hoedirt_plant_bytes)
+
+newmem:
+hoedirt_plant_bytes:
+  readMem(hook, 5)
+  jmp returnhere
+
+code:
+  // get number of phases
+  mov r9, [r12+Crop.phaseDays]
+  test r9, r9
+  jz end
+  mov r9, [r9+netIntList.count]
+  test r9, r9
+  jz end
+  mov r8d, [r9+netInt.value]
+  //test r8d, r8d
+  //jz end
+  //test r8d, 80000000
+  //jz end
+  cmp r8d, 0
+  jle end
+  dec r8d // array count is always 1 higher than the phase we want
+
+  // set current phase
+  mov r9, [r12+Crop.currentPhase]
+  test r9, r9
+  jz end
+  mov dword ptr [r9+netInt.value], r8d
+
+  // set fully grown if regrow is not -1
+  mov r9, [r12+Crop.regrowAfterHarvest]
+  test r9, r9
+  jz end
+  mov r9d, [r9+netInt.value]
+  cmp r9d, FFFFFFFF
+  jz end
+  mov r9, [r12+Crop.fullyGrown]
+  test r9, r9
+  jz end
+  mov byte ptr [r9+netBool.value], 1
+
+end:
+  jmp hoedirt_plant_bytes
+
+hook:
+  jmp code
+  returnhere:
+
+[DISABLE]
+hook:
+  readMem(hoedirt_plant_bytes, 5)
+
+unregistersymbol(hoedirt_plant_bytes)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: StardewValley.TerrainFeatures.HoeDirt::plant+121
+
+StardewValley.TerrainFeatures.HoeDirt::plant+F5: E8 56 E0 1E FF                 - call 7FFC889DD1E0
+StardewValley.TerrainFeatures.HoeDirt::plant+FA: E9 5F 03 00 00                 - jmp StardewValley.TerrainFeatures.HoeDirt::plant+45E
+StardewValley.TerrainFeatures.HoeDirt::plant+FF: 48 B9 A0 A7 B5 88 FC 7F 00 00  - mov rcx,00007FFC88B5A7A0
+StardewValley.TerrainFeatures.HoeDirt::plant+109: E8 D2 A9 A8 5E                 - call coreclr.dll+149B70
+StardewValley.TerrainFeatures.HoeDirt::plant+10E: 4C 8B E0                       - mov r12,rax
+StardewValley.TerrainFeatures.HoeDirt::plant+111: 49 8B CC                       - mov rcx,r12
+StardewValley.TerrainFeatures.HoeDirt::plant+114: 8B D7                          - mov edx,edi
+StardewValley.TerrainFeatures.HoeDirt::plant+116: 44 8B C3                       - mov r8d,ebx
+StardewValley.TerrainFeatures.HoeDirt::plant+119: 44 8B CD                       - mov r9d,ebp
+StardewValley.TerrainFeatures.HoeDirt::plant+11C: E8 DF 70 1E FF                 - call 7FFC889D6290
+// ---------- INJECTING HERE ----------
+StardewValley.TerrainFeatures.HoeDirt::plant+121: 49 8B 54 24 70                 - mov rdx,[r12+70]
+// ---------- DONE INJECTING  ----------
+StardewValley.TerrainFeatures.HoeDirt::plant+126: 48 8B 52 30                    - mov rdx,[rdx+30]
+StardewValley.TerrainFeatures.HoeDirt::plant+12A: 48 B9 A8 93 B0 88 FC 7F 00 00  - mov rcx,00007FFC88B093A8
+StardewValley.TerrainFeatures.HoeDirt::plant+134: E8 3F DA 1D FF                 - call 7FFC889CCC08
+StardewValley.TerrainFeatures.HoeDirt::plant+139: 85 C0                          - test eax,eax
+StardewValley.TerrainFeatures.HoeDirt::plant+13B: 0F 84 D8 03 00 00              - je StardewValley.TerrainFeatures.HoeDirt::plant+519
+StardewValley.TerrainFeatures.HoeDirt::plant+141: 4D 8B AE 98 00 00 00           - mov r13,[r14+00000098]
+StardewValley.TerrainFeatures.HoeDirt::plant+148: 45 39 6D 00                    - cmp [r13+00],r13d
+StardewValley.TerrainFeatures.HoeDirt::plant+14C: 49 8B CD                       - mov rcx,r13
+StardewValley.TerrainFeatures.HoeDirt::plant+14F: E8 14 E9 1E FF                 - call 7FFC889DDAF8
+StardewValley.TerrainFeatures.HoeDirt::plant+154: 49 8B 55 18                    - mov rdx,[r13+18]
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>127</ID>
+              <Description>"StardewValley.Crop::hitWithHoe"</Description>
+              <Options moHideChildren="1"/>
+              <LastState/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Stardew Valley.exe
+  Version: 
+  Date   : 2021-12-10
+  Author : sub1to
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+{$lua}
+checkDotNetSymbol('StardewValley.Crop::hitWithHoe')
+
+{$asm}
+define(hook,StardewValley.Crop::hitWithHoe)
+
+alloc(newmem,$1000,hook)
+
+label(code)
+label(returnhere)
+
+label(crop_hit_with_hoe_bytes)
+registersymbol(crop_hit_with_hoe_bytes)
+
+label(crop_base_ptr)
+registersymbol(crop_base_ptr)
+
+newmem:
+crop_hit_with_hoe_bytes:
+  readMem(hook,5)
+  jmp returnhere
+
+crop_base_ptr:
+  dq 0
+
+code:
+  mov [crop_base_ptr], rcx
+  jmp crop_hit_with_hoe_bytes
+
+hook:
+  jmp code
+  returnhere:
+
+[DISABLE]
+hook:
+  readMem(crop_hit_with_hoe_bytes,5)
+
+unregistersymbol(crop_hit_with_hoe_bytes)
+unregistersymbol(crop_base_ptr)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: StardewValley.Crop::hitWithHoe
+
+7FFC89856BA9: 00 00                       - add [rax],al
+7FFC89856BAB: 00 00                       - add [rax],al
+7FFC89856BAD: 00 00                       - add [rax],al
+7FFC89856BAF: 00 00                       - add [rax],al
+7FFC89856BB1: 00 00                       - add [rax],al
+7FFC89856BB3: 00 00                       - add [rax],al
+7FFC89856BB5: 00 00                       - add [rax],al
+7FFC89856BB7: 00 30                       - add [rax],dh
+7FFC89856BB9: 81 9D 89 FC 7F 00 00        - db 81 9D 89 FC 7F 00 00 
+StardewValley.Crop::hitWithHoe: 55                          - push rbp
+// ---------- INJECTING HERE ----------
+StardewValley.Crop::hitWithHoe+1: 41 57                       - push r15
+// ---------- DONE INJECTING  ----------
+StardewValley.Crop::hitWithHoe+3: 41 56                       - push r14
+StardewValley.Crop::hitWithHoe+5: 41 55                       - push r13
+StardewValley.Crop::hitWithHoe+7: 41 54                       - push r12
+StardewValley.Crop::hitWithHoe+9: 57                          - push rdi
+StardewValley.Crop::hitWithHoe+A: 56                          - push rsi
+StardewValley.Crop::hitWithHoe+B: 53                          - push rbx
+StardewValley.Crop::hitWithHoe+C: 48 81 EC A8 00 00 00        - sub rsp,000000A8
+StardewValley.Crop::hitWithHoe+13: C5 F8 77                    - vzeroupper 
+StardewValley.Crop::hitWithHoe+16: C5 F8 29 B4 24 90 00 00 00  - vmovaps [rsp+00000090],xmm6
+StardewValley.Crop::hitWithHoe+1F: C5 F8 29 BC 24 80 00 00 00  - vmovaps [rsp+00000080],xmm7
+}
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>128</ID>
+                  <Description>"re-init structs"</Description>
+                  <LastState/>
+                  <Color>008000</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{$lua}
+[ENABLE]
+if getAddressSafe('[crop_base_ptr]')==0 then
+  showMessage('Failed to update structs, base pointer is 0')
+  error()
+end
+updateStructures({
+  {'Crop','[crop_base_ptr]'},
+  {'NetIntList','[[crop_base_ptr]+Crop.phaseDays]'},
+  {'NetDouble','[[crop_base_ptr]+Crop.chanceForExtraCrops]'},
+})
+showMessage('Done updating structures')
+error()
+[DISABLE]
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>129</ID>
+                  <Description>"crop_base_ptr"</Description>
+                  <ShowAsHex>1</ShowAsHex>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>808080</Color>
+                  <VariableType>8 Bytes</VariableType>
+                  <Address>crop_base_ptr</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>130</ID>
+                  <Description>"Phase Days Count"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>808080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>crop_base_ptr</Address>
+                  <Offsets>
+                    <Offset>netInt.value</Offset>
+                    <Offset>netIntList.count</Offset>
+                    <Offset>Crop.phaseDays</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>140</ID>
+                  <Description>"Phase To Show"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <Color>808080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>crop_base_ptr</Address>
+                  <Offsets>
+                    <Offset>netInt.value</Offset>
+                    <Offset>Crop.phaseToShow</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>131</ID>
+                  <Description>"Current Phase"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>crop_base_ptr</Address>
+                  <Offsets>
+                    <Offset>netInt.value</Offset>
+                    <Offset>Crop.currentPhase</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>134</ID>
+                  <Description>"Regrow After Harvest"</Description>
+                  <ShowAsSigned>1</ShowAsSigned>
+                  <Color>808080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>crop_base_ptr</Address>
+                  <Offsets>
+                    <Offset>netInt.value</Offset>
+                    <Offset>Crop.regrowafterharvest</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>137</ID>
+                  <Description>"Day Of Current Phase (set to 0 to re-harvest regrowing crop)"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>crop_base_ptr</Address>
+                  <Offsets>
+                    <Offset>netInt.value</Offset>
+                    <Offset>Crop.dayOfCurrentPhase</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>138</ID>
+                  <Description>"Min Harvest"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>crop_base_ptr</Address>
+                  <Offsets>
+                    <Offset>netInt.value</Offset>
+                    <Offset>Crop.minHarvest</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>139</ID>
+                  <Description>"Max Harvest"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>crop_base_ptr</Address>
+                  <Offsets>
+                    <Offset>netInt.value</Offset>
+                    <Offset>Crop.maxHarvest</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>132</ID>
+                  <Description>"Fully Grown"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>crop_base_ptr</Address>
+                  <Offsets>
+                    <Offset>netBool.value</Offset>
+                    <Offset>Crop.fullyGrown</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>133</ID>
+                  <Description>"Dead"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>crop_base_ptr</Address>
+                  <Offsets>
+                    <Offset>netBool.value</Offset>
+                    <Offset>Crop.dead</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>135</ID>
+                  <Description>"Chance For Extra Crops"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>Double</VariableType>
+                  <Address>crop_base_ptr</Address>
+                  <Offsets>
+                    <Offset>NetDouble.value</Offset>
+                    <Offset>Crop.chanceForExtraCrops</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
       </CheatEntries>
     </CheatEntry>
   </CheatEntries>
   <UserdefinedSymbols>
     <SymbolEntry>
       <Name>tmp</Name>
-      <Address>7FFB0F850000</Address>
+      <Address>7FFC89980000</Address>
     </SymbolEntry>
   </UserdefinedSymbols>
   <Structures StructVersion="2">
@@ -2776,13 +3759,6 @@ StardewValley.Farmer::get_DailyLuck+28: C5 F0 57 C9           - vxorps xmm1,xmm1
         <Element Offset="388" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000184" Description="scale_2" DisplayMethod="Unsigned Integer"/>
         <Element Offset="392" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000188" Description="scale_3" DisplayMethod="Unsigned Integer"/>
         <Element Offset="396" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000018C" Description="scale_4" DisplayMethod="Unsigned Integer"/>
-      </Elements>
-    </Structure>
-    <Structure Name="String" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
-      <Elements>
-        <Element Offset="0" Vartype="Pointer" Bytesize="8" OffsetHex="00000000" Description="Vtable" DisplayMethod="Unsigned Integer"/>
-        <Element Offset="8" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000008" Description="_stringLength" DisplayMethod="Signed Integer"/>
-        <Element Offset="12" Vartype="Unicode String" Bytesize="256" OffsetHex="0000000C" Description="_firstChar" DisplayMethod="Unsigned Integer"/>
       </Elements>
     </Structure>
     <Structure Name="Farmer" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
@@ -3319,6 +4295,347 @@ StardewValley.Farmer::get_DailyLuck+28: C5 F0 57 C9           - vxorps xmm1,xmm1
         <Element Offset="92" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000005C" Description="_bools" DisplayMethod="Unsigned Integer"/>
         <Element Offset="93" Vartype="Byte" Bytesize="1" OffsetHex="0000005D" Description="xmlInitialized" DisplayMethod="Unsigned Integer"/>
         <Element Offset="96" Vartype="Pointer" Bytesize="8" OffsetHex="00000060" Description="FilterStringEvent" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+    <Structure Name="Tool" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="8" OffsetHex="00000000" Description="Vtable" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="8" Vartype="Pointer" Bytesize="8" OffsetHex="00000008" Description="specialVariable" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="16" Vartype="Pointer" Bytesize="8" OffsetHex="00000010" Description="category" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="24" Vartype="Pointer" Bytesize="8" OffsetHex="00000018" Description="hasbeenInInventory" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="32" Vartype="Pointer" Bytesize="8" OffsetHex="00000020" Description="_contextTags" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="40" Vartype="Pointer" Bytesize="8" OffsetHex="00000028" Description="modData" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="48" Vartype="Pointer" Bytesize="8" OffsetHex="00000030" Description="&lt;NetFields&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="56" Vartype="Pointer" Bytesize="8" OffsetHex="00000038" Description="netName" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="64" Vartype="Pointer" Bytesize="8" OffsetHex="00000040" Description="parentSheetIndex" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="72" Vartype="Byte" Bytesize="1" OffsetHex="00000048" Description="isLostItem" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="73" Vartype="Byte" Bytesize="1" OffsetHex="00000049" Description="_contextTagsDirty" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="74" Vartype="Byte" Bytesize="1" OffsetHex="0000004A" Description="specialItem" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="80" Vartype="Pointer" Bytesize="8" OffsetHex="00000050" Description="initialParentTileIndex" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="88" Vartype="Pointer" Bytesize="8" OffsetHex="00000058" Description="currentParentTileIndex" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="96" Vartype="Pointer" Bytesize="8" OffsetHex="00000060" Description="indexOfMenuItemView" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="104" Vartype="Pointer" Bytesize="8" OffsetHex="00000068" Description="stackable" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="112" Vartype="Pointer" Bytesize="8" OffsetHex="00000070" Description="instantUse" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="120" Vartype="Pointer" Bytesize="8" OffsetHex="00000078" Description="isEfficient" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="128" Vartype="Pointer" Bytesize="8" OffsetHex="00000080" Description="animationSpeedModifier" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="136" Vartype="Pointer" Bytesize="8" OffsetHex="00000088" Description="_description" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="144" Vartype="Pointer" Bytesize="8" OffsetHex="00000090" Description="upgradeLevel" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="152" Vartype="Pointer" Bytesize="8" OffsetHex="00000098" Description="numAttachmentSlots" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="160" Vartype="Pointer" Bytesize="8" OffsetHex="000000A0" Description="lastUser" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="168" Vartype="Pointer" Bytesize="8" OffsetHex="000000A8" Description="attachments" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="176" Vartype="Pointer" Bytesize="8" OffsetHex="000000B0" Description="displayName" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="184" Vartype="Pointer" Bytesize="8" OffsetHex="000000B8" Description="enchantments" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="192" Vartype="Pointer" Bytesize="8" OffsetHex="000000C0" Description="previousEnchantments" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="200" Vartype="Pointer" Bytesize="8" OffsetHex="000000C8" Description="additionalPower" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="208" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000D0" Description="boulderTileX" DisplayMethod="Signed Integer"/>
+        <Element Offset="212" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000D4" Description="boulderTileY" DisplayMethod="Signed Integer"/>
+        <Element Offset="216" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000D8" Description="hitsToBoulder" DisplayMethod="Signed Integer"/>
+      </Elements>
+    </Structure>
+    <Structure Name="String" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="8" OffsetHex="00000000" Description="Vtable" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="8" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000008" Description="_stringLength" DisplayMethod="Signed Integer"/>
+        <Element Offset="12" Vartype="Unicode String" Bytesize="256" OffsetHex="0000000C" Description="_firstChar" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+    <Structure Name="Crop" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="8" OffsetHex="00000000" Description="Vtable" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="8" Vartype="Pointer" Bytesize="8" OffsetHex="00000008" Description="phaseDays" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="16" Vartype="Pointer" Bytesize="8" OffsetHex="00000010" Description="rowInSpriteSheet" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="24" Vartype="Pointer" Bytesize="8" OffsetHex="00000018" Description="phaseToShow" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="32" Vartype="Pointer" Bytesize="8" OffsetHex="00000020" Description="currentPhase" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="40" Vartype="Pointer" Bytesize="8" OffsetHex="00000028" Description="harvestMethod" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="48" Vartype="Pointer" Bytesize="8" OffsetHex="00000030" Description="indexOfHarvest" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="56" Vartype="Pointer" Bytesize="8" OffsetHex="00000038" Description="regrowAfterHarvest" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="64" Vartype="Pointer" Bytesize="8" OffsetHex="00000040" Description="dayOfCurrentPhase" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="72" Vartype="Pointer" Bytesize="8" OffsetHex="00000048" Description="minHarvest" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="80" Vartype="Pointer" Bytesize="8" OffsetHex="00000050" Description="maxHarvest" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="88" Vartype="Pointer" Bytesize="8" OffsetHex="00000058" Description="maxHarvestIncreasePerFarmingLevel" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="96" Vartype="Pointer" Bytesize="8" OffsetHex="00000060" Description="daysOfUnclutteredGrowth" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="104" Vartype="Pointer" Bytesize="8" OffsetHex="00000068" Description="whichForageCrop" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="112" Vartype="Pointer" Bytesize="8" OffsetHex="00000070" Description="seasonsToGrowIn" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="120" Vartype="Pointer" Bytesize="8" OffsetHex="00000078" Description="tintColor" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="128" Vartype="Pointer" Bytesize="8" OffsetHex="00000080" Description="flip" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="136" Vartype="Pointer" Bytesize="8" OffsetHex="00000088" Description="fullyGrown" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="144" Vartype="Pointer" Bytesize="8" OffsetHex="00000090" Description="raisedSeeds" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="152" Vartype="Pointer" Bytesize="8" OffsetHex="00000098" Description="programColored" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="160" Vartype="Pointer" Bytesize="8" OffsetHex="000000A0" Description="dead" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="168" Vartype="Pointer" Bytesize="8" OffsetHex="000000A8" Description="forageCrop" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="176" Vartype="Pointer" Bytesize="8" OffsetHex="000000B0" Description="chanceForExtraCrops" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="184" Vartype="Pointer" Bytesize="8" OffsetHex="000000B8" Description="netSeedIndex" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="192" Vartype="Pointer" Bytesize="8" OffsetHex="000000C0" Description="&lt;NetFields&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="200" Vartype="Float" Bytesize="4" OffsetHex="000000C8" Description="layerDepth" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="204" Vartype="Float" Bytesize="4" OffsetHex="000000CC" Description="coloredLayerDepth" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="208" Vartype="Float" Bytesize="4" OffsetHex="000000D0" Description="drawPosition" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="212" Vartype="Float" Bytesize="4" OffsetHex="000000D4" Description="drawPosition_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="216" Vartype="Float" Bytesize="4" OffsetHex="000000D8" Description="tilePosition" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="220" Vartype="Float" Bytesize="4" OffsetHex="000000DC" Description="tilePosition_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="224" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000E0" Description="sourceRect" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="228" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000E4" Description="sourceRect_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="232" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000E8" Description="sourceRect_3" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="236" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000EC" Description="sourceRect_4" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="240" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000F0" Description="coloredSourceRect" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="244" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000F4" Description="coloredSourceRect_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="248" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000F8" Description="coloredSourceRect_3" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="252" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000FC" Description="coloredSourceRect_4" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+    <Structure Name="NetIntList" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="8" OffsetHex="00000000" Description="Vtable" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="8" Vartype="Pointer" Bytesize="8" OffsetHex="00000008" Description="&lt;Root&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="16" Vartype="Pointer" Bytesize="8" OffsetHex="00000010" Description="parent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="24" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000018" Description="dirtyTick" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="28" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000001C" Description="minNextDirtyTime" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="32" Vartype="2 Bytes" Bytesize="2" OffsetHex="00000020" Description="DeltaAggregateTicks" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="34" Vartype="Byte" Bytesize="1" OffsetHex="00000022" Description="needsTick" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="35" Vartype="Byte" Bytesize="1" OffsetHex="00000023" Description="childNeedsTick" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="40" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000028" Description="ChangeVersion" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="44" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000002C" Description="ChangeVersion_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="48" Vartype="Pointer" Bytesize="8" OffsetHex="00000030" Description="count" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="56" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000038" Description="array" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="64" Vartype="Pointer" Bytesize="8" OffsetHex="00000040" Description="OnElementChanged" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="72" Vartype="Pointer" Bytesize="8" OffsetHex="00000048" Description="OnArrayReplaced" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+    <Structure Name="NetDouble" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="8" OffsetHex="00000000" Description="Vtable" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="8" Vartype="Pointer" Bytesize="8" OffsetHex="00000008" Description="&lt;Root&gt;k__BackingField" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="16" Vartype="Pointer" Bytesize="8" OffsetHex="00000010" Description="parent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="24" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000018" Description="dirtyTick" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="28" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000001C" Description="minNextDirtyTime" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="32" Vartype="2 Bytes" Bytesize="2" OffsetHex="00000020" Description="DeltaAggregateTicks" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="34" Vartype="Byte" Bytesize="1" OffsetHex="00000022" Description="needsTick" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="35" Vartype="Byte" Bytesize="1" OffsetHex="00000023" Description="childNeedsTick" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="40" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000028" Description="ChangeVersion" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="44" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000002C" Description="ChangeVersion_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="48" Vartype="Pointer" Bytesize="8" OffsetHex="00000030" Description="fieldChangeEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="56" Vartype="Pointer" Bytesize="8" OffsetHex="00000038" Description="fieldChangeVisibleEvent" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="64" Vartype="Double" Bytesize="8" OffsetHex="00000040" Description="value" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="72" Vartype="Double" Bytesize="8" OffsetHex="00000048" Description="previousValue" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="80" Vartype="Double" Bytesize="8" OffsetHex="00000050" Description="targetValue" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="88" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000058" Description="interpolationStartTick" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="92" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000005C" Description="_bools" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="93" Vartype="Byte" Bytesize="1" OffsetHex="0000005D" Description="xmlInitialized" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+    <Structure Name="AbigailGame" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="8" OffsetHex="00000000" Description="Vtable" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="8" Vartype="Pointer" Bytesize="8" OffsetHex="00000008" Description="_borderTiles" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="16" Vartype="Pointer" Bytesize="8" OffsetHex="00000010" Description="player2MovementDirections" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="24" Vartype="Pointer" Bytesize="8" OffsetHex="00000018" Description="player2ShootingDirections" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="32" Vartype="Pointer" Bytesize="8" OffsetHex="00000020" Description="bullets" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="40" Vartype="Pointer" Bytesize="8" OffsetHex="00000028" Description="spawnQueue" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="48" Vartype="Pointer" Bytesize="8" OffsetHex="00000030" Description="behaviorAfterPause" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="56" Vartype="Pointer" Bytesize="8" OffsetHex="00000038" Description="monsterChances" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="64" Vartype="Pointer" Bytesize="8" OffsetHex="00000040" Description="activePowerups" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="72" Vartype="Pointer" Bytesize="8" OffsetHex="00000048" Description="AbigailDialogue" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="80" Vartype="Pointer" Bytesize="8" OffsetHex="00000050" Description="heldItem" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="88" Vartype="Pointer" Bytesize="8" OffsetHex="00000058" Description="storeItems" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="96" Vartype="Pointer" Bytesize="8" OffsetHex="00000060" Description="_binds" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="104" Vartype="Pointer" Bytesize="8" OffsetHex="00000068" Description="_buttonHeldState" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="112" Vartype="Pointer" Bytesize="8" OffsetHex="00000070" Description="_buttonHeldFrames" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="120" Vartype="Pointer" Bytesize="8" OffsetHex="00000078" Description="targetMonster" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="128" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000080" Description="lootDuration" DisplayMethod="Signed Integer"/>
+        <Element Offset="132" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000084" Description="powerupDuration" DisplayMethod="Signed Integer"/>
+        <Element Offset="136" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000088" Description="runSpeedLevel" DisplayMethod="Signed Integer"/>
+        <Element Offset="140" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000008C" Description="fireSpeedLevel" DisplayMethod="Signed Integer"/>
+        <Element Offset="144" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000090" Description="ammoLevel" DisplayMethod="Signed Integer"/>
+        <Element Offset="148" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000094" Description="whichRound" DisplayMethod="Signed Integer"/>
+        <Element Offset="152" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000098" Description="shootingDelay" DisplayMethod="Signed Integer"/>
+        <Element Offset="156" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000009C" Description="shotTimer" DisplayMethod="Signed Integer"/>
+        <Element Offset="160" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000A0" Description="motionPause" DisplayMethod="Signed Integer"/>
+        <Element Offset="164" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000A4" Description="bulletDamage" DisplayMethod="Signed Integer"/>
+        <Element Offset="168" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000A8" Description="speedBonus" DisplayMethod="Signed Integer"/>
+        <Element Offset="172" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000AC" Description="fireRateBonus" DisplayMethod="Signed Integer"/>
+        <Element Offset="176" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000B0" Description="lives" DisplayMethod="Signed Integer"/>
+        <Element Offset="180" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000B4" Description="coins" DisplayMethod="Signed Integer"/>
+        <Element Offset="184" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000B8" Description="score" DisplayMethod="Signed Integer"/>
+        <Element Offset="188" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000BC" Description="player2deathtimer" DisplayMethod="Signed Integer"/>
+        <Element Offset="192" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000C0" Description="player2invincibletimer" DisplayMethod="Signed Integer"/>
+        <Element Offset="196" Vartype="Float" Bytesize="4" OffsetHex="000000C4" Description="cactusDanceTimer" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="200" Vartype="Float" Bytesize="4" OffsetHex="000000C8" Description="playerMotionAnimationTimer" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="204" Vartype="Float" Bytesize="4" OffsetHex="000000CC" Description="playerFootstepSoundTimer" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="208" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000D0" Description="gameOverOption" DisplayMethod="Signed Integer"/>
+        <Element Offset="212" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000D4" Description="gamerestartTimer" DisplayMethod="Signed Integer"/>
+        <Element Offset="216" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000D8" Description="player2TargetUpdateTimer" DisplayMethod="Signed Integer"/>
+        <Element Offset="220" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000DC" Description="player2shotTimer" DisplayMethod="Signed Integer"/>
+        <Element Offset="224" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000E0" Description="player2AnimationTimer" DisplayMethod="Signed Integer"/>
+        <Element Offset="228" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000E4" Description="fadethenQuitTimer" DisplayMethod="Signed Integer"/>
+        <Element Offset="232" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000E8" Description="abigailPortraitYposition" DisplayMethod="Signed Integer"/>
+        <Element Offset="236" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000EC" Description="abigailPortraitTimer" DisplayMethod="Signed Integer"/>
+        <Element Offset="240" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000F0" Description="abigailPortraitExpression" DisplayMethod="Signed Integer"/>
+        <Element Offset="244" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000F4" Description="player2FootstepSoundTimer" DisplayMethod="Signed Integer"/>
+        <Element Offset="248" Vartype="Byte" Bytesize="1" OffsetHex="000000F8" Description="spreadPistol" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="249" Vartype="Byte" Bytesize="1" OffsetHex="000000F9" Description="quit" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="250" Vartype="Byte" Bytesize="1" OffsetHex="000000FA" Description="died" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="256" Vartype="Float" Bytesize="4" OffsetHex="00000100" Description="playerPosition" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="260" Vartype="Float" Bytesize="4" OffsetHex="00000104" Description="playerPosition_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="264" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000108" Description="playerBoundingBox" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="268" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000010C" Description="playerBoundingBox_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="272" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000110" Description="playerBoundingBox_3" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="276" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000114" Description="playerBoundingBox_4" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="280" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000118" Description="merchantBox" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="284" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000011C" Description="merchantBox_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="288" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000120" Description="merchantBox_3" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="292" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000124" Description="merchantBox_4" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="296" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000128" Description="player2BoundingBox" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="300" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000012C" Description="player2BoundingBox_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="304" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000130" Description="player2BoundingBox_3" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="308" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000134" Description="player2BoundingBox_4" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="312" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000138" Description="noPickUpBox" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="316" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000013C" Description="noPickUpBox_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="320" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000140" Description="noPickUpBox_3" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="324" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000144" Description="noPickUpBox_4" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="328" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000148" Description="shoppingCarpetNoPickup" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="332" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000014C" Description="shoppingCarpetNoPickup_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="336" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000150" Description="shoppingCarpetNoPickup_3" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="340" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000154" Description="shoppingCarpetNoPickup_4" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="344" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000158" Description="gopherMotion" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="348" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000015C" Description="gopherMotion_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="352" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000160" Description="gopherMotion_3" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="356" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000164" Description="gopherMotion_4" DisplayMethod="Unsigned Integer"/>
+      </Elements>
+    </Structure>
+    <Structure Name="MinecartGame" AutoFill="0" AutoCreate="1" DefaultHex="0" AutoDestroy="0" DoNotSaveLocal="0" RLECompression="1" AutoCreateStructsize="4096">
+      <Elements>
+        <Element Offset="0" Vartype="Pointer" Bytesize="8" OffsetHex="00000000" Description="Vtable" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="8" Vartype="Pointer" Bytesize="8" OffsetHex="00000008" Description="infiniteModeLevels" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="16" Vartype="Pointer" Bytesize="8" OffsetHex="00000010" Description="perfectText" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="24" Vartype="Pointer" Bytesize="8" OffsetHex="00000018" Description="musicSW" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="32" Vartype="Pointer" Bytesize="8" OffsetHex="00000020" Description="cutsceneText" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="40" Vartype="Pointer" Bytesize="8" OffsetHex="00000028" Description="minecartLoop" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="48" Vartype="Pointer" Bytesize="8" OffsetHex="00000030" Description="texture" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="56" Vartype="Pointer" Bytesize="8" OffsetHex="00000038" Description="_tracks" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="64" Vartype="Pointer" Bytesize="8" OffsetHex="00000040" Description="lakeDecor" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="72" Vartype="Pointer" Bytesize="8" OffsetHex="00000048" Description="obstacles" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="80" Vartype="Pointer" Bytesize="8" OffsetHex="00000050" Description="sparkShower" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="88" Vartype="Pointer" Bytesize="8" OffsetHex="00000058" Description="levelThemesFinishedThisRun" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="96" Vartype="Pointer" Bytesize="8" OffsetHex="00000060" Description="player" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="104" Vartype="Pointer" Bytesize="8" OffsetHex="00000068" Description="trackBuilderCharacter" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="112" Vartype="Pointer" Bytesize="8" OffsetHex="00000070" Description="titleScreenJunimo" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="120" Vartype="Pointer" Bytesize="8" OffsetHex="00000078" Description="_entities" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="128" Vartype="Pointer" Bytesize="8" OffsetHex="00000080" Description="LEVEL_TRANSITIONS" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="136" Vartype="Pointer" Bytesize="8" OffsetHex="00000088" Description="_lastGenerator" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="144" Vartype="Pointer" Bytesize="8" OffsetHex="00000090" Description="_forcedNextGenerator" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="152" Vartype="Pointer" Bytesize="8" OffsetHex="00000098" Description="_trackGenerator" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="160" Vartype="Pointer" Bytesize="8" OffsetHex="000000A0" Description="_goalIndicator" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="168" Vartype="Pointer" Bytesize="8" OffsetHex="000000A8" Description="_currentHighScores" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="176" Vartype="Pointer" Bytesize="8" OffsetHex="000000B0" Description="_spawnedFruit" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="184" Vartype="Pointer" Bytesize="8" OffsetHex="000000B8" Description="_collectedFruit" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="192" Vartype="Pointer" Bytesize="8" OffsetHex="000000C0" Description="checkpointPositions" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="200" Vartype="Pointer" Bytesize="8" OffsetHex="000000C8" Description="_validObstacles" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="208" Vartype="Pointer" Bytesize="8" OffsetHex="000000D0" Description="_generatorRolls" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="216" Vartype="Double" Bytesize="8" OffsetHex="000000D8" Description="_totalTime" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="224" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000E0" Description="gameState" DisplayMethod="Signed Integer"/>
+        <Element Offset="228" Vartype="Float" Bytesize="4" OffsetHex="000000E4" Description="pixelScale" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="232" Vartype="Float" Bytesize="4" OffsetHex="000000E8" Description="shakeMagnitude" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="236" Vartype="Float" Bytesize="4" OffsetHex="000000EC" Description="slimeBossPosition" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="240" Vartype="Float" Bytesize="4" OffsetHex="000000F0" Description="slimeBossSpeed" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="244" Vartype="Float" Bytesize="4" OffsetHex="000000F4" Description="secondsOnThisLevel" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="248" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000F8" Description="fruitEatCount" DisplayMethod="Signed Integer"/>
+        <Element Offset="252" Vartype="4 Bytes" Bytesize="4" OffsetHex="000000FC" Description="currentFruitCheckIndex" DisplayMethod="Signed Integer"/>
+        <Element Offset="256" Vartype="Float" Bytesize="4" OffsetHex="00000100" Description="currentFruitCheckMagnitude" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="260" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000104" Description="coinCount" DisplayMethod="Signed Integer"/>
+        <Element Offset="264" Vartype="Float" Bytesize="4" OffsetHex="00000108" Description="lakeSpeedAccumulator" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="268" Vartype="Float" Bytesize="4" OffsetHex="0000010C" Description="backBGPosition" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="272" Vartype="Float" Bytesize="4" OffsetHex="00000110" Description="midBGPosition" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="276" Vartype="Float" Bytesize="4" OffsetHex="00000114" Description="waterFallPosition" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="280" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000118" Description="noiseSeed" DisplayMethod="Signed Integer"/>
+        <Element Offset="284" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000011C" Description="screenWidth" DisplayMethod="Signed Integer"/>
+        <Element Offset="288" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000120" Description="screenHeight" DisplayMethod="Signed Integer"/>
+        <Element Offset="292" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000124" Description="tileSize" DisplayMethod="Signed Integer"/>
+        <Element Offset="296" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000128" Description="waterfallWidth" DisplayMethod="Signed Integer"/>
+        <Element Offset="300" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000012C" Description="ytileOffset" DisplayMethod="Signed Integer"/>
+        <Element Offset="304" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000130" Description="score" DisplayMethod="Signed Integer"/>
+        <Element Offset="308" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000134" Description="levelsBeat" DisplayMethod="Signed Integer"/>
+        <Element Offset="312" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000138" Description="gameMode" DisplayMethod="Signed Integer"/>
+        <Element Offset="316" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000013C" Description="livesLeft" DisplayMethod="Signed Integer"/>
+        <Element Offset="320" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000140" Description="distanceToTravel" DisplayMethod="Signed Integer"/>
+        <Element Offset="324" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000144" Description="respawnCounter" DisplayMethod="Signed Integer"/>
+        <Element Offset="328" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000148" Description="currentTheme" DisplayMethod="Signed Integer"/>
+        <Element Offset="332" Vartype="Float" Bytesize="4" OffsetHex="0000014C" Description="screenDarkness" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="336" Vartype="Float" Bytesize="4" OffsetHex="00000150" Description="fadeDelta" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="340" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000154" Description="backBGYOffset" DisplayMethod="Signed Integer"/>
+        <Element Offset="344" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000158" Description="midBGYOffset" DisplayMethod="Signed Integer"/>
+        <Element Offset="348" Vartype="Float" Bytesize="4" OffsetHex="0000015C" Description="screenLeftBound" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="352" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000160" Description="bottomTile" DisplayMethod="Signed Integer"/>
+        <Element Offset="356" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000164" Description="topTile" DisplayMethod="Signed Integer"/>
+        <Element Offset="360" Vartype="Float" Bytesize="4" OffsetHex="00000168" Description="deathTimer" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="364" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000016C" Description="_lastTilePosition" DisplayMethod="Signed Integer"/>
+        <Element Offset="368" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000170" Description="slimeResetPosition" DisplayMethod="Signed Integer"/>
+        <Element Offset="372" Vartype="Float" Bytesize="4" OffsetHex="00000174" Description="checkpointPosition" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="376" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000178" Description="furthestGeneratedCheckpoint" DisplayMethod="Signed Integer"/>
+        <Element Offset="380" Vartype="Float" Bytesize="4" OffsetHex="0000017C" Description="stateTimer" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="384" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000180" Description="cutsceneTick" DisplayMethod="Signed Integer"/>
+        <Element Offset="388" Vartype="Float" Bytesize="4" OffsetHex="00000184" Description="pauseBeforeTitleFadeOutTimer" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="392" Vartype="Float" Bytesize="4" OffsetHex="00000188" Description="mapTimer" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="396" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000018C" Description="currentHighScore" DisplayMethod="Signed Integer"/>
+        <Element Offset="400" Vartype="Float" Bytesize="4" OffsetHex="00000190" Description="scoreUpdateTimer" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="404" Vartype="Byte" Bytesize="1" OffsetHex="00000194" Description="gamePaused" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="405" Vartype="Byte" Bytesize="1" OffsetHex="00000195" Description="titleJunimoStartedBobbing" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="406" Vartype="Byte" Bytesize="1" OffsetHex="00000196" Description="lastLevelWasPerfect" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="407" Vartype="Byte" Bytesize="1" OffsetHex="00000197" Description="completelyPerfect" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="408" Vartype="Byte" Bytesize="1" OffsetHex="00000198" Description="reachedFinish" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="409" Vartype="Byte" Bytesize="1" OffsetHex="00000199" Description="gameOver" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="410" Vartype="Byte" Bytesize="1" OffsetHex="0000019A" Description="isJumpPressed" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="411" Vartype="Byte" Bytesize="1" OffsetHex="0000019B" Description="_trackAddedFlip" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="412" Vartype="Byte" Bytesize="1" OffsetHex="0000019C" Description="_buttonState" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="413" Vartype="Byte" Bytesize="1" OffsetHex="0000019D" Description="_wasJustChatting" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="416" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001A0" Description="_shakeOffset" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="420" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001A4" Description="_shakeOffset_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="424" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001A8" Description="transformMatrix" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="428" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001AC" Description="transformMatrix_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="432" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001B0" Description="transformMatrix_3" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="436" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001B4" Description="transformMatrix_4" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="440" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001B8" Description="transformMatrix_5" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="444" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001BC" Description="transformMatrix_6" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="448" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001C0" Description="transformMatrix_7" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="452" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001C4" Description="transformMatrix_8" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="456" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001C8" Description="transformMatrix_9" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="460" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001CC" Description="transformMatrix_10" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="464" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001D0" Description="transformMatrix_11" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="468" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001D4" Description="transformMatrix_12" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="472" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001D8" Description="transformMatrix_13" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="476" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001DC" Description="transformMatrix_14" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="480" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001E0" Description="transformMatrix_15" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="484" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001E4" Description="transformMatrix_16" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="488" Vartype="Float" Bytesize="4" OffsetHex="000001E8" Description="upperLeft" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="492" Vartype="Float" Bytesize="4" OffsetHex="000001EC" Description="upperLeft_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="496" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001F0" Description="backBGTint" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="500" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001F4" Description="backBGTint_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="504" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001F8" Description="midBGTint" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="508" Vartype="4 Bytes" Bytesize="4" OffsetHex="000001FC" Description="midBGTint_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="512" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000200" Description="caveTint" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="516" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000204" Description="caveTint_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="520" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000208" Description="lakeTint" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="524" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000020C" Description="lakeTint_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="528" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000210" Description="waterfallTint" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="532" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000214" Description="waterfallTint_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="536" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000218" Description="trackShadowTint" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="540" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000021C" Description="trackShadowTint_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="544" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000220" Description="trackTint" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="548" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000224" Description="trackTint_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="552" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000228" Description="midBGSource" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="556" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000022C" Description="midBGSource_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="560" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000230" Description="midBGSource_3" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="564" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000234" Description="midBGSource_4" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="568" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000238" Description="backBGSource" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="572" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000023C" Description="backBGSource_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="576" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000240" Description="backBGSource_3" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="580" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000244" Description="backBGSource_4" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="584" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000248" Description="lakeBGSource" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="588" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000024C" Description="lakeBGSource_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="592" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000250" Description="lakeBGSource_3" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="596" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000254" Description="lakeBGSource_4" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="600" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000258" Description="generatorPosition" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="604" Vartype="4 Bytes" Bytesize="4" OffsetHex="0000025C" Description="generatorPosition_2" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="608" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000260" Description="generatorPosition_3" DisplayMethod="Unsigned Integer"/>
+        <Element Offset="612" Vartype="4 Bytes" Bytesize="4" OffsetHex="00000264" Description="generatorPosition_4" DisplayMethod="Unsigned Integer"/>
       </Elements>
     </Structure>
   </Structures>
