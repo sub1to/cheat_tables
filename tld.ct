@@ -72,7 +72,7 @@
               <ID>8709</ID>
               <Description>"Temperature"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -174,7 +174,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8712</ID>
                   <Description>"Set Temperature"</Description>
-                  <LastState Activated="1"/>
+                  <LastState/>
                   <Color>800080</Color>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>[ENABLE]
@@ -189,7 +189,6 @@ player_temp_toggle:
                     <CheatEntry>
                       <ID>8713</ID>
                       <Description>"Temperature Value"</Description>
-                      <LastState Value="0" RealAddress="7FFB66C30014"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_temp_value</Address>
@@ -199,7 +198,6 @@ player_temp_toggle:
                 <CheatEntry>
                   <ID>8655</ID>
                   <Description>"Temperature"</Description>
-                  <LastState Value="0" RealAddress="2A78575EAA0"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_temp_base_ptr</Address>
@@ -210,7 +208,6 @@ player_temp_toggle:
                 <CheatEntry>
                   <ID>8719</ID>
                   <Description>"Temperature Max"</Description>
-                  <LastState Value="100" RealAddress="2A78575EAA4"/>
                   <Color>808080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_temp_base_ptr</Address>
@@ -224,7 +221,7 @@ player_temp_toggle:
               <ID>8714</ID>
               <Description>"Fatigue"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -331,7 +328,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8715</ID>
                   <Description>"Set Fatigue"</Description>
-                  <LastState Activated="1"/>
+                  <LastState/>
                   <Color>800080</Color>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>[ENABLE]
@@ -346,7 +343,6 @@ player_fatigue_toggle:
                     <CheatEntry>
                       <ID>8716</ID>
                       <Description>"Fatigue Value"</Description>
-                      <LastState Value="0" RealAddress="7FFB66C20016"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_fatigue_value</Address>
@@ -356,7 +352,6 @@ player_fatigue_toggle:
                 <CheatEntry>
                   <ID>8717</ID>
                   <Description>"Fatigue"</Description>
-                  <LastState Value="0" RealAddress="2A621302F68"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_fatigue_base_ptr</Address>
@@ -367,7 +362,6 @@ player_fatigue_toggle:
                 <CheatEntry>
                   <ID>8718</ID>
                   <Description>"Fatigue Max"</Description>
-                  <LastState Value="100" RealAddress="2A621302F6C"/>
                   <Color>808080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_fatigue_base_ptr</Address>
@@ -381,7 +375,7 @@ player_fatigue_toggle:
               <ID>8720</ID>
               <Description>"Thirst"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -482,7 +476,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8721</ID>
                   <Description>"Set Thirst"</Description>
-                  <LastState Activated="1"/>
+                  <LastState/>
                   <Color>800080</Color>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>[ENABLE]
@@ -497,7 +491,6 @@ player_thirst_toggle:
                     <CheatEntry>
                       <ID>8722</ID>
                       <Description>"Thirst Value"</Description>
-                      <LastState Value="0" RealAddress="7FFB66C10013"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_thirst_value</Address>
@@ -507,7 +500,6 @@ player_thirst_toggle:
                 <CheatEntry>
                   <ID>8723</ID>
                   <Description>"Thirst"</Description>
-                  <LastState Value="0" RealAddress="2A7CC2F997C"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_thirst_base_ptr</Address>
@@ -518,7 +510,6 @@ player_thirst_toggle:
                 <CheatEntry>
                   <ID>8724</ID>
                   <Description>"Thirst Max"</Description>
-                  <LastState Value="100" RealAddress="2A7CC2F9980"/>
                   <Color>808080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_thirst_base_ptr</Address>
@@ -532,7 +523,7 @@ player_thirst_toggle:
               <ID>8725</ID>
               <Description>"Hunger"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -633,7 +624,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8726</ID>
                   <Description>"Set Hunger"</Description>
-                  <LastState Activated="1"/>
+                  <LastState/>
                   <Color>800080</Color>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>[ENABLE]
@@ -648,7 +639,6 @@ player_hunger_toggle:
                     <CheatEntry>
                       <ID>8727</ID>
                       <Description>"Hunger Value"</Description>
-                      <LastState Value="2500" RealAddress="7FFB66C00013"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_hunger_value</Address>
@@ -658,7 +648,6 @@ player_hunger_toggle:
                 <CheatEntry>
                   <ID>8728</ID>
                   <Description>"Hunger"</Description>
-                  <LastState Value="2500" RealAddress="2A763B27F18"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_hunger_base_ptr</Address>
@@ -669,7 +658,6 @@ player_hunger_toggle:
                 <CheatEntry>
                   <ID>8729</ID>
                   <Description>"Hunger Max"</Description>
-                  <LastState Value="2500" RealAddress="2A763B27F78"/>
                   <Color>808080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_hunger_base_ptr</Address>
@@ -683,7 +671,7 @@ player_hunger_toggle:
               <ID>8730</ID>
               <Description>"Sprint"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -785,7 +773,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8731</ID>
                   <Description>"Set Sprint"</Description>
-                  <LastState Activated="1"/>
+                  <LastState/>
                   <Color>800080</Color>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>[ENABLE]
@@ -800,7 +788,6 @@ player_sprint_toggle:
                     <CheatEntry>
                       <ID>8732</ID>
                       <Description>"Sprint Value"</Description>
-                      <LastState Value="100" RealAddress="7FFB66BF0013"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_sprint_value</Address>
@@ -810,7 +797,6 @@ player_sprint_toggle:
                 <CheatEntry>
                   <ID>8733</ID>
                   <Description>"Sprint"</Description>
-                  <LastState Value="63" RealAddress="2A7CA9276AC"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_sprint_base_ptr</Address>
@@ -821,7 +807,6 @@ player_sprint_toggle:
                 <CheatEntry>
                   <ID>8734</ID>
                   <Description>"Sprint Max"</Description>
-                  <LastState Value="100" RealAddress="2A7CA9276A8"/>
                   <Color>808080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_sprint_base_ptr</Address>
@@ -835,7 +820,7 @@ player_sprint_toggle:
               <ID>8738</ID>
               <Description>"Health"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -937,7 +922,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8739</ID>
                   <Description>"Set Health"</Description>
-                  <LastState Activated="1"/>
+                  <LastState/>
                   <Color>800080</Color>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>[ENABLE]
@@ -952,7 +937,6 @@ player_health_toggle:
                     <CheatEntry>
                       <ID>8740</ID>
                       <Description>"Health Value"</Description>
-                      <LastState Value="105" RealAddress="7FFB66BE0013"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_health_value</Address>
@@ -962,7 +946,6 @@ player_health_toggle:
                 <CheatEntry>
                   <ID>8741</ID>
                   <Description>"Health"</Description>
-                  <LastState Value="105" RealAddress="2A72AA981D8"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_health_base_ptr</Address>
@@ -973,7 +956,6 @@ player_health_toggle:
                 <CheatEntry>
                   <ID>8742</ID>
                   <Description>"Health Max"</Description>
-                  <LastState Value="100" RealAddress="2A72AA981DC"/>
                   <Color>808080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_health_base_ptr</Address>
@@ -1125,7 +1107,7 @@ backpack_weight_toggle:
                     <CheatEntry>
                       <ID>8649</ID>
                       <Description>"Weight Value"</Description>
-                      <LastState Value="15" RealAddress="7FFB66BD0015"/>
+                      <LastState Value="15" RealAddress="7FFE18830015"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>backpack_weight_value</Address>
@@ -1150,7 +1132,7 @@ backpack_scent_toggle:
                     <CheatEntry>
                       <ID>8639</ID>
                       <Description>"Scent Value"</Description>
-                      <LastState Value="0" RealAddress="7FFB66BD0019"/>
+                      <LastState Value="0" RealAddress="7FFE18830019"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>backpack_scent_value</Address>
@@ -1160,7 +1142,7 @@ backpack_scent_toggle:
                 <CheatEntry>
                   <ID>8640</ID>
                   <Description>"Weight"</Description>
-                  <LastState Value="15" RealAddress="2A784901450"/>
+                  <LastState Value="15" RealAddress="1CA8B1C4180"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>backpack_base_ptr</Address>
@@ -1171,7 +1153,7 @@ backpack_scent_toggle:
                 <CheatEntry>
                   <ID>8641</ID>
                   <Description>"Scent"</Description>
-                  <LastState Value="0" RealAddress="2A78490146C"/>
+                  <LastState Value="0" RealAddress="1CA8B1C419C"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>backpack_base_ptr</Address>
@@ -1790,7 +1772,7 @@ dealloc(newmem)
           <ID>8787</ID>
           <Description>"Skills"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" Activated="1" RealAddress="00000000"/>
+          <LastState Value="" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -2253,7 +2235,7 @@ GameAssembly.dll+16B8647: 48 89 54 24 38              - mov [rsp+38],rdx
           <ID>8627</ID>
           <Description>"Light"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" Activated="1" RealAddress="00000000"/>
+          <LastState Value="" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -2261,7 +2243,7 @@ GameAssembly.dll+16B8647: 48 89 54 24 38              - mov [rsp+38],rdx
               <ID>8512</ID>
               <Description>"Lantern"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -2350,7 +2332,6 @@ lamp_oil_inf_toggle:
                 <CheatEntry>
                   <ID>8647</ID>
                   <Description>"Lantern Oil"</Description>
-                  <LastState Value="0.2893708646" RealAddress="2A7A5B29924"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>lamp_oil_base_ptr</Address>
@@ -3610,7 +3591,7 @@ aim_fatigue_bow_toggle:
               <ID>8555</ID>
               <Description>"Item Degrade"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState/>
+              <LastState Activated="1"/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -3667,8 +3648,8 @@ code_pause:
 code_max:
   cmp byte ptr [item_degrade_max_toggle], 0
   jz item_degrade_bytes
-  movss xmm6, [rbx+304]
-  mov byte ptr [rbx+389], 0       // item ruined byte
+  movss xmm6, [rbx+314]
+  mov byte ptr [rbx+399], 0       // item ruined byte
   jmp item_degrade_bytes+4
 
 hook:
@@ -3745,7 +3726,7 @@ item_degrade_pause_toggle:
                 <CheatEntry>
                   <ID>8652</ID>
                   <Description>"Max Quality"</Description>
-                  <LastState/>
+                  <LastState Activated="1"/>
                   <Color>800080</Color>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>[ENABLE]
@@ -4213,7 +4194,6 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8748</ID>
                   <Description>"Base"</Description>
-                  <LastState Value="A621302EE001C04B" RealAddress="7FFB66C2000A"/>
                   <ShowAsHex>1</ShowAsHex>
                   <Color>808080</Color>
                   <VariableType>8 Bytes</VariableType>
@@ -5123,7 +5103,7 @@ container_open_capacity_toggle:
             <CheatEntry>
               <ID>9064</ID>
               <Description>"Item Spawner"</Description>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -5270,7 +5250,6 @@ GameAssembly.dll+E05B1B: 44 38 35 9F 6C 64 03     - cmp [GameAssembly.dll+444C7C
                   <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:Idle/Done
 1:Spawn Item
 </DropDownList>
-                  <LastState Value="0" RealAddress="7FFB66C4000A"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>800080</Color>
                   <VariableType>Byte</VariableType>
@@ -5279,7 +5258,6 @@ GameAssembly.dll+E05B1B: 44 38 35 9F 6C 64 03     - cmp [GameAssembly.dll+444C7C
                 <CheatEntry>
                   <ID>9066</ID>
                   <Description>"Count (Stackable Items)"</Description>
-                  <LastState Value="1" RealAddress="7FFB66C4000B"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>800080</Color>
                   <VariableType>4 Bytes</VariableType>
@@ -5774,7 +5752,6 @@ GEAR_WorkBoots:GEAR_WorkBoots
 GEAR_WorkGloves:GEAR_WorkGloves
 GEAR_WorkPants:GEAR_WorkPants
 </DropDownList>
-                  <LastState RealAddress="7FFB66C40113"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>800080</Color>
                   <VariableType>String</VariableType>
@@ -5879,7 +5856,7 @@ GameAssembly.dll+1157879: CC                       - int 3
           <ID>8708</ID>
           <Description>"Fire"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" Activated="1" RealAddress="00000000"/>
+          <LastState Value="" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -5887,7 +5864,7 @@ GameAssembly.dll+1157879: CC                       - int 3
               <ID>8686</ID>
               <Description>"Campfire Tick"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{
@@ -6105,7 +6082,6 @@ fire_burn_temp_toggle:
                     <CheatEntry>
                       <ID>8706</ID>
                       <Description>"Temp"</Description>
-                      <LastState Value="20" RealAddress="7FFB66BC0017"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>fire_burn_temp_value</Address>
@@ -6115,7 +6091,6 @@ fire_burn_temp_toggle:
                 <CheatEntry>
                   <ID>8688</ID>
                   <Description>"Ember Time Limit"</Description>
-                  <LastState Value="500" RealAddress="2A72CC9A1D0"/>
                   <Color>808080</Color>
                   <VariableType>Float</VariableType>
                   <Address>fire_burn_base_ptr</Address>
@@ -6126,7 +6101,6 @@ fire_burn_temp_toggle:
                 <CheatEntry>
                   <ID>8687</ID>
                   <Description>"Ember Time"</Description>
-                  <LastState Value="1860236.75" RealAddress="2A72CC9A1D4"/>
                   <Color>808080</Color>
                   <VariableType>Float</VariableType>
                   <Address>fire_burn_base_ptr</Address>
@@ -6137,7 +6111,6 @@ fire_burn_temp_toggle:
                 <CheatEntry>
                   <ID>8689</ID>
                   <Description>"Burn Time"</Description>
-                  <LastState Value="1971.512939" RealAddress="2A72CC9A1E8"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>fire_burn_base_ptr</Address>
@@ -6148,7 +6121,6 @@ fire_burn_temp_toggle:
                 <CheatEntry>
                   <ID>8690</ID>
                   <Description>"Burn Time 2"</Description>
-                  <LastState Value="1971.512939" RealAddress="2A72CC9A1EC"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>fire_burn_base_ptr</Address>
@@ -6159,7 +6131,6 @@ fire_burn_temp_toggle:
                 <CheatEntry>
                   <ID>8691</ID>
                   <Description>"Burn Time Limit"</Description>
-                  <LastState Value="81000" RealAddress="2A72CC9A1F0"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>fire_burn_base_ptr</Address>
@@ -6170,7 +6141,6 @@ fire_burn_temp_toggle:
                 <CheatEntry>
                   <ID>8692</ID>
                   <Description>"Temperature"</Description>
-                  <LastState Value="8" RealAddress="2A72CC9A200"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>fire_burn_base_ptr</Address>
@@ -6186,14 +6156,14 @@ fire_burn_temp_toggle:
           <ID>8891</ID>
           <Description>"Weather / Time"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" Activated="1" RealAddress="00000000"/>
+          <LastState Value="" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
               <ID>8892</ID>
               <Description>"UniStormWeatherSystem"</Description>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -6477,7 +6447,6 @@ dealloc(newmem)
 8:ClearAurora
 9:ToxicFog
 </DropDownList>
-                  <LastState Value="4" RealAddress="2A784C300D4"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>808080</Color>
                   <VariableType>4 Bytes</VariableType>
@@ -6489,7 +6458,6 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>9029</ID>
                   <Description>"Minute Counter"</Description>
-                  <LastState Value="39" RealAddress="2A784C30068"/>
                   <Color>808080</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>weather_base_ptr</Address>
@@ -6500,7 +6468,6 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8897</ID>
                   <Description>"Hour Counter"</Description>
-                  <LastState Value="17" RealAddress="2A784C3006C"/>
                   <Color>808080</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>weather_base_ptr</Address>
@@ -6511,7 +6478,6 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8898</ID>
                   <Description>"Day Counter"</Description>
-                  <LastState Value="123" RealAddress="2A784C30070"/>
                   <Color>808080</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>weather_base_ptr</Address>
@@ -6522,7 +6488,6 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8899</ID>
                   <Description>"Temperature"</Description>
-                  <LastState Value="-14" RealAddress="2A784C30074"/>
                   <ShowAsSigned>1</ShowAsSigned>
                   <Color>808080</Color>
                   <VariableType>4 Bytes</VariableType>
@@ -6534,7 +6499,6 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8900</ID>
                   <Description>"Day Length"</Description>
-                  <LastState Value="7200" RealAddress="2A784C30078"/>
                   <Color>808080</Color>
                   <VariableType>Float</VariableType>
                   <Address>weather_base_ptr</Address>
@@ -6545,7 +6509,6 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8901</ID>
                   <Description>"Normalized Time (use to set time of day)"</Description>
-                  <LastState Value="0.7359796166" RealAddress="2A784C3007C"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>weather_base_ptr</Address>
@@ -6556,7 +6519,6 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>9026</ID>
                   <Description>"Fog Density"</Description>
-                  <LastState Value="0.0007999999798" RealAddress="2A784C3013C"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>808080</Color>
                   <VariableType>Float</VariableType>
@@ -6570,7 +6532,7 @@ dealloc(newmem)
             <CheatEntry>
               <ID>8912</ID>
               <Description>"TimeOfDay"</Description>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -6665,7 +6627,6 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8914</ID>
                   <Description>"Day Length Scale"</Description>
-                  <LastState Value="1" RealAddress="2A763B27E88"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>time_of_day_base_ptr</Address>
@@ -6946,7 +6907,7 @@ GameAssembly.dll+127D885: 33 D2                 - xor edx,edx
           <ID>9051</ID>
           <Description>"Unlocks"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" Activated="1" RealAddress="00000000"/>
+          <LastState Value="" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
