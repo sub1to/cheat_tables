@@ -221,7 +221,7 @@ player_temp_toggle:
               <ID>8714</ID>
               <Description>"Fatigue"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState/>
+              <LastState Activated="1"/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -343,6 +343,7 @@ player_fatigue_toggle:
                     <CheatEntry>
                       <ID>8716</ID>
                       <Description>"Fatigue Value"</Description>
+                      <LastState Value="0" RealAddress="7FFF358A0016"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_fatigue_value</Address>
@@ -352,6 +353,7 @@ player_fatigue_toggle:
                 <CheatEntry>
                   <ID>8717</ID>
                   <Description>"Fatigue"</Description>
+                  <LastState Value="4.108300686" RealAddress="2311D3C2F68"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_fatigue_base_ptr</Address>
@@ -362,6 +364,7 @@ player_fatigue_toggle:
                 <CheatEntry>
                   <ID>8718</ID>
                   <Description>"Fatigue Max"</Description>
+                  <LastState Value="100" RealAddress="2311D3C2F6C"/>
                   <Color>808080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_fatigue_base_ptr</Address>
@@ -375,7 +378,7 @@ player_fatigue_toggle:
               <ID>8720</ID>
               <Description>"Thirst"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState/>
+              <LastState Activated="1"/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -491,6 +494,7 @@ player_thirst_toggle:
                     <CheatEntry>
                       <ID>8722</ID>
                       <Description>"Thirst Value"</Description>
+                      <LastState Value="0" RealAddress="7FFF35890013"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_thirst_value</Address>
@@ -500,6 +504,7 @@ player_thirst_toggle:
                 <CheatEntry>
                   <ID>8723</ID>
                   <Description>"Thirst"</Description>
+                  <LastState Value="8.976885796" RealAddress="232C98C683C"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_thirst_base_ptr</Address>
@@ -510,6 +515,7 @@ player_thirst_toggle:
                 <CheatEntry>
                   <ID>8724</ID>
                   <Description>"Thirst Max"</Description>
+                  <LastState Value="100" RealAddress="232C98C6840"/>
                   <Color>808080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_thirst_base_ptr</Address>
@@ -523,7 +529,7 @@ player_thirst_toggle:
               <ID>8725</ID>
               <Description>"Hunger"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState/>
+              <LastState Activated="1"/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -639,6 +645,7 @@ player_hunger_toggle:
                     <CheatEntry>
                       <ID>8727</ID>
                       <Description>"Hunger Value"</Description>
+                      <LastState Value="2500" RealAddress="7FFF35880013"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_hunger_value</Address>
@@ -648,6 +655,7 @@ player_hunger_toggle:
                 <CheatEntry>
                   <ID>8728</ID>
                   <Description>"Hunger"</Description>
+                  <LastState Value="2420.37915" RealAddress="2328B1F3118"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_hunger_base_ptr</Address>
@@ -658,6 +666,7 @@ player_hunger_toggle:
                 <CheatEntry>
                   <ID>8729</ID>
                   <Description>"Hunger Max"</Description>
+                  <LastState Value="2500" RealAddress="2328B1F3178"/>
                   <Color>808080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_hunger_base_ptr</Address>
@@ -671,7 +680,7 @@ player_hunger_toggle:
               <ID>8730</ID>
               <Description>"Sprint"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState/>
+              <LastState Activated="1"/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -788,6 +797,7 @@ player_sprint_toggle:
                     <CheatEntry>
                       <ID>8732</ID>
                       <Description>"Sprint Value"</Description>
+                      <LastState Value="100" RealAddress="7FFF35870013"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_sprint_value</Address>
@@ -797,6 +807,7 @@ player_sprint_toggle:
                 <CheatEntry>
                   <ID>8733</ID>
                   <Description>"Sprint"</Description>
+                  <LastState Value="63" RealAddress="232C8F0E1DC"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_sprint_base_ptr</Address>
@@ -807,6 +818,7 @@ player_sprint_toggle:
                 <CheatEntry>
                   <ID>8734</ID>
                   <Description>"Sprint Max"</Description>
+                  <LastState Value="100" RealAddress="232C8F0E1D8"/>
                   <Color>808080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_sprint_base_ptr</Address>
@@ -1107,7 +1119,7 @@ backpack_weight_toggle:
                     <CheatEntry>
                       <ID>8649</ID>
                       <Description>"Weight Value"</Description>
-                      <LastState Value="15" RealAddress="7FFE18830015"/>
+                      <LastState Value="15" RealAddress="7FFF35860015"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>backpack_weight_value</Address>
@@ -1132,7 +1144,7 @@ backpack_scent_toggle:
                     <CheatEntry>
                       <ID>8639</ID>
                       <Description>"Scent Value"</Description>
-                      <LastState Value="0" RealAddress="7FFE18830019"/>
+                      <LastState Value="0" RealAddress="7FFF35860019"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>backpack_scent_value</Address>
@@ -1142,7 +1154,7 @@ backpack_scent_toggle:
                 <CheatEntry>
                   <ID>8640</ID>
                   <Description>"Weight"</Description>
-                  <LastState Value="15" RealAddress="1CA8B1C4180"/>
+                  <LastState Value="15" RealAddress="23251A3B330"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>backpack_base_ptr</Address>
@@ -1153,7 +1165,7 @@ backpack_scent_toggle:
                 <CheatEntry>
                   <ID>8641</ID>
                   <Description>"Scent"</Description>
-                  <LastState Value="0" RealAddress="1CA8B1C419C"/>
+                  <LastState Value="0" RealAddress="23251A3B34C"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>backpack_base_ptr</Address>
@@ -1772,14 +1784,14 @@ dealloc(newmem)
           <ID>8787</ID>
           <Description>"Skills"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" RealAddress="00000000"/>
+          <LastState Value="" Activated="1" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
               <ID>8654</ID>
               <Description>"Skill (Open journal skill tab to activate)"</Description>
-              <LastState/>
+              <LastState Activated="1"/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -2004,6 +2016,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8878</ID>
                   <Description>"Fire Starting"</Description>
+                  <LastState Value="200" RealAddress="23251507328"/>
                   <Color>FF8080</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>fire_skill_base_ptr</Address>
@@ -2014,6 +2027,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8657</ID>
                   <Description>"Carcass Harvesting"</Description>
+                  <LastState Value="100" RealAddress="23251507448"/>
                   <Color>FF8080</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>carcass_skill_base_ptr</Address>
@@ -2024,6 +2038,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8658</ID>
                   <Description>"Fishing"</Description>
+                  <LastState Value="250" RealAddress="231F527FE58"/>
                   <Color>FF8080</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>fish_skill_base_ptr</Address>
@@ -2034,6 +2049,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8659</ID>
                   <Description>"Cooking"</Description>
+                  <LastState Value="350" RealAddress="232515073B8"/>
                   <Color>FF8080</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>cook_skill_base_ptr</Address>
@@ -2044,6 +2060,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8660</ID>
                   <Description>"Rifle"</Description>
+                  <LastState Value="100" RealAddress="232C8F0E108"/>
                   <Color>FF8080</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>rifle_skill_base_ptr</Address>
@@ -2054,6 +2071,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8656</ID>
                   <Description>"Archery"</Description>
+                  <LastState Value="125" RealAddress="232C98C64B8"/>
                   <Color>FF8080</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>archery_skill_base_ptr</Address>
@@ -2064,6 +2082,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8661</ID>
                   <Description>"Mending"</Description>
+                  <LastState Value="350" RealAddress="23251507298"/>
                   <Color>FF8080</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>mending_skill_base_ptr</Address>
@@ -2074,6 +2093,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8663</ID>
                   <Description>"Revolver"</Description>
+                  <LastState Value="100" RealAddress="232C8F0E058"/>
                   <Color>FF8080</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>revolver_skill_base_ptr</Address>
@@ -2084,6 +2104,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8664</ID>
                   <Description>"Gunsmithing"</Description>
+                  <LastState Value="100" RealAddress="232C8F3F608"/>
                   <Color>FF8080</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>gunsmith_skill_base_ptr</Address>
@@ -2096,7 +2117,7 @@ dealloc(newmem)
             <CheatEntry>
               <ID>8786</ID>
               <Description>"Secondary Skills (Open tool repair/gun cleaning/sharpening screen to activate)"</Description>
-              <LastState/>
+              <LastState Activated="1"/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -2126,7 +2147,7 @@ label(secondary_skill_base_ptr)
 registersymbol(secondary_skill_hook)
 registersymbol(secondary_skill_bytes)
 registersymbol(secondary_skill_base_ptr)
-aobScanModule(hook,GameAssembly.dll,48 83 EC 48 48 C7 44 24 20 FE FF FF FF 80 3D ? ? ? ? 00 75 4F 48 8B 05 93 D0 D9)
+aobScanModule(hook,GameAssembly.dll,48 83 EC 48 48 C7 44 24 20 FE FF FF FF 80 3D ? ? ? ? 00 75 4F 48 8B 05 23 F4)
 
 newmem:
 secondary_skill_bytes:
@@ -2194,6 +2215,7 @@ GameAssembly.dll+16B8647: 48 89 54 24 38              - mov [rsp+38],rdx
                 <CheatEntry>
                   <ID>8711</ID>
                   <Description>"Tool Repair"</Description>
+                  <LastState Value="100" RealAddress="232A0DA2C70"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
@@ -2206,6 +2228,7 @@ GameAssembly.dll+16B8647: 48 89 54 24 38              - mov [rsp+38],rdx
                 <CheatEntry>
                   <ID>8789</ID>
                   <Description>"Gun Cleaning"</Description>
+                  <LastState Value="48" RealAddress="232A0DA2C74"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
@@ -2218,6 +2241,7 @@ GameAssembly.dll+16B8647: 48 89 54 24 38              - mov [rsp+38],rdx
                 <CheatEntry>
                   <ID>8790</ID>
                   <Description>"Sharpening"</Description>
+                  <LastState Value="100" RealAddress="232A0DA2C78"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
@@ -2235,7 +2259,7 @@ GameAssembly.dll+16B8647: 48 89 54 24 38              - mov [rsp+38],rdx
           <ID>8627</ID>
           <Description>"Light"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" RealAddress="00000000"/>
+          <LastState Value="" Activated="1" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -2243,7 +2267,7 @@ GameAssembly.dll+16B8647: 48 89 54 24 38              - mov [rsp+38],rdx
               <ID>8512</ID>
               <Description>"Lantern"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState/>
+              <LastState Activated="1"/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -2332,6 +2356,7 @@ lamp_oil_inf_toggle:
                 <CheatEntry>
                   <ID>8647</ID>
                   <Description>"Lantern Oil"</Description>
+                  <LastState Value="0.9977201819" RealAddress="232C9072924"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>lamp_oil_base_ptr</Address>
@@ -2345,7 +2370,7 @@ lamp_oil_inf_toggle:
               <ID>8768</ID>
               <Description>"Flare"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState/>
+              <LastState Activated="1"/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -2449,7 +2474,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8772</ID>
                   <Description>"Infinite Flare Burn Time"</Description>
-                  <LastState/>
+                  <LastState Activated="1"/>
                   <Color>800080</Color>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>[ENABLE]
@@ -2464,6 +2489,7 @@ flare_burn_toggle:
                 <CheatEntry>
                   <ID>8773</ID>
                   <Description>"Flare Burn Time"</Description>
+                  <LastState Value="0" RealAddress="23251C6ACFC"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>flare_burn_base_ptr</Address>
@@ -2611,7 +2637,7 @@ torch_burn_toggle:
           <ID>8769</ID>
           <Description>"Navigation"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" RealAddress="00000000"/>
+          <LastState Value="" Activated="1" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -2619,7 +2645,7 @@ torch_burn_toggle:
               <ID>8850</ID>
               <Description>"Map"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState/>
+              <LastState Activated="1"/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -2818,6 +2844,7 @@ panel_map_auto_survey_toggle:
                     <CheatEntry>
                       <ID>8859</ID>
                       <Description>"Range"</Description>
+                      <LastState Value="9999" RealAddress="7FFF35800013"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>panel_map_auto_survey_range</Address>
@@ -2842,6 +2869,7 @@ panel_map_show_player_toggle:
                 <CheatEntry>
                   <ID>8854</ID>
                   <Description>"Base"</Description>
+                  <LastState Value="0000023263F3CA80" RealAddress="7FFF3580000A"/>
                   <ShowAsHex>1</ShowAsHex>
                   <Color>FF8080</Color>
                   <VariableType>8 Bytes</VariableType>
@@ -2850,6 +2878,7 @@ panel_map_show_player_toggle:
                 <CheatEntry>
                   <ID>8857</ID>
                   <Description>"Charcoal Survey Range"</Description>
+                  <LastState Value="150" RealAddress="23263F3CB70"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>panel_map_base_ptr</Address>
@@ -2860,6 +2889,7 @@ panel_map_show_player_toggle:
                 <CheatEntry>
                   <ID>8855</ID>
                   <Description>"Rock Cache Survey Range"</Description>
+                  <LastState Value="5" RealAddress="23263F3CB74"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>panel_map_base_ptr</Address>
@@ -2870,6 +2900,7 @@ panel_map_show_player_toggle:
                 <CheatEntry>
                   <ID>8856</ID>
                   <Description>"Spray Paint Survey Range"</Description>
+                  <LastState Value="5" RealAddress="23263F3CB78"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>panel_map_base_ptr</Address>
@@ -3124,7 +3155,7 @@ dealloc(newmem)
           <ID>8831</ID>
           <Description>"Guns"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" RealAddress="00000000"/>
+          <LastState Value="" Activated="1" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -3591,7 +3622,7 @@ aim_fatigue_bow_toggle:
               <ID>8555</ID>
               <Description>"Item Degrade"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -3726,7 +3757,7 @@ item_degrade_pause_toggle:
                 <CheatEntry>
                   <ID>8652</ID>
                   <Description>"Max Quality"</Description>
-                  <LastState Activated="1"/>
+                  <LastState/>
                   <Color>800080</Color>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>[ENABLE]
@@ -3852,7 +3883,7 @@ dealloc(newmem)
             <CheatEntry>
               <ID>8617</ID>
               <Description>"Select Item Hook"</Description>
-              <LastState/>
+              <LastState Activated="1"/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -3860,262 +3891,6 @@ dealloc(newmem)
   Date   : 2021-10-18
   Author : sub1to
 
-public class GearItem : MonoBehaviour // TypeDefIndex: 8360
-{
-	// Fields
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public int m_InstanceID; // 0x18
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public bool m_BeenInPlayerInventory; // 0x1C
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public bool m_HasBeenOwnedByPlayer; // 0x1D
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public bool m_BeenInContainer; // 0x1E
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public bool m_BeenInspected; // 0x1F
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public bool m_InPlayerInventory; // 0x20
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public bool m_ItemLooted; // 0x21
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public bool m_InitialDecayApplied; // 0x22
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public bool m_IsInSatchel; // 0x23
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public int m_SatchelIndex; // 0x24
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public bool m_InsideContainer; // 0x28
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public float m_NormalizedRevealTimeInContainer; // 0x2C
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public bool m_LockedInContainer; // 0x30
-	public bool m_IsHidden; // 0x31
-	public Vector3 m_localScaleAtAwake; // 0x34
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public AmmoItem m_AmmoItem; // 0x40
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public AmmoCasingItem m_AmmoCasingItem; // 0x48
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public ArrowItem m_ArrowItem; // 0x50
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public BearSpearItem m_BearSpearItem; // 0x58
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public Bed m_Bed; // 0x60
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public BlueprintItemUnlock m_BlueprintItemUnlock; // 0x68
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public BodyHarvestItem m_BodyHarvestItem; // 0x70
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public BodyHarvest m_BodyHarvest; // 0x78
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public BowItem m_BowItem; // 0x80
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public BreakDownItem m_BreakDownItem; // 0x88
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public CanOpeningItem m_CanOpeningItem; // 0x90
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public CarryableBody m_CarryableBody; // 0x98
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public CarryingCapacityBuff m_CarryingCapacityBuff; // 0xA0
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public CharcoalItem m_CharcoalItem; // 0xA8
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public Cleanable m_Cleanable; // 0xB0
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public ClothingItem m_ClothingItem; // 0xB8
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public ConditionOverTimeBuff m_ConditionOverTimeBuff; // 0xC0
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public ConditionRestBuff m_ConditionRestBuff; // 0xC8
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public Cookable m_Cookable; // 0xD0
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public CookingPotItem m_CookingPotItem; // 0xD8
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public DegradeOnUse m_DegradeOnUse; // 0xE0
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public EmergencyStimItem m_EmergencyStim; // 0xE8
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public EnergyBoostItem m_EnergyBoost; // 0xF0
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public EvolveItem m_EvolveItem; // 0xF8
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public FatigueBuff m_FatigueBuff; // 0x100
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public FireStarterItem m_FireStarterItem; // 0x108
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public FirstAidItem m_FirstAidItem; // 0x110
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public FirstPersonItem m_FirstPersonItem; // 0x118
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public FishingItem m_FishingItem; // 0x120
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public FlareItem m_FlareItem; // 0x128
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public FlashlightItem m_FlashlightItem; // 0x130
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public FoodItem m_FoodItem; // 0x138
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public FoodWeight m_FoodWeight; // 0x140
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public ForageItem m_ForageItem; // 0x148
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public ForceLockItem m_ForceLockItem; // 0x150
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public FreezingBuff m_FreezingBuff; // 0x158
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public FuelSourceItem m_FuelSourceItem; // 0x160
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public HandheldShortwaveItem m_HandheldShortwaveItem; // 0x168
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public GunItem m_GunItem; // 0x170
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public Harvest m_Harvest; // 0x178
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public IceFishingHoleClearItem m_IceFishingHoleClearItem; // 0x180
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public InProgressCraftItem m_InProgressCraftItem; // 0x188
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public Inspect m_Inspect; // 0x190
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public KeroseneLampItem m_KeroseneLampItem; // 0x198
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public Knowledge m_Knowledge; // 0x1A0
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public LiquidItem m_LiquidItem; // 0x1A8
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public MatchesItem m_MatchesItem; // 0x1B0
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public Millable m_Millable; // 0x1B8
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public NarrativeCollectibleItem m_NarrativeCollectibleItem; // 0x1C0
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public NoiseMakerItem m_NoiseMakerItem; // 0x1C8
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public ShowOnMapItem m_ShowOnMapItem; // 0x1D0
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public OwnershipOverride m_OwnershipOverrideItem; // 0x1D8
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public PlaceableItem m_PlaceableItem; // 0x1E0
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public PowderItem m_PowderItem; // 0x1E8
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public PurifyWater m_PurifyWater; // 0x1F0
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public Repairable m_Repairable; // 0x1F8
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public ResearchItem m_ResearchItem; // 0x200
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public RopeItem m_RopeItem; // 0x208
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public Scent m_Scent; // 0x210
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public Sharpenable m_Sharpenable; // 0x218
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public SmashableItem m_SmashableItem; // 0x220
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public SnareItem m_SnareItem; // 0x228
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public SprayPaintCan m_SprayPaintCan; // 0x230
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public StackableItem m_StackableItem; // 0x238
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public StoneItem m_StoneItem; // 0x240
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public StruggleBonus m_StruggleBonus; // 0x248
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public ToolsItem m_ToolsItem; // 0x250
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public TorchItem m_TorchItem; // 0x258
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public WaterSupply m_WaterSupply; // 0x260
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public WildlifeItem m_WildlifeItem; // 0x268
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public WolfIntimidationBuff m_WolfIntimidationBuff; // 0x270
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public ClimbingBuff m_ClimbingBuff; // 0x278
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public ProtectionBuff m_ProtectionBuff; // 0x280
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public MeshRenderer[] m_MeshRenderers; // 0x288
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public SkinnedMeshRenderer[] m_SkinnedMeshRenderers; // 0x290
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public ObjectGuid m_ObjectGuid; // 0x298
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public MissionObjectIdentifier m_MissionObject; // 0x2A0
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public OnDroppedInWaterDelegate m_OnDroppedInWater; // 0x2A8
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public RadialObjectSpawner m_RadialObjectSpawnerParent; // 0x2B0
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public Container m_LastContainer; // 0x2B8
-	private string m_PlacePointGuid; // 0x2C0
-	private string m_PlacePointName; // 0x2C8
-	private bool m_PhysicsEnabled; // 0x2D0
-	private Rigidbody m_RigidBody; // 0x2D8
-	private bool m_UnequipInProgress; // 0x2E0
-	public GearTypeEnum m_Type; // 0x2E4
-	public List&lt;GearTypeEnum&gt; m_AdditionalTypesInventoryFilter; // 0x2E8
-	public bool m_ShouldUseProjectilePhysics; // 0x2F0
-	[TooltipAttribute] // RVA: 0x1B25E0 Offset: 0x1B19E0 VA: 0x7FFB670B25E0
-	public bool m_RemainInInventoryOnDrop; // 0x2F1
-	public LocalizedString m_LocalizedDisplayName; // 0x2F8
-	public LocalizedString m_LocalizedDescription; // 0x300
-	public GearScarcityEnum m_Scarcity; // 0x308
-	public float m_WeightKG; // 0x30C
-	public float m_CurrentHP; // 0x310
-	public float m_MaxHP; // 0x314
-	public float m_DailyHPDecay; // 0x318
-	public float m_ScentIntensity; // 0x31C
-	public GearStartCondition m_StartCondition; // 0x320
-	public GearMovementSound m_MovementSoundCategory; // 0x324
-	public string m_PickUpAudio; // 0x328
-	public string m_StowAudio; // 0x330
-	public string m_PutBackAudio; // 0x338
-	public string m_WornOutAudio; // 0x340
-	public string m_CookingSlotPlacementAudio; // 0x348
-	public float m_SpawnChance; // 0x350
-	[RangeAttribute] // RVA: 0x1A09F0 Offset: 0x19FDF0 VA: 0x7FFB670A09F0
-	public float m_GearBreakConditionThreshold; // 0x354
-	public bool m_NonInteractive; // 0x358
-	public ConditionTableManager.ConditionTableType m_ConditionTableType; // 0x35C
-	public const float m_DefaultScale = 1;
-	public bool m_DisableFavoriting; // 0x360
-	public bool m_DisableSerialization; // 0x361
-	public bool m_AlwaysHarvestedByPlayer; // 0x362
-	public bool m_PromptsPersistUntilUsed; // 0x363
-	public bool m_AutoEquipOnInteract; // 0x364
-	public bool m_RequiredForMission; // 0x365
-	[HeaderAttribute] // RVA: 0x1B2650 Offset: 0x1B1A50 VA: 0x7FFB670B2650
-	public string m_CoverflowMainTextureResourcePath; // 0x368
-	public string m_CoverflowDamageTextureResourcePath; // 0x370
-	public string m_CoverflowBlendTextureResourcePath; // 0x378
-	public string m_CoverflowOpenedTextureResourcePath; // 0x380
-	[HeaderAttribute] // RVA: 0x1B26C0 Offset: 0x1B1AC0 VA: 0x7FFB670B26C0
-	public GearDummyType m_DummyGearType; // 0x388
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB66F12A50
-	public string m_GearName; // 0x390
-	private bool m_RolledSpawnChance; // 0x398
-	private bool m_WornOut; // 0x399
-	private bool m_HaltDecay; // 0x39A
-	private bool m_HarvestedByPlayer; // 0x39B
-	private float m_LastUpdateDamageShaderCondition; // 0x39C
-	private bool m_MarkedForNextUpdateDestroy; // 0x3A0
-	private bool m_StartHasBeenCalled; // 0x3A1
-	private float m_DecayScalar; // 0x3A4
-	private float m_LastUpdatedTODHours; // 0x3A8
-	private bool m_LastUpdatedTODHoursInitialized; // 0x3AC
-	private const float m_Inv24 = 0.04166667;
-	private bool m_HasBeenEquippedAndUsed; // 0x3AD
-	private bool m_IsTextureStreamingDisabled; // 0x3AE
-	private static GearItemSaveDataProxy m_GearItemSaveDataProxy; // 0x0
-	private const int GEAR_ITEM_SAVE_VERSION = 4;
-	private const int CLOTH_INFLATION_MULTIPIER = 1;
-	private static Collider[] s_InaccessibleResults; // 0x8
-	private static RaycastHit[] s_RaycastResults; // 0x10
-	private static Dictionary&lt;Texture2D, int&gt; s_GearTextureReferenceCounts; // 0x18
 }
 
 [ENABLE]
@@ -4194,6 +3969,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8748</ID>
                   <Description>"Base"</Description>
+                  <LastState Value="00000232C90C6540" RealAddress="7FFF3585000A"/>
                   <ShowAsHex>1</ShowAsHex>
                   <Color>808080</Color>
                   <VariableType>8 Bytes</VariableType>
@@ -4202,6 +3978,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8797</ID>
                   <Description>"Display Name"</Description>
+                  <LastState RealAddress="23285D91854"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>808080</Color>
                   <VariableType>String</VariableType>
@@ -4219,6 +3996,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>9005</ID>
                   <Description>"Description"</Description>
+                  <LastState RealAddress="2325151CF74"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>808080</Color>
                   <VariableType>String</VariableType>
@@ -4236,6 +4014,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>9004</ID>
                   <Description>"Gear Name"</Description>
+                  <LastState RealAddress="23285D91714"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>808080</Color>
                   <VariableType>String</VariableType>
@@ -4264,6 +4043,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8750</ID>
                   <Description>"Wet %"</Description>
+                  <LastState Value="0" RealAddress="232517D0934"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
@@ -4276,6 +4056,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8753</ID>
                   <Description>"Frozen %"</Description>
+                  <LastState Value="0" RealAddress="232517D0938"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
@@ -4288,6 +4069,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8619</ID>
                   <Description>"Quality"</Description>
+                  <LastState Value="99.99819946" RealAddress="232C90C6850"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
@@ -4299,6 +4081,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8620</ID>
                   <Description>"Quality Max"</Description>
+                  <LastState Value="100" RealAddress="232C90C6854"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
@@ -4313,6 +4096,7 @@ dealloc(newmem)
                   <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:No
 1:yes
 </DropDownList>
+                  <LastState Value="0" RealAddress="232C90C68D9"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>FF8080</Color>
                   <VariableType>Byte</VariableType>
@@ -4539,58 +4323,6 @@ dealloc(newmem)
   Version: 1.97 85101 S
   Date   : 2021-10-30
   Author : sub1to
-
-  class Container:
-    private Lock m_Lock; // 0xF0
-
-  public class Lock : MonoBehaviour // TypeDefIndex: 8250
-	// Fields
-	public GameModeFilter m_ModeFilter; // 0x18
-	[RangeAttribute] // RVA: 0x172EE0 Offset: 0x1722E0 VA: 0x7FFB0BB42EE0
-	public float m_ChanceLocked; // 0x1C
-	[RangeAttribute] // RVA: 0x1696D0 Offset: 0x168AD0 VA: 0x7FFB0BB396D0
-	public float m_ForceLockDurationSecondsMin; // 0x20
-	[RangeAttribute] // RVA: 0x1696D0 Offset: 0x168AD0 VA: 0x7FFB0BB396D0
-	public float m_ForceLockDurationSecondsMax; // 0x24
-	[RangeAttribute] // RVA: 0x172EE0 Offset: 0x1722E0 VA: 0x7FFB0BB42EE0
-	public float m_ChanceContainerRuinedWhenToolBreaks; // 0x28
-	public GearItem m_GearPrefabToForceLock; // 0x30
-	public string m_CompanionLockGuid; // 0x38
-	public string m_LockedAudio; // 0x40
-	public string m_UnlockAudio; // 0x48
-	[TooltipAttribute] // RVA: 0x182270 Offset: 0x181670 VA: 0x7FFB0BB52270
-	public bool m_UseHoverTextColor; // 0x50
-	[TooltipAttribute] // RVA: 0x1822E0 Offset: 0x1816E0 VA: 0x7FFB0BB522E0
-	public bool m_HideToolRequiredToForceOpenHintText; // 0x51
-	[HeaderAttribute] // RVA: 0x182350 Offset: 0x181750 VA: 0x7FFB0BB52350
-	public AnimatedInteraction m_AnimatedInteraction; // 0x58
-	public Animator m_AnimatedObjectAnimator; // 0x60
-	public string m_AnimatedObjectTrackName; // 0x68
-	public static List&lt;string&gt; m_UnlockedCompanionGuids; // 0x0
-	private GearItem m_GearUsedToForceLock; // 0x70
-	private LockState m_LockState; // 0x78
-	private bool m_AttemptedToOpen; // 0x7C
-	private bool m_LockStateRolled; // 0x7D
-	private bool m_BreakOnUse; // 0x7E
-	private bool m_CheckedForUnlockedCompanion; // 0x7F
-	private ObjectGuid m_ObjectGuid; // 0x80
-	private HoverIconsToShow m_HoverIcons; // 0x88
-	private Lock.OnLockStateBroken m_OnLockStateBroken; // 0x90
-	private bool m_IsBeingInteractedWith; // 0x98
-	private float m_InteractTimer; // 0x9C
-	private uint m_ForceLockAudioID; // 0xA0
-	private PlayerControlMode m_RestoreControlMode; // 0xA4
-	private float m_RandomFailureTime; // 0xA8
-	private bool m_WasEverLocked; // 0xAC
-	private static LockSaveDataProxy m_LockSaveDataProxy; // 0x8
-
-  public enum LockState // TypeDefIndex: 8247
-  {
-	// Fields
-	public int value__; // 0x0
-	public const LockState Locked = 0;
-	public const LockState Unlocked = 1;
-	public const LockState Broken = 2;
 }
 
 [ENABLE]
@@ -4768,82 +4500,6 @@ GameAssembly.dll+12D9A57: 33 D2                    - xor edx,edx
   Date   : 2021-10-30
   Author : sub1to
 
-  	// Fields
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB0B9E2A50
-	public List&lt;GearItemObject&gt; m_Items; // 0x18
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB0B9E2A50
-	public GameObject[] m_ScriptedItemPrefabs; // 0x20
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB0B9E2A50
-	public GameModeFilter[] m_ScriptedItemFilter; // 0x28
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB0B9E2A50
-	public string m_ContainerFilterName; // 0x30
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB0B9E2A50
-	public string m_ContainerSortName; // 0x38
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB0B9E2A50
-	public bool m_DestoryPending; // 0x40
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB0B9E2A50
-	public bool m_Restored; // 0x41
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB0B9E2A50
-	public bool m_MarkedInactiveInSaveData; // 0x42
-	public LocalizedString m_LocalizedDisplayName; // 0x48
-	[HeaderAttribute] // RVA: 0x177060 Offset: 0x176460 VA: 0x7FFB0BB47060
-	public float m_CapacityKG; // 0x50
-	public float m_SearchTimeSeconds; // 0x54
-	public float m_OpenDelaySeconds; // 0x58
-	public float m_SpawnChance; // 0x5C
-	public bool m_IsCorpse; // 0x60
-	public bool m_CanStickToGroundAfterBreakdown; // 0x61
-	[HeaderAttribute] // RVA: 0x186FD0 Offset: 0x1863D0 VA: 0x7FFB0BB56FD0
-	public InventoryFilterType m_DefaultFilter; // 0x64
-	public bool m_FilterLocked; // 0x68
-	public GearTypeEnum m_ShowOnlyGearType; // 0x6C
-	public bool m_OnlyShowSpecifiedGearType; // 0x70
-	public ContainerSelectionMode m_StartSelectionMode; // 0x74
-	public bool m_StartInspected; // 0x78
-	[HeaderAttribute] // RVA: 0x1764B0 Offset: 0x1758B0 VA: 0x7FFB0BB464B0
-	public string m_OpenAudio; // 0x80
-	public string m_CloseAudio; // 0x88
-	public string m_SearchAudio; // 0x90
-	[HeaderAttribute] // RVA: 0x187040 Offset: 0x186440 VA: 0x7FFB0BB57040
-	public LootTable m_LootTablePrefab; // 0x98
-	public LootTable m_LockedLootTablePrefab; // 0xA0
-	[HeaderAttribute] // RVA: 0x1870B0 Offset: 0x1864B0 VA: 0x7FFB0BB570B0
-	public LootTable m_LootTableStoryPrefab; // 0xA8
-	public LootTable m_LockedLootTableStoryPrefab; // 0xB0
-	[HeaderAttribute] // RVA: 0x187120 Offset: 0x186520 VA: 0x7FFB0BB57120
-	public float m_ChanceEmpty; // 0xB8
-	public int m_MinRandomItems; // 0xBC
-	public int m_MaxRandomItems; // 0xC0
-	public int m_MinRandomItemsLocked; // 0xC4
-	public int m_MaxRandomItemsLocked; // 0xC8
-	public bool m_SkipInspectVO; // 0xCC
-	[HeaderAttribute] // RVA: 0x187190 Offset: 0x186590 VA: 0x7FFB0BB57190
-	[RangeAttribute] // RVA: 0x187190 Offset: 0x186590 VA: 0x7FFB0BB57190
-	public float m_DecayScalar; // 0xD0
-	[HeaderAttribute] // RVA: 0x187220 Offset: 0x186620 VA: 0x7FFB0BB57220
-	public string m_MissionSupplyObjectiveId; // 0xD8
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB0B9E2A50
-	public MissionObjectIdentifier m_MissionObject; // 0xE0
-	protected bool m_Inspected; // 0xE8
-	private bool m_CanNeverBeOpened; // 0xE9
-	private Lock m_Lock; // 0xF0
-	private SafeCracking m_Safe; // 0xF8
-	private RockCache m_RockCache; // 0x100
-	private bool m_RolledSpawnChance; // 0x108
-	private bool m_NotPopulated; // 0x109
-	protected bool m_SearchInProgress; // 0x10A
-	protected bool m_OpenInProgress; // 0x10B
-	private LootTable m_LootTable; // 0x110
-	private bool m_PendingClose; // 0x118
-	private ObjectAnim[] m_ObjectAnims; // 0x120
-	private bool m_StartHasBeenCalled; // 0x128
-	private float m_SearchTimeRemaining; // 0x12C
-	private PlayerControlMode m_RestoreControlMode; // 0x130
-	private uint m_SearchAudioID; // 0x134
-	private List&lt;string&gt; m_GearToInstantiate; // 0x138
-	private static ContainerSaveDataProxy m_ContainerSaveDataProxy; // 0x0
-	private const int CONTAINER_ITEM_SAVE_DATA_POOL_LEN = 512;
-	private static ContainerItemSaveData[] m_ContainerItemSaveDataPool; // 0x8
 }
 
 [ENABLE]
@@ -5138,7 +4794,7 @@ registersymbol(item_spawn_string)
 //  class: PlayerManager
 //  RVA: 0x15A7EC0 Offset: 0x15A6AC0 VA: 0x7FFB684A7EC0
 //  public void Update() { }
-aobScanModule(hook,GameAssembly.dll,B5 FE CC 40 55 48 8B EC)
+aobScanModule(hook,GameAssembly.dll,40 55 48 8b ec 48 83 ec ? 48 c7 45 ? ? ? ? ? 48 89 5c 24 ? 48 89 74 24 ? 48 89 7c 24 ? 4c 89 74 24 ? 48 8b d9 45 33 f6 44 38 35 ? ? ? ? 75 ? 48 8b 05)
 
 //  class: PlayerManager
 //  RVA: 0xDDC160 Offset: 0xDDB160 VA: 0x7FFB0C7AC160
@@ -5157,7 +4813,7 @@ newmem:
 playermanager_update_bytes:
   //push rbp
   //mov rbp,rsp
-  readMem(hook+3, 5)
+  readMem(hook, 5)
   jmp returnhere
 
 item_spawn_toggle:
@@ -5195,7 +4851,7 @@ code_strlen_end:
   lea rsp, [rsp+28]
   jmp playermanager_update_bytes
 
-hook+3:
+hook:
 playermanager_update_hook:
   jmp code
   returnhere:
@@ -5856,7 +5512,7 @@ GameAssembly.dll+1157879: CC                       - int 3
           <ID>8708</ID>
           <Description>"Fire"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" RealAddress="00000000"/>
+          <LastState Value="" Activated="1" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -5864,7 +5520,7 @@ GameAssembly.dll+1157879: CC                       - int 3
               <ID>8686</ID>
               <Description>"Campfire Tick"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState/>
+              <LastState Activated="1"/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{
@@ -5879,70 +5535,6 @@ GameAssembly.dll+1157879: CC                       - int 3
 
   +D0  temperature
 
-
-
-  	// Fields
-	public EffectsControllerFire m_FX; // 0x18
-	public bool m_StartLit; // 0x20
-	public bool m_IsPerpetual; // 0x21
-	public FuelSourceItem m_FuelPrefabIfLit; // 0x28
-	public float m_BurnMinutesIfLit; // 0x30
-	public string m_ChimneyGuid; // 0x38
-	public int m_NumStartingCharcoalPieces; // 0x40
-	public float m_NumCharcoalPiecesGeneratedPerHour; // 0x44
-	public int m_MaxNumCharcoal; // 0x48
-	public string m_FireAudioString; // 0x50
-	[TooltipAttribute] // RVA: 0x182120 Offset: 0x181520 VA: 0x7FFB0BB52120
-	public bool m_ApplyToHeatSource; // 0x58
-	[RangeAttribute] // RVA: 0x1696B0 Offset: 0x168AB0 VA: 0x7FFB0BB396B0
-	public float m_LightIntensityMultiplier; // 0x5C
-	[HeaderAttribute] // RVA: 0x182190 Offset: 0x181590 VA: 0x7FFB0BB52190
-	public bool m_BreakdownEnabled; // 0x60
-	[RangeAttribute] // RVA: 0x16B8F0 Offset: 0x16ACF0 VA: 0x7FFB0BB3B8F0
-	public float m_BreakdownRealSecondsElapsed; // 0x64
-	[RangeAttribute] // RVA: 0x16B8F0 Offset: 0x16ACF0 VA: 0x7FFB0BB3B8F0
-	public float m_BreakdownGameMinutes; // 0x68
-	public string m_BreakdownAudio; // 0x70
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB0B9E2A50
-	public HeatSource m_HeatSource; // 0x78
-	[CompilerGeneratedAttribute] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB0B9E2A50
-	private static Fire.FireStateDelegate OnFireStateChanged; // 0x0
-	private FireState m_FireState; // 0x80
-	private FireStartingState m_FireStartingState; // 0x84
-	private float m_FireStageDurationSeconds; // 0x88
-	private float m_FireStarterUseSeconds; // 0x8C
-	private float m_TinderSmolderSeconds; // 0x90
-	private float m_TinderSmallFlameSeconds; // 0x94
-	private float m_TinderMediumBurnSeconds; // 0x98
-	private float m_DurationSecondsToReduceToEmbers; // 0x9C
-	private float m_EmberDurationSecondsTOD; // 0xA0
-	private float m_EmberTimer; // 0xA4
-	private bool m_UseEmbers; // 0xA8
-	private GameObject m_DestroyOnFailure; // 0xB0
-	private float m_ElapsedOnTODSeconds; // 0xB8
-	private float m_ElapsedOnTODSecondsUnmodified; // 0xBC
-	private float m_MaxOnTODSeconds; // 0xC0
-	private float m_UsableFuelRemaining; // 0xC4
-	private uint m_FireStarterLoop; // 0xC8
-	private uint m_FireLoop; // 0xCC
-	private float m_FuelHeatIncrease; // 0xD0
-	private DamageTrigger m_DamageTrigger; // 0xD8
-	private Campfire m_Campfire; // 0xE0
-	private NavMeshObstacle m_NavMeshObstacle; // 0xE8
-	private FuelSourceItem m_FuelUsedToStart; // 0xF0
-	private bool m_FullBurnTriggered; // 0xF8
-	private bool m_StartedByPlayer; // 0xF9
-	private float m_TimeOffSeconds; // 0xFC
-	private SmokeTrail m_SmokeTrail; // 0x100
-	private bool m_StartHasBeenCalled; // 0x108
-	private static FireSaveDataProxy m_FireSaveDataProxy; // 0x8
-	private int m_NumGeneratedCharcoalPieces; // 0x10C
-	private bool m_HasCollectedCharcoal; // 0x110
-	private List&lt;string&gt; m_TrackedBurntItems; // 0x118
-	private float m_BurningTimeTODHours; // 0x120
-	private static bool m_IsStartingFireUIInProgress; // 0x10
-	private bool m_TriggerStageRequested; // 0x124
-	private static Collider[] s_CookableColliderCandidates; // 0x18
 }
 
 [ENABLE]
@@ -6082,6 +5674,7 @@ fire_burn_temp_toggle:
                     <CheatEntry>
                       <ID>8706</ID>
                       <Description>"Temp"</Description>
+                      <LastState Value="20" RealAddress="7FFF35810017"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>fire_burn_temp_value</Address>
@@ -6091,6 +5684,7 @@ fire_burn_temp_toggle:
                 <CheatEntry>
                   <ID>8688</ID>
                   <Description>"Ember Time Limit"</Description>
+                  <LastState Value="500" RealAddress="23227670690"/>
                   <Color>808080</Color>
                   <VariableType>Float</VariableType>
                   <Address>fire_burn_base_ptr</Address>
@@ -6101,6 +5695,7 @@ fire_burn_temp_toggle:
                 <CheatEntry>
                   <ID>8687</ID>
                   <Description>"Ember Time"</Description>
+                  <LastState Value="0" RealAddress="23227670694"/>
                   <Color>808080</Color>
                   <VariableType>Float</VariableType>
                   <Address>fire_burn_base_ptr</Address>
@@ -6111,6 +5706,7 @@ fire_burn_temp_toggle:
                 <CheatEntry>
                   <ID>8689</ID>
                   <Description>"Burn Time"</Description>
+                  <LastState Value="650.8821411" RealAddress="232276706A8"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>fire_burn_base_ptr</Address>
@@ -6121,6 +5717,7 @@ fire_burn_temp_toggle:
                 <CheatEntry>
                   <ID>8690</ID>
                   <Description>"Burn Time 2"</Description>
+                  <LastState Value="731.7749023" RealAddress="232276706AC"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>fire_burn_base_ptr</Address>
@@ -6131,6 +5728,7 @@ fire_burn_temp_toggle:
                 <CheatEntry>
                   <ID>8691</ID>
                   <Description>"Burn Time Limit"</Description>
+                  <LastState Value="81000" RealAddress="232276706B0"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>fire_burn_base_ptr</Address>
@@ -6141,6 +5739,7 @@ fire_burn_temp_toggle:
                 <CheatEntry>
                   <ID>8692</ID>
                   <Description>"Temperature"</Description>
+                  <LastState Value="8" RealAddress="232276706C0"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>fire_burn_base_ptr</Address>
@@ -6156,14 +5755,14 @@ fire_burn_temp_toggle:
           <ID>8891</ID>
           <Description>"Weather / Time"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" RealAddress="00000000"/>
+          <LastState Value="" Activated="1" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
               <ID>8892</ID>
               <Description>"UniStormWeatherSystem"</Description>
-              <LastState/>
+              <LastState Activated="1"/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -6171,179 +5770,6 @@ fire_burn_temp_toggle:
   Date   : 2021-10-30
   Author : sub1to
 
-  	// Fields
-	private const float SUN_SIZE = 0.1;
-	public WeatherStateConfig[] m_WeatherStateConfigs; // 0x18
-	public TODStateConfig[] m_SpecialTODStates; // 0x20
-	public SpecialTODState m_SpecialTODState; // 0x28
-	public float[] m_SpecialTODStateFixedTimes; // 0x30
-	public bool m_StaticWeather; // 0x38
-	public bool m_LiveEdit; // 0x39
-	public float m_AnimScalar_Ambient; // 0x3C
-	public float m_AnimScalar_Directional; // 0x40
-	public float m_MasterTimeKeyOffset; // 0x44
-	public float m_MasterAmbientIntensityScalar; // 0x48
-	public float m_MasterSunLightIntensityScalar; // 0x4C
-	public float m_MasterMoonLightIntensityScalar; // 0x50
-	public float m_MasterSunShadowStrengthReduction; // 0x54
-	public float m_MasterMoonShadowStrengthReduction; // 0x58
-	public float m_MasterMoonShadowStrengthCap; // 0x5C
-	public float m_FarClipCheat; // 0x60
-	public float m_FogColorMargin; // 0x64
-	public int m_MinuteCounter; // 0x68
-	public int m_HourCounter; // 0x6C
-	public int m_DayCounter; // 0x70
-	public int m_Temperature; // 0x74
-	public float m_DayLength; // 0x78
-	public float m_NormalizedTime; // 0x7C
-	[SerializeField] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB0B9E2A50
-	private float[] m_TODKeyframeTimes; // 0x80
-	public int m_MoonCycleStartDay; // 0x88
-	public float m_MoonPhaseIntensityControl; // 0x8C
-	public float m_SunAngle; // 0x90
-	public Color m_MoonLightColor; // 0x94
-	public Color m_MoonLightColorOverride; // 0xA4
-	public Color m_StarColor; // 0xB4
-	public float m_CloudSpeed; // 0xC4
-	public float m_BlizzardFogBlusterRange; // 0xC8
-	public float m_BlizzardFogBlusterSpeed; // 0xCC
-	public WeatherStage m_PreviousWeatherStage; // 0xD0
-	public WeatherStage m_CurrentWeatherStage; // 0xD4
-	private float m_NormalizedAuroraAlpha; // 0xD8
-	public float m_SkyboxFogSampleDistance; // 0xDC
-	public float m_SkyboxFogPower; // 0xE0
-	public Material m_SkyboxMaterial; // 0xE8
-	public Renderer[] m_SkyGlowRenderers; // 0xF0
-	public ColorGradingSettings m_DefaultColorGradingSettings; // 0xF8
-	public HeightFogManager m_HeightFogManager; // 0x100
-	public GameObject m_SnowPlaneManager; // 0x108
-	public GameObject m_StarSphere; // 0x110
-	public Texture2D[] m_MoonPhases; // 0x118
-	public Light m_SunLight; // 0x120
-	public Light m_MoonLight; // 0x128
-	public GodrayManager m_GodrayManager; // 0x130
-	public float m_CloudCoverage; // 0x138
-	public float m_FogDensity; // 0x13C
-	public GameObject m_LightClouds1; // 0x140
-	public GameObject m_LightClouds2; // 0x148
-	public GameObject m_HighClouds1; // 0x150
-	public GameObject m_MostlyCloudyClouds; // 0x158
-	public static float m_MinimumFogDensityScale; // 0x0
-	public static float m_FogScale; // 0x4
-	private SnowPlaneManager m_SnowPlaneManagerComponent; // 0x160
-	private Renderer m_StarSphereRenderer; // 0x168
-	private Renderer m_LightClouds1_Renderer; // 0x170
-	private Renderer m_LightClouds2_Renderer; // 0x178
-	private Renderer m_HighClouds1_Renderer; // 0x180
-	private Renderer m_MostlyCloudyClouds_Renderer; // 0x188
-	private Renderer m_HorizonCloudsBand1_Renderer; // 0x190
-	private Renderer m_HorizonCloudsBand2_Renderer; // 0x198
-	private Renderer m_HorizonCloudsBand3_Renderer; // 0x1A0
-	private Renderer m_SkyCloudEdge1_Renderer; // 0x1A8
-	private Renderer m_SkyCloudEdge2_Renderer; // 0x1B0
-	private Renderer m_HorizonGrad_Renderer; // 0x1B8
-	private Material m_SkyboxMaterialCopy; // 0x1C0
-	public Camera m_MainCamera; // 0x1C8
-	[SerializeField] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB0B9E2A50
-	public WeatherParticleManagerConfiguration m_WeatherParticleManagerConfig; // 0x1D0
-	private WeatherParticleManager m_WeatherParticleManager; // 0x268
-	private float m_Hour; // 0x270
-	private float m_MinuteCounterCalculator; // 0x274
-	private float m_ActiveSunAngle; // 0x278
-	private bool m_LockAmbientLight; // 0x27C
-	private GameObject m_WeatherSystemsGameObject; // 0x280
-	private GameObject m_CloudParentGameObject; // 0x288
-	public float m_DayLengthScale; // 0x290
-	public float m_CurrentWeatherBlend; // 0x294
-	private float m_DeltaTime; // 0x298
-	private bool m_WarmingWeatherState; // 0x29C
-	private float m_SecondsSinceLastWeatherChange; // 0x2A0
-	private bool m_MoonPhaseSet; // 0x2A4
-	private int m_CurrentMoonPhaseIndex; // 0x2A8
-	private float m_MoonPhaseIntensityScalar; // 0x2AC
-	private Vector2 m_BlizzardFogNoiseVec; // 0x2B0
-	private float m_AmbientLightTransitionTimeSeconds; // 0x2B8
-	private bool m_Paused; // 0x2BC
-	private bool m_Indoors; // 0x2BD
-	private float m_ElapsedHours; // 0x2C0
-	private float m_ElapsedHoursAccumulator; // 0x2C4
-	private float m_ElapsedHoursIndoorsAccumulator; // 0x2C8
-	private float m_ElapsedHoursOutdoorsAccumulator; // 0x2CC
-	private float m_ElapsedHoursAsleepAccumulator; // 0x2D0
-	private float m_ElapsedHoursAsleepOutdoorsAccumulator; // 0x2D4
-	private float m_ElapsedHoursAwakeAccumulator; // 0x2D8
-	private float m_ElapsedHoursLakeRegionAccumulator; // 0x2DC
-	private float m_ElapsedHoursCoastalRegionAccumulator; // 0x2E0
-	private float m_ElapsedHoursRuralRegionAccumulator; // 0x2E4
-	private float m_ElapsedHoursWhalingStationRegionAccumulator; // 0x2E8
-	private float m_ElapsedHoursCrashMountainRegionAccumulator; // 0x2EC
-	private float m_ElapsedHoursMarshRegionAccumulator; // 0x2F0
-	private float m_ElapsedHoursTracksRegionAccumulator; // 0x2F4
-	private float m_ElapsedHoursMountainTownRegionAccumulator; // 0x2F8
-	private float m_ElapsedHoursRiverValleyRegionAccumulator; // 0x2FC
-	private float m_ElapsedHoursCanneryRegionAccumulator; // 0x300
-	private float m_ElapsedHoursAshCanyonRegionAcculumator; // 0x304
-	private float m_ElapsedHoursBlackrockRegionAccumulator; // 0x308
-	private bool m_LastFrameWasOutside; // 0x30C
-	private bool m_LastFrameWasNight; // 0x30D
-	private bool m_OutsideSinceBeginningOfNight; // 0x30E
-	private bool m_UseMoonColourColorOverride; // 0x30F
-	private float m_WeatherTransitionTime; // 0x310
-	private ActiveEnvironment m_ActiveEnvironment; // 0x318
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB0B9E2A50
-	public SpecialTODState m_RequestedSpecialTODState; // 0x320
-	private SpecialTODState m_LastSpecialTODState; // 0x324
-	private GameRegion m_CurrentRegion; // 0x328
-	private Animator m_Animator; // 0x330
-	private Vector4 m_CloudTextureOffset_LightClouds1; // 0x338
-	private Vector4 m_CloudTextureOffset_LightClouds2; // 0x348
-	private Vector4 m_CloudTextureOffset_HighClouds1; // 0x358
-	private Vector4 m_CloudTextureOffset_MostlyCloudyClouds; // 0x368
-	private MaterialPropertyBlock m_OnUpdatePropertyBlock; // 0x378
-	private List&lt;SunShadowOverrideVolume&gt; m_SunShadowOverrideVolumes; // 0x380
-	private static float s_OriginalNightToxicFogDensity; // 0x8
-	private static readonly int s_ColorShaderID; // 0xC
-	private static readonly int s_MainTexOffsetShaderID; // 0x10
-	private static readonly int s_TintColorShaderID; // 0x14
-	private static readonly int s_MoonXShaderID; // 0x18
-	private static readonly int s_MoonYShaderID; // 0x1C
-	private static readonly int s_MoonZShaderID; // 0x20
-	private static readonly int s_MoonColorShaderID; // 0x24
-	private static readonly int s_MoonTexShaderID; // 0x28
-	private static readonly int s_MoonGlowShaderID; // 0x2C
-	private static readonly int s_AmbientLightColorShaderID; // 0x30
-	private static readonly int s_FogColorShaderID; // 0x34
-	private static readonly int s_AtmosphereThicknessShaderID; // 0x38
-	private static readonly int s_ExposureShaderID; // 0x3C
-	private static readonly int s_SunSizeShaderID; // 0x40
-	private static readonly int s_SunDiffusionShaderID; // 0x44
-	private static readonly int s_SunDirShaderID; // 0x48
-	private static readonly int s_SunColorShaderID; // 0x4C
-	private static readonly int s_HorizonAdjustShaderID; // 0x50
-	private static readonly int s_GlobalSunDirShaderID; // 0x54
-	private static readonly int s_GlobalSunLuminanceShaderID; // 0x58
-	private static readonly int s_GlobalGrassTintScalarShaderID; // 0x5C
-	private static readonly int s_FresnelcolorShaderID; // 0x60
-	private const float ENDLESSNIGHT_NORMALIZEDTIME = 0.2;
-	private static float[] m_MoonIntensityByPhaseScalars; // 0x68
-
-
-
-  public enum WeatherStage // TypeDefIndex: 9677
-	// Fields
-	public int value__; // 0x0
-	public const WeatherStage DenseFog = 0;
-	public const WeatherStage LightSnow = 1;
-	public const WeatherStage HeavySnow = 2;
-	public const WeatherStage PartlyCloudy = 3;
-	public const WeatherStage Clear = 4;
-	public const WeatherStage Cloudy = 5;
-	public const WeatherStage LightFog = 6;
-	public const WeatherStage Blizzard = 7;
-	public const WeatherStage ClearAurora = 8;
-	public const WeatherStage ToxicFog = 9;
-	public const WeatherStage Undefined = 10;
-	public const WeatherStage Num = 10;
 }
 
 [ENABLE]
@@ -6447,6 +5873,7 @@ dealloc(newmem)
 8:ClearAurora
 9:ToxicFog
 </DropDownList>
+                  <LastState Value="4" RealAddress="23286427614"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>808080</Color>
                   <VariableType>4 Bytes</VariableType>
@@ -6458,6 +5885,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>9029</ID>
                   <Description>"Minute Counter"</Description>
+                  <LastState Value="42" RealAddress="232864275A8"/>
                   <Color>808080</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>weather_base_ptr</Address>
@@ -6468,6 +5896,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8897</ID>
                   <Description>"Hour Counter"</Description>
+                  <LastState Value="17" RealAddress="232864275AC"/>
                   <Color>808080</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>weather_base_ptr</Address>
@@ -6478,6 +5907,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8898</ID>
                   <Description>"Day Counter"</Description>
+                  <LastState Value="123" RealAddress="232864275B0"/>
                   <Color>808080</Color>
                   <VariableType>4 Bytes</VariableType>
                   <Address>weather_base_ptr</Address>
@@ -6488,6 +5918,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8899</ID>
                   <Description>"Temperature"</Description>
+                  <LastState Value="-3" RealAddress="232864275B4"/>
                   <ShowAsSigned>1</ShowAsSigned>
                   <Color>808080</Color>
                   <VariableType>4 Bytes</VariableType>
@@ -6499,6 +5930,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8900</ID>
                   <Description>"Day Length"</Description>
+                  <LastState Value="7200" RealAddress="232864275B8"/>
                   <Color>808080</Color>
                   <VariableType>Float</VariableType>
                   <Address>weather_base_ptr</Address>
@@ -6509,6 +5941,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8901</ID>
                   <Description>"Normalized Time (use to set time of day)"</Description>
+                  <LastState Value="0.7377701402" RealAddress="232864275BC"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>weather_base_ptr</Address>
@@ -6519,6 +5952,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>9026</ID>
                   <Description>"Fog Density"</Description>
+                  <LastState Value="0.0007999999798" RealAddress="2328642767C"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>808080</Color>
                   <VariableType>Float</VariableType>
@@ -6532,7 +5966,7 @@ dealloc(newmem)
             <CheatEntry>
               <ID>8912</ID>
               <Description>"TimeOfDay"</Description>
-              <LastState/>
+              <LastState Activated="1"/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -6627,6 +6061,7 @@ dealloc(newmem)
                 <CheatEntry>
                   <ID>8914</ID>
                   <Description>"Day Length Scale"</Description>
+                  <LastState Value="1" RealAddress="2328B1F3088"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>time_of_day_base_ptr</Address>
@@ -6757,7 +6192,7 @@ GameAssembly.dll+19A02CA: 48 8B 88 80 00 00 00           - mov rcx,[rax+00000080
           <ID>8975</ID>
           <Description>"Crafting"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" RealAddress="00000000"/>
+          <LastState Value="" Activated="1" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -6772,43 +6207,6 @@ GameAssembly.dll+19A02CA: 48 8B 88 80 00 00 00           - mov rcx,[rax+00000080
   Date   : 2021-11-01
   Author : sub1to
 
-  public class BlueprintItem : MonoBehaviour // TypeDefIndex: 8292
-	// Fields
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB0B9E2A50
-	public GearItem[] m_RequiredGear; // 0x18
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB0B9E2A50
-	public int[] m_RequiredGearUnits; // 0x20
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB0B9E2A50
-	public ToolsItem m_RequiredTool; // 0x28
-	[HideInInspector] // RVA: 0x12A50 Offset: 0x11E50 VA: 0x7FFB0B9E2A50
-	public ToolsItem[] m_OptionalTools; // 0x30
-	public GearItem m_CraftedResult; // 0x38
-	public int m_CraftedResultCount; // 0x40
-	public int m_DurationMinutes; // 0x44
-	public string m_CraftingAudio; // 0x48
-	public float m_KeroseneLitersRequired; // 0x50
-	public float m_GunpowderKGRequired; // 0x54
-	public bool m_RequiresLight; // 0x58
-	public bool m_Locked; // 0x59
-	public bool m_AppearsInStoryOnly; // 0x5A
-	[TooltipAttribute] // RVA: 0x183510 Offset: 0x182910 VA: 0x7FFB0BB53510
-	public SkillType m_AppliedSkill; // 0x5C
-	[TooltipAttribute] // RVA: 0x183580 Offset: 0x182980 VA: 0x7FFB0BB53580
-	public SkillType m_ImprovedSkill; // 0x60
-	public CraftingLocation m_RequiredCraftingLocation; // 0x64
-	public bool m_RequiresLitFire; // 0x68
-	private static List&lt;string&gt; m_UnlockedBlueprints; // 0x0
-
-
-  // Namespace:
-  public enum CraftingLocation // TypeDefIndex: 8291
-	// Fields
-	public int value__; // 0x0
-	public const CraftingLocation Anywhere = 0;
-	public const CraftingLocation Workbench = 1;
-	public const CraftingLocation Forge = 2;
-	public const CraftingLocation AmmoWorkbench = 3;
-	public const CraftingLocation Count = 4;
 }
 
 [ENABLE]
@@ -6907,7 +6305,7 @@ GameAssembly.dll+127D885: 33 D2                 - xor edx,edx
           <ID>9051</ID>
           <Description>"Unlocks"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" RealAddress="00000000"/>
+          <LastState Value="" Activated="1" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -7026,1147 +6424,6 @@ GameAssembly.dll+E652E2: 0F 29 70 D8              - movaps [rax-28],xmm6
 GameAssembly.dll+E652E6: 0F 29 78 C8              - movaps [rax-38],xmm7
 }
 </AssemblerScript>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>9050</ID>
-              <Description>"Unlock All (Steam) Achievements"</Description>
-              <LastState/>
-              <Color>008000</Color>
-              <VariableType>Auto Assembler Script</VariableType>
-              <AssemblerScript>{ Game   : tld.exe
-  Version: 1.97 85101 S
-  Date   : 2021-11-01
-  Author : sub1to
-
-  public enum Achievement // TypeDefIndex: 7547
-	// Fields
-	public int value__; // 0x0
-	public const Achievement Survival_10_Days = 1;
-	public const Achievement Survival_50_Days = 6;
-	public const Achievement LakeCoastalInteriors = 7;
-	public const Achievement Harvest_10_Deer = 8;
-	public const Achievement Survival_1_Night = 9;
-	public const Achievement Survival_3_Nights = 10;
-	public const Achievement NoGun_50_Days = 11;
-	public const Achievement NoKill_25_Days = 12;
-	public const Achievement Wrapped_Fur = 13;
-	public const Achievement Big_Fish = 14;
-	public const Achievement Living_Off_Land = 15;
-	public const Achievement Natural_Healer = 16;
-	public const Achievement Happy_Harvester = 17;
-	public const Achievement Survival_1_Days = 18;
-	public const Achievement Survival_100_Days = 20;
-	public const Achievement Survival_500_Days = 22;
-	public const Achievement StoneAgeSniper = 23;
-	public const Achievement SkilledSurvivor = 24;
-	public const Achievement TasteTheImpossible = 25;
-	public const Achievement WellNourished = 26;
-	public const Achievement FaithfulCartographer = 27;
-	public const Achievement ResoluteOutfitter = 28;
-	public const Achievement PenitentScholar = 29;
-	public const Achievement TimberwolfMountain = 30;
-	public const Achievement DesolationPoint = 31;
-	public const Achievement DeepForest = 32;
-	public const Achievement EP1_YourJourneyBegins = 33;
-	public const Achievement EP1_ParadiseLost = 34;
-	public const Achievement EP1_TheLongWinter = 35;
-	public const Achievement EP1_LosingAChildIsLike = 36;
-	public const Achievement EP1_LeavingTheOldWorldBehind = 37;
-	public const Achievement EP2_TheOldTrapper = 38;
-	public const Achievement EP2_LightsInTheSky = 39;
-	public const Achievement EP2_GraduationDay = 40;
-	public const Achievement EP2_FreightTrainOfHateAndHunger = 41;
-	public const Achievement EP2_YouWillBeWithHerSoon = 42;
-	public const Achievement SM_UnlockAllMiltonDepositBoxes = 43;
-	public const Achievement SM_FoundAllForestTalkerCaches = 44;
-	public const Achievement SM_FoundAllHiddenCaches = 45;
-	public const Achievement ChallengeMastery = 46;
-	public const Achievement EP3_HadBarnCall = 47;
-	public const Achievement EP3_EnterCrashSite = 48;
-	public const Achievement EP3_RescuedAllSurvivors = 49;
-	public const Achievement EP3_HeardMackenzieOnRadio = 50;
-	public const Achievement EP3_Completed = 51;
-	public const Achievement SM_TallTales = 52;
-	public const Achievement SM_FoundAllPVCollectibles = 53;
-	public const Achievement ThereWillBeBlood = 54;
-	public const Achievement EP4_WelcomeToTheShitShow = 55;
-	public const Achievement EP4_JustLikeNew = 56;
-	public const Achievement EP4_SomethingStinks = 57;
-	public const Achievement EP4_EnemyForLife = 58;
-	public const Achievement EP4_LeapOfFaith = 59;
-	public const Achievement EP4_BlackBlackHeart = 60;
-	public const Achievement EP4_HardTimes = 61;
-	public const Achievement EP4_NoHalfMeasures = 62;
-}
-
-[ENABLE]
-alloc(newmem,$ff,GameAssembly.dll)
-label(returnhere)
-label(code)
-label(code_next)
-label(code_skip)
-label(code_exit)
-label(achievement_update_hook)
-label(achievement_update_bytes)
-registersymbol(achievement_update_hook)
-registersymbol(achievement_update_bytes)
-
-//  class: AchievementPlatformManager
-//  RVA: 0x1370C30 Offset: 0x136FC30 VA: 0x7FFB0CD40C30
-//  public static void Update() { }
-aobScanModule(hook,GameAssembly.dll,48 83 EC 48 48 C7 44 24 20 FE FF FF FF 80 3D ? ? ? ? 00 75 4F 48 8B 05 F3 50)
-
-//  class: AchievementPlatformManager
-//  RVA: 0x1371040 Offset: 0x1370040 VA: 0x7FFB0CD41040
-//  public static void Unlock(Achievement achievement) { }
-aobScanModule(_unlock,GameAssembly.dll,D5 FE CC CC CC CC CC CC CC CC CC CC CC CC CC 40 53 48 83 EC 40)
-
-newmem:
-achievement_update_bytes:
-  //sub rsp,48
-  //mov qword ptr [rsp+20],FFFFFFFFFFFFFFFE
-  readMem(hook,$D)
-  jmp returnhere
-
-code:
-  lea rsp, [rsp-28]
-  mov [rsp+20], rbx
-  xor rbx, rbx
-
-code_next:
-  inc ebx
-
-  //skip 2,3,4,5,19,21
-  cmp ebx, 1
-  jz code_skip
-  cmp ebx, 5
-  jbe code_next
-  cmp ebx, #19
-  jz code_next
-  cmp ebx, #21
-  jz code_next
-
-code_skip:
-  cmp ebx, #63
-  jz code_exit
-  mov ecx, ebx
-  call _unlock+F
-  jmp code_next
-
-code_exit:
-  mov rbx, [rsp+20]
-  lea rsp, [rsp+28]
-
-  jmp achievement_update_bytes
-
-hook:
-achievement_update_hook:
-  jmp code
-  nop 8
-  returnhere:
-
-
-
-[DISABLE]
-achievement_update_hook:
-  //48 83 EC 48 48 C7 44 24 20 FE FF FF FF
-  readMem(achievement_update_bytes,$D)
-
-unregistersymbol(achievement_update_hook)
-unregistersymbol(achievement_update_bytes)
-dealloc(newmem)
-
-{
-// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+1370C30
-
-GameAssembly.dll+1370C26: CC                          - int 3
-GameAssembly.dll+1370C27: CC                          - int 3
-GameAssembly.dll+1370C28: CC                          - int 3
-GameAssembly.dll+1370C29: CC                          - int 3
-GameAssembly.dll+1370C2A: CC                          - int 3
-GameAssembly.dll+1370C2B: CC                          - int 3
-GameAssembly.dll+1370C2C: CC                          - int 3
-GameAssembly.dll+1370C2D: CC                          - int 3
-GameAssembly.dll+1370C2E: CC                          - int 3
-GameAssembly.dll+1370C2F: CC                          - int 3
-// ---------- INJECTING HERE ----------
-GameAssembly.dll+1370C30: 48 83 EC 48                 - sub rsp,48
-GameAssembly.dll+1370C34: 48 C7 44 24 20 FE FF FF FF  - mov qword ptr [rsp+20],FFFFFFFFFFFFFFFE
-// ---------- DONE INJECTING  ----------
-GameAssembly.dll+1370C3D: 80 3D EB 2C 0E 03 00        - cmp byte ptr [GameAssembly.dll+445392F],00
-GameAssembly.dll+1370C44: 75 4F                       - jne GameAssembly.dll+1370C95
-GameAssembly.dll+1370C46: 48 8B 05 F3 50 0D 03        - mov rax,[GameAssembly.dll+4445D40]
-GameAssembly.dll+1370C4D: 48 63 88 B8 00 00 00        - movsxd  rcx,dword ptr [rax+000000B8]
-GameAssembly.dll+1370C54: 48 8B 05 BD 50 0D 03        - mov rax,[GameAssembly.dll+4445D18]
-GameAssembly.dll+1370C5B: 33 D2                       - xor edx,edx
-GameAssembly.dll+1370C5D: 48 89 54 24 28              - mov [rsp+28],rdx
-GameAssembly.dll+1370C62: 48 89 54 24 30              - mov [rsp+30],rdx
-GameAssembly.dll+1370C67: 48 89 54 24 38              - mov [rsp+38],rdx
-}
-</AssemblerScript>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>8929</ID>
-              <Description>"Feats (Badges)"</Description>
-              <Options moHideChildren="1"/>
-              <LastState Value="" RealAddress="00000000"/>
-              <Color>C08000</Color>
-              <GroupHeader>1</GroupHeader>
-              <CheatEntries>
-                <CheatEntry>
-                  <ID>9016</ID>
-                  <Description>"Unlock Blizzard Walker"</Description>
-                  <LastState/>
-                  <Color>008000</Color>
-                  <VariableType>Auto Assembler Script</VariableType>
-                  <AssemblerScript>{ Game   : tld.exe
-  Version: 1.97 85101 S
-  Date   : 2021-11-01
-  Author : sub1to
-}
-
-[ENABLE]
-alloc(newmem,$ff,GameAssembly.dll)
-label(returnhere)
-label(code)
-label(feat_blizzwalk_hook)
-label(feat_blizzwalk_bytes)
-registersymbol(feat_blizzwalk_hook)
-registersymbol(feat_blizzwalk_bytes)
-
-//  class: Feat_BlizzardWalker
-//  RVA: 0x1187440 Offset: 0x1186440 VA: 0x7FFB0CB57440 Slot: 8
-//  public override float GetNormalizedProgress() { }
-aobScanModule(hook,GameAssembly.dll,C0 48 83 C4 40 5B C3 CC CC CC CC CC 40 53 48 83 EC 60)
-
-//  class: Feat_BlizzardWalker
-//  RVA: 0x1187540 Offset: 0x1186540 VA: 0x7FFB0CB57540 Slot: 9
-//  public override void SetNormalizedProgress(float normalizedValue) { }
-aobScanModule(feat_blizzwalk_set,GameAssembly.dll,60 5B C3 CC CC CC CC CC CC CC CC CC 4C 8B DC 57 48 83 EC 60)
-
-
-newmem:
-feat_blizzwalk_bytes:
-  //push rbx
-  //sub rsp,60
-  readMem(hook+C, 6)
-  jmp returnhere
-
-code:
-  lea rsp, [rsp-28]
-  mov [rsp+20], rcx
-  mov edx, (float)1.0
-  movd xmm1, edx
-  call feat_blizzwalk_set+C
-  mov rcx, [rsp+20]
-  lea rsp, [rsp+28]
-  jmp feat_blizzwalk_bytes
-
-hook+C:
-feat_blizzwalk_hook:
-  jmp code
-  nop
-  returnhere:
-
-
-
-[DISABLE]
-feat_blizzwalk_hook:
-  //40 53 48 83 EC 60
-  readMem(feat_blizzwalk_bytes, 6)
-
-unregistersymbol(feat_blizzwalk_hook)
-unregistersymbol(feat_blizzwalk_bytes)
-dealloc(newmem)
-
-{
-// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+1187440
-
-GameAssembly.dll+118742E: 0F 2F 43 60                 - comiss xmm0,[rbx+60]
-GameAssembly.dll+1187432: 0F 93 C0                    - setae al
-GameAssembly.dll+1187435: 48 83 C4 40                 - add rsp,40
-GameAssembly.dll+1187439: 5B                          - pop rbx
-GameAssembly.dll+118743A: C3                          - ret
-GameAssembly.dll+118743B: CC                          - int 3
-GameAssembly.dll+118743C: CC                          - int 3
-GameAssembly.dll+118743D: CC                          - int 3
-GameAssembly.dll+118743E: CC                          - int 3
-GameAssembly.dll+118743F: CC                          - int 3
-// ---------- INJECTING HERE ----------
-GameAssembly.dll+1187440: 40 53                       - push rbx
-GameAssembly.dll+1187442: 48 83 EC 60                 - sub rsp,60
-// ---------- DONE INJECTING  ----------
-GameAssembly.dll+1187446: 48 C7 44 24 20 FE FF FF FF  - mov qword ptr [rsp+20],FFFFFFFFFFFFFFFE
-GameAssembly.dll+118744F: 0F 29 74 24 50              - movaps [rsp+50],xmm6
-GameAssembly.dll+1187454: 0F 29 7C 24 40              - movaps [rsp+40],xmm7
-GameAssembly.dll+1187459: 48 8B D9                    - mov rbx,rcx
-GameAssembly.dll+118745C: 80 3D 53 B9 2C 03 00        - cmp byte ptr [GameAssembly.dll+4452DB6],00
-GameAssembly.dll+1187463: 75 50                       - jne GameAssembly.dll+11874B5
-GameAssembly.dll+1187465: 48 8B 05 D4 E8 2B 03        - mov rax,[GameAssembly.dll+4445D40]
-GameAssembly.dll+118746C: 48 63 90 B8 00 00 00        - movsxd  rdx,dword ptr [rax+000000B8]
-GameAssembly.dll+1187473: 48 8B 05 9E E8 2B 03        - mov rax,[GameAssembly.dll+4445D18]
-}
-</AssemblerScript>
-                </CheatEntry>
-                <CheatEntry>
-                  <ID>9017</ID>
-                  <Description>"Unlock Book Smarts"</Description>
-                  <LastState/>
-                  <Color>008000</Color>
-                  <VariableType>Auto Assembler Script</VariableType>
-                  <AssemblerScript>{ Game   : tld.exe
-  Version: 1.97 85101 S
-  Date   : 2021-11-01
-  Author : sub1to
-}
-
-[ENABLE]
-alloc(newmem,$ff,GameAssembly.dll)
-label(returnhere)
-label(code)
-label(feat_booksmarts_hook)
-label(feat_booksmarts_bytes)
-registersymbol(feat_booksmarts_hook)
-registersymbol(feat_booksmarts_bytes)
-
-//  class: Feat_BookSmarts
-//  RVA: 0x1188070 Offset: 0x1187070 VA: 0x7FFB0CB58070 Slot: 8
-//  public override float GetNormalizedProgress() { }
-aobScanModule(hook,GameAssembly.dll,C3 CC CC CC CC CC CC CC CC CC CC CC 40 57 48 83 EC 40 48 C7 44 24 20 FE FF FF FF 48 89 5C 24 50 48 8B D9 80 3D 76)
-
-//  class: Feat_BookSmarts
-//  RVA: 0x1188180 Offset: 0x1187180 VA: 0x7FFB0CB58180 Slot: 9
-//  public override void SetNormalizedProgress(float normalizedValue) { }
-//  this sig is shit, but oh well..
-aobScanModule(feat_booksmarts_set,GameAssembly.dll,4c 8b dc 57 48 83 ec ? 49 c7 43 ? ? ? ? ? 49 89 5b ? 49 89 73 ? 0f 29 74 24 ? 0f 28 f1 48 8b d9 80 3d ? ? ? ? ? 75 ? 48 8b 05 ? ? ? ? 48 63 90 ? ? ? ? 48 8b 05 ? ? ? ? 8b 8c 02 ? ? ? ? 49 c7 43 ? ? ? ? ? 49 c7 43 ? ? ? ? ? 49 c7 43 ? ? ? ? ? 4d 8d 43 ? 8b 94 02 ? ? ? ? e8 ? ? ? ? 90 33 c9 ff 15 ? ? ? ? 90 c6 05 ? ? ? ? ? 48 8b 03 48 8b 90 ? ? ? ? 48 8b cb ff 90 ? ? ? ? 0f b6 f8 8b 73 ? 48 8b 0d ? ? ? ? f6 81 ? ? ? ? ? 74 ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 66 0f 6e c6 0f 5b c0 f3 0f 59 c6 33 d2 e8 ? ? ? ? 8b f0 48 8b 0d ? ? ? ? f6 81 ? ? ? ? ? 74 ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 48 8b 0d ? ? ? ? 48 8b 89 ? ? ? ? 89 31 8b 4b ? 48 8b 05 ? ? ? ? 48 8b 90 ? ? ? ? 8b 02 85 c0 78 ? 3b c1 7e ? 8b c1 eb ? 33 c0 89 02 48 8b 03 48 8b 90 ? ? ? ? 48 8b cb ff 90 ? ? ? ? 84 c0 74 ? 40 84 ff 75 ? c6 43 ? ? 48 8b 5c 24 ? 48 8b 74 24 ? 0f 28 74 24 ? 48 83 c4 ? 5f c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc 40 57)
-
-
-newmem:
-feat_booksmarts_bytes:
-  //push rdi
-  //sub rsp,40
-  readMem(hook+C, 6)
-  jmp returnhere
-
-code:
-  lea rsp, [rsp-28]
-  mov [rsp+20], rcx
-  mov edx, (float)1.0
-  movd xmm1, edx
-  call feat_booksmarts_set
-  mov rcx, [rsp+20]
-  lea rsp, [rsp+28]
-  jmp feat_booksmarts_bytes
-
-hook+C:
-feat_booksmarts_hook:
-  jmp code
-  nop
-  returnhere:
-
-
-
-[DISABLE]
-feat_booksmarts_hook:
-  //40 57 48 83 EC 40
-  readMem(feat_booksmarts_bytes, 6)
-
-unregistersymbol(feat_booksmarts_hook)
-unregistersymbol(feat_booksmarts_bytes)
-dealloc(newmem)
-
-{
-// ORIGINAL CODE - INJECTION POINT: "GameAssembly.dll"+1188070
-
-"GameAssembly.dll"+1188066: CC                          -  int 3
-"GameAssembly.dll"+1188067: CC                          -  int 3
-"GameAssembly.dll"+1188068: CC                          -  int 3
-"GameAssembly.dll"+1188069: CC                          -  int 3
-"GameAssembly.dll"+118806A: CC                          -  int 3
-"GameAssembly.dll"+118806B: CC                          -  int 3
-"GameAssembly.dll"+118806C: CC                          -  int 3
-"GameAssembly.dll"+118806D: CC                          -  int 3
-"GameAssembly.dll"+118806E: CC                          -  int 3
-"GameAssembly.dll"+118806F: CC                          -  int 3
-// ---------- INJECTING HERE ----------
-"GameAssembly.dll"+1188070: 40 57                       -  push rdi
-"GameAssembly.dll"+1188072: 48 83 EC 40                 -  sub rsp,40
-// ---------- DONE INJECTING  ----------
-"GameAssembly.dll"+1188076: 48 C7 44 24 20 FE FF FF FF  -  mov qword ptr [rsp+20],FFFFFFFE
-"GameAssembly.dll"+118807F: 48 89 5C 24 50              -  mov [rsp+50],rbx
-"GameAssembly.dll"+1188084: 48 8B D9                    -  mov rbx,rcx
-"GameAssembly.dll"+1188087: 80 3D 76 AC 2C 03 00        -  cmp byte ptr [GameAssembly.dll+4452D04],00
-"GameAssembly.dll"+118808E: 75 50                       -  jne GameAssembly.dll+11880E0
-"GameAssembly.dll"+1188090: 48 8B 05 A9 DC 2B 03        -  mov rax,[GameAssembly.dll+4445D40]
-"GameAssembly.dll"+1188097: 48 63 90 B8 00 00 00        -  movsxd  rdx,dword ptr [rax+000000B8]
-"GameAssembly.dll"+118809E: 48 8B 05 73 DC 2B 03        -  mov rax,[GameAssembly.dll+4445D18]
-"GameAssembly.dll"+11880A5: 8B 8C 02 40 95 03 00        -  mov ecx,[rdx+rax+00039540]
-"GameAssembly.dll"+11880AC: 45 33 C0                    -  xor r8d,r8d
-}
-</AssemblerScript>
-                </CheatEntry>
-                <CheatEntry>
-                  <ID>9018</ID>
-                  <Description>"Unlock Cold Fusion"</Description>
-                  <LastState/>
-                  <Color>008000</Color>
-                  <VariableType>Auto Assembler Script</VariableType>
-                  <AssemblerScript>{ Game   : tld.exe
-  Version: 1.97 85101 S
-  Date   : 2021-11-01
-  Author : sub1to
-}
-
-[ENABLE]
-alloc(newmem,$ff,GameAssembly.dll)
-label(returnhere)
-label(code)
-label(feat_coldfusion_hook)
-label(feat_coldfusion_bytes)
-registersymbol(feat_coldfusion_hook)
-registersymbol(feat_coldfusion_bytes)
-
-//  class: Feat_ColdFusion
-//  RVA: 0x1188D90 Offset: 0x1187D90 VA: 0x7FFB0CB58D90 Slot: 8
-//  public override float GetNormalizedProgress() { }
-aobScanModule(hook,GameAssembly.dll,40 53 48 83 EC 50 48 C7 44 24 20 FE FF FF FF 0F 29 74 24 40 48 8B D9 80 3D 2E)
-
-//  class: Feat_ColdFusion
-//  RVA: 0x1188E90 Offset: 0x1187E90 VA: 0x7FFB0CB58E90 Slot: 9
-//  public override void SetNormalizedProgress(float normalizedValue) { }
-//  another shit sig..
-aobScanModule(feat_coldfusion_set,GameAssembly.dll,4c 8b dc 57 48 83 ec ? 49 c7 43 ? ? ? ? ? 49 89 5b ? 49 89 73 ? 0f 29 74 24 ? 0f 29 7c 24 ? 0f 28 f9 48 8b d9 80 3d ? ? ? ? ? 75 ? 48 8b 05 ? ? ? ? 48 63 90 ? ? ? ? 48 8b 05 ? ? ? ? 8b 8c 02 ? ? ? ? 45 33 c0 4d 89 43 ? 4d 89 43 ? 4d 89 43 ? 4d 8d 43 ? 8b 94 02 ? ? ? ? e8 ? ? ? ? 90 33 c9 ff 15 ? ? ? ? 90 c6 05 ? ? ? ? ? 48 8b 03 48 8b 90 ? ? ? ? 48 8b cb ff 90 ? ? ? ? 0f b6 f0 8b 7b ? 48 8b 05 ? ? ? ? f6 80 ? ? ? ? ? 74 ? 83 b8 ? ? ? ? ? 75 ? 48 8b c8 e8 ? ? ? ? 48 8b 05 ? ? ? ? 66 0f 6e f7 0f 5b f6 f3 0f 59 f7 48 8b 80 ? ? ? ? f3 0f 11 30 8b 7b ? 48 8b 0d ? ? ? ? f6 81 ? ? ? ? ? 74 ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 66 0f 6e c7 0f 5b c0 0f 57 c9 0f 2f ce 77 ? 0f 2f f0 76 ? 0f 28 f0 eb ? 0f 57 f6 48 8b 05 ? ? ? ? 48 8b 88 ? ? ? ? f3 0f 11 31 48 8b 03 48 8b 90 ? ? ? ? 48 8b cb ff 90 ? ? ? ? 84 c0 74 ? 40 84 f6 75 ? c6 43 ? ? 48 8b 5c 24 ? 48 8b 74 24 ? 0f 28 74 24 ? 0f 28 7c 24 ? 48 83 c4 ? 5f c3 cc cc cc 40 57 48 83 ec ? 48 c7 44 24 ? ? ? ? ? 48 89 5c 24 ? 80 3d ? ? ? ? ? 75 ? 48 8b 05 ? ? ? ? 48 63 88 ? ? ? ? 48 8b 05 ? ? ? ? 33 d2 48 89 54 24 ? 48 89 54 24 ? 48 89 54 24 ? 4c 8d 44 24 ? 8b 94 01 ? ? ? ? 8b 8c 01 ? ? ? ? e8 ? ? ? ? 90 33 c9 ff 15 ? ? ? ? 90 c6 05 ? ? ? ? ? 48 8b 1d ? ? ? ? 48 8b cb e8 ? ? ? ? 48 8b 43 ? 48 85 c0 74 ? 8b 08 e8 ? ? ? ? 48 3b 05 ? ? ? ? 75 ? 48 8b 43 ? 48 8b 48 ? 48 8b 49 ? b2 ? 48 8b 09 e8 ? ? ? ? 48 8b d8 f6 83 ? ? ? ? ? 75 ? 48 8b cb e8 ? ? ? ? eb ? 8b 8b ? ? ? ? 48 8b d3 48 83 7b ? ? 74 ? e8 ? ? ? ? eb ? e8 ? ? ? ? 48 8b f8 f6 83 ? ? ? ? ? 74 ? 48 8d 44 24 ? 48 89 44 24 ? 4c 8d 4c 24 ? 48 8d 15 ? ? ? ? 48 8b cf e8 ? ? ? ? 8b 05 ? ? ? ? c1 e8 ? a8 ? 74 ? 48 8b d3 48 8b cf e8 ? ? ? ? 48 8b cb e8 ? ? ? ? 48 8b 05 ? ? ? ? 4c 8b 80 ? ? ? ? 49 83 c0 ? 49 89 38 83 3d ? ? ? ? ? 74 ? 49 c1 e8 ? 41 81 e0 ? ? ? ? 41 8b c0 48 c1 e8 ? 48 8d 0d ? ? ? ? 48 8d 14 c1 41 83 e0 ? 0f 0d 0a 0f 1f 84 00 ? ? ? ? 48 8b 02 48 8b c8 4c 0f ab c1 f0 48 0f b1 0a 75 ? 48 8b 5c 24 ? 48 83 c4 ? 5f c3 cc cc cc cc 40 53 48 83 ec ? 48 c7 44 24 ? ? ? ? ? 80 3d)
-
-
-newmem:
-feat_coldfusion_bytes:
-  //push rbx
-  //sub rsp,50
-  readMem(hook, 6)
-  jmp returnhere
-
-code:
-  lea rsp, [rsp-28]
-  mov [rsp+20], rcx
-  mov edx, (float)1.0
-  movd xmm1, edx
-  call feat_coldfusion_set
-  mov rcx, [rsp+20]
-  lea rsp, [rsp+28]
-  jmp feat_coldfusion_bytes
-
-hook:
-feat_coldfusion_hook:
-  jmp code
-  nop
-  returnhere:
-
-
-
-[DISABLE]
-feat_coldfusion_hook:
-  //40 53 48 83 EC 50
-  readMem(feat_coldfusion_bytes, 6)
-
-unregistersymbol(feat_coldfusion_hook)
-unregistersymbol(feat_coldfusion_bytes)
-dealloc(newmem)
-
-{
-// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+1188D90
-
-GameAssembly.dll+1188D76: 0F 28 C6                    - movaps xmm0,xmm6
-GameAssembly.dll+1188D79: E8 F2 35 5E 00              - call GameAssembly.dll+176C370
-GameAssembly.dll+1188D7E: 84 C0                       - test al,al
-GameAssembly.dll+1188D80: 0F 95 C0                    - setne al
-GameAssembly.dll+1188D83: 0F 28 74 24 40              - movaps xmm6,[rsp+40]
-GameAssembly.dll+1188D88: 48 83 C4 50                 - add rsp,50
-GameAssembly.dll+1188D8C: 5B                          - pop rbx
-GameAssembly.dll+1188D8D: C3                          - ret
-GameAssembly.dll+1188D8E: CC                          - int 3
-GameAssembly.dll+1188D8F: CC                          - int 3
-// ---------- INJECTING HERE ----------
-GameAssembly.dll+1188D90: 40 53                       - push rbx
-GameAssembly.dll+1188D92: 48 83 EC 50                 - sub rsp,50
-// ---------- DONE INJECTING  ----------
-GameAssembly.dll+1188D96: 48 C7 44 24 20 FE FF FF FF  - mov qword ptr [rsp+20],FFFFFFFFFFFFFFFE
-GameAssembly.dll+1188D9F: 0F 29 74 24 40              - movaps [rsp+40],xmm6
-GameAssembly.dll+1188DA4: 48 8B D9                    - mov rbx,rcx
-GameAssembly.dll+1188DA7: 80 3D 2E A0 2C 03 00        - cmp byte ptr [GameAssembly.dll+4452DDC],00
-GameAssembly.dll+1188DAE: 75 50                       - jne GameAssembly.dll+1188E00
-GameAssembly.dll+1188DB0: 48 8B 05 89 CF 2B 03        - mov rax,[GameAssembly.dll+4445D40]
-GameAssembly.dll+1188DB7: 48 63 90 B8 00 00 00        - movsxd  rdx,dword ptr [rax+000000B8]
-GameAssembly.dll+1188DBE: 48 8B 05 53 CF 2B 03        - mov rax,[GameAssembly.dll+4445D18]
-GameAssembly.dll+1188DC5: 8B 8C 02 98 95 03 00        - mov ecx,[rdx+rax+00039598]
-}
-</AssemblerScript>
-                </CheatEntry>
-                <CheatEntry>
-                  <ID>9019</ID>
-                  <Description>"Unlock Efficient Machine"</Description>
-                  <LastState/>
-                  <Color>008000</Color>
-                  <VariableType>Auto Assembler Script</VariableType>
-                  <AssemblerScript>{ Game   : tld.exe
-  Version: 1.97 85101 S
-  Date   : 2021-11-02
-  Author : sub1to
-}
-
-[ENABLE]
-alloc(newmem,$ff,GameAssembly.dll)
-label(returnhere)
-label(code)
-label(feat_efficientmachine_hook)
-label(feat_efficientmachine_bytes)
-registersymbol(feat_efficientmachine_hook)
-registersymbol(feat_efficientmachine_bytes)
-
-//  class: Feat_EfficientMachine
-//  RVA: 0x1189B70 Offset: 0x1188B70 VA: 0x7FFB0CB59B70 Slot: 8
-//  public override float GetNormalizedProgress() { }
-aobScanModule(hook,GameAssembly.dll,40 53 48 83 EC 50 48 C7 44 24 20 FE FF FF FF 0F 29 74 24 40 48 8B D9 80 3D C2)
-
-//  class: Feat_EfficientMachine
-//  RVA: 0x1189C80 Offset: 0x1188C80 VA: 0x7FFB0CB59C80 Slot: 9
-//  public override void SetNormalizedProgress(float normalizedValue) { }
-aobScanModule(feat_efficientmachine_set,GameAssembly.dll,50 5B C3 CC CC CC CC CC CC CC CC 4C 8B DC 57 48 83 EC 60)
-
-
-newmem:
-feat_efficientmachine_bytes:
-  //push rbx
-  //sub rsp,50
-  readMem(hook, 6)
-  jmp returnhere
-
-code:
-  lea rsp, [rsp-28]
-  mov [rsp+20], rcx
-  mov edx, (float)1.0
-  movd xmm1, edx
-  call feat_efficientmachine_set+B
-  mov rcx, [rsp+20]
-  lea rsp, [rsp+28]
-  jmp feat_efficientmachine_bytes
-
-hook:
-feat_efficientmachine_hook:
-  jmp code
-  nop
-  returnhere:
-
-
-
-[DISABLE]
-feat_efficientmachine_hook:
-  //40 53 48 83 EC 50
-  readMem(feat_efficientmachine_bytes, 6)
-
-unregistersymbol(feat_efficientmachine_hook)
-unregistersymbol(feat_efficientmachine_bytes)
-dealloc(newmem)
-
-{
-// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+1189B70
-
-GameAssembly.dll+1189B66: CC                          - int 3
-GameAssembly.dll+1189B67: CC                          - int 3
-GameAssembly.dll+1189B68: CC                          - int 3
-GameAssembly.dll+1189B69: CC                          - int 3
-GameAssembly.dll+1189B6A: CC                          - int 3
-GameAssembly.dll+1189B6B: CC                          - int 3
-GameAssembly.dll+1189B6C: CC                          - int 3
-GameAssembly.dll+1189B6D: CC                          - int 3
-GameAssembly.dll+1189B6E: CC                          - int 3
-GameAssembly.dll+1189B6F: CC                          - int 3
-// ---------- INJECTING HERE ----------
-GameAssembly.dll+1189B70: 40 53                       - push rbx
-GameAssembly.dll+1189B72: 48 83 EC 50                 - sub rsp,50
-// ---------- DONE INJECTING  ----------
-GameAssembly.dll+1189B76: 48 C7 44 24 20 FE FF FF FF  - mov qword ptr [rsp+20],FFFFFFFFFFFFFFFE
-GameAssembly.dll+1189B7F: 0F 29 74 24 40              - movaps [rsp+40],xmm6
-GameAssembly.dll+1189B84: 48 8B D9                    - mov rbx,rcx
-GameAssembly.dll+1189B87: 80 3D C2 91 2C 03 00        - cmp byte ptr [GameAssembly.dll+4452D50],00
-GameAssembly.dll+1189B8E: 75 50                       - jne GameAssembly.dll+1189BE0
-GameAssembly.dll+1189B90: 48 8B 05 A9 C1 2B 03        - mov rax,[GameAssembly.dll+4445D40]
-GameAssembly.dll+1189B97: 48 63 90 B8 00 00 00        - movsxd  rdx,dword ptr [rax+000000B8]
-GameAssembly.dll+1189B9E: 48 8B 05 73 C1 2B 03        - mov rax,[GameAssembly.dll+4445D18]
-GameAssembly.dll+1189BA5: 8B 8C 02 F8 95 03 00        - mov ecx,[rdx+rax+000395F8]
-}
-</AssemblerScript>
-                </CheatEntry>
-                <CheatEntry>
-                  <ID>9020</ID>
-                  <Description>"Unlock Expert Trapper"</Description>
-                  <LastState/>
-                  <Color>008000</Color>
-                  <VariableType>Auto Assembler Script</VariableType>
-                  <AssemblerScript>{ Game   : tld.exe
-  Version: 1.97 85101 S
-  Date   : 2021-11-02
-  Author : sub1to
-}
-
-[ENABLE]
-alloc(newmem,$ff,GameAssembly.dll)
-label(returnhere)
-label(code)
-label(feat_trapper_hook)
-label(feat_trapper_bytes)
-registersymbol(feat_trapper_hook)
-registersymbol(feat_trapper_bytes)
-
-//  class: Feat_ExpertTrapper
-//  RVA: 0x118A700 Offset: 0x1189700 VA: 0x7FFB0CB5A700 Slot: 8
-//  public override float GetNormalizedProgress() { }
-//  another shit sig
-aobScanModule(hook,GameAssembly.dll,40 57 48 83 ec ? 48 c7 44 24 ? ? ? ? ? 48 89 5c 24 ? 48 8b d9 80 3d ? ? ? ? ? 75 ? 48 8b 05 ? ? ? ? 48 63 90 ? ? ? ? 48 8b 05 ? ? ? ? 8b 8c 02 ? ? ? ? 45 33 c0 4c 89 44 24 ? 4c 89 44 24 ? 4c 89 44 24 ? 4c 8d 44 24 ? 8b 94 02 ? ? ? ? e8 ? ? ? ? 90 33 c9 ff 15 ? ? ? ? 90 c6 05 ? ? ? ? ? 48 8b 05 ? ? ? ? f6 80 ? ? ? ? ? 74 ? 83 b8 ? ? ? ? ? 75 ? 48 8b c8 e8 ? ? ? ? 48 8b 05 ? ? ? ? 48 8b 80 ? ? ? ? 8b 38 8b 5b ? 48 8b 0d ? ? ? ? f6 81 ? ? ? ? ? 74 ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 66 0f 6e c7 0f 5b c0 66 0f 6e cb 0f 5b c9 f3 0f 5e c1 0f 57 d2 0f 2f d0 77 ? f3 0f 10 0d ? ? ? ? 0f 2f c1 76 ? 0f 28 c1 48 8b 5c 24 ? 48 83 c4 ? 5f c3 0f 57 c0 48 8b 5c 24 ? 48 83 c4 ? 5f c3 cc cc cc cc cc cc cc cc cc cc cc 4c 8b dc 57 48 83 ec ? 49 c7 43 ? ? ? ? ? 49 89 5b ? 49 89 73 ? 0f 29 74 24 ? 0f 28 f1 48 8b d9 80 3d ? ? ? ? ? 75 ? 48 8b 05 ? ? ? ? 48 63 90 ? ? ? ? 48 8b 05 ? ? ? ? 8b 8c 02 ? ? ? ? 49 c7 43 ? ? ? ? ? 49 c7 43 ? ? ? ? ? 49 c7 43 ? ? ? ? ? 4d 8d 43 ? 8b 94 02 ? ? ? ? e8 ? ? ? ? 90 33 c9 ff 15 ? ? ? ? 90 c6 05 ? ? ? ? ? 48 8b 03 48 8b 90 ? ? ? ? 48 8b cb ff 90 ? ? ? ? 0f b6 f8 8b 73 ? 48 8b 0d ? ? ? ? f6 81 ? ? ? ? ? 74 ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 66 0f 6e c6 0f 5b c0 f3 0f 59 c6 33 d2 e8 ? ? ? ? 8b f0 48 8b 0d ? ? ? ? f6 81 ? ? ? ? ? 74 ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 48 8b 0d ? ? ? ? 48 8b 89 ? ? ? ? 89 31 8b 4b ? 48 8b 05 ? ? ? ? 48 8b 90 ? ? ? ? 8b 02 85 c0 78 ? 3b c1 7e ? 8b c1 eb ? 33 c0 89 02 48 8b 03 48 8b 90 ? ? ? ? 48 8b cb ff 90 ? ? ? ? 84 c0 74 ? 40 84 ff 75 ? c6 43 ? ? 48 8b 5c 24 ? 48 8b 74 24 ? 0f 28 74 24 ? 48 83 c4 ? 5f c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc 33 d2)
-
-//  class: Feat_ExpertTrapper
-//  RVA: 0x118A810 Offset: 0x1189810 VA: 0x7FFB0CB5A810 Slot: 9
-//  public override void SetNormalizedProgress(float normalizedValue) { }
-aobScanModule(feat_trapper_set,GameAssembly.dll,4c 8b dc 57 48 83 ec ? 49 c7 43 ? ? ? ? ? 49 89 5b ? 49 89 73 ? 0f 29 74 24 ? 0f 28 f1 48 8b d9 80 3d ? ? ? ? ? 75 ? 48 8b 05 ? ? ? ? 48 63 90 ? ? ? ? 48 8b 05 ? ? ? ? 8b 8c 02 ? ? ? ? 49 c7 43 ? ? ? ? ? 49 c7 43 ? ? ? ? ? 49 c7 43 ? ? ? ? ? 4d 8d 43 ? 8b 94 02 ? ? ? ? e8 ? ? ? ? 90 33 c9 ff 15 ? ? ? ? 90 c6 05 ? ? ? ? ? 48 8b 03 48 8b 90 ? ? ? ? 48 8b cb ff 90 ? ? ? ? 0f b6 f8 8b 73 ? 48 8b 0d ? ? ? ? f6 81 ? ? ? ? ? 74 ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 66 0f 6e c6 0f 5b c0 f3 0f 59 c6 33 d2 e8 ? ? ? ? 8b f0 48 8b 0d ? ? ? ? f6 81 ? ? ? ? ? 74 ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 48 8b 0d ? ? ? ? 48 8b 89 ? ? ? ? 89 31 8b 4b ? 48 8b 05 ? ? ? ? 48 8b 90 ? ? ? ? 8b 02 85 c0 78 ? 3b c1 7e ? 8b c1 eb ? 33 c0 89 02 48 8b 03 48 8b 90 ? ? ? ? 48 8b cb ff 90 ? ? ? ? 84 c0 74 ? 40 84 ff 75 ? c6 43 ? ? 48 8b 5c 24 ? 48 8b 74 24 ? 0f 28 74 24 ? 48 83 c4 ? 5f c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc 33 d2)
-
-
-newmem:
-feat_trapper_bytes:
-  //push rdi
-  //sub rsp,40
-  readMem(hook, 6)
-  jmp returnhere
-
-code:
-  lea rsp, [rsp-28]
-  mov [rsp+20], rcx
-  mov edx, (float)1.0
-  movd xmm1, edx
-  call feat_trapper_set
-  mov rcx, [rsp+20]
-  lea rsp, [rsp+28]
-  jmp feat_trapper_bytes
-
-hook:
-feat_trapper_hook:
-  jmp code
-  nop
-  returnhere:
-
-
-
-[DISABLE]
-feat_trapper_hook:
-  //40 57 48 83 EC 40
-  readMem(feat_trapper_bytes, 6)
-
-unregistersymbol(feat_trapper_hook)
-unregistersymbol(feat_trapper_bytes)
-dealloc(newmem)
-
-{
-// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+118A700
-
-GameAssembly.dll+118A6F6: CC                          - int 3
-GameAssembly.dll+118A6F7: CC                          - int 3
-GameAssembly.dll+118A6F8: CC                          - int 3
-GameAssembly.dll+118A6F9: CC                          - int 3
-GameAssembly.dll+118A6FA: CC                          - int 3
-GameAssembly.dll+118A6FB: CC                          - int 3
-GameAssembly.dll+118A6FC: CC                          - int 3
-GameAssembly.dll+118A6FD: CC                          - int 3
-GameAssembly.dll+118A6FE: CC                          - int 3
-GameAssembly.dll+118A6FF: CC                          - int 3
-// ---------- INJECTING HERE ----------
-GameAssembly.dll+118A700: 40 57                       - push rdi
-GameAssembly.dll+118A702: 48 83 EC 40                 - sub rsp,40
-// ---------- DONE INJECTING  ----------
-GameAssembly.dll+118A706: 48 C7 44 24 20 FE FF FF FF  - mov qword ptr [rsp+20],FFFFFFFFFFFFFFFE
-GameAssembly.dll+118A70F: 48 89 5C 24 50              - mov [rsp+50],rbx
-GameAssembly.dll+118A714: 48 8B D9                    - mov rbx,rcx
-GameAssembly.dll+118A717: 80 3D EA 85 2C 03 00        - cmp byte ptr [GameAssembly.dll+4452D08],00
-GameAssembly.dll+118A71E: 75 50                       - jne GameAssembly.dll+118A770
-GameAssembly.dll+118A720: 48 8B 05 19 B6 2B 03        - mov rax,[GameAssembly.dll+4445D40]
-GameAssembly.dll+118A727: 48 63 90 B8 00 00 00        - movsxd  rdx,dword ptr [rax+000000B8]
-GameAssembly.dll+118A72E: 48 8B 05 E3 B5 2B 03        - mov rax,[GameAssembly.dll+4445D18]
-GameAssembly.dll+118A735: 8B 8C 02 58 96 03 00        - mov ecx,[rdx+rax+00039658]
-}
-</AssemblerScript>
-                </CheatEntry>
-                <CheatEntry>
-                  <ID>9021</ID>
-                  <Description>"Unlock Fire Master"</Description>
-                  <LastState/>
-                  <Color>008000</Color>
-                  <VariableType>Auto Assembler Script</VariableType>
-                  <AssemblerScript>{ Game   : tld.exe
-  Version: 1.97 85101 S
-  Date   : 2021-11-02
-  Author : sub1to
-}
-
-[ENABLE]
-alloc(newmem,$ff,GameAssembly.dll)
-label(returnhere)
-label(code)
-label(feat_firemaster_hook)
-label(feat_firemaster_bytes)
-registersymbol(feat_firemaster_hook)
-registersymbol(feat_firemaster_bytes)
-
-//  class: Feat_FireMaster
-//  RVA: 0x118B340 Offset: 0x118A340 VA: 0x7FFB0CB5B340 Slot: 8
-//  public override float GetNormalizedProgress() { }
-aobScanModule(hook,GameAssembly.dll,40 57 48 83 ec ? 48 c7 44 24 ? ? ? ? ? 48 89 5c 24 ? 48 8b d9 80 3d ? ? ? ? ? 75 ? 48 8b 05 ? ? ? ? 48 63 90 ? ? ? ? 48 8b 05 ? ? ? ? 8b 8c 02 ? ? ? ? 45 33 c0 4c 89 44 24 ? 4c 89 44 24 ? 4c 89 44 24 ? 4c 8d 44 24 ? 8b 94 02 ? ? ? ? e8 ? ? ? ? 90 33 c9 ff 15 ? ? ? ? 90 c6 05 ? ? ? ? ? 48 8b 05 ? ? ? ? f6 80 ? ? ? ? ? 74 ? 83 b8 ? ? ? ? ? 75 ? 48 8b c8 e8 ? ? ? ? 48 8b 05 ? ? ? ? 48 8b 80 ? ? ? ? 8b 38 8b 5b ? 48 8b 0d ? ? ? ? f6 81 ? ? ? ? ? 74 ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 66 0f 6e c7 0f 5b c0 66 0f 6e cb 0f 5b c9 f3 0f 5e c1 0f 57 d2 0f 2f d0 77 ? f3 0f 10 0d ? ? ? ? 0f 2f c1 76 ? 0f 28 c1 48 8b 5c 24 ? 48 83 c4 ? 5f c3 0f 57 c0 48 8b 5c 24 ? 48 83 c4 ? 5f c3 cc cc cc cc cc cc cc cc cc cc cc 4c 8b dc 57 48 83 ec ? 49 c7 43 ? ? ? ? ? 49 89 5b ? 49 89 73 ? 0f 29 74 24 ? 0f 28 f1 48 8b d9 80 3d ? ? ? ? ? 75 ? 48 8b 05 ? ? ? ? 48 63 90 ? ? ? ? 48 8b 05 ? ? ? ? 8b 8c 02 ? ? ? ? 49 c7 43 ? ? ? ? ? 49 c7 43 ? ? ? ? ? 49 c7 43 ? ? ? ? ? 4d 8d 43 ? 8b 94 02 ? ? ? ? e8 ? ? ? ? 90 33 c9 ff 15 ? ? ? ? 90 c6 05 ? ? ? ? ? 48 8b 03 48 8b 90 ? ? ? ? 48 8b cb ff 90 ? ? ? ? 0f b6 f8 8b 73 ? 48 8b 0d ? ? ? ? f6 81 ? ? ? ? ? 74 ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 66 0f 6e c6 0f 5b c0 f3 0f 59 c6 33 d2 e8 ? ? ? ? 8b f0 48 8b 0d ? ? ? ? f6 81 ? ? ? ? ? 74 ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 48 8b 0d ? ? ? ? 48 8b 89 ? ? ? ? 89 31 8b 4b ? 48 8b 05 ? ? ? ? 48 8b 90 ? ? ? ? 8b 02 85 c0 78 ? 3b c1 7e ? 8b c1 eb ? 33 c0 89 02 33 d2)
-
-//  class: Feat_FireMaster
-//  RVA: 0x118B450 Offset: 0x118A450 VA: 0x7FFB0CB5B450 Slot: 9
-//  public override void SetNormalizedProgress(float normalizedValue) { }
-aobScanModule(feat_firemaster_set,GameAssembly.dll,4c 8b dc 57 48 83 ec ? 49 c7 43 ? ? ? ? ? 49 89 5b ? 49 89 73 ? 0f 29 74 24 ? 0f 28 f1 48 8b d9 80 3d ? ? ? ? ? 75 ? 48 8b 05 ? ? ? ? 48 63 90 ? ? ? ? 48 8b 05 ? ? ? ? 8b 8c 02 ? ? ? ? 49 c7 43 ? ? ? ? ? 49 c7 43 ? ? ? ? ? 49 c7 43 ? ? ? ? ? 4d 8d 43 ? 8b 94 02 ? ? ? ? e8 ? ? ? ? 90 33 c9 ff 15 ? ? ? ? 90 c6 05 ? ? ? ? ? 48 8b 03 48 8b 90 ? ? ? ? 48 8b cb ff 90 ? ? ? ? 0f b6 f8 8b 73 ? 48 8b 0d ? ? ? ? f6 81 ? ? ? ? ? 74 ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 66 0f 6e c6 0f 5b c0 f3 0f 59 c6 33 d2 e8 ? ? ? ? 8b f0 48 8b 0d ? ? ? ? f6 81 ? ? ? ? ? 74 ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 48 8b 0d ? ? ? ? 48 8b 89 ? ? ? ? 89 31 8b 4b ? 48 8b 05 ? ? ? ? 48 8b 90 ? ? ? ? 8b 02 85 c0 78 ? 3b c1 7e ? 8b c1 eb ? 33 c0 89 02 33 d2)
-
-
-newmem:
-feat_firemaster_bytes:
-  //push rdi
-  //sub rsp,40
-  readMem(hook, 6)
-  jmp returnhere
-
-code:
-  lea rsp, [rsp-28]
-  mov [rsp+20], rcx
-  mov edx, (float)1.0
-  movd xmm1, edx
-  call feat_firemaster_set
-  mov rcx, [rsp+20]
-  lea rsp, [rsp+28]
-  jmp feat_firemaster_bytes
-
-hook:
-feat_firemaster_hook:
-  jmp code
-  nop
-  returnhere:
-
-
-
-[DISABLE]
-feat_firemaster_hook:
-  //40 57 48 83 EC 40
-  readMem(feat_firemaster_bytes, 6)
-
-unregistersymbol(feat_firemaster_hook)
-unregistersymbol(feat_firemaster_bytes)
-dealloc(newmem)
-
-{
-// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+118B340
-
-GameAssembly.dll+118B336: CC                          - int 3
-GameAssembly.dll+118B337: CC                          - int 3
-GameAssembly.dll+118B338: CC                          - int 3
-GameAssembly.dll+118B339: CC                          - int 3
-GameAssembly.dll+118B33A: CC                          - int 3
-GameAssembly.dll+118B33B: CC                          - int 3
-GameAssembly.dll+118B33C: CC                          - int 3
-GameAssembly.dll+118B33D: CC                          - int 3
-GameAssembly.dll+118B33E: CC                          - int 3
-GameAssembly.dll+118B33F: CC                          - int 3
-// ---------- INJECTING HERE ----------
-GameAssembly.dll+118B340: 40 57                       - push rdi
-GameAssembly.dll+118B342: 48 83 EC 40                 - sub rsp,40
-// ---------- DONE INJECTING  ----------
-GameAssembly.dll+118B346: 48 C7 44 24 20 FE FF FF FF  - mov qword ptr [rsp+20],FFFFFFFFFFFFFFFE
-GameAssembly.dll+118B34F: 48 89 5C 24 50              - mov [rsp+50],rbx
-GameAssembly.dll+118B354: 48 8B D9                    - mov rbx,rcx
-GameAssembly.dll+118B357: 80 3D 77 7A 2C 03 00        - cmp byte ptr [GameAssembly.dll+4452DD5],00
-GameAssembly.dll+118B35E: 75 50                       - jne GameAssembly.dll+118B3B0
-GameAssembly.dll+118B360: 48 8B 05 D9 A9 2B 03        - mov rax,[GameAssembly.dll+4445D40]
-GameAssembly.dll+118B367: 48 63 90 B8 00 00 00        - movsxd  rdx,dword ptr [rax+000000B8]
-GameAssembly.dll+118B36E: 48 8B 05 A3 A9 2B 03        - mov rax,[GameAssembly.dll+4445D18]
-GameAssembly.dll+118B375: 8B 8C 02 B0 96 03 00        - mov ecx,[rdx+rax+000396B0]
-}
-</AssemblerScript>
-                </CheatEntry>
-                <CheatEntry>
-                  <ID>9022</ID>
-                  <Description>"Unlock Free Runner"</Description>
-                  <LastState/>
-                  <Color>008000</Color>
-                  <VariableType>Auto Assembler Script</VariableType>
-                  <AssemblerScript>{ Game   : tld.exe
-  Version: 1.97 85101 S
-  Date   : 2021-11-02
-  Author : sub1to
-}
-
-[ENABLE]
-alloc(newmem,$ff,GameAssembly.dll)
-label(returnhere)
-label(code)
-label(feat_freerunner_hook)
-label(feat_freerunner_bytes)
-registersymbol(feat_freerunner_hook)
-registersymbol(feat_freerunner_bytes)
-
-//  class: Feat_FreeRunner
-//  RVA: 0x118C4C0 Offset: 0x118B4C0 VA: 0x7FFB0CB5C4C0 Slot: 8
-//  public override float GetNormalizedProgress() { }
-aobScanModule(hook,GameAssembly.dll,40 53 48 83 EC 50 48 C7 44 24 20 FE FF FF FF 0F 29 74 24 40 48 8B D9 80 3D ED 68 2C 03 00)
-
-//  class: Feat_FreeRunner
-//  RVA: 0x118C5C0 Offset: 0x118B5C0 VA: 0x7FFB0CB5C5C0 Slot: 9
-//  public override void SetNormalizedProgress(float normalizedValue) { }
-aobScanModule(feat_freerunner_set,GameAssembly.dll,4C 8B DC 57 48 83 EC 60 49 C7 43 B8 FE FF FF FF 49 89 5B 08 49 89 73 10 0F 29 74 24 50 0F 29 7C 24 40 0F 28 F9 48 8B D9 80 3D C0 67 2C 03 00)
-
-
-newmem:
-feat_freerunner_bytes:
-  //push rbx
-  //sub rsp,50
-  readMem(hook, 6)
-  jmp returnhere
-
-code:
-  lea rsp, [rsp-28]
-  mov [rsp+20], rcx
-  mov edx, (float)1.0
-  movd xmm1, edx
-  call feat_freerunner_set
-  mov rcx, [rsp+20]
-  lea rsp, [rsp+28]
-  jmp feat_freerunner_bytes
-
-hook:
-feat_freerunner_hook:
-  jmp code
-  nop
-  returnhere:
-
-
-
-[DISABLE]
-feat_freerunner_hook:
-  //40 53 48 83 EC 50
-  readMem(feat_freerunner_bytes, 6)
-
-unregistersymbol(feat_freerunner_hook)
-unregistersymbol(feat_freerunner_bytes)
-dealloc(newmem)
-
-{
-// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+118C4C0
-
-GameAssembly.dll+118C4A6: 0F 28 C6                    - movaps xmm0,xmm6
-GameAssembly.dll+118C4A9: E8 C2 FE 5D 00              - call GameAssembly.dll+176C370
-GameAssembly.dll+118C4AE: 84 C0                       - test al,al
-GameAssembly.dll+118C4B0: 0F 95 C0                    - setne al
-GameAssembly.dll+118C4B3: 0F 28 74 24 40              - movaps xmm6,[rsp+40]
-GameAssembly.dll+118C4B8: 48 83 C4 50                 - add rsp,50
-GameAssembly.dll+118C4BC: 5B                          - pop rbx
-GameAssembly.dll+118C4BD: C3                          - ret
-GameAssembly.dll+118C4BE: CC                          - int 3
-GameAssembly.dll+118C4BF: CC                          - int 3
-// ---------- INJECTING HERE ----------
-GameAssembly.dll+118C4C0: 40 53                       - push rbx
-GameAssembly.dll+118C4C2: 48 83 EC 50                 - sub rsp,50
-// ---------- DONE INJECTING  ----------
-GameAssembly.dll+118C4C6: 48 C7 44 24 20 FE FF FF FF  - mov qword ptr [rsp+20],FFFFFFFFFFFFFFFE
-GameAssembly.dll+118C4CF: 0F 29 74 24 40              - movaps [rsp+40],xmm6
-GameAssembly.dll+118C4D4: 48 8B D9                    - mov rbx,rcx
-GameAssembly.dll+118C4D7: 80 3D ED 68 2C 03 00        - cmp byte ptr [GameAssembly.dll+4452DCB],00
-GameAssembly.dll+118C4DE: 75 50                       - jne GameAssembly.dll+118C530
-GameAssembly.dll+118C4E0: 48 8B 05 59 98 2B 03        - mov rax,[GameAssembly.dll+4445D40]
-GameAssembly.dll+118C4E7: 48 63 90 B8 00 00 00        - movsxd  rdx,dword ptr [rax+000000B8]
-GameAssembly.dll+118C4EE: 48 8B 05 23 98 2B 03        - mov rax,[GameAssembly.dll+4445D18]
-GameAssembly.dll+118C4F5: 8B 8C 02 10 97 03 00        - mov ecx,[rdx+rax+00039710]
-}
-</AssemblerScript>
-                </CheatEntry>
-                <CheatEntry>
-                  <ID>9023</ID>
-                  <Description>"Unlock Night Walker"</Description>
-                  <LastState/>
-                  <Color>008000</Color>
-                  <VariableType>Auto Assembler Script</VariableType>
-                  <AssemblerScript>{ Game   : tld.exe
-  Version: 1.97 85101 S
-  Date   : 2021-11-02
-  Author : sub1to
-}
-
-[ENABLE]
-alloc(newmem,$ff,GameAssembly.dll)
-label(returnhere)
-label(code)
-label(feat_nightwalker_hook)
-label(feat_nightwalker_bytes)
-registersymbol(feat_nightwalker_hook)
-registersymbol(feat_nightwalker_bytes)
-
-//  class: Feat_NightWalker
-//  RVA: 0x118CC40 Offset: 0x118BC40 VA: 0x7FFB0CB5CC40 Slot: 8
-//  public override float GetNormalizedProgress() { }
-aobScanModule(hook,GameAssembly.dll,80 79 60 00 74 09)
-
-//  class: Feat_NightWalker
-//  RVA: 0x118CC60 Offset: 0x118BC60 VA: 0x7FFB0CB5CC60 Slot: 9
-//  public override void SetNormalizedProgress(float normalizedValue) { }
-aobScanModule(feat_nightwalker_set,GameAssembly.dll,57 C0 C3 CC CC CC CC CC CC CC CC CC CC CC CC CC 40 57 48 83 EC 50)
-
-
-newmem:
-feat_nightwalker_bytes:
-  //cmp byte ptr [rcx+60],00
-  readMem(hook, 6)
-  jmp returnhere
-
-code:
-  lea rsp, [rsp-28]
-  mov [rsp+20], rcx
-  mov edx, (float)1.0
-  movd xmm1, edx
-  call feat_nightwalker_set+10
-  mov rcx, [rsp+20]
-  lea rsp, [rsp+28]
-  jmp feat_nightwalker_bytes
-
-hook:
-feat_nightwalker_hook:
-  jmp code
-  nop
-  returnhere:
-
-
-
-[DISABLE]
-feat_nightwalker_hook:
-  //80 79 60 00 74 09
-  readMem(feat_nightwalker_bytes, 6)
-
-unregistersymbol(feat_nightwalker_hook)
-unregistersymbol(feat_nightwalker_bytes)
-dealloc(newmem)
-
-{
-// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+118CC40
-
-GameAssembly.dll+118CC36: CC                       - int 3
-GameAssembly.dll+118CC37: CC                       - int 3
-GameAssembly.dll+118CC38: CC                       - int 3
-GameAssembly.dll+118CC39: CC                       - int 3
-GameAssembly.dll+118CC3A: CC                       - int 3
-GameAssembly.dll+118CC3B: CC                       - int 3
-GameAssembly.dll+118CC3C: CC                       - int 3
-GameAssembly.dll+118CC3D: CC                       - int 3
-GameAssembly.dll+118CC3E: CC                       - int 3
-GameAssembly.dll+118CC3F: CC                       - int 3
-// ---------- INJECTING HERE ----------
-GameAssembly.dll+118CC40: 80 79 60 00              - cmp byte ptr [rcx+60],00
-// ---------- DONE INJECTING  ----------
-GameAssembly.dll+118CC44: 74 09                    - je GameAssembly.dll+118CC4F
-GameAssembly.dll+118CC46: F3 0F 10 05 F2 7C 81 02  - movss xmm0,[GameAssembly.dll+39A4940]
-GameAssembly.dll+118CC4E: C3                       - ret
-GameAssembly.dll+118CC4F: 0F 57 C0                 - xorps xmm0,xmm0
-GameAssembly.dll+118CC52: C3                       - ret
-GameAssembly.dll+118CC53: CC                       - int 3
-GameAssembly.dll+118CC54: CC                       - int 3
-GameAssembly.dll+118CC55: CC                       - int 3
-GameAssembly.dll+118CC56: CC                       - int 3
-GameAssembly.dll+118CC57: CC                       - int 3
-}
-</AssemblerScript>
-                </CheatEntry>
-                <CheatEntry>
-                  <ID>9024</ID>
-                  <Description>"Unlock Snow Walker"</Description>
-                  <LastState/>
-                  <Color>008000</Color>
-                  <VariableType>Auto Assembler Script</VariableType>
-                  <AssemblerScript>{ Game   : tld.exe
-  Version: 1.97 85101 S
-  Date   : 2021-11-02
-  Author : sub1to
-}
-
-[ENABLE]
-alloc(newmem,$ff,GameAssembly.dll)
-label(returnhere)
-label(code)
-label(feat_snowwalker_hook)
-label(feat_snowwalker_bytes)
-registersymbol(feat_snowwalker_hook)
-registersymbol(feat_snowwalker_bytes)
-
-//  class: Feat_SnowWalker
-//  RVA: 0x118DA60 Offset: 0x118CA60 VA: 0x7FFB0CB5DA60 Slot: 8
-//  public override float GetNormalizedProgress() { }
-aobScanModule(hook,GameAssembly.dll,40 53 48 83 ec ? 48 c7 44 24 ? ? ? ? ? 0f 29 74 24 ? 48 8b d9 80 3d ? ? ? ? ? 75 ? 48 8b 05 ? ? ? ? 48 63 90 ? ? ? ? 48 8b 05 ? ? ? ? 8b 8c 02 ? ? ? ? 45 33 c0 4c 89 44 24 ? 4c 89 44 24 ? 4c 89 44 24 ? 4c 8d 44 24 ? 8b 94 02 ? ? ? ? e8 ? ? ? ? 90 33 c9 ff 15 ? ? ? ? 90 c6 05 ? ? ? ? ? 48 8b 05 ? ? ? ? f6 80 ? ? ? ? ? 74 ? 83 b8 ? ? ? ? ? 75 ? 48 8b c8 e8 ? ? ? ? 48 8b 05 ? ? ? ? 48 8b 80 ? ? ? ? f3 0f 10 30 8b 5b ? 48 8b 0d ? ? ? ? f6 81 ? ? ? ? ? 74 ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 66 0f 6e cb 0f 5b c9 f3 0f 5e f1 0f 57 c0 0f 2f c6 77 ? f3 0f 10 05 ? ? ? ? 0f 2f f0 77 ? 0f 28 c6 0f 28 74 24 ? 48 83 c4 ? 5b c3 cc cc cc cc cc cc cc cc cc cc cc cc cc cc 4c 8b dc 57 48 83 ec ? 49 c7 43 ? ? ? ? ? 49 89 5b ? 49 89 73 ? 0f 29 74 24 ? 0f 29 7c 24 ? 0f 28 f9 48 8b d9 80 3d ? ? ? ? ? 75 ? 48 8b 05 ? ? ? ? 48 63 90 ? ? ? ? 48 8b 05 ? ? ? ? 8b 8c 02 ? ? ? ? 45 33 c0 4d 89 43 ? 4d 89 43 ? 4d 89 43 ? 4d 8d 43 ? 8b 94 02 ? ? ? ? e8 ? ? ? ? 90 33 c9 ff 15 ? ? ? ? 90 c6 05 ? ? ? ? ? 48 8b 03 48 8b 90 ? ? ? ? 48 8b cb ff 90 ? ? ? ? 0f b6 f0 8b 7b ? 48 8b 05 ? ? ? ? f6 80 ? ? ? ? ? 74 ? 83 b8 ? ? ? ? ? 75 ? 48 8b c8 e8 ? ? ? ? 48 8b 05 ? ? ? ? 66 0f 6e f7 0f 5b f6 f3 0f 59 f7 48 8b 80 ? ? ? ? f3 0f 11 30 8b 7b ? 48 8b 0d ? ? ? ? f6 81 ? ? ? ? ? 74 ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 66 0f 6e c7 0f 5b c0 0f 57 c9 0f 2f ce 77 ? 0f 2f f0 76 ? 0f 28 f0 eb ? 0f 57 f6 48 8b 05 ? ? ? ? 48 8b 88 ? ? ? ? f3 0f 11 31 48 8b 03 48 8b 90 ? ? ? ? 48 8b cb ff 90 ? ? ? ? 84 c0 74 ? 40 84 f6 75 ? c6 43 ? ? 48 8b 5c 24 ? 48 8b 74 24 ? 0f 28 74 24 ? 0f 28 7c 24 ? 48 83 c4 ? 5f c3 cc cc cc 40 57 48 83 ec ? 48 c7 44 24 ? ? ? ? ? 48 89 5c 24 ? 80 3d ? ? ? ? ? 75 ? 48 8b 05 ? ? ? ? 48 63 88 ? ? ? ? 48 8b 05 ? ? ? ? 33 d2 48 89 54 24 ? 48 89 54 24 ? 48 89 54 24 ? 4c 8d 44 24 ? 8b 94 01 ? ? ? ? 8b 8c 01 ? ? ? ? e8 ? ? ? ? 90 33 c9 ff 15 ? ? ? ? 90 c6 05 ? ? ? ? ? 48 8b 1d ? ? ? ? 48 8b cb e8 ? ? ? ? 48 8b 43 ? 48 85 c0 74 ? 8b 08 e8 ? ? ? ? 48 3b 05 ? ? ? ? 75 ? 48 8b 43 ? 48 8b 48 ? 48 8b 49 ? b2 ? 48 8b 09 e8 ? ? ? ? 48 8b d8 f6 83 ? ? ? ? ? 75 ? 48 8b cb e8 ? ? ? ? eb ? 8b 8b ? ? ? ? 48 8b d3 48 83 7b ? ? 74 ? e8 ? ? ? ? eb ? e8 ? ? ? ? 48 8b f8 f6 83 ? ? ? ? ? 74 ? 48 8d 44 24 ? 48 89 44 24 ? 4c 8d 4c 24 ? 48 8d 15 ? ? ? ? 48 8b cf e8 ? ? ? ? 8b 05 ? ? ? ? c1 e8 ? a8 ? 74 ? 48 8b d3 48 8b cf e8 ? ? ? ? 48 8b cb e8 ? ? ? ? 48 8b 05 ? ? ? ? 4c 8b 80 ? ? ? ? 49 83 c0 ? 49 89 38 83 3d ? ? ? ? ? 74 ? 49 c1 e8 ? 41 81 e0 ? ? ? ? 41 8b c0 48 c1 e8 ? 48 8d 0d ? ? ? ? 48 8d 14 c1 41 83 e0 ? 0f 0d 0a 0f 1f 84 00 ? ? ? ? 48 8b 02 48 8b c8 4c 0f ab c1 f0 48 0f b1 0a 75 ? 48 8b 5c 24 ? 48 83 c4 ? 5f c3 cc cc cc cc 40 55)
-
-//  class: Feat_SnowWalker
-//  RVA: 0x118DB60 Offset: 0x118CB60 VA: 0x7FFB0CB5DB60 Slot: 9
-//  public override void SetNormalizedProgress(float normalizedValue) { }
-aobScanModule(feat_snowwalker_set,GameAssembly.dll,4c 8b dc 57 48 83 ec ? 49 c7 43 ? ? ? ? ? 49 89 5b ? 49 89 73 ? 0f 29 74 24 ? 0f 29 7c 24 ? 0f 28 f9 48 8b d9 80 3d ? ? ? ? ? 75 ? 48 8b 05 ? ? ? ? 48 63 90 ? ? ? ? 48 8b 05 ? ? ? ? 8b 8c 02 ? ? ? ? 45 33 c0 4d 89 43 ? 4d 89 43 ? 4d 89 43 ? 4d 8d 43 ? 8b 94 02 ? ? ? ? e8 ? ? ? ? 90 33 c9 ff 15 ? ? ? ? 90 c6 05 ? ? ? ? ? 48 8b 03 48 8b 90 ? ? ? ? 48 8b cb ff 90 ? ? ? ? 0f b6 f0 8b 7b ? 48 8b 05 ? ? ? ? f6 80 ? ? ? ? ? 74 ? 83 b8 ? ? ? ? ? 75 ? 48 8b c8 e8 ? ? ? ? 48 8b 05 ? ? ? ? 66 0f 6e f7 0f 5b f6 f3 0f 59 f7 48 8b 80 ? ? ? ? f3 0f 11 30 8b 7b ? 48 8b 0d ? ? ? ? f6 81 ? ? ? ? ? 74 ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 66 0f 6e c7 0f 5b c0 0f 57 c9 0f 2f ce 77 ? 0f 2f f0 76 ? 0f 28 f0 eb ? 0f 57 f6 48 8b 05 ? ? ? ? 48 8b 88 ? ? ? ? f3 0f 11 31 48 8b 03 48 8b 90 ? ? ? ? 48 8b cb ff 90 ? ? ? ? 84 c0 74 ? 40 84 f6 75 ? c6 43 ? ? 48 8b 5c 24 ? 48 8b 74 24 ? 0f 28 74 24 ? 0f 28 7c 24 ? 48 83 c4 ? 5f c3 cc cc cc 40 57 48 83 ec ? 48 c7 44 24 ? ? ? ? ? 48 89 5c 24 ? 80 3d ? ? ? ? ? 75 ? 48 8b 05 ? ? ? ? 48 63 88 ? ? ? ? 48 8b 05 ? ? ? ? 33 d2 48 89 54 24 ? 48 89 54 24 ? 48 89 54 24 ? 4c 8d 44 24 ? 8b 94 01 ? ? ? ? 8b 8c 01 ? ? ? ? e8 ? ? ? ? 90 33 c9 ff 15 ? ? ? ? 90 c6 05 ? ? ? ? ? 48 8b 1d ? ? ? ? 48 8b cb e8 ? ? ? ? 48 8b 43 ? 48 85 c0 74 ? 8b 08 e8 ? ? ? ? 48 3b 05 ? ? ? ? 75 ? 48 8b 43 ? 48 8b 48 ? 48 8b 49 ? b2 ? 48 8b 09 e8 ? ? ? ? 48 8b d8 f6 83 ? ? ? ? ? 75 ? 48 8b cb e8 ? ? ? ? eb ? 8b 8b ? ? ? ? 48 8b d3 48 83 7b ? ? 74 ? e8 ? ? ? ? eb ? e8 ? ? ? ? 48 8b f8 f6 83 ? ? ? ? ? 74 ? 48 8d 44 24 ? 48 89 44 24 ? 4c 8d 4c 24 ? 48 8d 15 ? ? ? ? 48 8b cf e8 ? ? ? ? 8b 05 ? ? ? ? c1 e8 ? a8 ? 74 ? 48 8b d3 48 8b cf e8 ? ? ? ? 48 8b cb e8 ? ? ? ? 48 8b 05 ? ? ? ? 4c 8b 80 ? ? ? ? 49 83 c0 ? 49 89 38 83 3d ? ? ? ? ? 74 ? 49 c1 e8 ? 41 81 e0 ? ? ? ? 41 8b c0 48 c1 e8 ? 48 8d 0d ? ? ? ? 48 8d 14 c1 41 83 e0 ? 0f 0d 0a 0f 1f 84 00 ? ? ? ? 48 8b 02 48 8b c8 4c 0f ab c1 f0 48 0f b1 0a 75 ? 48 8b 5c 24 ? 48 83 c4 ? 5f c3 cc cc cc cc 40 55)
-
-
-newmem:
-feat_snowwalker_bytes:
-  //push rbx
-  //sub rsp,50
-  readMem(hook, 6)
-  jmp returnhere
-
-code:
-  lea rsp, [rsp-28]
-  mov [rsp+20], rcx
-  mov edx, (float)1.0
-  movd xmm1, edx
-  call feat_snowwalker_set
-  mov rcx, [rsp+20]
-  lea rsp, [rsp+28]
-  jmp feat_snowwalker_bytes
-
-hook:
-feat_snowwalker_hook:
-  jmp code
-  nop
-  returnhere:
-
-
-
-[DISABLE]
-feat_snowwalker_hook:
-  //40 53 48 83 EC 50
-  readMem(feat_snowwalker_bytes, 6)
-
-unregistersymbol(feat_snowwalker_hook)
-unregistersymbol(feat_snowwalker_bytes)
-dealloc(newmem)
-
-{
-// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+118DA60
-
-GameAssembly.dll+118DA46: 0F 28 C6                    - movaps xmm0,xmm6
-GameAssembly.dll+118DA49: E8 22 E9 5D 00              - call GameAssembly.dll+176C370
-GameAssembly.dll+118DA4E: 84 C0                       - test al,al
-GameAssembly.dll+118DA50: 0F 95 C0                    - setne al
-GameAssembly.dll+118DA53: 0F 28 74 24 40              - movaps xmm6,[rsp+40]
-GameAssembly.dll+118DA58: 48 83 C4 50                 - add rsp,50
-GameAssembly.dll+118DA5C: 5B                          - pop rbx
-GameAssembly.dll+118DA5D: C3                          - ret
-GameAssembly.dll+118DA5E: CC                          - int 3
-GameAssembly.dll+118DA5F: CC                          - int 3
-// ---------- INJECTING HERE ----------
-GameAssembly.dll+118DA60: 40 53                       - push rbx
-GameAssembly.dll+118DA62: 48 83 EC 50                 - sub rsp,50
-// ---------- DONE INJECTING  ----------
-GameAssembly.dll+118DA66: 48 C7 44 24 20 FE FF FF FF  - mov qword ptr [rsp+20],FFFFFFFFFFFFFFFE
-GameAssembly.dll+118DA6F: 0F 29 74 24 40              - movaps [rsp+40],xmm6
-GameAssembly.dll+118DA74: 48 8B D9                    - mov rbx,rcx
-GameAssembly.dll+118DA77: 80 3D 67 53 2C 03 00        - cmp byte ptr [GameAssembly.dll+4452DE5],00
-GameAssembly.dll+118DA7E: 75 50                       - jne GameAssembly.dll+118DAD0
-GameAssembly.dll+118DA80: 48 8B 05 B9 82 2B 03        - mov rax,[GameAssembly.dll+4445D40]
-GameAssembly.dll+118DA87: 48 63 90 B8 00 00 00        - movsxd  rdx,dword ptr [rax+000000B8]
-GameAssembly.dll+118DA8E: 48 8B 05 83 82 2B 03        - mov rax,[GameAssembly.dll+4445D18]
-GameAssembly.dll+118DA95: 8B 8C 02 B0 97 03 00        - mov ecx,[rdx+rax+000397B0]
-}
-</AssemblerScript>
-                </CheatEntry>
-                <CheatEntry>
-                  <ID>9025</ID>
-                  <Description>"Unlock Straight To The Heart"</Description>
-                  <LastState/>
-                  <Color>008000</Color>
-                  <VariableType>Auto Assembler Script</VariableType>
-                  <AssemblerScript>{ Game   : tld.exe
-  Version: 1.97 85101 S
-  Date   : 2021-11-02
-  Author : sub1to
-}
-
-[ENABLE]
-alloc(newmem,$ff,GameAssembly.dll)
-label(returnhere)
-label(code)
-label(feat_straighttoheart_hook)
-label(feat_straighttoheart_bytes)
-registersymbol(feat_straighttoheart_hook)
-registersymbol(feat_straighttoheart_bytes)
-
-//  class: Feat_StraightToHeart
-//  RVA: 0x118E910 Offset: 0x118D910 VA: 0x7FFB0CB5E910 Slot: 8
-//  public override float GetNormalizedProgress() { }
-aobScanModule(hook,GameAssembly.dll,C0 48 83 C4 40 5B C3 CC CC CC CC CC CC CC CC CC CC CC 40 57 48 83 EC 50)
-
-//  class: Feat_StraightToHeart
-//  RVA: 0x118EA30 Offset: 0x118DA30 VA: 0x7FFB0CB5EA30 Slot: 9
-//  public override void SetNormalizedProgress(float normalizedValue) { }
-aobScanModule(feat_straighttoheart_set,GameAssembly.dll,50 5F C3 CC CC CC 4C 8B DC 57 48 83 EC 50 49 C7 43 C8)
-
-
-newmem:
-feat_straighttoheart_bytes:
-  //push rdi
-  //sub rsp,50
-  readMem(hook+12, 6)
-  jmp returnhere
-
-code:
-  lea rsp, [rsp-28]
-  mov [rsp+20], rcx
-  mov edx, (float)1.0
-  movd xmm1, edx
-  call feat_straighttoheart_set+6
-  mov rcx, [rsp+20]
-  lea rsp, [rsp+28]
-  jmp feat_straighttoheart_bytes
-
-hook+12:
-feat_straighttoheart_hook:
-  jmp code
-  nop
-  returnhere:
-
-
-
-[DISABLE]
-feat_straighttoheart_hook:
-  //40 57 48 83 EC 50
-  readMem(feat_straighttoheart_bytes, 6)
-
-unregistersymbol(feat_straighttoheart_hook)
-unregistersymbol(feat_straighttoheart_bytes)
-dealloc(newmem)
-
-{
-// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+118E910
-
-GameAssembly.dll+118E906: CC                          - int 3
-GameAssembly.dll+118E907: CC                          - int 3
-GameAssembly.dll+118E908: CC                          - int 3
-GameAssembly.dll+118E909: CC                          - int 3
-GameAssembly.dll+118E90A: CC                          - int 3
-GameAssembly.dll+118E90B: CC                          - int 3
-GameAssembly.dll+118E90C: CC                          - int 3
-GameAssembly.dll+118E90D: CC                          - int 3
-GameAssembly.dll+118E90E: CC                          - int 3
-GameAssembly.dll+118E90F: CC                          - int 3
-// ---------- INJECTING HERE ----------
-GameAssembly.dll+118E910: 40 57                       - push rdi
-GameAssembly.dll+118E912: 48 83 EC 50                 - sub rsp,50
-// ---------- DONE INJECTING  ----------
-GameAssembly.dll+118E916: 48 C7 44 24 20 FE FF FF FF  - mov qword ptr [rsp+20],FFFFFFFFFFFFFFFE
-GameAssembly.dll+118E91F: 48 89 5C 24 60              - mov [rsp+60],rbx
-GameAssembly.dll+118E924: 0F 29 74 24 40              - movaps [rsp+40],xmm6
-GameAssembly.dll+118E929: 48 8B D9                    - mov rbx,rcx
-GameAssembly.dll+118E92C: 80 3D A3 44 2C 03 00        - cmp byte ptr [GameAssembly.dll+4452DD6],00
-GameAssembly.dll+118E933: 75 50                       - jne GameAssembly.dll+118E985
-GameAssembly.dll+118E935: 48 8B 05 04 74 2B 03        - mov rax,[GameAssembly.dll+4445D40]
-GameAssembly.dll+118E93C: 48 63 90 B8 00 00 00        - movsxd  rdx,dword ptr [rax+000000B8]
-GameAssembly.dll+118E943: 48 8B 05 CE 73 2B 03        - mov rax,[GameAssembly.dll+4445D18]
-}
-</AssemblerScript>
-                </CheatEntry>
-              </CheatEntries>
             </CheatEntry>
           </CheatEntries>
         </CheatEntry>
@@ -8697,78 +6954,6 @@ unregistersymbol(fire_add_hook)
 </AssemblerScript>
         </CheatEntry>
         <CheatEntry>
-          <ID>8577</ID>
-          <Description>"Infinite Medical Supplies (Stacked Only) [PAT BROKEN]"</Description>
-          <LastState/>
-          <Color>4080FF</Color>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>{ Game   : tld.exe
-  Version: 
-  Date   : 2020-04-03
-  Author : sub1to
-
-  This script does blah blah blah
-}
-
-[ENABLE]
-
-aobscanmodule(apply_bandage_hook,GameAssembly.dll,2B D0 89 57 18)
-alloc(newmem,$1000,"GameAssembly.dll"+5CF7C8)
-
-label(code)
-label(return)
-
-newmem:
-
-code:
-  //sub edx,eax
-  mov [rdi+18],edx
-  jmp return
-
-apply_bandage_hook:
-  jmp newmem
-return:
-registersymbol(apply_bandage_hook)
-
-[DISABLE]
-
-apply_bandage_hook:
-  db 2B D0 89 57 18
-
-unregistersymbol(apply_bandage_hook)
-dealloc(newmem)
-
-{
-// ORIGINAL CODE - INJECTION POINT: "GameAssembly.dll"+5CF7C8
-
-"GameAssembly.dll"+5CF7A0: 48 8B 0D 61 62 68 03  -  mov rcx,[GameAssembly.dll+3C55A08]
-"GameAssembly.dll"+5CF7A7: F6 81 27 01 00 00 02  -  test byte ptr [rcx+00000127],02
-"GameAssembly.dll"+5CF7AE: 74 11                 -  je GameAssembly.dll+5CF7C1
-"GameAssembly.dll"+5CF7B0: 83 B9 D8 00 00 00 00  -  cmp dword ptr [rcx+000000D8],00
-"GameAssembly.dll"+5CF7B7: 75 08                 -  jne GameAssembly.dll+5CF7C1
-"GameAssembly.dll"+5CF7B9: E8 C2 27 CA FF        -  call GameAssembly.dll+271F80
-"GameAssembly.dll"+5CF7BE: 8B 57 18              -  mov edx,[rdi+18]
-"GameAssembly.dll"+5CF7C1: 8B C5                 -  mov eax,ebp
-"GameAssembly.dll"+5CF7C3: 3B DD                 -  cmp ebx,ebp
-"GameAssembly.dll"+5CF7C5: 0F 4C C3              -  cmovl eax,ebx
-// ---------- INJECTING HERE ----------
-"GameAssembly.dll"+5CF7C8: 2B D0                 -  sub edx,eax
-"GameAssembly.dll"+5CF7CA: 89 57 18              -  mov [rdi+18],edx
-// ---------- DONE INJECTING  ----------
-"GameAssembly.dll"+5CF7CD: 2B E8                 -  sub ebp,eax
-"GameAssembly.dll"+5CF7CF: 8B DD                 -  mov ebx,ebp
-"GameAssembly.dll"+5CF7D1: 85 D2                 -  test edx,edx
-"GameAssembly.dll"+5CF7D3: 75 37                 -  jne GameAssembly.dll+5CF80C
-"GameAssembly.dll"+5CF7D5: 48 8B 05 BC C7 6D 03  -  mov rax,[GameAssembly.dll+3CABF98]
-"GameAssembly.dll"+5CF7DC: 48 85 C0              -  test rax,rax
-"GameAssembly.dll"+5CF7DF: 75 18                 -  jne GameAssembly.dll+5CF7F9
-"GameAssembly.dll"+5CF7E1: 48 8D 0D 20 D1 C4 02  -  lea rcx,[GameAssembly.dll+321C908]
-"GameAssembly.dll"+5CF7E8: E8 C3 B2 CF FF        -  call GameAssembly.dll+2CAAB0
-"GameAssembly.dll"+5CF7ED: 48 85 C0              -  test rax,rax
-}
-</AssemblerScript>
-        </CheatEntry>
-        <CheatEntry>
           <ID>8525</ID>
           <Description>"Infinite Matches (light directly)"</Description>
           <LastState/>
@@ -8834,76 +7019,6 @@ dealloc(newmem)
 "GameAssembly.dll"+851C59: 74 0E                 -  je GameAssembly.dll+851C69
 "GameAssembly.dll"+851C5B: 83 B9 D8 00 00 00 00  -  cmp dword ptr [rcx+000000D8],00
 "GameAssembly.dll"+851C62: 75 05                 -  jne GameAssembly.dll+851C69
-}
-</AssemblerScript>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>8557</ID>
-          <Description>"Free Repairs (No Material Cost) [PAT BROKEN]"</Description>
-          <LastState/>
-          <Color>4080FF</Color>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>{ Game   : tld.exe
-  Version: 1.74 58755
-  Date   : 2020-04-02
-  Author : sub1to
-
-  This script does blah blah blah
-}
-
-[ENABLE]
-aobscanmodule(repair_item_dec_hook,GameAssembly.dll,2b c5 89 46)
-alloc(newmem,$1000,"GameAssembly.dll"+5CFC51)
-
-label(code)
-label(return)
-
-newmem:
-
-code:
-  //sub eax,ebp
-  mov [rsi+18],eax
-  jmp return
-
-repair_item_dec_hook:
-  jmp newmem
-return:
-registersymbol(repair_item_dec_hook)
-
-[DISABLE]
-repair_item_dec_hook:
-  db 2B C5 89 46 18
-
-unregistersymbol(repair_item_dec_hook)
-dealloc(newmem)
-
-{
-// ORIGINAL CODE - INJECTION POINT: "GameAssembly.dll"+5CFC51
-
-"GameAssembly.dll"+5CFC26: 41 8B C7                 -  mov eax,r15d
-"GameAssembly.dll"+5CFC29: 48 8B 0D D8 5D 68 03     -  mov rcx,[GameAssembly.dll+3C55A08]
-"GameAssembly.dll"+5CFC30: F6 81 27 01 00 00 02     -  test byte ptr [rcx+00000127],02
-"GameAssembly.dll"+5CFC37: 74 11                    -  je GameAssembly.dll+5CFC4A
-"GameAssembly.dll"+5CFC39: 83 B9 D8 00 00 00 00     -  cmp dword ptr [rcx+000000D8],00
-"GameAssembly.dll"+5CFC40: 75 08                    -  jne GameAssembly.dll+5CFC4A
-"GameAssembly.dll"+5CFC42: E8 39 23 CA FF           -  call GameAssembly.dll+271F80
-"GameAssembly.dll"+5CFC47: 8B 46 18                 -  mov eax,[rsi+18]
-"GameAssembly.dll"+5CFC4A: 44 3B FD                 -  cmp r15d,ebp
-"GameAssembly.dll"+5CFC4D: 41 0F 4C EF              -  cmovl ebp,r15d
-// ---------- INJECTING HERE ----------
-"GameAssembly.dll"+5CFC51: 2B C5                    -  sub eax,ebp
-"GameAssembly.dll"+5CFC53: 89 46 18                 -  mov [rsi+18],eax
-// ---------- DONE INJECTING  ----------
-"GameAssembly.dll"+5CFC56: 44 8B 7C 24 20           -  mov r15d,[rsp+20]
-"GameAssembly.dll"+5CFC5B: 44 03 FD                 -  add r15d,ebp
-"GameAssembly.dll"+5CFC5E: 44 89 7C 24 20           -  mov [rsp+20],r15d
-"GameAssembly.dll"+5CFC63: 85 C0                    -  test eax,eax
-"GameAssembly.dll"+5CFC65: 75 39                    -  jne GameAssembly.dll+5CFCA0
-"GameAssembly.dll"+5CFC67: 49 63 ED                 -  movsxd  rbp,r13d
-"GameAssembly.dll"+5CFC6A: 41 FF C5                 -  inc r13d
-"GameAssembly.dll"+5CFC6D: 33 D2                    -  xor edx,edx
-"GameAssembly.dll"+5CFC6F: 49 8B CE                 -  mov rcx,r14
-"GameAssembly.dll"+5CFC72: E8 99 54 DA 00           -  call GameAssembly.dll+1375110
 }
 </AssemblerScript>
         </CheatEntry>
@@ -9265,144 +7380,6 @@ dealloc(newmem)
           <VariableType>8 Bytes</VariableType>
           <Address>tmp</Address>
         </CheatEntry>
-        <CheatEntry>
-          <ID>9069</ID>
-          <Description>"GameManager_Update"</Description>
-          <LastState/>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>{ Game   : tld.exe
-  Version: 
-  Date   : 2021-11-03
-  Author : sub1to
-
-  This script does blah blah blah
-}
-
-[ENABLE]
-
-aobscanmodule(GameManager_Update,GameAssembly.dll,26 FF CC CC 48 8B C4 55 57) // should be unique
-alloc(newmem,$1000,GameManager_Update)
-alloc(string,$ff,gameassembly.dll)
-globalalloc(_uconsole_init,1,gameassembly.dll)
-
-label(code)
-label(return)
-
-string:
-  dq 00 // +00 ptr
-  dq 00 // +08 padding
-  dd 08 // +10 len
-  db 'u' 0 'C' 0 'o' 0 'n' 0 's' 0 'o' 0 'l' 0 'e' 0 0
-  //db 0 // +14 first byte
-
-_uconsole_init:
-  db 0
-
-newmem:
-  mov al, [_uconsole_init]
-  test al, al
-  jnz code
-  mov byte ptr [_uconsole_init], 1
-
-  lea rsp, [rsp-28]
-  mov [rsp+20], rcx
-  lea rcx, [string]
-  //40 57 48 83 ec ? 48 c7 44 24 ? ? ? ? ? 48 89 5c 24 ? 48 8b f9 80 3d ? ? ? ? ? 75 ? 48 8b 05 ? ? ? ? 48 63 90 ? ? ? ? 48 8b 05 ? ? ? ? 8b 8c 02 ? ? ? ? 45 33 c0 4c 89 44 24 ? 4c 89 44 24 ? 4c 89 44 24 ? 4c 8d 44 24 ? 8b 94 02 ? ? ? ? e8 ? ? ? ? 90 33 c9 ff 15 ? ? ? ? 90 c6 05 ? ? ? ? ? 48 8b 1d ? ? ? ? 48 8b 0d ? ? ? ? f6 81 ? ? ? ? ? 74 ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 33 d2 48 8b cb e8 ? ? ? ? 48 8b d8 48 8b 05
-  call gameassembly.dll+2A0FFC0 // public static Object Load(string path) { }
-  mov rcx, rax
-  //40 53 48 83 ec ? 48 c7 44 24 ? ? ? ? ? 48 8b d9 80 3d ? ? ? ? ? 75 ? 48 8b 05 ? ? ? ? 48 63 90 ? ? ? ? 48 8b 05 ? ? ? ? 8b 8c 02 ? ? ? ? 45 33 c0 4c 89 44 24 ? 4c 89 44 24 ? 4c 89 44 24 ? 4c 8d 44 24 ? 8b 94 02 ? ? ? ? e8 ? ? ? ? 90 33 c9 ff 15 ? ? ? ? 90 c6 05 ? ? ? ? ? 48 8b 0d ? ? ? ? f6 81 ? ? ? ? ? 74 ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 45 33 c0 48 8b 15 ? ? ? ? 48 8b cb e8 ? ? ? ? 48 8b 05
-  call gameassembly.dll+2844950 // public static Object Instantiate(Object original) { }
-  mov rcx, [rsp+20]
-  lea rsp, [rsp+28]
-
-  {
-  lea rsp, [rsp-28]
-  mov [rsp+20], rcx
-  call gameassembly.dll+E239A0 // ConsoleManager.Initialize
-  call gameassembly.dll+E245D0 // ConsoleManager.RegisterCommands
-  mov rcx, [rsp+20]
-  lea rsp, [rsp+28]
-  }
-
-code:
-  mov rax,rsp
-  push rbp
-  push rdi
-  jmp return
-
-GameManager_Update+04:
-  jmp newmem
-return:
-registersymbol(GameManager_Update)
-
-[DISABLE]
-
-GameManager_Update+04:
-  db 48 8B C4 55 57
-
-unregistersymbol(GameManager_Update)
-dealloc(newmem)
-
-{
-// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+E652C0
-
-GameAssembly.dll+E652A6: CC                       - int 3 
-GameAssembly.dll+E652A7: E8 54 51 26 FF           - call GameAssembly.dll+CA400
-GameAssembly.dll+E652AC: CC                       - int 3 
-GameAssembly.dll+E652AD: E8 4E 51 26 FF           - call GameAssembly.dll+CA400
-GameAssembly.dll+E652B2: CC                       - int 3 
-GameAssembly.dll+E652B3: E8 48 51 26 FF           - call GameAssembly.dll+CA400
-GameAssembly.dll+E652B8: CC                       - int 3 
-GameAssembly.dll+E652B9: E8 42 51 26 FF           - call GameAssembly.dll+CA400
-GameAssembly.dll+E652BE: CC                       - int 3 
-GameAssembly.dll+E652BF: CC                       - int 3 
-// ---------- INJECTING HERE ----------
-GameAssembly.dll+E652C0: 48 8B C4                 - mov rax,rsp
-GameAssembly.dll+E652C3: 55                       - push rbp
-// ---------- DONE INJECTING  ----------
-GameAssembly.dll+E652C4: 57                       - push rdi
-GameAssembly.dll+E652C5: 41 56                    - push r14
-GameAssembly.dll+E652C7: 48 8D 68 D8              - lea rbp,[rax-28]
-GameAssembly.dll+E652CB: 48 81 EC 10 01 00 00     - sub rsp,00000110
-GameAssembly.dll+E652D2: 48 C7 45 C0 FE FF FF FF  - mov qword ptr [rbp-40],FFFFFFFFFFFFFFFE
-GameAssembly.dll+E652DA: 48 89 58 08              - mov [rax+08],rbx
-GameAssembly.dll+E652DE: 48 89 70 10              - mov [rax+10],rsi
-GameAssembly.dll+E652E2: 0F 29 70 D8              - movaps [rax-28],xmm6
-GameAssembly.dll+E652E6: 0F 29 78 C8              - movaps [rax-38],xmm7
-}
-</AssemblerScript>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>9070</ID>
-          <Description>"uConsole.m_On"</Description>
-          <ShowAsSigned>0</ShowAsSigned>
-          <VariableType>Byte</VariableType>
-          <Address>gameassembly.dll+448f0a0</Address>
-          <Offsets>
-            <Offset>3C</Offset>
-            <Offset>B8</Offset>
-          </Offsets>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>9071</ID>
-          <Description>"uConsole.m_Activate"</Description>
-          <ShowAsSigned>0</ShowAsSigned>
-          <VariableType>4 Bytes</VariableType>
-          <Address>gameassembly.dll+448f0a0</Address>
-          <Offsets>
-            <Offset>A0</Offset>
-            <Offset>0</Offset>
-            <Offset>B8</Offset>
-          </Offsets>
-          <Hotkeys>
-            <Hotkey>
-              <Action>Toggle Activation</Action>
-              <Keys/>
-              <Value>1</Value>
-              <ID>0</ID>
-            </Hotkey>
-          </Hotkeys>
-        </CheatEntry>
       </CheatEntries>
     </CheatEntry>
   </CheatEntries>
@@ -9417,7 +7394,7 @@ GameAssembly.dll+E652E6: 0F 29 78 C8              - movaps [rax-38],xmm7
     </SymbolEntry>
     <SymbolEntry>
       <Name>_uconsole_init</Name>
-      <Address>7FFB66C10000</Address>
+      <Address>7FFF35840000</Address>
     </SymbolEntry>
   </UserdefinedSymbols>
   <Comments>https://github.com/Perfare/Il2CppDumper
