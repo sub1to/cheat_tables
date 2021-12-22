@@ -122,17 +122,16 @@ end
 
 function Offsetable.new(base)
 	local s = {}
-
 	s.base = '[' .. base .. ']'
 	s.extended = s.base
-
-	return setmetatable(s,Offsetable)
+	return setmetatable(s, Offsetable)
 end
-
 
 
 StructResolver 			= {}
 StructResolver.__index 	= StructResolver
+StructResolver.queue	= {}
+StructResolver.timer	= nil
 
 function StructResolver.resolve(_this)
 	if _this.done == true then
@@ -143,16 +142,16 @@ function StructResolver.resolve(_this)
 		return false
 	end
 
-	for i=1,#_this.structs do
-		local o = Offsetable.new(_this.base)
+	local o = Offsetable.new(_this.base)
 
+	for i=1,#_this.structs do
 		for j=1,#_this.structs[i].offsets do
 			o = o:add(_this.structs[i].offsets[j])
 		end
 
 		local a = getAddressSafe(o:get())
 
-		if not a then
+		if a == nil or a == 0 then
 			return false
 		end
 
@@ -179,6 +178,57 @@ function StructResolver.resolveOrError(_this)
 	end
 end
 
+function StructResolver.onTimer(timer)
+	for i=1,#StructResolver.queue do
+		StructResolver.queue[i]:resolve()
+	end
+
+	for i=1,#StructResolver.queue do
+		if StructResolver.queue[i].done == false then
+			return
+		end
+	end
+
+	writeBytes(getAddress('struct_update_status'), 1)
+	timer.destroy()
+	if StructResolver.timer ~= nil then
+		StructResolver.timer = nil
+	end
+	print('ok')
+end
+
+function StructResolver.async(base, structs)
+	for i=1,#StructResolver.queue do
+		if StructResolver.queue[i].base == base then
+			return false
+		end
+	end
+
+	table.insert(StructResolver.queue, StructResolver.new(base, structs))
+
+	if StructResolver.timer == nil then
+		StructResolver.timer = createTimer()
+		StructResolver.timer.Interval = 1000
+		StructResolver.timer.OnTimer = StructResolver.onTimer
+	end
+
+	return true
+end
+
+function StructResolver.clear()
+	while getStructureCount() &gt; 0 do
+		getStructure(0).removeFromGlobalStructureList()
+	end
+end
+
+function StructResolver.shutdown()
+	if StructResolver.timer ~= nil then
+		StructResolver.timer.destroy()
+		StructResolver.timer = nil
+		writeBytes(getAddress('struct_update_status'), -1)
+	end
+end
+
 function StructResolver.new(base, structs)
 	local r = {}
 
@@ -187,73 +237,6 @@ function StructResolver.new(base, structs)
 	r.done = false
 
 	return setmetatable(r, StructResolver)
-end
-
-local resolvers = {};
-
-table.insert(resolvers, StructResolver.new('game1_base_ptr', {
-	{ name = 'Game1',	offsets = {} },
-}))
-
-table.insert(resolvers, StructResolver.new('farmer_base_ptr', {
-	{ name = 'Farmer',		offsets = {} },
-	{ name = 'teamRoot',	offsets = {'farmer.teamRoot'} },
-	{ name = 'Team',		offsets = {'farmer.teamRoot', 'teamRoot.value'} },
-	{ name = 'netInt',		offsets = {'farmer.netSpeed'} },
-	{ name = 'netIntList',	offsets = {'farmer.professions'} },
-	{ name = 'netDouble',	offsets = {'farmer.teamRoot', 'teamRoot.value', 'Team.sharedDailyLuck'} },
-	{ name = 'netBool',		offsets = {'farmer.Exhausted'} },
-	{ name = 'netString',	offsets = {'farmer.name'} },
-	{ name = 'String',		offsets = {'farmer.name', 'netString.value'} },
-	{ name = 'netFloat',	offsets = {'farmer.scale'} },
-}))
-
-table.insert(resolvers, StructResolver.new('wateringcan_base_ptr', {
-	{ name = 'WateringCan',	offsets = {} },
-}))
-
-table.insert(resolvers, StructResolver.new('chatbox_base_ptr', {
-	{ name = 'ChatBox',		offsets = {} },
-}))
-
-table.insert(resolvers, StructResolver.new('abigailgame_base_ptr', {
-	{ name = 'AbigailGame',	offsets = {} },
-}))
-
-table.insert(resolvers, StructResolver.new('minecartgame_base_ptr', {
-	{ name = 'MinecartGame',offsets = {} },
-}))
-
-table.insert(resolvers, StructResolver.new('crop_base_ptr', {
-	{ name = 'Crop',		offsets = {} },
-}))
-
-table.insert(resolvers, StructResolver.new('object_base_ptr', {
-	{ name = 'Object',		offsets = {} },
-}))
-
-table.insert(resolvers, StructResolver.new('tool_base_ptr', {
-	{ name = 'Tool',		offsets = {} },
-}))
-
-local _main = function(timer)
-	for i=1,#resolvers do
-		resolvers[i]:resolve()
-	end
-
-	for i=1,#resolvers do
-		if resolvers[i].done == false then
-			return
-		end
-	end
-
-	writeBytes(getAddress('struct_update_status'), 1)
-	--struct_update_status = 1
-	timer.destroy()
-	if mainTimer then
-		mainTimer = nil
-	end
-	print('ok')
 end
 
 _subscripts = {
@@ -288,10 +271,50 @@ for i=1,#_subscripts do
 	mr.Active = true
 end
 
+StructResolver.async('game1_base_ptr', {
+	{ name = 'Game1',		offsets = {} },
+})
 
-mainTimer = createTimer()
-mainTimer.Interval = 1000
-mainTimer.OnTimer = _main
+StructResolver.async('farmer_base_ptr', {
+	{ name = 'Farmer',		offsets = {} },
+	{ name = 'teamRoot',	offsets = {'farmer.teamRoot'} },
+	{ name = 'Team',		offsets = {'farmer.teamRoot', 'teamRoot.value'} },
+	{ name = 'netInt',		offsets = {'farmer.netSpeed'} },
+	{ name = 'netIntList',	offsets = {'farmer.professions'} },
+	{ name = 'netDouble',	offsets = {'farmer.teamRoot', 'teamRoot.value', 'Team.sharedDailyLuck'} },
+	{ name = 'netBool',		offsets = {'farmer.Exhausted'} },
+	{ name = 'netString',	offsets = {'farmer.name'} },
+	{ name = 'String',		offsets = {'farmer.name', 'netString.value'} },
+	{ name = 'netFloat',	offsets = {'farmer.scale'} },
+})
+
+StructResolver.async('wateringcan_base_ptr', {
+	{ name = 'WateringCan',	offsets = {} },
+})
+
+StructResolver.async('chatbox_base_ptr', {
+	{ name = 'ChatBox',		offsets = {} },
+})
+
+StructResolver.async('abigailgame_base_ptr', {
+	{ name = 'AbigailGame',	offsets = {} },
+})
+
+StructResolver.async('minecartgame_base_ptr', {
+	{ name = 'MinecartGame',offsets = {} },
+})
+
+StructResolver.async('crop_base_ptr', {
+	{ name = 'Crop',		offsets = {} },
+})
+
+StructResolver.async('object_base_ptr', {
+	{ name = 'Object',		offsets = {} },
+})
+
+StructResolver.async('tool_base_ptr', {
+	{ name = 'Tool',		offsets = {} },
+})
 
 {$asm}
 globalalloc(struct_update_status,1)
@@ -302,10 +325,8 @@ struct_update_status:
 [DISABLE]
 {$lua}
 if syntaxcheck then return end
-if mainTimer ~= nil then
-	mainTimer.destroy()
-	writeBytes(getAddress('struct_update_status'), -1)
-end
+StructResolver.shutdown()
+StructResolver.clear()
 
 local al = getAddressList()
 if al then
@@ -582,7 +603,7 @@ StardewValley.Farmer::getMovementSpeed+26: 74 12              - je StardewValley
                   <Description>"Money"</Description>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>FF8080</Color>
-                  <VariableType>8 Bytes</VariableType>
+                  <VariableType>4 Bytes</VariableType>
                   <Address>farmer_base_ptr</Address>
                   <Offsets>
                     <Offset>NetInt.Value</Offset>
@@ -596,7 +617,7 @@ StardewValley.Farmer::getMovementSpeed+26: 74 12              - je StardewValley
                   <Description>"Money Earned"</Description>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>FF8080</Color>
-                  <VariableType>8 Bytes</VariableType>
+                  <VariableType>4 Bytes</VariableType>
                   <Address>farmer_base_ptr</Address>
                   <Offsets>
                     <Offset>NetInt.Value</Offset>
@@ -2581,6 +2602,7 @@ StardewValley.Object::get_DisplayName+2D: 48 8B 06                       - mov r
                 <CheatEntry>
                   <ID>47</ID>
                   <Description>"object_base_ptr"</Description>
+                  <LastState Value="0001000000007FFC" RealAddress="7FFC39DB000C"/>
                   <ShowAsHex>1</ShowAsHex>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>808080</Color>
@@ -2890,6 +2912,7 @@ StardewValley.Tools.WateringCan::DoFunction+27C: 48 B9 90 EF 14 DC FE 7F 00 00  
                 <CheatEntry>
                   <ID>8947</ID>
                   <Description>"watering_can_base_ptr"</Description>
+                  <LastState Value="0001000000007FFC" RealAddress="7FFC39DC000C"/>
                   <ShowAsHex>1</ShowAsHex>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>808080</Color>
@@ -2913,7 +2936,7 @@ StardewValley.Tools.WateringCan::DoFunction+27C: 48 B9 90 EF 14 DC FE 7F 00 00  
                   <Description>"Water Max"</Description>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>FF8080</Color>
-                  <VariableType>Byte</VariableType>
+                  <VariableType>4 Bytes</VariableType>
                   <Address>wateringcan_base_ptr</Address>
                   <Offsets>
                     <Offset>WateringCan.waterCanMax</Offset>
@@ -2924,7 +2947,7 @@ StardewValley.Tools.WateringCan::DoFunction+27C: 48 B9 90 EF 14 DC FE 7F 00 00  
                   <Description>"Water Left"</Description>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>FF8080</Color>
-                  <VariableType>Byte</VariableType>
+                  <VariableType>4 Bytes</VariableType>
                   <Address>wateringcan_base_ptr</Address>
                   <Offsets>
                     <Offset>WateringCan.waterLeft</Offset>
@@ -2958,10 +2981,10 @@ StardewValley.Tools.WateringCan::DoFunction+27C: 48 B9 90 EF 14 DC FE 7F 00 00  
 
 [ENABLE]
 {$lua}
-checkDotNetSymbol('&lt;&gt;c::&lt;performTenMinuteClockUpdate&gt;b__670_0')
+checkDotNetSymbol('&lt;&gt;c::&lt;performTenMinuteClockUpdate&gt;b__671_0')
 
 {$asm}
-define(hook, &lt;&gt;c::&lt;performTenMinuteClockUpdate&gt;b__670_0+50)
+define(hook, &lt;&gt;c::&lt;performTenMinuteClockUpdate&gt;b__671_0+50)
 assert(hook,83 00 0A)
 
 alloc(newmem,$20,hook)
@@ -3263,7 +3286,7 @@ StardewValley.Minigames.AbigailGame::playerDie+16: C5 F8 29 B4 24 C0 00 00 00  -
                 <CheatEntry>
                   <ID>104</ID>
                   <Description>"abigailgame_base_ptr"</Description>
-                  <LastState Value="000000007FFB09A0" RealAddress="7FFB09A0000A"/>
+                  <LastState Value="000000007FFC39DC" RealAddress="7FFC39DC000A"/>
                   <ShowAsHex>1</ShowAsHex>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>808080</Color>
@@ -4349,28 +4372,11 @@ StardewValley.Menus.ChatBox::runCommand+18: 48 B8 E0 FE FF FF FF FF FF FF  - mov
 0:Pending
 1:Done
 </DropDownList>
-          <LastState Value="-1" RealAddress="15255050000"/>
+          <LastState Value="1" RealAddress="1165D690000"/>
           <ShowAsSigned>1</ShowAsSigned>
           <Color>C0C0C0</Color>
           <VariableType>Byte</VariableType>
           <Address>struct_update_status</Address>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>8965</ID>
-          <Description>"remove all structs"</Description>
-          <LastState/>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>[ENABLE]
-{$lua}
-if syntaxcheck then return end
-while getStructureCount() do
-	getStructure(0).removeFromGlobalStructureList()
-end
-
-{$asm}
-
-[DISABLE]
-</AssemblerScript>
         </CheatEntry>
         <CheatEntry>
           <ID>8968</ID>
@@ -4590,7 +4596,7 @@ StardewValley.Game1::UpdateChatBox+7B: FF 50 38                       - call qwo
     </SymbolEntry>
     <SymbolEntry>
       <Name>struct_update_status</Name>
-      <Address>15255050000</Address>
+      <Address>1165D690000</Address>
     </SymbolEntry>
   </UserdefinedSymbols>
 </CheatTable>
