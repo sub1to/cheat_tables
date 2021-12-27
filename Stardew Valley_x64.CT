@@ -242,12 +242,14 @@ end
 _subscripts = {
 	'_hook_game1_',
 	'_hook_chatbox_',
+    '_hook_melee_weapon_',
 }
 
 local symbols = {
 	'StardewValley.Game1::Update',
 	'StardewValley.Game1::get_player',
 	'StardewValley.Game1::UpdateChatBox',
+    'StardewValley.Tools.MeleeWeapon::tickUpdate',
 }
 
 for i=1,#symbols do
@@ -314,6 +316,10 @@ StructResolver.async('object_base_ptr', {
 
 StructResolver.async('tool_base_ptr', {
 	{ name = 'Tool',		offsets = {} },
+})
+
+StructResolver.async('melee_weapon_base_ptr', {
+	{ name = 'Weapon',		offsets = {} },
 })
 
 {$asm}
@@ -2602,7 +2608,6 @@ StardewValley.Object::get_DisplayName+2D: 48 8B 06                       - mov r
                 <CheatEntry>
                   <ID>47</ID>
                   <Description>"object_base_ptr"</Description>
-                  <LastState Value="0001000000007FFC" RealAddress="7FFC39DB000C"/>
                   <ShowAsHex>1</ShowAsHex>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>808080</Color>
@@ -2807,6 +2812,123 @@ StardewValley.Tool::get_DisplayName+24: 48 8B 96 90 00 00 00  - mov rdx,[rsi+000
                     <Offset>Tool.UpgradeLevel</Offset>
                   </Offsets>
                 </CheatEntry>
+                <CheatEntry>
+                  <ID>8972</ID>
+                  <Description>"Weapon"</Description>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <Color>C08000</Color>
+                  <GroupHeader>1</GroupHeader>
+                  <CheatEntries>
+                    <CheatEntry>
+                      <ID>8973</ID>
+                      <Description>"Min Damage"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>tool_base_ptr</Address>
+                      <Offsets>
+                        <Offset>NetInt.Value</Offset>
+                        <Offset>Weapon.minDamage</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>8977</ID>
+                      <Description>"Max Damage"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>tool_base_ptr</Address>
+                      <Offsets>
+                        <Offset>NetInt.Value</Offset>
+                        <Offset>Weapon.maxDamage</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>8978</ID>
+                      <Description>"Speed"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>tool_base_ptr</Address>
+                      <Offsets>
+                        <Offset>NetInt.Value</Offset>
+                        <Offset>Weapon.speed</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>8979</ID>
+                      <Description>"Added Precision"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>tool_base_ptr</Address>
+                      <Offsets>
+                        <Offset>NetInt.Value</Offset>
+                        <Offset>Weapon.addedPrecision</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>8980</ID>
+                      <Description>"Added Defense"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>tool_base_ptr</Address>
+                      <Offsets>
+                        <Offset>NetInt.Value</Offset>
+                        <Offset>Weapon.addedDefense</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>8981</ID>
+                      <Description>"Added Area Of Effect"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>4 Bytes</VariableType>
+                      <Address>tool_base_ptr</Address>
+                      <Offsets>
+                        <Offset>NetInt.Value</Offset>
+                        <Offset>Weapon.addedAreaOfEffect</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>8976</ID>
+                      <Description>"Knockback"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>tool_base_ptr</Address>
+                      <Offsets>
+                        <Offset>NetFloat.Value</Offset>
+                        <Offset>Weapon.knockback</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>8974</ID>
+                      <Description>"Crit Chance"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>tool_base_ptr</Address>
+                      <Offsets>
+                        <Offset>NetFloat.Value</Offset>
+                        <Offset>Weapon.critChance</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                    <CheatEntry>
+                      <ID>8975</ID>
+                      <Description>"Crit Multiplier"</Description>
+                      <ShowAsSigned>0</ShowAsSigned>
+                      <Color>FF8080</Color>
+                      <VariableType>Float</VariableType>
+                      <Address>tool_base_ptr</Address>
+                      <Offsets>
+                        <Offset>NetFloat.Value</Offset>
+                        <Offset>Weapon.critMultiplier</Offset>
+                      </Offsets>
+                    </CheatEntry>
+                  </CheatEntries>
+                </CheatEntry>
               </CheatEntries>
             </CheatEntry>
             <CheatEntry>
@@ -2912,7 +3034,6 @@ StardewValley.Tools.WateringCan::DoFunction+27C: 48 B9 90 EF 14 DC FE 7F 00 00  
                 <CheatEntry>
                   <ID>8947</ID>
                   <Description>"watering_can_base_ptr"</Description>
-                  <LastState Value="0001000000007FFC" RealAddress="7FFC39DC000C"/>
                   <ShowAsHex>1</ShowAsHex>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>808080</Color>
@@ -3286,7 +3407,6 @@ StardewValley.Minigames.AbigailGame::playerDie+16: C5 F8 29 B4 24 C0 00 00 00  -
                 <CheatEntry>
                   <ID>104</ID>
                   <Description>"abigailgame_base_ptr"</Description>
-                  <LastState Value="000000007FFC39DC" RealAddress="7FFC39DC000A"/>
                   <ShowAsHex>1</ShowAsHex>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>808080</Color>
@@ -4372,7 +4492,7 @@ StardewValley.Menus.ChatBox::runCommand+18: 48 B8 E0 FE FF FF FF FF FF FF  - mov
 0:Pending
 1:Done
 </DropDownList>
-          <LastState Value="1" RealAddress="1165D690000"/>
+          <LastState Value="-1" RealAddress="289364A0000"/>
           <ShowAsSigned>1</ShowAsSigned>
           <Color>C0C0C0</Color>
           <VariableType>Byte</VariableType>
@@ -4586,6 +4706,95 @@ StardewValley.Game1::UpdateChatBox+7B: FF 50 38                       - call qwo
 }
 </AssemblerScript>
         </CheatEntry>
+        <CheatEntry>
+          <ID>8971</ID>
+          <Description>"_hook_melee_weapon_"</Description>
+          <LastState/>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : Stardew Valley.exe
+  Version: 
+  Date   : 2021-12-27
+  Author : sub1to
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+{$lua}
+if syntaxcheck then
+	return
+end
+
+checkDotNetSymbol('StardewValley.Tools.MeleeWeapon::tickUpdate')
+
+{$asm}
+define(hook,StardewValley.Tools.MeleeWeapon::tickUpdate)
+assert(hook,57 56 48 83 EC)
+
+alloc(newmem,$1000,hook)
+
+label(melee_weapon_tickupdate_code)
+label(returnhere)
+label(melee_weapon_tickupdate_bytes)
+registersymbol(melee_weapon_tickupdate_bytes)
+label(melee_weapon_base_ptr)
+registersymbol(melee_weapon_base_ptr)
+
+newmem:
+melee_weapon_tickupdate_bytes:
+  readMem(hook,6)
+  jmp returnhere
+
+melee_weapon_base_ptr:
+  dq 0
+
+melee_weapon_tickupdate_code:
+  mov [melee_weapon_base_ptr], rcx
+  jmp melee_weapon_tickupdate_bytes
+
+hook:
+  jmp melee_weapon_tickupdate_code
+  nop
+  returnhere:
+
+[DISABLE]
+hook:
+  readMem(melee_weapon_tickupdate_bytes,6)
+
+unregistersymbol(melee_weapon_tickupdate_bytes)
+unregistersymbol(melee_weapon_base_ptr)
+
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: StardewValley.Tools.MeleeWeapon::tickUpdate
+
+7FFEA4FFF3FE: 00 00                 - add [rax],al
+7FFEA4FFF400: 00 00                 - add [rax],al
+7FFEA4FFF402: 00 00                 - add [rax],al
+7FFEA4FFF404: 00 00                 - add [rax],al
+7FFEA4FFF406: 00 00                 - add [rax],al
+7FFEA4FFF408: 18 DB                 - sbb bl,bl
+7FFEA4FFF40A: 1C A5                 - sbb al,-5B
+7FFEA4FFF40C: FE                    - db -02
+7FFEA4FFF40D: 7F 00                 - jg 7FFEA4FFF40F
+7FFEA4FFF40F: 00                    - db 00
+// ---------- INJECTING HERE ----------
+StardewValley.Tools.MeleeWeapon::tickUpdate: 57                    - push rdi
+StardewValley.Tools.MeleeWeapon::tickUpdate+1: 56                    - push rsi
+StardewValley.Tools.MeleeWeapon::tickUpdate+2: 48 83 EC 28           - sub rsp,28
+// ---------- DONE INJECTING  ----------
+StardewValley.Tools.MeleeWeapon::tickUpdate+6: 48 8B F1              - mov rsi,rcx
+StardewValley.Tools.MeleeWeapon::tickUpdate+9: 49 8B F8              - mov rdi,r8
+StardewValley.Tools.MeleeWeapon::tickUpdate+C: 48 8D 8E A0 00 00 00  - lea rcx,[rsi+000000A0]
+StardewValley.Tools.MeleeWeapon::tickUpdate+13: 48 8B D7              - mov rdx,rdi
+StardewValley.Tools.MeleeWeapon::tickUpdate+16: E8 55 A3 B7 5E        - call coreclr.dll+149780
+StardewValley.Tools.MeleeWeapon::tickUpdate+1B: 48 8B 8E 28 01 00 00  - mov rcx,[rsi+00000128]
+StardewValley.Tools.MeleeWeapon::tickUpdate+22: 39 09                 - cmp [rcx],ecx
+StardewValley.Tools.MeleeWeapon::tickUpdate+24: E8 67 1A 2C FF        - call 7FFEA42C0EA0
+}
+</AssemblerScript>
+        </CheatEntry>
       </CheatEntries>
     </CheatEntry>
   </CheatEntries>
@@ -4596,7 +4805,7 @@ StardewValley.Game1::UpdateChatBox+7B: FF 50 38                       - call qwo
     </SymbolEntry>
     <SymbolEntry>
       <Name>struct_update_status</Name>
-      <Address>1165D690000</Address>
+      <Address>289364A0000</Address>
     </SymbolEntry>
   </UserdefinedSymbols>
 </CheatTable>
