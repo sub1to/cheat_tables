@@ -3102,10 +3102,10 @@ StardewValley.Tools.WateringCan::DoFunction+27C: 48 B9 90 EF 14 DC FE 7F 00 00  
 
 [ENABLE]
 {$lua}
-checkDotNetSymbol('&lt;&gt;c::&lt;performTenMinuteClockUpdate&gt;b__671_0')
+checkDotNetSymbol('&lt;&gt;c::&lt;performTenMinuteClockUpdate&gt;b__673_0')
 
 {$asm}
-define(hook, &lt;&gt;c::&lt;performTenMinuteClockUpdate&gt;b__671_0+50)
+define(hook, &lt;&gt;c::&lt;performTenMinuteClockUpdate&gt;b__673_0+50)
 assert(hook,83 00 0A)
 
 alloc(newmem,$20,hook)
