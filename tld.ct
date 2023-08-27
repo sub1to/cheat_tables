@@ -196,7 +196,6 @@ player_temp_toggle:
                     <CheatEntry>
                       <ID>8713</ID>
                       <Description>"Temperature Value"</Description>
-                      <LastState Value="0" RealAddress="7FF810470015"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_temp_value</Address>
@@ -229,7 +228,7 @@ player_temp_toggle:
               <ID>8714</ID>
               <Description>"Fatigue"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -328,7 +327,7 @@ GameAssembly.dll+5ED8A5: 48 8B 81 B8 00 00 00     - mov rax,[rcx+000000B8]
                 <CheatEntry>
                   <ID>8715</ID>
                   <Description>"Set Fatigue"</Description>
-                  <LastState Activated="1"/>
+                  <LastState/>
                   <Color>800080</Color>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>[ENABLE]
@@ -343,7 +342,6 @@ player_fatigue_toggle:
                     <CheatEntry>
                       <ID>8716</ID>
                       <Description>"Fatigue Value"</Description>
-                      <LastState Value="0" RealAddress="7FF810480013"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_fatigue_value</Address>
@@ -353,7 +351,6 @@ player_fatigue_toggle:
                 <CheatEntry>
                   <ID>8717</ID>
                   <Description>"Fatigue"</Description>
-                  <LastState Value="0" RealAddress="1B704B589AC"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
@@ -365,7 +362,6 @@ player_fatigue_toggle:
                 <CheatEntry>
                   <ID>8718</ID>
                   <Description>"Fatigue Max"</Description>
-                  <LastState Value="100" RealAddress="1B704B589B0"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>808080</Color>
                   <VariableType>Float</VariableType>
@@ -496,7 +492,6 @@ player_thirst_toggle:
                     <CheatEntry>
                       <ID>8722</ID>
                       <Description>"Thirst Value"</Description>
-                      <LastState Value="1.58456325E29" RealAddress="7FF810460013"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_thirst_value</Address>
@@ -506,7 +501,6 @@ player_thirst_toggle:
                 <CheatEntry>
                   <ID>8723</ID>
                   <Description>"Thirst"</Description>
-                  <LastState Value="6.137687274E-43" RealAddress="1B7D8F3CF3C"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_thirst_base_ptr</Address>
@@ -517,7 +511,6 @@ player_thirst_toggle:
                 <CheatEntry>
                   <ID>8724</ID>
                   <Description>"Thirst Max"</Description>
-                  <LastState Value="3.085830701E38" RealAddress="1B7D8F3CF40"/>
                   <Color>808080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_thirst_base_ptr</Address>
@@ -645,7 +638,6 @@ player_hunger_toggle:
                     <CheatEntry>
                       <ID>8727</ID>
                       <Description>"Hunger Value"</Description>
-                      <LastState Value="100" RealAddress="7FF810490013"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_hunger_value</Address>
@@ -655,7 +647,6 @@ player_hunger_toggle:
                 <CheatEntry>
                   <ID>8728</ID>
                   <Description>"Hunger"</Description>
-                  <LastState Value="45" RealAddress="1B7D8F3CE88"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_hunger_base_ptr</Address>
@@ -666,7 +657,6 @@ player_hunger_toggle:
                 <CheatEntry>
                   <ID>8729</ID>
                   <Description>"Hunger Max"</Description>
-                  <LastState Value="82" RealAddress="1B7D8F3CEE8"/>
                   <Color>808080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_hunger_base_ptr</Address>
@@ -680,7 +670,7 @@ player_hunger_toggle:
               <ID>8730</ID>
               <Description>"Sprint"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -779,7 +769,7 @@ GameAssembly.dll+D1B797: 0F 28 7C 24 20  - movaps xmm7,[rsp+20]
                 <CheatEntry>
                   <ID>8731</ID>
                   <Description>"Set Sprint"</Description>
-                  <LastState Activated="1"/>
+                  <LastState/>
                   <Color>800080</Color>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>[ENABLE]
@@ -794,7 +784,6 @@ player_sprint_toggle:
                     <CheatEntry>
                       <ID>8732</ID>
                       <Description>"Sprint Value"</Description>
-                      <LastState Value="100" RealAddress="7FF810490013"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_sprint_value</Address>
@@ -804,7 +793,6 @@ player_sprint_toggle:
                 <CheatEntry>
                   <ID>8733</ID>
                   <Description>"Sprint"</Description>
-                  <LastState Value="0" RealAddress="1B7D8F3CEEC"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_sprint_base_ptr</Address>
@@ -815,7 +803,6 @@ player_sprint_toggle:
                 <CheatEntry>
                   <ID>8734</ID>
                   <Description>"Sprint Max"</Description>
-                  <LastState Value="82" RealAddress="1B7D8F3CEE8"/>
                   <Color>808080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_sprint_base_ptr</Address>
@@ -945,7 +932,6 @@ player_health_toggle:
                     <CheatEntry>
                       <ID>8740</ID>
                       <Description>"Health Value"</Description>
-                      <LastState Value="0" RealAddress="7FF810480013"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_health_value</Address>
@@ -955,7 +941,6 @@ player_health_toggle:
                 <CheatEntry>
                   <ID>8741</ID>
                   <Description>"Health"</Description>
-                  <LastState Value="4.583000183" RealAddress="1B704B589A8"/>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_health_base_ptr</Address>
@@ -966,7 +951,6 @@ player_health_toggle:
                 <CheatEntry>
                   <ID>8742</ID>
                   <Description>"Health Max"</Description>
-                  <LastState Value="0" RealAddress="1B704B589AC"/>
                   <Color>808080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_health_base_ptr</Address>
@@ -980,7 +964,7 @@ player_health_toggle:
               <ID>8603</ID>
               <Description>"Backpack (Weight / Scent)"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -1098,7 +1082,7 @@ GameAssembly.dll+CEE0CC: 44 3B 70 18                 - cmp r14d,[rax+18]
                 <CheatEntry>
                   <ID>8648</ID>
                   <Description>"Set Weight"</Description>
-                  <LastState Activated="1"/>
+                  <LastState/>
                   <Color>800080</Color>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>[ENABLE]
@@ -1113,7 +1097,6 @@ backpack_weight_toggle:
                     <CheatEntry>
                       <ID>8649</ID>
                       <Description>"Weight Value"</Description>
-                      <LastState Value="15" RealAddress="7FF810460014"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>backpack_weight_value</Address>
@@ -1138,7 +1121,6 @@ backpack_scent_toggle:
                     <CheatEntry>
                       <ID>8639</ID>
                       <Description>"Scent Value"</Description>
-                      <LastState Value="0" RealAddress="7FF810460018"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>backpack_scent_value</Address>
@@ -1148,7 +1130,6 @@ backpack_scent_toggle:
                 <CheatEntry>
                   <ID>8640</ID>
                   <Description>"Weight"</Description>
-                  <LastState Value="15" RealAddress="1B7D8F3CF90"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
@@ -1160,7 +1141,6 @@ backpack_scent_toggle:
                 <CheatEntry>
                   <ID>8641</ID>
                   <Description>"Scent"</Description>
-                  <LastState Value="0" RealAddress="1B7D8F3CFAC"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
@@ -1648,7 +1628,7 @@ GameAssembly.dll+16B8647: 48 89 54 24 38              - mov [rsp+38],rdx
               <ID>8512</ID>
               <Description>"Lantern"</Description>
               <Options moDeactivateChildrenAsWell="1"/>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -1748,7 +1728,7 @@ GameAssembly.dll+1216C9F: 0F 28 74 24 30        - movaps xmm6,[rsp+30]
                 <CheatEntry>
                   <ID>8636</ID>
                   <Description>"Infinite Lantern Oil"</Description>
-                  <LastState Activated="1"/>
+                  <LastState/>
                   <Color>800080</Color>
                   <VariableType>Auto Assembler Script</VariableType>
                   <AssemblerScript>[ENABLE]
@@ -1763,7 +1743,6 @@ lamp_oil_inf_toggle:
                 <CheatEntry>
                   <ID>8647</ID>
                   <Description>"Max Lantern Oil"</Description>
-                  <LastState Value="0" RealAddress="1B7347BCC48"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>808080</Color>
                   <VariableType>Float</VariableType>
@@ -1775,7 +1754,6 @@ lamp_oil_inf_toggle:
                 <CheatEntry>
                   <ID>9084</ID>
                   <Description>"Lantern Oil"</Description>
-                  <LastState Value="0" RealAddress="1B7347BCC90"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>FF8080</Color>
                   <VariableType>Float</VariableType>
@@ -2493,7 +2471,7 @@ hook2 / rope_deploy_hook_finalize
             <CheatEntry>
               <ID>8872</ID>
               <Description>"Ice Never Cracks"</Description>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -2575,7 +2553,7 @@ GameAssembly.dll+DD2891: E8 BA D5 59 FF        - call GameAssembly.dll+36FE50
           <ID>8831</ID>
           <Description>"Guns"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" RealAddress="00000000"/>
+          <LastState Value="" Activated="1" RealAddress="00000000"/>
           <Color>0000FF</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -3707,7 +3685,7 @@ GameAssembly.dll+76D19C: 48 8D 0D 9D E0 EB 03  - lea rcx,[GameAssembly.dll+462B2
             <CheatEntry>
               <ID>8956</ID>
               <Description>"Auto Unlock Lockers"</Description>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -4207,6 +4185,724 @@ GameAssembly.dll+7A1B32: E8 A9 9C B6 FF           - call GameAssembly.DllCanUnlo
 }
 </AssemblerScript>
             </CheatEntry>
+            <CheatEntry>
+              <ID>9064</ID>
+              <Description>"Item Spawner"</Description>
+              <LastState Activated="1"/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : tld.exe
+  Version: 2.22
+  Date   : 2023-08-27
+  Author : sub1to
+}
+
+[ENABLE]
+alloc(newmem,$ff,GameAssembly.dll)
+alloc(string,$ff,GameAssembly.dll)
+label(returnhere)
+label(code)
+label(code_get_string)
+label(code_strlen_next)
+label(code_strlen_end)
+label(playermanager_update_hook)
+label(playermanager_update_bytes)
+label(item_spawn_toggle)
+label(item_spawn_count)
+label(item_spawn_string)
+label(uconsole_getstring_bytes)
+registersymbol(playermanager_update_hook)
+registersymbol(playermanager_update_bytes)
+registersymbol(item_spawn_toggle)
+registersymbol(item_spawn_count)
+registersymbol(item_spawn_string)
+registersymbol(uconsole_getstring_bytes)
+
+//  class: PlayerManager
+//  RVA: 0x15A7EC0 Offset: 0x15A6AC0 VA: 0x7FFB684A7EC0
+//  public void Update() { }
+aobScanModule(hook,GameAssembly.dll,40 53 41 56 48 83 ec ? 80 3d ? ? ? ? ? 48 8b d9 75 ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? c6 05 ? ? ? ? ? 48 8b 15)
+
+// claass: uConsole
+// RVA: 0xE5A2D0 Offset: 0xE590D0 VA: 0x180E5A2D0
+// public static string GetString() { }
+aobScanModule(uConsole_GetString,GameAssembly.dll,48 83 ec ? 80 3d ? ? ? ? ? 75 ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? c6 05 ? ? ? ? ? 48 8b 0d ? ? ? ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 48 8b 0d ? ? ? ? 48 8b 91 ? ? ? ? 48 8b 42 ? 48 85 c0 74)
+
+// class: ConsoleManager
+// RVA: 0xB218F0 Offset: 0xB206F0 VA: 0x180B218F0
+// public static void CONSOLE_gear_add() { }
+aobScanModule(ConsoleManager_gear_add,GameAssembly.dll,48 89 5c 24 ? 48 89 74 24 ? 57 48 81 ec ? ? ? ? 0f 29 b4 24 ? ? ? ? 80 3d)
+
+string:
+item_spawn_string:
+  dq 00 // +00 ptr
+  dq 00 // +08 padding
+  dd 16 // +10 len
+  db 'G' 0 'E' 0 'A' 0 'R' 0 '_' 0 'T' 0 'e' 0 'c' 0 'h' 0 'n' 0 'i' 0 'c' 0 'a' 0 'l' 0 'B' 0 'a' 0 'c' 0 'k' 0 'p' 0 'a' 0 'c' 0 'k' 0 0
+  //db 0 // +14 first byte
+
+newmem:
+playermanager_update_bytes:
+  //push rbp
+  //mov rbp,rsp
+  readMem(hook, $8)
+  jmp returnhere
+
+uconsole_getstring_bytes:
+  readMem(uConsole_GetString, 11)
+
+item_spawn_toggle:
+  db 0
+
+item_spawn_count:
+  dd 1
+
+code_get_string:
+  lea rax, [string]
+  ret
+
+code:
+  cmp byte ptr [item_spawn_toggle], 0
+  jz playermanager_update_bytes
+  mov byte ptr [item_spawn_toggle], 0
+
+  //get strlen
+  xor r8d, r8d
+  lea rdx, [item_spawn_string+14]
+code_strlen_next:
+  mov r9w, [rdx]
+  test r9w, r9w
+  jz code_strlen_end
+  inc r8d
+  lea rdx, [rdx+2]
+  jmp code_strlen_next
+
+code_strlen_end:
+  mov [item_spawn_string+10], r8d
+
+  // spawn item
+  lea rsp, [rsp-28]
+  mov [rsp+20], rcx
+  call ConsoleManager_gear_add
+  mov rcx, [rsp+20]
+  lea rsp, [rsp+28]
+
+  jmp playermanager_update_bytes
+
+hook:
+playermanager_update_hook:
+  jmp code
+  nop
+  nop
+  nop
+  returnhere:
+
+uConsole_GetString:
+  jmp code_get_string
+  nop 6
+
+
+
+[DISABLE]
+playermanager_update_hook:
+  //40 55 48 8B EC
+  readMem(playermanager_update_bytes, 8)
+
+uConsole_GetString:
+  readMem(uconsole_getstring_bytes, 11)
+
+unregistersymbol(playermanager_update_hook)
+unregistersymbol(playermanager_update_bytes)
+unregistersymbol(item_spawn_toggle)
+unregistersymbol(item_spawn_count)
+unregistersymbol(item_spawn_string)
+unregistersymbol(uconsole_getstring_bytes)
+dealloc(newmem)
+dealloc(string)
+
+{
+PlayerManager::Update
+
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+C04BF0
+
+GameAssembly.dll+C04BD3: 74 14                 - je GameAssembly.dll+C04BE9
+GameAssembly.dll+C04BD5: 33 D2                 - xor edx,edx
+GameAssembly.dll+C04BD7: E8 E4 E4 0D 00        - call GameAssembly.dll+CE30C0
+GameAssembly.dll+C04BDC: C6 83 90 01 00 00 00  - mov byte ptr [rbx+00000190],00
+GameAssembly.dll+C04BE3: 48 83 C4 20           - add rsp,20
+GameAssembly.dll+C04BE7: 5B                    - pop rbx
+GameAssembly.dll+C04BE8: C3                    - ret
+GameAssembly.dll+C04BE9: E8 42 41 6E FF        - call GameAssembly.il2cpp_value_box+50
+GameAssembly.dll+C04BEE: CC                    - int 3
+GameAssembly.dll+C04BEF: CC                    - int 3
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+C04BF0: 40 53                 - push rbx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+C04BF2: 41 56                 - push r14
+GameAssembly.dll+C04BF4: 48 83 EC 68           - sub rsp,68
+GameAssembly.dll+C04BF8: 80 3D 9C 18 C4 03 00  - cmp byte ptr [GameAssembly.dll+484649B],00
+GameAssembly.dll+C04BFF: 48 8B D9              - mov rbx,rcx
+GameAssembly.dll+C04C02: 75 73                 - jne GameAssembly.dll+C04C77
+GameAssembly.dll+C04C04: 48 8D 0D 05 43 A6 03  - lea rcx,[GameAssembly.dll+4668F10]
+GameAssembly.dll+C04C0B: E8 40 B2 76 FF        - call GameAssembly.dll+36FE50
+GameAssembly.dll+C04C10: 48 8D 0D 41 2F A5 03  - lea rcx,[GameAssembly.dll+4657B58]
+GameAssembly.dll+C04C17: E8 34 B2 76 FF        - call GameAssembly.dll+36FE50
+GameAssembly.dll+C04C1C: 48 8D 0D 15 35 A5 03  - lea rcx,[GameAssembly.dll+4658138]
+}
+
+{
+uConsole::GetString
+
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+E5A2D0
+
+GameAssembly.dll+E5A2B6: 48 85 C0              - test rax,rax
+GameAssembly.dll+E5A2B9: 74 0E                 - je GameAssembly.dll+E5A2C9
+GameAssembly.dll+E5A2BB: 8B 40 18              - mov eax,[rax+18]
+GameAssembly.dll+E5A2BE: 39 41 38              - cmp [rcx+38],eax
+GameAssembly.dll+E5A2C1: 0F 9C C0              - setl al
+GameAssembly.dll+E5A2C4: 48 83 C4 28           - add rsp,28
+GameAssembly.dll+E5A2C8: C3                    - ret
+GameAssembly.dll+E5A2C9: E8 62 EA 48 FF        - call GameAssembly.il2cpp_value_box+50
+GameAssembly.dll+E5A2CE: CC                    - int 3
+GameAssembly.dll+E5A2CF: CC                    - int 3
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+E5A2D0: 48 83 EC 28           - sub rsp,28
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+E5A2D4: 80 3D 03 CF 9E 03 00  - cmp byte ptr [GameAssembly.dll+48471DE],00
+GameAssembly.dll+E5A2DB: 75 2B                 - jne GameAssembly.dll+E5A308
+GameAssembly.dll+E5A2DD: 48 8D 0D 34 30 7E 03  - lea rcx,[GameAssembly.dll+463D318]
+GameAssembly.dll+E5A2E4: E8 67 5B 51 FF        - call GameAssembly.dll+36FE50
+GameAssembly.dll+E5A2E9: 48 8D 0D C8 2F 7E 03  - lea rcx,[GameAssembly.dll+463D2B8]
+GameAssembly.dll+E5A2F0: E8 5B 5B 51 FF        - call GameAssembly.dll+36FE50
+GameAssembly.dll+E5A2F5: 48 8D 0D E4 3C 81 03  - lea rcx,[GameAssembly.dll+466DFE0]
+GameAssembly.dll+E5A2FC: E8 4F 5B 51 FF        - call GameAssembly.dll+36FE50
+GameAssembly.dll+E5A301: C6 05 D6 CE 9E 03 01  - mov byte ptr [GameAssembly.dll+48471DE],01
+GameAssembly.dll+E5A308: 48 8B 0D D1 3C 81 03  - mov rcx,[GameAssembly.dll+466DFE0]
+}
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>9065</ID>
+                  <Description>"State"</Description>
+                  <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:Idle/Done
+1:Spawn Item
+</DropDownList>
+                  <LastState Value="0" RealAddress="7FF8179D0018"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>800080</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>item_spawn_toggle</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>9066</ID>
+                  <Description>"Count (Stackable Items)"</Description>
+                  <LastState Value="1" RealAddress="7FF8179D0019"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>800080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>item_spawn_count</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>9067</ID>
+                  <Description>"Item Name"</Description>
+                  <DropDownList>GEAR_Accelerant:GEAR_Accelerant
+GEAR_AccelerantGunpowder:GEAR_AccelerantGunpowder
+GEAR_AccelerantKerosene:GEAR_AccelerantKerosene
+GEAR_AccelerantMedium:GEAR_AccelerantMedium
+GEAR_AirlineFoodChick:GEAR_AirlineFoodChick
+GEAR_AirlineFoodVeg:GEAR_AirlineFoodVeg
+GEAR_Arrow:GEAR_Arrow
+GEAR_ArrowHead:GEAR_ArrowHead
+GEAR_ArrowShaft:GEAR_ArrowShaft
+GEAR_AstridBackPack_hangar:GEAR_AstridBackPack_hangar
+GEAR_AstridBoots:GEAR_AstridBoots
+GEAR_AstridGloves:GEAR_AstridGloves
+GEAR_AstridJacket:GEAR_AstridJacket
+GEAR_AstridJeans:GEAR_AstridJeans
+GEAR_AstridSweater:GEAR_AstridSweater
+GEAR_AstridToque:GEAR_AstridToque
+GEAR_AuroraHatchCode:GEAR_AuroraHatchCode
+GEAR_AuroraObservationNote:GEAR_AuroraObservationNote
+GEAR_Balaclava:GEAR_Balaclava
+GEAR_BankManagerHouseKey:GEAR_BankManagerHouseKey
+GEAR_BankVaultCode:GEAR_BankVaultCode
+GEAR_BarkTinder:GEAR_BarkTinder
+GEAR_BaseballCap:GEAR_BaseballCap
+GEAR_BasicBoots:GEAR_BasicBoots
+GEAR_BasicGloves:GEAR_BasicGloves
+GEAR_BasicShoes:GEAR_BasicShoes
+GEAR_BasicWinterCoat:GEAR_BasicWinterCoat
+GEAR_BasicWoolHat:GEAR_BasicWoolHat
+GEAR_BasicWoolScarf:GEAR_BasicWoolScarf
+GEAR_BearEar:GEAR_BearEar
+GEAR_BearHide:GEAR_BearHide
+GEAR_BearHideDried:GEAR_BearHideDried
+GEAR_BearQuarter:GEAR_BearQuarter
+GEAR_BearSkinBedRoll:GEAR_BearSkinBedRoll
+GEAR_BearSkinCoat:GEAR_BearSkinCoat
+GEAR_BearSpear:GEAR_BearSpear
+GEAR_BearSpearBroken:GEAR_BearSpearBroken
+GEAR_BearSpearBrokenStory:GEAR_BearSpearBrokenStory
+GEAR_BearSpearRelic:GEAR_BearSpearRelic
+GEAR_BearSpearStory:GEAR_BearSpearStory
+GEAR_BedRoll:GEAR_BedRoll
+GEAR_BeefJerky:GEAR_BeefJerky
+GEAR_BirchbarkPrepared:GEAR_BirchbarkPrepared
+GEAR_BirchbarkTea:GEAR_BirchbarkTea
+GEAR_BirchSapling:GEAR_BirchSapling
+GEAR_BirchSaplingDried:GEAR_BirchSaplingDried
+GEAR_BlackrockConvictNote1:GEAR_BlackrockConvictNote1
+GEAR_BlackrockConvictNote2:GEAR_BlackrockConvictNote2
+GEAR_BlackrockConvictNote3:GEAR_BlackrockConvictNote3
+GEAR_BlackrockMemo:GEAR_BlackrockMemo
+GEAR_BlueFlare:GEAR_BlueFlare
+GEAR_BoltCutters:GEAR_BoltCutters
+GEAR_BookA:GEAR_BookA
+GEAR_BookArchery:GEAR_BookArchery
+GEAR_BookB:GEAR_BookB
+GEAR_BookBopen:GEAR_BookBopen
+GEAR_BookC:GEAR_BookC
+GEAR_BookCarcassHarvesting:GEAR_BookCarcassHarvesting
+GEAR_BookCooking:GEAR_BookCooking
+GEAR_BookD:GEAR_BookD
+GEAR_BookE:GEAR_BookE
+GEAR_BookEopen:GEAR_BookEopen
+GEAR_BookF:GEAR_BookF
+GEAR_BookFireStarting:GEAR_BookFireStarting
+GEAR_BookFopen:GEAR_BookFopen
+GEAR_BookG:GEAR_BookG
+GEAR_BookGunsmithing:GEAR_BookGunsmithing
+GEAR_BookH:GEAR_BookH
+GEAR_BookHopen:GEAR_BookHopen
+GEAR_BookI:GEAR_BookI
+GEAR_BookIceFishing:GEAR_BookIceFishing
+GEAR_BookLabE_01:GEAR_BookLabE_01
+GEAR_BookLabE_02:GEAR_BookLabE_02
+GEAR_BookLabE_03:GEAR_BookLabE_03
+GEAR_BookLabE_Open_01:GEAR_BookLabE_Open_01
+GEAR_BookManual:GEAR_BookManual
+GEAR_BookMending:GEAR_BookMending
+GEAR_BookRevolverFirearm:GEAR_BookRevolverFirearm
+GEAR_BookRifleFirearm:GEAR_BookRifleFirearm
+GEAR_BookRifleFirearmAdvanced:GEAR_BookRifleFirearmAdvanced
+GEAR_BookTallTalesFishing:GEAR_BookTallTalesFishing
+GEAR_BookTallTalesGlowCave:GEAR_BookTallTalesGlowCave
+GEAR_BookTallTalesStag:GEAR_BookTallTalesStag
+GEAR_BookTallTalesYeti:GEAR_BookTallTalesYeti
+GEAR_BottleAntibiotics:GEAR_BottleAntibiotics
+GEAR_BottleHydrogenPeroxide:GEAR_BottleHydrogenPeroxide
+GEAR_BottlePainKillers:GEAR_BottlePainKillers
+GEAR_Bow:GEAR_Bow
+GEAR_Brand:GEAR_Brand
+GEAR_BrokenArrow:GEAR_BrokenArrow
+GEAR_BrokenRifle:GEAR_BrokenRifle
+GEAR_Bullet:GEAR_Bullet
+GEAR_CacheNote_ChurchMarshDir:GEAR_CacheNote_ChurchMarshDir
+GEAR_CampOfficeCollectible:GEAR_CampOfficeCollectible
+GEAR_CandyBar:GEAR_CandyBar
+GEAR_CannedBeans:GEAR_CannedBeans
+GEAR_CannedSardines:GEAR_CannedSardines
+GEAR_CanOpener:GEAR_CanOpener
+GEAR_CarBattery:GEAR_CarBattery
+GEAR_CargoPants:GEAR_CargoPants
+GEAR_CashBundle:GEAR_CashBundle
+GEAR_CattailPlant:GEAR_CattailPlant
+GEAR_CattailStalk:GEAR_CattailStalk
+GEAR_CattailTinder:GEAR_CattailTinder
+GEAR_CaveCacheNote:GEAR_CaveCacheNote
+GEAR_Charcoal:GEAR_Charcoal
+GEAR_ChurchHymn:GEAR_ChurchHymn
+GEAR_ChurchNoteEP1:GEAR_ChurchNoteEP1
+GEAR_ClimbingSocks:GEAR_ClimbingSocks
+GEAR_Cloth:GEAR_Cloth
+GEAR_ClothSheet:GEAR_ClothSheet
+GEAR_Coal:GEAR_Coal
+GEAR_CombatBoots:GEAR_CombatBoots
+GEAR_CombatPants:GEAR_CombatPants
+GEAR_CompressionBandage:GEAR_CompressionBandage
+GEAR_CondensedMilk:GEAR_CondensedMilk
+GEAR_ConvictCorpseNote:GEAR_ConvictCorpseNote
+GEAR_CookedMeatBear:GEAR_CookedMeatBear
+GEAR_CookedMeatDeer:GEAR_CookedMeatDeer
+GEAR_CookedMeatMoose:GEAR_CookedMeatMoose
+GEAR_CookedMeatRabbit:GEAR_CookedMeatRabbit
+GEAR_CookedMeatWolf:GEAR_CookedMeatWolf
+GEAR_CookingPot:GEAR_CookingPot
+GEAR_CookingPotDummy:GEAR_CookingPotDummy
+GEAR_CottonHoodie:GEAR_CottonHoodie
+GEAR_CottonScarf:GEAR_CottonScarf
+GEAR_CottonShirt:GEAR_CottonShirt
+GEAR_CottonSocks:GEAR_CottonSocks
+GEAR_CottonSocksStart:GEAR_CottonSocksStart
+GEAR_CowichanSweater:GEAR_CowichanSweater
+GEAR_Crackers:GEAR_Crackers
+GEAR_Crampons:GEAR_Crampons
+GEAR_CrowFeather:GEAR_CrowFeather
+GEAR_DamCollectible1:GEAR_DamCollectible1
+GEAR_DamControlRoomCodeNote:GEAR_DamControlRoomCodeNote
+GEAR_DamElevatorNotice:GEAR_DamElevatorNotice
+GEAR_DamExitCodeNote:GEAR_DamExitCodeNote
+GEAR_DamFenceKey:GEAR_DamFenceKey
+GEAR_DamGarbageLetter:GEAR_DamGarbageLetter
+GEAR_DamLockerKey:GEAR_DamLockerKey
+GEAR_DamOfficeKey:GEAR_DamOfficeKey
+GEAR_DamTrailerBCrewNote:GEAR_DamTrailerBCrewNote
+GEAR_DarkwalkerDiary1:GEAR_DarkwalkerDiary1
+GEAR_DarkwalkerDiary10:GEAR_DarkwalkerDiary10
+GEAR_DarkwalkerDiary11:GEAR_DarkwalkerDiary11
+GEAR_DarkwalkerDiary2:GEAR_DarkwalkerDiary2
+GEAR_DarkwalkerDiary3:GEAR_DarkwalkerDiary3
+GEAR_DarkwalkerDiary4:GEAR_DarkwalkerDiary4
+GEAR_DarkwalkerDiary5:GEAR_DarkwalkerDiary5
+GEAR_DarkwalkerDiary6:GEAR_DarkwalkerDiary6
+GEAR_DarkwalkerDiary7:GEAR_DarkwalkerDiary7
+GEAR_DarkwalkerDiary8:GEAR_DarkwalkerDiary8
+GEAR_DarkwalkerDiary9:GEAR_DarkwalkerDiary9
+GEAR_DarkwalkerID:GEAR_DarkwalkerID
+GEAR_DeadmanNote1:GEAR_DeadmanNote1
+GEAR_DeadmanNote2:GEAR_DeadmanNote2
+GEAR_DeadmanNote3:GEAR_DeadmanNote3
+GEAR_DeadmanNote4:GEAR_DeadmanNote4
+GEAR_DeadmanNote5:GEAR_DeadmanNote5
+GEAR_DeerSkinBoots:GEAR_DeerSkinBoots
+GEAR_DeerSkinPants:GEAR_DeerSkinPants
+GEAR_DogFood:GEAR_DogFood
+GEAR_DownParka:GEAR_DownParka
+GEAR_DownSkiJacket:GEAR_DownSkiJacket
+GEAR_DownVest:GEAR_DownVest
+GEAR_DustingSulfur:GEAR_DustingSulfur
+GEAR_EarMuffs:GEAR_EarMuffs
+GEAR_ElevatorCrank:GEAR_ElevatorCrank
+GEAR_ElevatorParts:GEAR_ElevatorParts
+GEAR_ElevatorPartsDead:GEAR_ElevatorPartsDead
+GEAR_EmergencyKitNote:GEAR_EmergencyKitNote
+GEAR_EmergencyStim:GEAR_EmergencyStim
+GEAR_EnergyBar:GEAR_EnergyBar
+GEAR_Ep3ForestTalkers_FTCollectible1:GEAR_Ep3ForestTalkers_FTCollectible1
+GEAR_Ep3ForestTalkers_FTCollectible2:GEAR_Ep3ForestTalkers_FTCollectible2
+GEAR_Ep3ForestTalkers_FTCollectible3:GEAR_Ep3ForestTalkers_FTCollectible3
+GEAR_Ep3ForestTalkers_PVCollectible1:GEAR_Ep3ForestTalkers_PVCollectible1
+GEAR_Ep3ForestTalkers_PVCollectible2:GEAR_Ep3ForestTalkers_PVCollectible2
+GEAR_Ep3ForestTalkers_PVCollectible3:GEAR_Ep3ForestTalkers_PVCollectible3
+GEAR_Ep3HallFlyer:GEAR_Ep3HallFlyer
+GEAR_Ep3Rosary:GEAR_Ep3Rosary
+GEAR_Ep3TomsMap:GEAR_Ep3TomsMap
+GEAR_Ep3_ChurchArtifact:GEAR_Ep3_ChurchArtifact
+GEAR_Ep3_ChurchFlyer:GEAR_Ep3_ChurchFlyer
+GEAR_Ep3_ChurchMotelLetter:GEAR_Ep3_ChurchMotelLetter
+GEAR_Ep3_ChurchNewsClipping:GEAR_Ep3_ChurchNewsClipping
+GEAR_Ep3_ChurchThankyouLetter:GEAR_Ep3_ChurchThankyouLetter
+GEAR_Ep3_ChurchTheftReport:GEAR_Ep3_ChurchTheftReport
+GEAR_EP3_JoplinBunkerNote:GEAR_EP3_JoplinBunkerNote
+GEAR_EP3_JoplinBunkerNote2:GEAR_EP3_JoplinBunkerNote2
+GEAR_EP3_JoplinCacheNote:GEAR_EP3_JoplinCacheNote
+GEAR_EP3_PatientHistory01:GEAR_EP3_PatientHistory01
+GEAR_EP3_PatientHistory02:GEAR_EP3_PatientHistory02
+GEAR_EP3_PatientHistory03:GEAR_EP3_PatientHistory03
+GEAR_EP3_PatientHistory04:GEAR_EP3_PatientHistory04
+GEAR_EP3_PatientHistory05:GEAR_EP3_PatientHistory05
+GEAR_EP3_PatientHistory06:GEAR_EP3_PatientHistory06
+GEAR_FarmerDepositBoxKey:GEAR_FarmerDepositBoxKey
+GEAR_FireAxe:GEAR_FireAxe
+GEAR_Firelog:GEAR_Firelog
+GEAR_Firestriker:GEAR_Firestriker
+GEAR_FishermanSweater:GEAR_FishermanSweater
+GEAR_FishingLine:GEAR_FishingLine
+GEAR_FixedRifle:GEAR_FixedRifle
+GEAR_FlareA:GEAR_FlareA
+GEAR_FlareGun:GEAR_FlareGun
+GEAR_FlareGunAmmoSingle:GEAR_FlareGunAmmoSingle
+GEAR_FlareGunAmmoSingle_SurvivorMission:GEAR_FlareGunAmmoSingle_SurvivorMission
+GEAR_FlareGunCase_hangar:GEAR_FlareGunCase_hangar
+GEAR_Flashlight:GEAR_Flashlight
+GEAR_FleeceMittens:GEAR_FleeceMittens
+GEAR_FleeceSweater:GEAR_FleeceSweater
+GEAR_FlintAndSteel:GEAR_FlintAndSteel
+GEAR_FoodSupplies_hangar:GEAR_FoodSupplies_hangar
+GEAR_ForestTalkerBloodyItem:GEAR_ForestTalkerBloodyItem
+GEAR_ForestTalkerDamNote:GEAR_ForestTalkerDamNote
+GEAR_ForestTalkerFlyer:GEAR_ForestTalkerFlyer
+GEAR_ForestTalkerHiddenItem:GEAR_ForestTalkerHiddenItem
+GEAR_ForestTalkerMap:GEAR_ForestTalkerMap
+GEAR_ForestTalkerThankyou:GEAR_ForestTalkerThankyou
+GEAR_ForestTalkerThankyou2:GEAR_ForestTalkerThankyou2
+GEAR_ForgeBlueprints:GEAR_ForgeBlueprints
+GEAR_ForgeCacheNote:GEAR_ForgeCacheNote
+GEAR_Gauntlets:GEAR_Gauntlets
+GEAR_GMExtraSuppliesNote:GEAR_GMExtraSuppliesNote
+GEAR_GranolaBar:GEAR_GranolaBar
+GEAR_GreyMotherBoots:GEAR_GreyMotherBoots
+GEAR_GreyMotherPearls:GEAR_GreyMotherPearls
+GEAR_GreyMotherTrunkKey:GEAR_GreyMotherTrunkKey
+GEAR_GunpowderCan:GEAR_GunpowderCan
+GEAR_Gut:GEAR_Gut
+GEAR_GutDried:GEAR_GutDried
+GEAR_Hacksaw:GEAR_Hacksaw
+GEAR_Hammer:GEAR_Hammer
+GEAR_HandheldShortwave:GEAR_HandheldShortwave
+GEAR_HankHatchCode:GEAR_HankHatchCode
+GEAR_HankJournal1:GEAR_HankJournal1
+GEAR_HankJournal2:GEAR_HankJournal2
+GEAR_HankLockboxKey:GEAR_HankLockboxKey
+GEAR_HankNeiceLetter:GEAR_HankNeiceLetter
+GEAR_HardCase:GEAR_HardCase
+GEAR_HardCase_hangar:GEAR_HardCase_hangar
+GEAR_Hardwood:GEAR_Hardwood
+GEAR_Hatchet:GEAR_Hatchet
+GEAR_HatchetImprovised:GEAR_HatchetImprovised
+GEAR_HC_EP1_FM_TreeRoots_Dir:GEAR_HC_EP1_FM_TreeRoots_Dir
+GEAR_HC_EP1_ML_AlansCave_Dir:GEAR_HC_EP1_ML_AlansCave_Dir
+GEAR_HC_EP1_ML_ClearCut_Dir:GEAR_HC_EP1_ML_ClearCut_Dir
+GEAR_HC_EP1_ML_TracksEnt_Dir:GEAR_HC_EP1_ML_TracksEnt_Dir
+GEAR_HC_EP1_RW_HunterLodge_Dir:GEAR_HC_EP1_RW_HunterLodge_Dir
+GEAR_HC_EP1_RW_RavineEnd_Dir:GEAR_HC_EP1_RW_RavineEnd_Dir
+GEAR_HeavyBandage:GEAR_HeavyBandage
+GEAR_HeavyParka:GEAR_HeavyParka
+GEAR_HeavyWoolSweater:GEAR_HeavyWoolSweater
+GEAR_HighQualityTools:GEAR_HighQualityTools
+GEAR_HomeMadeSoup:GEAR_HomeMadeSoup
+GEAR_Hook:GEAR_Hook
+GEAR_HookAndLine:GEAR_HookAndLine
+GEAR_ImprovisedHat:GEAR_ImprovisedHat
+GEAR_ImprovisedMittens:GEAR_ImprovisedMittens
+GEAR_InsulatedBoots:GEAR_InsulatedBoots
+GEAR_InsulatedPants:GEAR_InsulatedPants
+GEAR_InsulatedVest:GEAR_InsulatedVest
+GEAR_Insulin:GEAR_Insulin
+GEAR_Jeans:GEAR_Jeans
+GEAR_JeremiahKnife:GEAR_JeremiahKnife
+GEAR_JeremiahsCoat:GEAR_JeremiahsCoat
+GEAR_JerrycanRusty:GEAR_JerrycanRusty
+GEAR_KeroseneLampB:GEAR_KeroseneLampB
+GEAR_KetchupChips:GEAR_KetchupChips
+GEAR_Knife:GEAR_Knife
+GEAR_KnifeImprovised:GEAR_KnifeImprovised
+GEAR_KnifeScrapMetal:GEAR_KnifeScrapMetal
+GEAR_KnowledgeCarterDam:GEAR_KnowledgeCarterDam
+GEAR_KnowledgeCollapse1:GEAR_KnowledgeCollapse1
+GEAR_KnowledgeCollapse2:GEAR_KnowledgeCollapse2
+GEAR_KnowledgeCollapse3:GEAR_KnowledgeCollapse3
+GEAR_KnowledgeCollapse4:GEAR_KnowledgeCollapse4
+GEAR_KnowledgeMilton:GEAR_KnowledgeMilton
+GEAR_KnowledgeMysteryLake:GEAR_KnowledgeMysteryLake
+GEAR_KnowledgePVbook1:GEAR_KnowledgePVbook1
+GEAR_KnowledgePVbook2:GEAR_KnowledgePVbook2
+GEAR_KnowledgePVbook3:GEAR_KnowledgePVbook3
+GEAR_LakeCabinKey1:GEAR_LakeCabinKey1
+GEAR_LakeCabinKey2:GEAR_LakeCabinKey2
+GEAR_LakeCabinKey3:GEAR_LakeCabinKey3
+GEAR_LakeDeerHuntNote:GEAR_LakeDeerHuntNote
+GEAR_LakeIncidentNote:GEAR_LakeIncidentNote
+GEAR_LakeLetter1:GEAR_LakeLetter1
+GEAR_LakesFlareCacheNote:GEAR_LakesFlareCacheNote
+GEAR_LakeTrailerKey1:GEAR_LakeTrailerKey1
+GEAR_LakeWolfCullNote:GEAR_LakeWolfCullNote
+GEAR_LampFuel:GEAR_LampFuel
+GEAR_LampFuelFull:GEAR_LampFuelFull
+GEAR_Leather:GEAR_Leather
+GEAR_LeatherDried:GEAR_LeatherDried
+GEAR_LeatherHide:GEAR_LeatherHide
+GEAR_LeatherHideDried:GEAR_LeatherHideDried
+GEAR_LeatherShoes:GEAR_LeatherShoes
+GEAR_LeatherStrips:GEAR_LeatherStrips
+GEAR_LetterBundle:GEAR_LetterBundle
+GEAR_LightParka:GEAR_LightParka
+GEAR_LilyClimbMap:GEAR_LilyClimbMap
+GEAR_Line:GEAR_Line
+GEAR_LongUnderwear:GEAR_LongUnderwear
+GEAR_LongUnderwearStart:GEAR_LongUnderwearStart
+GEAR_LongUnderwearWool:GEAR_LongUnderwearWool
+GEAR_MackinawJacket:GEAR_MackinawJacket
+GEAR_MagnifyingLens:GEAR_MagnifyingLens
+GEAR_MapleSapling:GEAR_MapleSapling
+GEAR_MapleSaplingDried:GEAR_MapleSaplingDried
+GEAR_MapleSyrup:GEAR_MapleSyrup
+GEAR_MedicalSupplies:GEAR_MedicalSupplies
+GEAR_MedicalSupplies_hangar:GEAR_MedicalSupplies_hangar
+GEAR_MilitaryParka:GEAR_MilitaryParka
+GEAR_MiltonCaveLetter:GEAR_MiltonCaveLetter
+GEAR_MiltonDepositBoxKey1:GEAR_MiltonDepositBoxKey1
+GEAR_MiltonDepositBoxKey2:GEAR_MiltonDepositBoxKey2
+GEAR_MiltonDepositBoxKey3:GEAR_MiltonDepositBoxKey3
+GEAR_MiltonFlareGunNote:GEAR_MiltonFlareGunNote
+GEAR_MiltonGardenCache:GEAR_MiltonGardenCache
+GEAR_MiltonLetter1:GEAR_MiltonLetter1
+GEAR_MiltonLetter2:GEAR_MiltonLetter2
+GEAR_MiltonParkNotice:GEAR_MiltonParkNotice
+GEAR_MiltonPostOfficeCollectible1:GEAR_MiltonPostOfficeCollectible1
+GEAR_MiltonStoreNotice:GEAR_MiltonStoreNotice
+GEAR_Mittens:GEAR_Mittens
+GEAR_MooseHide:GEAR_MooseHide
+GEAR_MooseHideBag:GEAR_MooseHideBag
+GEAR_MooseHideCloak:GEAR_MooseHideCloak
+GEAR_MooseHideDried:GEAR_MooseHideDried
+GEAR_MooseQuarter:GEAR_MooseQuarter
+GEAR_MountainTownFarmKey:GEAR_MountainTownFarmKey
+GEAR_MountainTownFarmNote:GEAR_MountainTownFarmNote
+GEAR_MountainTownLockBoxKey:GEAR_MountainTownLockBoxKey
+GEAR_MRE:GEAR_MRE
+GEAR_MuklukBoots:GEAR_MuklukBoots
+GEAR_Newsprint:GEAR_Newsprint
+GEAR_NewsprintBootStuffing:GEAR_NewsprintBootStuffing
+GEAR_NewsprintInsulation:GEAR_NewsprintInsulation
+GEAR_NewsprintRoll:GEAR_NewsprintRoll
+GEAR_NoteMCU:GEAR_NoteMCU
+GEAR_NULL:GEAR_NULL
+GEAR_Nylon:GEAR_Nylon
+GEAR_OldLadyStolenItem:GEAR_OldLadyStolenItem
+GEAR_OldMansBeardDressing:GEAR_OldMansBeardDressing
+GEAR_OldMansBeardHarvested:GEAR_OldMansBeardHarvested
+GEAR_PackMatches:GEAR_PackMatches
+GEAR_PaperStack:GEAR_PaperStack
+GEAR_PassengerManifest:GEAR_PassengerManifest
+GEAR_PeanutButter:GEAR_PeanutButter
+GEAR_PinnacleCanPeaches:GEAR_PinnacleCanPeaches
+GEAR_PlaidShirt:GEAR_PlaidShirt
+GEAR_PlaneCrashID1:GEAR_PlaneCrashID1
+GEAR_PlaneCrashID10:GEAR_PlaneCrashID10
+GEAR_PlaneCrashID2:GEAR_PlaneCrashID2
+GEAR_PlaneCrashID3:GEAR_PlaneCrashID3
+GEAR_PlaneCrashID4:GEAR_PlaneCrashID4
+GEAR_PlaneCrashID5:GEAR_PlaneCrashID5
+GEAR_PlaneCrashID6:GEAR_PlaneCrashID6
+GEAR_PlaneCrashID7:GEAR_PlaneCrashID7
+GEAR_PlaneCrashID8:GEAR_PlaneCrashID8
+GEAR_PlaneCrashID9:GEAR_PlaneCrashID9
+GEAR_PlantSurvivalNote:GEAR_PlantSurvivalNote
+GEAR_PostCard_AC_CentralSpire:GEAR_PostCard_AC_CentralSpire
+GEAR_PostCard_AC_TopShelf:GEAR_PostCard_AC_TopShelf
+GEAR_PostCard_BI_EchoOne-RadioTower:GEAR_PostCard_BI_EchoOne-RadioTower
+GEAR_PostCard_CR_AbandonedLookout:GEAR_PostCard_CR_AbandonedLookout
+GEAR_PostCard_FM_MuskegOverlook:GEAR_PostCard_FM_MuskegOverlook
+GEAR_PostCard_FM_ShortwaveTower:GEAR_PostCard_FM_ShortwaveTower
+GEAR_PostCard_ML_ForestryLookout:GEAR_PostCard_ML_ForestryLookout
+GEAR_PostCard_ML_LakeOverlook:GEAR_PostCard_ML_LakeOverlook
+GEAR_PostCard_MT_RadioTower:GEAR_PostCard_MT_RadioTower
+GEAR_PostCard_PV_SignalHill:GEAR_PostCard_PV_SignalHill
+GEAR_PostCard_RV_Pensive:GEAR_PostCard_RV_Pensive
+GEAR_PostCard_TM_AndresPeak:GEAR_PostCard_TM_AndresPeak
+GEAR_PostCard_TM_TailSection:GEAR_PostCard_TM_TailSection
+GEAR_PremiumWinterCoat:GEAR_PremiumWinterCoat
+GEAR_PrisonBusNote:GEAR_PrisonBusNote
+GEAR_Prybar:GEAR_Prybar
+GEAR_QualityWinterCoat:GEAR_QualityWinterCoat
+GEAR_RabbitCarcass:GEAR_RabbitCarcass
+GEAR_RabbitPelt:GEAR_RabbitPelt
+GEAR_RabbitPeltDried:GEAR_RabbitPeltDried
+GEAR_RabbitskinHat:GEAR_RabbitskinHat
+GEAR_RabbitSkinMittens:GEAR_RabbitSkinMittens
+GEAR_RadioParts:GEAR_RadioParts
+GEAR_RawMeatBear:GEAR_RawMeatBear
+GEAR_RawMeatDeer:GEAR_RawMeatDeer
+GEAR_RawMeatMoose:GEAR_RawMeatMoose
+GEAR_RawMeatRabbit:GEAR_RawMeatRabbit
+GEAR_RawMeatWolf:GEAR_RawMeatWolf
+GEAR_ReclaimedWoodB:GEAR_ReclaimedWoodB
+GEAR_RecycledCan:GEAR_RecycledCan
+GEAR_ReishiMushroom:GEAR_ReishiMushroom
+GEAR_ReishiPrepared:GEAR_ReishiPrepared
+GEAR_ReishiTea:GEAR_ReishiTea
+GEAR_Revolver:GEAR_Revolver
+GEAR_RevolverAmmoBox:GEAR_RevolverAmmoBox
+GEAR_RevolverAmmoCasing:GEAR_RevolverAmmoCasing
+GEAR_RevolverAmmoSingle:GEAR_RevolverAmmoSingle
+GEAR_Rifle:GEAR_Rifle
+GEAR_RifleAmmoBox:GEAR_RifleAmmoBox
+GEAR_RifleAmmoCasing:GEAR_RifleAmmoCasing
+GEAR_RifleAmmoSingle:GEAR_RifleAmmoSingle
+GEAR_RifleCleaningKit:GEAR_RifleCleaningKit
+GEAR_RifleHuntingLodge:GEAR_RifleHuntingLodge
+GEAR_Rope:GEAR_Rope
+GEAR_RoseHip:GEAR_RoseHip
+GEAR_RosehipsPrepared:GEAR_RosehipsPrepared
+GEAR_RoseHipTea:GEAR_RoseHipTea
+GEAR_RuralRegionFarmKey:GEAR_RuralRegionFarmKey
+GEAR_ScrapLead:GEAR_ScrapLead
+GEAR_ScrapMetal:GEAR_ScrapMetal
+GEAR_SewingKit:GEAR_SewingKit
+GEAR_SharpeningStone:GEAR_SharpeningStone
+GEAR_ShedCodeNote:GEAR_ShedCodeNote
+GEAR_Shovel:GEAR_Shovel
+GEAR_SimpleTools:GEAR_SimpleTools
+GEAR_SkiBoots:GEAR_SkiBoots
+GEAR_SkiGloves:GEAR_SkiGloves
+GEAR_SkiJacket:GEAR_SkiJacket
+GEAR_Snare:GEAR_Snare
+GEAR_Soda:GEAR_Soda
+GEAR_SodaEnergy:GEAR_SodaEnergy
+GEAR_SodaGrape:GEAR_SodaGrape
+GEAR_SodaOrange:GEAR_SodaOrange
+GEAR_Softwood:GEAR_Softwood
+GEAR_SpearHead:GEAR_SpearHead
+GEAR_SprayPaintCan:GEAR_SprayPaintCan
+GEAR_SprayPaintCanGlyphA:GEAR_SprayPaintCanGlyphA
+GEAR_StagQuarter:GEAR_StagQuarter
+GEAR_Stick:GEAR_Stick
+GEAR_Stone:GEAR_Stone
+GEAR_StumpRemover:GEAR_StumpRemover
+GEAR_SurvivalSchoolClothing:GEAR_SurvivalSchoolClothing
+GEAR_SurvivalSchoolDeerHunt:GEAR_SurvivalSchoolDeerHunt
+GEAR_SurvivalSchoolFishing:GEAR_SurvivalSchoolFishing
+GEAR_SurvivalSchoolPlants:GEAR_SurvivalSchoolPlants
+GEAR_SurvivalSchoolRabbits:GEAR_SurvivalSchoolRabbits
+GEAR_SurvivalSchoolWolfHunt:GEAR_SurvivalSchoolWolfHunt
+GEAR_TechnicalBackpack:GEAR_TechnicalBackpack
+GEAR_TeeShirt:GEAR_TeeShirt
+GEAR_TimberwolfQuarter:GEAR_TimberwolfQuarter
+GEAR_Tinder:GEAR_Tinder
+Gear_TomatoSoupCan:Gear_TomatoSoupCan
+GEAR_Toque:GEAR_Toque
+GEAR_Torch:GEAR_Torch
+GEAR_TrailerSupplies:GEAR_TrailerSupplies
+GEAR_TransponderParts:GEAR_TransponderParts
+GEAR_UtilitiesBill:GEAR_UtilitiesBill
+GEAR_Water1000ml:GEAR_Water1000ml
+GEAR_Water500ml:GEAR_Water500ml
+GEAR_WaterPurificationTablets:GEAR_WaterPurificationTablets
+GEAR_WaterSupplyNotPotable:GEAR_WaterSupplyNotPotable
+GEAR_WaterSupplyPotable:GEAR_WaterSupplyPotable
+GEAR_WaterTowerNote:GEAR_WaterTowerNote
+GEAR_WillBoots:GEAR_WillBoots
+GEAR_WillBootsStart:GEAR_WillBootsStart
+GEAR_WillPants:GEAR_WillPants
+GEAR_WillPantsStart:GEAR_WillPantsStart
+GEAR_WillParka:GEAR_WillParka
+GEAR_WillParkaHangar:GEAR_WillParkaHangar
+GEAR_WillParka_Table:GEAR_WillParka_Table
+GEAR_WillParka_Tossed:GEAR_WillParka_Tossed
+GEAR_WillShirt:GEAR_WillShirt
+GEAR_WillShirtStart:GEAR_WillShirtStart
+GEAR_WillSweater:GEAR_WillSweater
+GEAR_WillSweaterStart:GEAR_WillSweaterStart
+GEAR_WillToque:GEAR_WillToque
+GEAR_WolfCarcass:GEAR_WolfCarcass
+GEAR_WolfPelt:GEAR_WolfPelt
+GEAR_WolfPeltDried:GEAR_WolfPeltDried
+GEAR_WolfQuarter:GEAR_WolfQuarter
+GEAR_WolfSkinCape:GEAR_WolfSkinCape
+GEAR_WolfSkinCapeTallTales:GEAR_WolfSkinCapeTallTales
+GEAR_WoodMatches:GEAR_WoodMatches
+GEAR_WoolShirt:GEAR_WoolShirt
+GEAR_WoolSocks:GEAR_WoolSocks
+GEAR_WoolSweater:GEAR_WoolSweater
+GEAR_WoolWrap:GEAR_WoolWrap
+GEAR_WoolWrapCap:GEAR_WoolWrapCap
+GEAR_WorkBoots:GEAR_WorkBoots
+GEAR_WorkGloves:GEAR_WorkGloves
+GEAR_WorkPants:GEAR_WorkPants
+</DropDownList>
+                  <LastState RealAddress="7FF8179D0113"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>800080</Color>
+                  <VariableType>String</VariableType>
+                  <Length>128</Length>
+                  <Unicode>1</Unicode>
+                  <CodePage>0</CodePage>
+                  <ZeroTerminate>1</ZeroTerminate>
+                  <Address>item_spawn_string+14</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
           </CheatEntries>
         </CheatEntry>
         <CheatEntry>
@@ -4368,7 +5064,6 @@ fire_burn_temp_toggle:
                     <CheatEntry>
                       <ID>8706</ID>
                       <Description>"Temp"</Description>
-                      <LastState Value="-1.17045349E34" RealAddress="7FF810450017"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>fire_burn_temp_value</Address>
@@ -5017,7 +5712,7 @@ GameAssembly.dll+127D885: 33 D2                 - xor edx,edx
       <ID>8665</ID>
       <Description>"Old Stuff"</Description>
       <Options moHideChildren="1"/>
-      <LastState Value="" RealAddress="00000000"/>
+      <LastState Value="" Activated="1" RealAddress="00000000"/>
       <Color>4080FF</Color>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
@@ -5902,821 +6597,6 @@ dealloc(newmem)
 </AssemblerScript>
         </CheatEntry>
         <CheatEntry>
-          <ID>9064</ID>
-          <Description>"Item Spawner"</Description>
-          <LastState/>
-          <Color>0000FF</Color>
-          <VariableType>Auto Assembler Script</VariableType>
-          <AssemblerScript>{ Game   : tld.exe
-  Version: 1.97 85101 S
-  Date   : 2021-11-02
-  Author : sub1to
-
-  public sealed class String : IComparable, ICloneable, IConvertible, IEnumerable, IComparable&lt;string&gt;, IEnumerable&lt;char&gt;, IEquatable&lt;string&gt; // TypeDefIndex: 289
-	// Fields
-	private int m_stringLength; // 0x10
-	private char m_firstChar; // 0x14
-}
-
-[ENABLE]
-alloc(newmem,$ff,GameAssembly.dll)
-alloc(string,$ff,GameAssembly.dll)
-label(returnhere)
-label(code)
-label(code_strlen_next)
-label(code_strlen_end)
-label(playermanager_update_hook)
-label(playermanager_update_bytes)
-label(item_spawn_toggle)
-label(item_spawn_count)
-label(item_spawn_string)
-registersymbol(playermanager_update_hook)
-registersymbol(playermanager_update_bytes)
-registersymbol(item_spawn_toggle)
-registersymbol(item_spawn_count)
-registersymbol(item_spawn_string)
-
-//  class: PlayerManager
-//  RVA: 0x15A7EC0 Offset: 0x15A6AC0 VA: 0x7FFB684A7EC0
-//  public void Update() { }
-aobScanModule(hook,GameAssembly.dll,40 53 41 56 48 83 ec ? 80 3d ? ? ? ? ? 48 8b d9 75 ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? c6 05 ? ? ? ? ? 48 8b 15)
-
-//  class: PlayerManager
-//  RVA: 0xDDC160 Offset: 0xDDB160 VA: 0x7FFB0C7AC160
-//  public GearItem InstantiateItemAtPlayersFeet(string itemName, int numUnits) { }
-aobScanModule(PlayerManager_InstantiateItemAtPlayersFeet,GameAssembly.dll,48 83 ec ? 48 85 d2 74 ? 48 8b 92 ? ? ? ? 48 85 d2 74 ? 48 8b 52 ? 45 33 c9)
-
-aobScanModule(LoadGearItemPrefab,GameAssembly.dll,40 53 48 83 ec ? 80 3d ? ? ? ? ? 48 8b d9 75 ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? c6 05 ? ? ? ? ? 48 8b 0d ? ? ? ? 48 c7 44 24 ? ? ? ? ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 4c 8b 0d)
-aobScanModule(InstantiateGearItem,GameAssembly.dll,48 89 5c 24 ? 57 48 83 ec ? 80 3d ? ? ? ? ? 48 8b f9 75 ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? c6 05 ? ? ? ? ? 48 8b 0d ? ? ? ? 33 db 48 89 5c 24 ? 39 99 ? ? ? ? 75 ? e8 ? ? ? ? 4c 8b 0d ? ? ? ? 48 8d 54 24 ? 45 33 c0 48 8b cf e8 ? ? ? ? 84 c0 48 0f 45 5c 24 ? 48 8b c3 48 8b 5c 24 ? 48 83 c4 ? 5f c3 cc cc cc 48 89 5c 24 ? 57 48 83 ec ? 80 3d ? ? ? ? ? 48 8b f9)
-
-string:
-item_spawn_string:
-  dq 00 // +00 ptr
-  dq 00 // +08 padding
-  dd 16 // +10 len
-  db 'G' 0 'E' 0 'A' 0 'R' 0 '_' 0 'T' 0 'e' 0 'c' 0 'h' 0 'n' 0 'i' 0 'c' 0 'a' 0 'l' 0 'B' 0 'a' 0 'c' 0 'k' 0 'p' 0 'a' 0 'c' 0 'k' 0 0
-  //db 0 // +14 first byte
-
-newmem:
-playermanager_update_bytes:
-  //push rbp
-  //mov rbp,rsp
-  readMem(hook, 8)
-  jmp returnhere
-
-item_spawn_toggle:
-  db 0
-
-item_spawn_count:
-  dd 1
-
-code:
-  cmp byte ptr [item_spawn_toggle], 0
-  jz playermanager_update_bytes
-  mov byte ptr [item_spawn_toggle], 0
-
-  lea r8, [string+14]
-  mov [string], r8
-
-  //get strlen
-  xor r8d, r8d
-  lea rdx, [item_spawn_string+14]
-code_strlen_next:
-  mov r9w, [rdx]
-  test r9w, r9w
-  jz code_strlen_end
-  inc r8d
-  lea rdx, [rdx+2]
-  jmp code_strlen_next
-
-code_strlen_end:
-  mov [item_spawn_string+10], r8d
-
-  // spawn item
-  /*
-  lea rsp, [rsp-28]
-  mov [rsp+20], rcx
-  lea rdx, [string]
-  mov r8d, (float)1.0
-  movd xmm3, r8d
-  mov r8d, [item_spawn_count]
-  call PlayerManager_InstantiateItemAtPlayersFeet
-  mov rcx, [rsp+20]
-  lea rsp, [rsp+28]
-  */
-
-  //load item
-  lea rsp, [rsp-28]
-  mov [rsp+20], rcx
-  lea rcx, [string]
-  xor edx, edx
-  call LoadGearItemPrefab
-  mov rcx, [rsp+20]
-  lea rsp, [rsp+28]
-
-  jmp playermanager_update_bytes
-
-hook:
-playermanager_update_hook:
-  jmp code
-  nop
-  nop
-  nop
-  returnhere:
-
-
-
-[DISABLE]
-playermanager_update_hook:
-  //40 55 48 8B EC
-  readMem(playermanager_update_bytes, 8)
-
-unregistersymbol(playermanager_update_hook)
-unregistersymbol(playermanager_update_bytes)
-unregistersymbol(item_spawn_toggle)
-unregistersymbol(item_spawn_count)
-unregistersymbol(item_spawn_string)
-dealloc(newmem)
-dealloc(string)
-
-{
-// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+E05AF0
-
-GameAssembly.dll+E05AD1: 74 17                    - je GameAssembly.dll+E05AEA
-GameAssembly.dll+E05AD3: 33 D2                    - xor edx,edx
-GameAssembly.dll+E05AD5: 48 8B C8                 - mov rcx,rax
-GameAssembly.dll+E05AD8: E8 23 2A 55 00           - call GameAssembly.dll+1358500
-GameAssembly.dll+E05ADD: C6 83 38 05 00 00 00     - mov byte ptr [rbx+00000538],00
-GameAssembly.dll+E05AE4: 48 83 C4 40              - add rsp,40
-GameAssembly.dll+E05AE8: 5B                       - pop rbx
-GameAssembly.dll+E05AE9: C3                       - ret
-GameAssembly.dll+E05AEA: E8 11 49 2C FF           - call GameAssembly.dll+CA400
-GameAssembly.dll+E05AEF: CC                       - int 3
-// ---------- INJECTING HERE ----------
-GameAssembly.dll+E05AF0: 40 55                    - push rbp
-GameAssembly.dll+E05AF2: 48 8B EC                 - mov rbp,rsp
-// ---------- DONE INJECTING  ----------
-GameAssembly.dll+E05AF5: 48 83 EC 40              - sub rsp,40
-GameAssembly.dll+E05AF9: 48 C7 45 E0 FE FF FF FF  - mov qword ptr [rbp-20],FFFFFFFFFFFFFFFE
-GameAssembly.dll+E05B01: 48 89 5C 24 50           - mov [rsp+50],rbx
-GameAssembly.dll+E05B06: 48 89 74 24 58           - mov [rsp+58],rsi
-GameAssembly.dll+E05B0B: 48 89 7C 24 60           - mov [rsp+60],rdi
-GameAssembly.dll+E05B10: 4C 89 74 24 68           - mov [rsp+68],r14
-GameAssembly.dll+E05B15: 48 8B D9                 - mov rbx,rcx
-GameAssembly.dll+E05B18: 45 33 F6                 - xor r14d,r14d
-GameAssembly.dll+E05B1B: 44 38 35 9F 6C 64 03     - cmp [GameAssembly.dll+444C7C1],r14l
-}
-</AssemblerScript>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>9065</ID>
-              <Description>"State"</Description>
-              <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:Idle/Done
-1:Spawn Item
-</DropDownList>
-              <ShowAsSigned>0</ShowAsSigned>
-              <Color>800080</Color>
-              <VariableType>Byte</VariableType>
-              <Address>item_spawn_toggle</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>9066</ID>
-              <Description>"Count (Stackable Items)"</Description>
-              <ShowAsSigned>0</ShowAsSigned>
-              <Color>800080</Color>
-              <VariableType>4 Bytes</VariableType>
-              <Address>item_spawn_count</Address>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>9067</ID>
-              <Description>"Item Name"</Description>
-              <DropDownList>GEAR_Accelerant:GEAR_Accelerant
-GEAR_AccelerantGunpowder:GEAR_AccelerantGunpowder
-GEAR_AccelerantKerosene:GEAR_AccelerantKerosene
-GEAR_AccelerantMedium:GEAR_AccelerantMedium
-GEAR_AirlineFoodChick:GEAR_AirlineFoodChick
-GEAR_AirlineFoodVeg:GEAR_AirlineFoodVeg
-GEAR_Arrow:GEAR_Arrow
-GEAR_ArrowHead:GEAR_ArrowHead
-GEAR_ArrowShaft:GEAR_ArrowShaft
-GEAR_AstridBackPack_hangar:GEAR_AstridBackPack_hangar
-GEAR_AstridBoots:GEAR_AstridBoots
-GEAR_AstridGloves:GEAR_AstridGloves
-GEAR_AstridJacket:GEAR_AstridJacket
-GEAR_AstridJeans:GEAR_AstridJeans
-GEAR_AstridSweater:GEAR_AstridSweater
-GEAR_AstridToque:GEAR_AstridToque
-GEAR_AuroraHatchCode:GEAR_AuroraHatchCode
-GEAR_AuroraObservationNote:GEAR_AuroraObservationNote
-GEAR_Balaclava:GEAR_Balaclava
-GEAR_BankManagerHouseKey:GEAR_BankManagerHouseKey
-GEAR_BankVaultCode:GEAR_BankVaultCode
-GEAR_BarkTinder:GEAR_BarkTinder
-GEAR_BaseballCap:GEAR_BaseballCap
-GEAR_BasicBoots:GEAR_BasicBoots
-GEAR_BasicGloves:GEAR_BasicGloves
-GEAR_BasicShoes:GEAR_BasicShoes
-GEAR_BasicWinterCoat:GEAR_BasicWinterCoat
-GEAR_BasicWoolHat:GEAR_BasicWoolHat
-GEAR_BasicWoolScarf:GEAR_BasicWoolScarf
-GEAR_BearEar:GEAR_BearEar
-GEAR_BearHide:GEAR_BearHide
-GEAR_BearHideDried:GEAR_BearHideDried
-GEAR_BearQuarter:GEAR_BearQuarter
-GEAR_BearSkinBedRoll:GEAR_BearSkinBedRoll
-GEAR_BearSkinCoat:GEAR_BearSkinCoat
-GEAR_BearSpear:GEAR_BearSpear
-GEAR_BearSpearBroken:GEAR_BearSpearBroken
-GEAR_BearSpearBrokenStory:GEAR_BearSpearBrokenStory
-GEAR_BearSpearRelic:GEAR_BearSpearRelic
-GEAR_BearSpearStory:GEAR_BearSpearStory
-GEAR_BedRoll:GEAR_BedRoll
-GEAR_BeefJerky:GEAR_BeefJerky
-GEAR_BirchbarkPrepared:GEAR_BirchbarkPrepared
-GEAR_BirchbarkTea:GEAR_BirchbarkTea
-GEAR_BirchSapling:GEAR_BirchSapling
-GEAR_BirchSaplingDried:GEAR_BirchSaplingDried
-GEAR_BlackrockConvictNote1:GEAR_BlackrockConvictNote1
-GEAR_BlackrockConvictNote2:GEAR_BlackrockConvictNote2
-GEAR_BlackrockConvictNote3:GEAR_BlackrockConvictNote3
-GEAR_BlackrockMemo:GEAR_BlackrockMemo
-GEAR_BlueFlare:GEAR_BlueFlare
-GEAR_BoltCutters:GEAR_BoltCutters
-GEAR_BookA:GEAR_BookA
-GEAR_BookArchery:GEAR_BookArchery
-GEAR_BookB:GEAR_BookB
-GEAR_BookBopen:GEAR_BookBopen
-GEAR_BookC:GEAR_BookC
-GEAR_BookCarcassHarvesting:GEAR_BookCarcassHarvesting
-GEAR_BookCooking:GEAR_BookCooking
-GEAR_BookD:GEAR_BookD
-GEAR_BookE:GEAR_BookE
-GEAR_BookEopen:GEAR_BookEopen
-GEAR_BookF:GEAR_BookF
-GEAR_BookFireStarting:GEAR_BookFireStarting
-GEAR_BookFopen:GEAR_BookFopen
-GEAR_BookG:GEAR_BookG
-GEAR_BookGunsmithing:GEAR_BookGunsmithing
-GEAR_BookH:GEAR_BookH
-GEAR_BookHopen:GEAR_BookHopen
-GEAR_BookI:GEAR_BookI
-GEAR_BookIceFishing:GEAR_BookIceFishing
-GEAR_BookLabE_01:GEAR_BookLabE_01
-GEAR_BookLabE_02:GEAR_BookLabE_02
-GEAR_BookLabE_03:GEAR_BookLabE_03
-GEAR_BookLabE_Open_01:GEAR_BookLabE_Open_01
-GEAR_BookManual:GEAR_BookManual
-GEAR_BookMending:GEAR_BookMending
-GEAR_BookRevolverFirearm:GEAR_BookRevolverFirearm
-GEAR_BookRifleFirearm:GEAR_BookRifleFirearm
-GEAR_BookRifleFirearmAdvanced:GEAR_BookRifleFirearmAdvanced
-GEAR_BookTallTalesFishing:GEAR_BookTallTalesFishing
-GEAR_BookTallTalesGlowCave:GEAR_BookTallTalesGlowCave
-GEAR_BookTallTalesStag:GEAR_BookTallTalesStag
-GEAR_BookTallTalesYeti:GEAR_BookTallTalesYeti
-GEAR_BottleAntibiotics:GEAR_BottleAntibiotics
-GEAR_BottleHydrogenPeroxide:GEAR_BottleHydrogenPeroxide
-GEAR_BottlePainKillers:GEAR_BottlePainKillers
-GEAR_Bow:GEAR_Bow
-GEAR_Brand:GEAR_Brand
-GEAR_BrokenArrow:GEAR_BrokenArrow
-GEAR_BrokenRifle:GEAR_BrokenRifle
-GEAR_Bullet:GEAR_Bullet
-GEAR_CacheNote_ChurchMarshDir:GEAR_CacheNote_ChurchMarshDir
-GEAR_CampOfficeCollectible:GEAR_CampOfficeCollectible
-GEAR_CandyBar:GEAR_CandyBar
-GEAR_CannedBeans:GEAR_CannedBeans
-GEAR_CannedSardines:GEAR_CannedSardines
-GEAR_CanOpener:GEAR_CanOpener
-GEAR_CarBattery:GEAR_CarBattery
-GEAR_CargoPants:GEAR_CargoPants
-GEAR_CashBundle:GEAR_CashBundle
-GEAR_CattailPlant:GEAR_CattailPlant
-GEAR_CattailStalk:GEAR_CattailStalk
-GEAR_CattailTinder:GEAR_CattailTinder
-GEAR_CaveCacheNote:GEAR_CaveCacheNote
-GEAR_Charcoal:GEAR_Charcoal
-GEAR_ChurchHymn:GEAR_ChurchHymn
-GEAR_ChurchNoteEP1:GEAR_ChurchNoteEP1
-GEAR_ClimbingSocks:GEAR_ClimbingSocks
-GEAR_Cloth:GEAR_Cloth
-GEAR_ClothSheet:GEAR_ClothSheet
-GEAR_Coal:GEAR_Coal
-GEAR_CombatBoots:GEAR_CombatBoots
-GEAR_CombatPants:GEAR_CombatPants
-GEAR_CompressionBandage:GEAR_CompressionBandage
-GEAR_CondensedMilk:GEAR_CondensedMilk
-GEAR_ConvictCorpseNote:GEAR_ConvictCorpseNote
-GEAR_CookedMeatBear:GEAR_CookedMeatBear
-GEAR_CookedMeatDeer:GEAR_CookedMeatDeer
-GEAR_CookedMeatMoose:GEAR_CookedMeatMoose
-GEAR_CookedMeatRabbit:GEAR_CookedMeatRabbit
-GEAR_CookedMeatWolf:GEAR_CookedMeatWolf
-GEAR_CookingPot:GEAR_CookingPot
-GEAR_CookingPotDummy:GEAR_CookingPotDummy
-GEAR_CottonHoodie:GEAR_CottonHoodie
-GEAR_CottonScarf:GEAR_CottonScarf
-GEAR_CottonShirt:GEAR_CottonShirt
-GEAR_CottonSocks:GEAR_CottonSocks
-GEAR_CottonSocksStart:GEAR_CottonSocksStart
-GEAR_CowichanSweater:GEAR_CowichanSweater
-GEAR_Crackers:GEAR_Crackers
-GEAR_Crampons:GEAR_Crampons
-GEAR_CrowFeather:GEAR_CrowFeather
-GEAR_DamCollectible1:GEAR_DamCollectible1
-GEAR_DamControlRoomCodeNote:GEAR_DamControlRoomCodeNote
-GEAR_DamElevatorNotice:GEAR_DamElevatorNotice
-GEAR_DamExitCodeNote:GEAR_DamExitCodeNote
-GEAR_DamFenceKey:GEAR_DamFenceKey
-GEAR_DamGarbageLetter:GEAR_DamGarbageLetter
-GEAR_DamLockerKey:GEAR_DamLockerKey
-GEAR_DamOfficeKey:GEAR_DamOfficeKey
-GEAR_DamTrailerBCrewNote:GEAR_DamTrailerBCrewNote
-GEAR_DarkwalkerDiary1:GEAR_DarkwalkerDiary1
-GEAR_DarkwalkerDiary10:GEAR_DarkwalkerDiary10
-GEAR_DarkwalkerDiary11:GEAR_DarkwalkerDiary11
-GEAR_DarkwalkerDiary2:GEAR_DarkwalkerDiary2
-GEAR_DarkwalkerDiary3:GEAR_DarkwalkerDiary3
-GEAR_DarkwalkerDiary4:GEAR_DarkwalkerDiary4
-GEAR_DarkwalkerDiary5:GEAR_DarkwalkerDiary5
-GEAR_DarkwalkerDiary6:GEAR_DarkwalkerDiary6
-GEAR_DarkwalkerDiary7:GEAR_DarkwalkerDiary7
-GEAR_DarkwalkerDiary8:GEAR_DarkwalkerDiary8
-GEAR_DarkwalkerDiary9:GEAR_DarkwalkerDiary9
-GEAR_DarkwalkerID:GEAR_DarkwalkerID
-GEAR_DeadmanNote1:GEAR_DeadmanNote1
-GEAR_DeadmanNote2:GEAR_DeadmanNote2
-GEAR_DeadmanNote3:GEAR_DeadmanNote3
-GEAR_DeadmanNote4:GEAR_DeadmanNote4
-GEAR_DeadmanNote5:GEAR_DeadmanNote5
-GEAR_DeerSkinBoots:GEAR_DeerSkinBoots
-GEAR_DeerSkinPants:GEAR_DeerSkinPants
-GEAR_DogFood:GEAR_DogFood
-GEAR_DownParka:GEAR_DownParka
-GEAR_DownSkiJacket:GEAR_DownSkiJacket
-GEAR_DownVest:GEAR_DownVest
-GEAR_DustingSulfur:GEAR_DustingSulfur
-GEAR_EarMuffs:GEAR_EarMuffs
-GEAR_ElevatorCrank:GEAR_ElevatorCrank
-GEAR_ElevatorParts:GEAR_ElevatorParts
-GEAR_ElevatorPartsDead:GEAR_ElevatorPartsDead
-GEAR_EmergencyKitNote:GEAR_EmergencyKitNote
-GEAR_EmergencyStim:GEAR_EmergencyStim
-GEAR_EnergyBar:GEAR_EnergyBar
-GEAR_Ep3ForestTalkers_FTCollectible1:GEAR_Ep3ForestTalkers_FTCollectible1
-GEAR_Ep3ForestTalkers_FTCollectible2:GEAR_Ep3ForestTalkers_FTCollectible2
-GEAR_Ep3ForestTalkers_FTCollectible3:GEAR_Ep3ForestTalkers_FTCollectible3
-GEAR_Ep3ForestTalkers_PVCollectible1:GEAR_Ep3ForestTalkers_PVCollectible1
-GEAR_Ep3ForestTalkers_PVCollectible2:GEAR_Ep3ForestTalkers_PVCollectible2
-GEAR_Ep3ForestTalkers_PVCollectible3:GEAR_Ep3ForestTalkers_PVCollectible3
-GEAR_Ep3HallFlyer:GEAR_Ep3HallFlyer
-GEAR_Ep3Rosary:GEAR_Ep3Rosary
-GEAR_Ep3TomsMap:GEAR_Ep3TomsMap
-GEAR_Ep3_ChurchArtifact:GEAR_Ep3_ChurchArtifact
-GEAR_Ep3_ChurchFlyer:GEAR_Ep3_ChurchFlyer
-GEAR_Ep3_ChurchMotelLetter:GEAR_Ep3_ChurchMotelLetter
-GEAR_Ep3_ChurchNewsClipping:GEAR_Ep3_ChurchNewsClipping
-GEAR_Ep3_ChurchThankyouLetter:GEAR_Ep3_ChurchThankyouLetter
-GEAR_Ep3_ChurchTheftReport:GEAR_Ep3_ChurchTheftReport
-GEAR_EP3_JoplinBunkerNote:GEAR_EP3_JoplinBunkerNote
-GEAR_EP3_JoplinBunkerNote2:GEAR_EP3_JoplinBunkerNote2
-GEAR_EP3_JoplinCacheNote:GEAR_EP3_JoplinCacheNote
-GEAR_EP3_PatientHistory01:GEAR_EP3_PatientHistory01
-GEAR_EP3_PatientHistory02:GEAR_EP3_PatientHistory02
-GEAR_EP3_PatientHistory03:GEAR_EP3_PatientHistory03
-GEAR_EP3_PatientHistory04:GEAR_EP3_PatientHistory04
-GEAR_EP3_PatientHistory05:GEAR_EP3_PatientHistory05
-GEAR_EP3_PatientHistory06:GEAR_EP3_PatientHistory06
-GEAR_FarmerDepositBoxKey:GEAR_FarmerDepositBoxKey
-GEAR_FireAxe:GEAR_FireAxe
-GEAR_Firelog:GEAR_Firelog
-GEAR_Firestriker:GEAR_Firestriker
-GEAR_FishermanSweater:GEAR_FishermanSweater
-GEAR_FishingLine:GEAR_FishingLine
-GEAR_FixedRifle:GEAR_FixedRifle
-GEAR_FlareA:GEAR_FlareA
-GEAR_FlareGun:GEAR_FlareGun
-GEAR_FlareGunAmmoSingle:GEAR_FlareGunAmmoSingle
-GEAR_FlareGunAmmoSingle_SurvivorMission:GEAR_FlareGunAmmoSingle_SurvivorMission
-GEAR_FlareGunCase_hangar:GEAR_FlareGunCase_hangar
-GEAR_Flashlight:GEAR_Flashlight
-GEAR_FleeceMittens:GEAR_FleeceMittens
-GEAR_FleeceSweater:GEAR_FleeceSweater
-GEAR_FlintAndSteel:GEAR_FlintAndSteel
-GEAR_FoodSupplies_hangar:GEAR_FoodSupplies_hangar
-GEAR_ForestTalkerBloodyItem:GEAR_ForestTalkerBloodyItem
-GEAR_ForestTalkerDamNote:GEAR_ForestTalkerDamNote
-GEAR_ForestTalkerFlyer:GEAR_ForestTalkerFlyer
-GEAR_ForestTalkerHiddenItem:GEAR_ForestTalkerHiddenItem
-GEAR_ForestTalkerMap:GEAR_ForestTalkerMap
-GEAR_ForestTalkerThankyou:GEAR_ForestTalkerThankyou
-GEAR_ForestTalkerThankyou2:GEAR_ForestTalkerThankyou2
-GEAR_ForgeBlueprints:GEAR_ForgeBlueprints
-GEAR_ForgeCacheNote:GEAR_ForgeCacheNote
-GEAR_Gauntlets:GEAR_Gauntlets
-GEAR_GMExtraSuppliesNote:GEAR_GMExtraSuppliesNote
-GEAR_GranolaBar:GEAR_GranolaBar
-GEAR_GreyMotherBoots:GEAR_GreyMotherBoots
-GEAR_GreyMotherPearls:GEAR_GreyMotherPearls
-GEAR_GreyMotherTrunkKey:GEAR_GreyMotherTrunkKey
-GEAR_GunpowderCan:GEAR_GunpowderCan
-GEAR_Gut:GEAR_Gut
-GEAR_GutDried:GEAR_GutDried
-GEAR_Hacksaw:GEAR_Hacksaw
-GEAR_Hammer:GEAR_Hammer
-GEAR_HandheldShortwave:GEAR_HandheldShortwave
-GEAR_HankHatchCode:GEAR_HankHatchCode
-GEAR_HankJournal1:GEAR_HankJournal1
-GEAR_HankJournal2:GEAR_HankJournal2
-GEAR_HankLockboxKey:GEAR_HankLockboxKey
-GEAR_HankNeiceLetter:GEAR_HankNeiceLetter
-GEAR_HardCase:GEAR_HardCase
-GEAR_HardCase_hangar:GEAR_HardCase_hangar
-GEAR_Hardwood:GEAR_Hardwood
-GEAR_Hatchet:GEAR_Hatchet
-GEAR_HatchetImprovised:GEAR_HatchetImprovised
-GEAR_HC_EP1_FM_TreeRoots_Dir:GEAR_HC_EP1_FM_TreeRoots_Dir
-GEAR_HC_EP1_ML_AlansCave_Dir:GEAR_HC_EP1_ML_AlansCave_Dir
-GEAR_HC_EP1_ML_ClearCut_Dir:GEAR_HC_EP1_ML_ClearCut_Dir
-GEAR_HC_EP1_ML_TracksEnt_Dir:GEAR_HC_EP1_ML_TracksEnt_Dir
-GEAR_HC_EP1_RW_HunterLodge_Dir:GEAR_HC_EP1_RW_HunterLodge_Dir
-GEAR_HC_EP1_RW_RavineEnd_Dir:GEAR_HC_EP1_RW_RavineEnd_Dir
-GEAR_HeavyBandage:GEAR_HeavyBandage
-GEAR_HeavyParka:GEAR_HeavyParka
-GEAR_HeavyWoolSweater:GEAR_HeavyWoolSweater
-GEAR_HighQualityTools:GEAR_HighQualityTools
-GEAR_HomeMadeSoup:GEAR_HomeMadeSoup
-GEAR_Hook:GEAR_Hook
-GEAR_HookAndLine:GEAR_HookAndLine
-GEAR_ImprovisedHat:GEAR_ImprovisedHat
-GEAR_ImprovisedMittens:GEAR_ImprovisedMittens
-GEAR_InsulatedBoots:GEAR_InsulatedBoots
-GEAR_InsulatedPants:GEAR_InsulatedPants
-GEAR_InsulatedVest:GEAR_InsulatedVest
-GEAR_Insulin:GEAR_Insulin
-GEAR_Jeans:GEAR_Jeans
-GEAR_JeremiahKnife:GEAR_JeremiahKnife
-GEAR_JeremiahsCoat:GEAR_JeremiahsCoat
-GEAR_JerrycanRusty:GEAR_JerrycanRusty
-GEAR_KeroseneLampB:GEAR_KeroseneLampB
-GEAR_KetchupChips:GEAR_KetchupChips
-GEAR_Knife:GEAR_Knife
-GEAR_KnifeImprovised:GEAR_KnifeImprovised
-GEAR_KnifeScrapMetal:GEAR_KnifeScrapMetal
-GEAR_KnowledgeCarterDam:GEAR_KnowledgeCarterDam
-GEAR_KnowledgeCollapse1:GEAR_KnowledgeCollapse1
-GEAR_KnowledgeCollapse2:GEAR_KnowledgeCollapse2
-GEAR_KnowledgeCollapse3:GEAR_KnowledgeCollapse3
-GEAR_KnowledgeCollapse4:GEAR_KnowledgeCollapse4
-GEAR_KnowledgeMilton:GEAR_KnowledgeMilton
-GEAR_KnowledgeMysteryLake:GEAR_KnowledgeMysteryLake
-GEAR_KnowledgePVbook1:GEAR_KnowledgePVbook1
-GEAR_KnowledgePVbook2:GEAR_KnowledgePVbook2
-GEAR_KnowledgePVbook3:GEAR_KnowledgePVbook3
-GEAR_LakeCabinKey1:GEAR_LakeCabinKey1
-GEAR_LakeCabinKey2:GEAR_LakeCabinKey2
-GEAR_LakeCabinKey3:GEAR_LakeCabinKey3
-GEAR_LakeDeerHuntNote:GEAR_LakeDeerHuntNote
-GEAR_LakeIncidentNote:GEAR_LakeIncidentNote
-GEAR_LakeLetter1:GEAR_LakeLetter1
-GEAR_LakesFlareCacheNote:GEAR_LakesFlareCacheNote
-GEAR_LakeTrailerKey1:GEAR_LakeTrailerKey1
-GEAR_LakeWolfCullNote:GEAR_LakeWolfCullNote
-GEAR_LampFuel:GEAR_LampFuel
-GEAR_LampFuelFull:GEAR_LampFuelFull
-GEAR_Leather:GEAR_Leather
-GEAR_LeatherDried:GEAR_LeatherDried
-GEAR_LeatherHide:GEAR_LeatherHide
-GEAR_LeatherHideDried:GEAR_LeatherHideDried
-GEAR_LeatherShoes:GEAR_LeatherShoes
-GEAR_LeatherStrips:GEAR_LeatherStrips
-GEAR_LetterBundle:GEAR_LetterBundle
-GEAR_LightParka:GEAR_LightParka
-GEAR_LilyClimbMap:GEAR_LilyClimbMap
-GEAR_Line:GEAR_Line
-GEAR_LongUnderwear:GEAR_LongUnderwear
-GEAR_LongUnderwearStart:GEAR_LongUnderwearStart
-GEAR_LongUnderwearWool:GEAR_LongUnderwearWool
-GEAR_MackinawJacket:GEAR_MackinawJacket
-GEAR_MagnifyingLens:GEAR_MagnifyingLens
-GEAR_MapleSapling:GEAR_MapleSapling
-GEAR_MapleSaplingDried:GEAR_MapleSaplingDried
-GEAR_MapleSyrup:GEAR_MapleSyrup
-GEAR_MedicalSupplies:GEAR_MedicalSupplies
-GEAR_MedicalSupplies_hangar:GEAR_MedicalSupplies_hangar
-GEAR_MilitaryParka:GEAR_MilitaryParka
-GEAR_MiltonCaveLetter:GEAR_MiltonCaveLetter
-GEAR_MiltonDepositBoxKey1:GEAR_MiltonDepositBoxKey1
-GEAR_MiltonDepositBoxKey2:GEAR_MiltonDepositBoxKey2
-GEAR_MiltonDepositBoxKey3:GEAR_MiltonDepositBoxKey3
-GEAR_MiltonFlareGunNote:GEAR_MiltonFlareGunNote
-GEAR_MiltonGardenCache:GEAR_MiltonGardenCache
-GEAR_MiltonLetter1:GEAR_MiltonLetter1
-GEAR_MiltonLetter2:GEAR_MiltonLetter2
-GEAR_MiltonParkNotice:GEAR_MiltonParkNotice
-GEAR_MiltonPostOfficeCollectible1:GEAR_MiltonPostOfficeCollectible1
-GEAR_MiltonStoreNotice:GEAR_MiltonStoreNotice
-GEAR_Mittens:GEAR_Mittens
-GEAR_MooseHide:GEAR_MooseHide
-GEAR_MooseHideBag:GEAR_MooseHideBag
-GEAR_MooseHideCloak:GEAR_MooseHideCloak
-GEAR_MooseHideDried:GEAR_MooseHideDried
-GEAR_MooseQuarter:GEAR_MooseQuarter
-GEAR_MountainTownFarmKey:GEAR_MountainTownFarmKey
-GEAR_MountainTownFarmNote:GEAR_MountainTownFarmNote
-GEAR_MountainTownLockBoxKey:GEAR_MountainTownLockBoxKey
-GEAR_MRE:GEAR_MRE
-GEAR_MuklukBoots:GEAR_MuklukBoots
-GEAR_Newsprint:GEAR_Newsprint
-GEAR_NewsprintBootStuffing:GEAR_NewsprintBootStuffing
-GEAR_NewsprintInsulation:GEAR_NewsprintInsulation
-GEAR_NewsprintRoll:GEAR_NewsprintRoll
-GEAR_NoteMCU:GEAR_NoteMCU
-GEAR_NULL:GEAR_NULL
-GEAR_Nylon:GEAR_Nylon
-GEAR_OldLadyStolenItem:GEAR_OldLadyStolenItem
-GEAR_OldMansBeardDressing:GEAR_OldMansBeardDressing
-GEAR_OldMansBeardHarvested:GEAR_OldMansBeardHarvested
-GEAR_PackMatches:GEAR_PackMatches
-GEAR_PaperStack:GEAR_PaperStack
-GEAR_PassengerManifest:GEAR_PassengerManifest
-GEAR_PeanutButter:GEAR_PeanutButter
-GEAR_PinnacleCanPeaches:GEAR_PinnacleCanPeaches
-GEAR_PlaidShirt:GEAR_PlaidShirt
-GEAR_PlaneCrashID1:GEAR_PlaneCrashID1
-GEAR_PlaneCrashID10:GEAR_PlaneCrashID10
-GEAR_PlaneCrashID2:GEAR_PlaneCrashID2
-GEAR_PlaneCrashID3:GEAR_PlaneCrashID3
-GEAR_PlaneCrashID4:GEAR_PlaneCrashID4
-GEAR_PlaneCrashID5:GEAR_PlaneCrashID5
-GEAR_PlaneCrashID6:GEAR_PlaneCrashID6
-GEAR_PlaneCrashID7:GEAR_PlaneCrashID7
-GEAR_PlaneCrashID8:GEAR_PlaneCrashID8
-GEAR_PlaneCrashID9:GEAR_PlaneCrashID9
-GEAR_PlantSurvivalNote:GEAR_PlantSurvivalNote
-GEAR_PostCard_AC_CentralSpire:GEAR_PostCard_AC_CentralSpire
-GEAR_PostCard_AC_TopShelf:GEAR_PostCard_AC_TopShelf
-GEAR_PostCard_BI_EchoOne-RadioTower:GEAR_PostCard_BI_EchoOne-RadioTower
-GEAR_PostCard_CR_AbandonedLookout:GEAR_PostCard_CR_AbandonedLookout
-GEAR_PostCard_FM_MuskegOverlook:GEAR_PostCard_FM_MuskegOverlook
-GEAR_PostCard_FM_ShortwaveTower:GEAR_PostCard_FM_ShortwaveTower
-GEAR_PostCard_ML_ForestryLookout:GEAR_PostCard_ML_ForestryLookout
-GEAR_PostCard_ML_LakeOverlook:GEAR_PostCard_ML_LakeOverlook
-GEAR_PostCard_MT_RadioTower:GEAR_PostCard_MT_RadioTower
-GEAR_PostCard_PV_SignalHill:GEAR_PostCard_PV_SignalHill
-GEAR_PostCard_RV_Pensive:GEAR_PostCard_RV_Pensive
-GEAR_PostCard_TM_AndresPeak:GEAR_PostCard_TM_AndresPeak
-GEAR_PostCard_TM_TailSection:GEAR_PostCard_TM_TailSection
-GEAR_PremiumWinterCoat:GEAR_PremiumWinterCoat
-GEAR_PrisonBusNote:GEAR_PrisonBusNote
-GEAR_Prybar:GEAR_Prybar
-GEAR_QualityWinterCoat:GEAR_QualityWinterCoat
-GEAR_RabbitCarcass:GEAR_RabbitCarcass
-GEAR_RabbitPelt:GEAR_RabbitPelt
-GEAR_RabbitPeltDried:GEAR_RabbitPeltDried
-GEAR_RabbitskinHat:GEAR_RabbitskinHat
-GEAR_RabbitSkinMittens:GEAR_RabbitSkinMittens
-GEAR_RadioParts:GEAR_RadioParts
-GEAR_RawMeatBear:GEAR_RawMeatBear
-GEAR_RawMeatDeer:GEAR_RawMeatDeer
-GEAR_RawMeatMoose:GEAR_RawMeatMoose
-GEAR_RawMeatRabbit:GEAR_RawMeatRabbit
-GEAR_RawMeatWolf:GEAR_RawMeatWolf
-GEAR_ReclaimedWoodB:GEAR_ReclaimedWoodB
-GEAR_RecycledCan:GEAR_RecycledCan
-GEAR_ReishiMushroom:GEAR_ReishiMushroom
-GEAR_ReishiPrepared:GEAR_ReishiPrepared
-GEAR_ReishiTea:GEAR_ReishiTea
-GEAR_Revolver:GEAR_Revolver
-GEAR_RevolverAmmoBox:GEAR_RevolverAmmoBox
-GEAR_RevolverAmmoCasing:GEAR_RevolverAmmoCasing
-GEAR_RevolverAmmoSingle:GEAR_RevolverAmmoSingle
-GEAR_Rifle:GEAR_Rifle
-GEAR_RifleAmmoBox:GEAR_RifleAmmoBox
-GEAR_RifleAmmoCasing:GEAR_RifleAmmoCasing
-GEAR_RifleAmmoSingle:GEAR_RifleAmmoSingle
-GEAR_RifleCleaningKit:GEAR_RifleCleaningKit
-GEAR_RifleHuntingLodge:GEAR_RifleHuntingLodge
-GEAR_Rope:GEAR_Rope
-GEAR_RoseHip:GEAR_RoseHip
-GEAR_RosehipsPrepared:GEAR_RosehipsPrepared
-GEAR_RoseHipTea:GEAR_RoseHipTea
-GEAR_RuralRegionFarmKey:GEAR_RuralRegionFarmKey
-GEAR_ScrapLead:GEAR_ScrapLead
-GEAR_ScrapMetal:GEAR_ScrapMetal
-GEAR_SewingKit:GEAR_SewingKit
-GEAR_SharpeningStone:GEAR_SharpeningStone
-GEAR_ShedCodeNote:GEAR_ShedCodeNote
-GEAR_Shovel:GEAR_Shovel
-GEAR_SimpleTools:GEAR_SimpleTools
-GEAR_SkiBoots:GEAR_SkiBoots
-GEAR_SkiGloves:GEAR_SkiGloves
-GEAR_SkiJacket:GEAR_SkiJacket
-GEAR_Snare:GEAR_Snare
-GEAR_Soda:GEAR_Soda
-GEAR_SodaEnergy:GEAR_SodaEnergy
-GEAR_SodaGrape:GEAR_SodaGrape
-GEAR_SodaOrange:GEAR_SodaOrange
-GEAR_Softwood:GEAR_Softwood
-GEAR_SpearHead:GEAR_SpearHead
-GEAR_SprayPaintCan:GEAR_SprayPaintCan
-GEAR_SprayPaintCanGlyphA:GEAR_SprayPaintCanGlyphA
-GEAR_StagQuarter:GEAR_StagQuarter
-GEAR_Stick:GEAR_Stick
-GEAR_Stone:GEAR_Stone
-GEAR_StumpRemover:GEAR_StumpRemover
-GEAR_SurvivalSchoolClothing:GEAR_SurvivalSchoolClothing
-GEAR_SurvivalSchoolDeerHunt:GEAR_SurvivalSchoolDeerHunt
-GEAR_SurvivalSchoolFishing:GEAR_SurvivalSchoolFishing
-GEAR_SurvivalSchoolPlants:GEAR_SurvivalSchoolPlants
-GEAR_SurvivalSchoolRabbits:GEAR_SurvivalSchoolRabbits
-GEAR_SurvivalSchoolWolfHunt:GEAR_SurvivalSchoolWolfHunt
-GEAR_TechnicalBackpack:GEAR_TechnicalBackpack
-GEAR_TeeShirt:GEAR_TeeShirt
-GEAR_TimberwolfQuarter:GEAR_TimberwolfQuarter
-GEAR_Tinder:GEAR_Tinder
-Gear_TomatoSoupCan:Gear_TomatoSoupCan
-GEAR_Toque:GEAR_Toque
-GEAR_Torch:GEAR_Torch
-GEAR_TrailerSupplies:GEAR_TrailerSupplies
-GEAR_TransponderParts:GEAR_TransponderParts
-GEAR_UtilitiesBill:GEAR_UtilitiesBill
-GEAR_Water1000ml:GEAR_Water1000ml
-GEAR_Water500ml:GEAR_Water500ml
-GEAR_WaterPurificationTablets:GEAR_WaterPurificationTablets
-GEAR_WaterSupplyNotPotable:GEAR_WaterSupplyNotPotable
-GEAR_WaterSupplyPotable:GEAR_WaterSupplyPotable
-GEAR_WaterTowerNote:GEAR_WaterTowerNote
-GEAR_WillBoots:GEAR_WillBoots
-GEAR_WillBootsStart:GEAR_WillBootsStart
-GEAR_WillPants:GEAR_WillPants
-GEAR_WillPantsStart:GEAR_WillPantsStart
-GEAR_WillParka:GEAR_WillParka
-GEAR_WillParkaHangar:GEAR_WillParkaHangar
-GEAR_WillParka_Table:GEAR_WillParka_Table
-GEAR_WillParka_Tossed:GEAR_WillParka_Tossed
-GEAR_WillShirt:GEAR_WillShirt
-GEAR_WillShirtStart:GEAR_WillShirtStart
-GEAR_WillSweater:GEAR_WillSweater
-GEAR_WillSweaterStart:GEAR_WillSweaterStart
-GEAR_WillToque:GEAR_WillToque
-GEAR_WolfCarcass:GEAR_WolfCarcass
-GEAR_WolfPelt:GEAR_WolfPelt
-GEAR_WolfPeltDried:GEAR_WolfPeltDried
-GEAR_WolfQuarter:GEAR_WolfQuarter
-GEAR_WolfSkinCape:GEAR_WolfSkinCape
-GEAR_WolfSkinCapeTallTales:GEAR_WolfSkinCapeTallTales
-GEAR_WoodMatches:GEAR_WoodMatches
-GEAR_WoolShirt:GEAR_WoolShirt
-GEAR_WoolSocks:GEAR_WoolSocks
-GEAR_WoolSweater:GEAR_WoolSweater
-GEAR_WoolWrap:GEAR_WoolWrap
-GEAR_WoolWrapCap:GEAR_WoolWrapCap
-GEAR_WorkBoots:GEAR_WorkBoots
-GEAR_WorkGloves:GEAR_WorkGloves
-GEAR_WorkPants:GEAR_WorkPants
-</DropDownList>
-              <ShowAsSigned>0</ShowAsSigned>
-              <Color>800080</Color>
-              <VariableType>String</VariableType>
-              <Length>128</Length>
-              <Unicode>1</Unicode>
-              <CodePage>0</CodePage>
-              <ZeroTerminate>1</ZeroTerminate>
-              <Address>item_spawn_string+14</Address>
-            </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>9051</ID>
-          <Description>"Unlocks"</Description>
-          <Options moHideChildren="1"/>
-          <LastState Value="" Activated="1" RealAddress="00000000"/>
-          <Color>0000FF</Color>
-          <GroupHeader>1</GroupHeader>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>9072</ID>
-              <Description>"Enable uConsole"</Description>
-              <LastState/>
-              <Color>008000</Color>
-              <VariableType>Auto Assembler Script</VariableType>
-              <AssemblerScript>{ Game   : tld.exe
-  Version: 2.06
-  Date   : 2022-12-21
-  Author : sub1to
-
-  public sealed class String : IComparable, ICloneable, IConvertible, IEnumerable, IComparable&lt;string&gt;, IEnumerable&lt;char&gt;, IEquatable&lt;string&gt; // TypeDefIndex: 289
-	// Fields
-	private int m_stringLength; // 0x10
-	private char m_firstChar; // 0x14
-}
-
-[ENABLE]
-alloc(newmem,$ff,GameAssembly.dll)
-alloc(string,$ff,GameAssembly.dll)
-globalalloc(_uconsole_init,1,GameAssembly.dll)
-label(returnhere)
-label(code)
-label(GameManager_Update_hook)
-label(GameManager_Update_bytes)
-registersymbol(GameManager_Update_hook)
-registersymbol(GameManager_Update_bytes)
-
-//  class: GameManager
-//  RVA: 0xB780C0 Offset: 0xB76EC0 VA: 0x7FFC742C80C0
-//  public void Update() { }
-aobScanModule(hook,GameAssembly.dll,48 89 74 24 ? 57 48 83 ec ? 80 3d ? ? ? ? ? 48 8b f9 0f 85 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? c6 05)
-
-//  class: Resources
-//  RVA: 0x3AB5010 Offset: 0x3AB3E10 VA: 0x7FFC77205010
-//  public static Object Load(string path) { }
-aobScanModule(Resources_Load,GameAssembly.dll,48 89 5c 24 ? 48 89 74 24 ? 57 48 83 ec ? 80 3d ? ? ? ? ? 48 8b fa 48 8b f1 75 ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? c6 05 ? ? ? ? ? 48 8b 0d ? ? ? ? 48 8b 1d ? ? ? ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 33 d2 48 8b cb e8 ? ? ? ? 48 8b d8 48 85 ff 74 ? 83 7f ? ? 0f 84 ? ? ? ? 48 85 c0 0f 84 ? ? ? ? 48 8b 05 ? ? ? ? 48 85 c0)
-
-//  class: Object
-//  RVA: 0x3ABD830 Offset: 0x3ABC630 VA: 0x7FFC7720D830
-//  public static Object Instantiate(Object original) { }
-aobScanModule(Object_Instantiate,GameAssembly.dll,48 89 5c 24 ? 57 48 83 ec ? 80 3d ? ? ? ? ? 48 8b d9 75 ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? c6 05 ? ? ? ? ? 48 8b 0d ? ? ? ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 48 8b 3d)
-
-string:
-  dq 00 // +00 ptr
-  dq 00 // +08 padding
-  dd 08 // +10 len
-  db 'u' 0 'C' 0 'o' 0 'n' 0 's' 0 'o' 0 'l' 0 'e' 0 0
-
-newmem:
-GameManager_Update_bytes:
-  readMem(hook, 7)
-  jmp returnhere
-
-code:
-
-  mov al, [_uconsole_init]
-  test al, al
-  jnz GameManager_Update_bytes
-  mov byte ptr [_uconsole_init], 1
-
-  lea rsp, [rsp-28]
-  mov [rsp+20], rcx
-  lea rcx, [string]
-  call Resources_Load
-  mov rcx, rax
-  call Object_Instantiate
-  mov rcx, [rsp+20]
-  lea rsp, [rsp+28]
-
-  jmp GameManager_Update_bytes
-
-hook:
-GameManager_Update_hook:
-  jmp code
-  nop
-  nop
-  returnhere:
-
-
-
-[DISABLE]
-GameManager_Update_hook:
-  readMem(GameManager_Update_bytes, 7)
-
-unregistersymbol(GameManager_Update_hook)
-unregistersymbol(GameManager_Update_bytes)
-dealloc(newmem)
-dealloc(string)
-
-{
-// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+E652C0
-
-GameAssembly.dll+E652A6: CC                       - int 3
-GameAssembly.dll+E652A7: E8 54 51 26 FF           - call GameAssembly.dll+CA400
-GameAssembly.dll+E652AC: CC                       - int 3
-GameAssembly.dll+E652AD: E8 4E 51 26 FF           - call GameAssembly.dll+CA400
-GameAssembly.dll+E652B2: CC                       - int 3
-GameAssembly.dll+E652B3: E8 48 51 26 FF           - call GameAssembly.dll+CA400
-GameAssembly.dll+E652B8: CC                       - int 3
-GameAssembly.dll+E652B9: E8 42 51 26 FF           - call GameAssembly.dll+CA400
-GameAssembly.dll+E652BE: CC                       - int 3
-GameAssembly.dll+E652BF: CC                       - int 3
-// ---------- INJECTING HERE ----------
-GameAssembly.dll+E652C0: 48 8B C4                 - mov rax,rsp
-GameAssembly.dll+E652C3: 55                       - push rbp
-// ---------- DONE INJECTING  ----------
-GameAssembly.dll+E652C4: 57                       - push rdi
-GameAssembly.dll+E652C5: 41 56                    - push r14
-GameAssembly.dll+E652C7: 48 8D 68 D8              - lea rbp,[rax-28]
-GameAssembly.dll+E652CB: 48 81 EC 10 01 00 00     - sub rsp,00000110
-GameAssembly.dll+E652D2: 48 C7 45 C0 FE FF FF FF  - mov qword ptr [rbp-40],FFFFFFFFFFFFFFFE
-GameAssembly.dll+E652DA: 48 89 58 08              - mov [rax+08],rbx
-GameAssembly.dll+E652DE: 48 89 70 10              - mov [rax+10],rsi
-GameAssembly.dll+E652E2: 0F 29 70 D8              - movaps [rax-28],xmm6
-GameAssembly.dll+E652E6: 0F 29 78 C8              - movaps [rax-38],xmm7
-}
-</AssemblerScript>
-            </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-        <CheatEntry>
           <ID>8863</ID>
           <Description>"Afflictions"</Description>
           <LastState Value="" RealAddress="00000000"/>
@@ -7331,14 +7211,13 @@ dealloc(newmem)
       <ID>8959</ID>
       <Description>"Dev"</Description>
       <Options moHideChildren="1"/>
-      <LastState Value="" RealAddress="00000000"/>
+      <LastState Value="" Activated="1" RealAddress="00000000"/>
       <Color>0080FF</Color>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>8940</ID>
           <Description>"tmp"</Description>
-          <LastState Value="E9CE2F0FF05C0FF3" RealAddress="7FF8104A0000"/>
           <ShowAsHex>1</ShowAsHex>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>8 Bytes</VariableType>
@@ -7358,7 +7237,7 @@ dealloc(newmem)
     </SymbolEntry>
     <SymbolEntry>
       <Name>_uconsole_init</Name>
-      <Address>7FF8104A0000</Address>
+      <Address>7FF8179E0000</Address>
     </SymbolEntry>
   </UserdefinedSymbols>
   <Comments>https://github.com/Perfare/Il2CppDumper
