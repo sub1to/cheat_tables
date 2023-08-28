@@ -196,6 +196,7 @@ player_temp_toggle:
                     <CheatEntry>
                       <ID>8713</ID>
                       <Description>"Temperature Value"</Description>
+                      <LastState Value="7.715996607E31" RealAddress="7FF810470015"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_temp_value</Address>
@@ -342,6 +343,7 @@ player_fatigue_toggle:
                     <CheatEntry>
                       <ID>8716</ID>
                       <Description>"Fatigue Value"</Description>
+                      <LastState Value="4.544820615E30" RealAddress="7FF810480013"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_fatigue_value</Address>
@@ -492,6 +494,7 @@ player_thirst_toggle:
                     <CheatEntry>
                       <ID>8722</ID>
                       <Description>"Thirst Value"</Description>
+                      <LastState Value="2.471818775E20" RealAddress="7FF810460013"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_thirst_value</Address>
@@ -638,6 +641,7 @@ player_hunger_toggle:
                     <CheatEntry>
                       <ID>8727</ID>
                       <Description>"Hunger Value"</Description>
+                      <LastState Value="7.036672206E22" RealAddress="7FF810490013"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_hunger_value</Address>
@@ -784,6 +788,7 @@ player_sprint_toggle:
                     <CheatEntry>
                       <ID>8732</ID>
                       <Description>"Sprint Value"</Description>
+                      <LastState Value="7.036672206E22" RealAddress="7FF810490013"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_sprint_value</Address>
@@ -932,6 +937,7 @@ player_health_toggle:
                     <CheatEntry>
                       <ID>8740</ID>
                       <Description>"Health Value"</Description>
+                      <LastState Value="4.544820615E30" RealAddress="7FF810480013"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_health_value</Address>
@@ -1097,6 +1103,7 @@ backpack_weight_toggle:
                     <CheatEntry>
                       <ID>8649</ID>
                       <Description>"Weight Value"</Description>
+                      <LastState Value="1.089665184E27" RealAddress="7FF810460014"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>backpack_weight_value</Address>
@@ -1121,6 +1128,7 @@ backpack_scent_toggle:
                     <CheatEntry>
                       <ID>8639</ID>
                       <Description>"Scent Value"</Description>
+                      <LastState Value="3.639592501E-41" RealAddress="7FF810460018"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>backpack_scent_value</Address>
@@ -2242,6 +2250,7 @@ panel_map_auto_survey_toggle:
                     <CheatEntry>
                       <ID>8859</ID>
                       <Description>"Range"</Description>
+                      <LastState Value="Nan" RealAddress="7FF810400013"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>panel_map_auto_survey_range</Address>
@@ -2266,6 +2275,7 @@ panel_map_show_player_toggle:
                 <CheatEntry>
                   <ID>8854</ID>
                   <Description>"Base"</Description>
+                  <LastState Value="0028000000000000" RealAddress="7FF81040000A"/>
                   <ShowAsHex>1</ShowAsHex>
                   <Color>FF8080</Color>
                   <VariableType>8 Bytes</VariableType>
@@ -4202,21 +4212,27 @@ alloc(newmem,$ff,GameAssembly.dll)
 alloc(string,$ff,GameAssembly.dll)
 label(returnhere)
 label(code)
-label(code_get_string)
 label(code_strlen_next)
 label(code_strlen_end)
+label(code_get_gear_name)
+label(code_get_number_of_params)
+label(code_get_num)
 label(playermanager_update_hook)
 label(playermanager_update_bytes)
 label(item_spawn_toggle)
 label(item_spawn_count)
 label(item_spawn_string)
-label(uconsole_getstring_bytes)
+label(uconsole_get_gear_name_bytes)
+label(uconsole_getnumberofparams_bytes)
+label(uconsole_get_num_bytes)
 registersymbol(playermanager_update_hook)
 registersymbol(playermanager_update_bytes)
 registersymbol(item_spawn_toggle)
 registersymbol(item_spawn_count)
 registersymbol(item_spawn_string)
-registersymbol(uconsole_getstring_bytes)
+registersymbol(uconsole_get_gear_name_bytes)
+registersymbol(uconsole_getnumberofparams_bytes)
+registersymbol(uconsole_get_num_bytes)
 
 //  class: PlayerManager
 //  RVA: 0x15A7EC0 Offset: 0x15A6AC0 VA: 0x7FFB684A7EC0
@@ -4226,7 +4242,11 @@ aobScanModule(hook,GameAssembly.dll,40 53 41 56 48 83 ec ? 80 3d ? ? ? ? ? 48 8b
 // claass: uConsole
 // RVA: 0xE5A2D0 Offset: 0xE590D0 VA: 0x180E5A2D0
 // public static string GetString() { }
-aobScanModule(uConsole_GetString,GameAssembly.dll,48 83 ec ? 80 3d ? ? ? ? ? 75 ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? c6 05 ? ? ? ? ? 48 8b 0d ? ? ? ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 48 8b 0d ? ? ? ? 48 8b 91 ? ? ? ? 48 8b 42 ? 48 85 c0 74)
+aobScanModule(uConsole_GetString,GameAssembly.dll,e8 ? ? ? ? 48 8b d8 48 85 c0 0f 84 ? ? ? ? 39 70 ? 0f 86 ? ? ? ? bf ? ? ? ? 48 8b 0d ? ? ? ? 39 b1 ? ? ? ? 75 ? e8 ? ? ? ? 33 c9 e8 ? ? ? ? 3b c7)
+
+aobScanModule(uConsole_GetNumberOfParams,GameAssembly.dll,e8 ? ? ? ? 3b c7 7e ? 48 8b 0d)
+
+aobScanModule(uConsole_GetInt,GameAssembly.dll,e8 ? ? ? ? 8b f8 f3 0f 10 35)
 
 // class: ConsoleManager
 // RVA: 0xB218F0 Offset: 0xB206F0 VA: 0x180B218F0
@@ -4248,8 +4268,14 @@ playermanager_update_bytes:
   readMem(hook, $8)
   jmp returnhere
 
-uconsole_getstring_bytes:
-  readMem(uConsole_GetString, 11)
+uconsole_get_gear_name_bytes:
+  readMem(uConsole_GetString, 5)
+
+uconsole_getnumberofparams_bytes:
+  readMem(uConsole_GetNumberOfParams, 5)
+
+uconsole_get_num_bytes:
+  readMem(uConsole_GetInt, 5)
 
 item_spawn_toggle:
   db 0
@@ -4257,8 +4283,16 @@ item_spawn_toggle:
 item_spawn_count:
   dd 1
 
-code_get_string:
+code_get_gear_name:
   lea rax, [string]
+  ret
+
+code_get_number_of_params:
+  mov rax, 2
+  ret
+
+code_get_num:
+  mov eax, [item_spawn_count]
   ret
 
 code:
@@ -4298,8 +4332,13 @@ playermanager_update_hook:
   returnhere:
 
 uConsole_GetString:
-  jmp code_get_string
-  nop 6
+  call code_get_gear_name
+
+uConsole_GetNumberOfParams:
+  call code_get_number_of_params
+
+uConsole_GetInt:
+  call code_get_num
 
 
 
@@ -4309,14 +4348,22 @@ playermanager_update_hook:
   readMem(playermanager_update_bytes, 8)
 
 uConsole_GetString:
-  readMem(uconsole_getstring_bytes, 11)
+  readMem(uconsole_get_gear_name_bytes, 5)
+
+uConsole_GetNumberOfParams:
+  readMem(uconsole_getnumberofparams_bytes, 5)
+
+uConsole_GetInt:
+  readMem(uconsole_get_num_bytes, 5)
 
 unregistersymbol(playermanager_update_hook)
 unregistersymbol(playermanager_update_bytes)
 unregistersymbol(item_spawn_toggle)
 unregistersymbol(item_spawn_count)
 unregistersymbol(item_spawn_string)
-unregistersymbol(uconsole_getstring_bytes)
+unregistersymbol(uconsole_get_gear_name_bytes)
+unregistersymbol(uconsole_getnumberofparams_bytes)
+unregistersymbol(uconsole_get_num_bytes)
 dealloc(newmem)
 dealloc(string)
 
@@ -4387,7 +4434,7 @@ GameAssembly.dll+E5A308: 48 8B 0D D1 3C 81 03  - mov rcx,[GameAssembly.dll+466DF
                   <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:Idle/Done
 1:Spawn Item
 </DropDownList>
-                  <LastState Value="0" RealAddress="7FF8179D0018"/>
+                  <LastState Value="0" RealAddress="7FF80C8E001C"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>800080</Color>
                   <VariableType>Byte</VariableType>
@@ -4396,7 +4443,7 @@ GameAssembly.dll+E5A308: 48 8B 0D D1 3C 81 03  - mov rcx,[GameAssembly.dll+466DF
                 <CheatEntry>
                   <ID>9066</ID>
                   <Description>"Count (Stackable Items)"</Description>
-                  <LastState Value="1" RealAddress="7FF8179D0019"/>
+                  <LastState Value="5" RealAddress="7FF80C8E001D"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>800080</Color>
                   <VariableType>4 Bytes</VariableType>
@@ -4891,7 +4938,7 @@ GEAR_WorkBoots:GEAR_WorkBoots
 GEAR_WorkGloves:GEAR_WorkGloves
 GEAR_WorkPants:GEAR_WorkPants
 </DropDownList>
-                  <LastState RealAddress="7FF8179D0113"/>
+                  <LastState RealAddress="7FF80C8E0113"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>800080</Color>
                   <VariableType>String</VariableType>
@@ -5064,6 +5111,7 @@ fire_burn_temp_toggle:
                     <CheatEntry>
                       <ID>8706</ID>
                       <Description>"Temp"</Description>
+                      <LastState Value="-2.079225681E-12" RealAddress="7FF810450017"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>fire_burn_temp_value</Address>
@@ -5545,6 +5593,7 @@ GameAssembly.dll+DEB936: 75 13                 - jne GameAssembly.dll+DEB94B
 9:ToxicFog
 255:None
 </DropDownList>
+                  <LastState Value="0" RealAddress="7FF81043000A"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>800080</Color>
                   <VariableType>Byte</VariableType>
@@ -5712,7 +5761,7 @@ GameAssembly.dll+127D885: 33 D2                 - xor edx,edx
       <ID>8665</ID>
       <Description>"Old Stuff"</Description>
       <Options moHideChildren="1"/>
-      <LastState Value="" Activated="1" RealAddress="00000000"/>
+      <LastState Value="" RealAddress="00000000"/>
       <Color>4080FF</Color>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
@@ -7211,13 +7260,14 @@ dealloc(newmem)
       <ID>8959</ID>
       <Description>"Dev"</Description>
       <Options moHideChildren="1"/>
-      <LastState Value="" Activated="1" RealAddress="00000000"/>
+      <LastState Value="" RealAddress="00000000"/>
       <Color>0080FF</Color>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>8940</ID>
           <Description>"tmp"</Description>
+          <LastState Value="32726F746365562E" RealAddress="7FF8104A0000"/>
           <ShowAsHex>1</ShowAsHex>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>8 Bytes</VariableType>
