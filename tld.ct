@@ -5,7 +5,7 @@
       <ID>8642</ID>
       <Description>"L"</Description>
       <Options moHideChildren="1"/>
-      <LastState Value="" Activated="1" RealAddress="00000000"/>
+      <LastState Value="" RealAddress="00000000"/>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
@@ -71,7 +71,7 @@
           <ID>8710</ID>
           <Description>"Player"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" RealAddress="00000000"/>
+          <LastState Value="" Activated="1" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -196,7 +196,6 @@ player_temp_toggle:
                     <CheatEntry>
                       <ID>8713</ID>
                       <Description>"Temperature Value"</Description>
-                      <LastState Value="7.715996607E31" RealAddress="7FF810470015"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_temp_value</Address>
@@ -343,7 +342,6 @@ player_fatigue_toggle:
                     <CheatEntry>
                       <ID>8716</ID>
                       <Description>"Fatigue Value"</Description>
-                      <LastState Value="4.544820615E30" RealAddress="7FF810480013"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_fatigue_value</Address>
@@ -494,7 +492,6 @@ player_thirst_toggle:
                     <CheatEntry>
                       <ID>8722</ID>
                       <Description>"Thirst Value"</Description>
-                      <LastState Value="2.471818775E20" RealAddress="7FF810460013"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_thirst_value</Address>
@@ -641,7 +638,6 @@ player_hunger_toggle:
                     <CheatEntry>
                       <ID>8727</ID>
                       <Description>"Hunger Value"</Description>
-                      <LastState Value="7.036672206E22" RealAddress="7FF810490013"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_hunger_value</Address>
@@ -788,7 +784,6 @@ player_sprint_toggle:
                     <CheatEntry>
                       <ID>8732</ID>
                       <Description>"Sprint Value"</Description>
-                      <LastState Value="7.036672206E22" RealAddress="7FF810490013"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_sprint_value</Address>
@@ -937,7 +932,6 @@ player_health_toggle:
                     <CheatEntry>
                       <ID>8740</ID>
                       <Description>"Health Value"</Description>
-                      <LastState Value="4.544820615E30" RealAddress="7FF810480013"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>player_health_value</Address>
@@ -1103,7 +1097,6 @@ backpack_weight_toggle:
                     <CheatEntry>
                       <ID>8649</ID>
                       <Description>"Weight Value"</Description>
-                      <LastState Value="1.089665184E27" RealAddress="7FF810460014"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>backpack_weight_value</Address>
@@ -1128,7 +1121,6 @@ backpack_scent_toggle:
                     <CheatEntry>
                       <ID>8639</ID>
                       <Description>"Scent Value"</Description>
-                      <LastState Value="3.639592501E-41" RealAddress="7FF810460018"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>backpack_scent_value</Address>
@@ -1156,6 +1148,736 @@ backpack_scent_toggle:
                   <Offsets>
                     <Offset>8c</Offset>
                   </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>8863</ID>
+              <Description>"Afflictions"</Description>
+              <LastState Value="" RealAddress="00000000"/>
+              <Color>C08000</Color>
+              <GroupHeader>1</GroupHeader>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>8861</ID>
+                  <Description>"Remove Sprained Ankle"</Description>
+                  <LastState/>
+                  <Color>008000</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{ Game   : tld.exe
+  Version: 2.22
+  Date   : 2023-08-28
+  Author : sub1to
+}
+
+[ENABLE]
+alloc(newmem,$ff,GameAssembly.dll)
+label(returnhere)
+label(code)
+label(sprained_ankle_update_hook)
+label(sprained_ankle_update_bytes)
+registersymbol(sprained_ankle_update_hook)
+registersymbol(sprained_ankle_update_bytes)
+
+//  class: SprainedAnkle
+//  RVA: 0xFE60B0 Offset: 0xFE50B0 VA: 0x7FFB0C9B60B0
+//  public void Update() { }
+aobScanModule(hook,GameAssembly.dll,40 57 48 83 ec ? 80 3d ? ? ? ? ? 48 8b f9 75 ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? c6 05 ? ? ? ? ? 48 8b 0d ? ? ? ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 48 8b 0d ? ? ? ? 48 8b 81 ? ? ? ? 80 78 ? ? 0f 85 ? ? ? ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 48 8b 0d ? ? ? ? 48 8b 81 ? ? ? ? 80 b8 ? ? ? ? ? 75 ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 48 89 5c 24 ? e8 ? ? ? ? 48 85 c0 74 ? 80 b8 ? ? ? ? ? 75 ? 48 8b 87)
+
+//  class: SprainedAnkle
+//  RVA: 0xFE7B80 Offset: 0xFE6B80 VA: 0x7FFB0C9B7B80
+//  public void SprainedAnkleEnd(int index) { }
+aobScanModule(sprained_ankle_end,GameAssembly.dll,AD FF CC CC CC CC CC 48 89 5C 24 10)
+
+newmem:
+sprained_ankle_update_bytes:
+  readMem(hook, 6)
+  jmp returnhere
+
+code:
+  lea rsp, [rsp-38]
+  mov [rsp+30], rcx
+  xor rdx, rdx
+  call sprained_ankle_end+7
+  mov rcx, [rsp+30]
+  lea rsp, [rsp+38]
+  jmp sprained_ankle_update_bytes
+
+hook:
+sprained_ankle_update_hook:
+  jmp code
+  nop
+  returnhere:
+
+
+
+[DISABLE]
+sprained_ankle_update_hook:
+  //57 48 83 EC 40
+  readMem(sprained_ankle_update_bytes, 6)
+
+unregistersymbol(sprained_ankle_update_hook)
+unregistersymbol(sprained_ankle_update_bytes)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "GameAssembly.dll"+FE60B0
+
+"GameAssembly.dll"+FE60A6: CC                          -  int 3
+"GameAssembly.dll"+FE60A7: CC                          -  int 3
+"GameAssembly.dll"+FE60A8: CC                          -  int 3
+"GameAssembly.dll"+FE60A9: CC                          -  int 3
+"GameAssembly.dll"+FE60AA: CC                          -  int 3
+"GameAssembly.dll"+FE60AB: CC                          -  int 3
+"GameAssembly.dll"+FE60AC: CC                          -  int 3
+"GameAssembly.dll"+FE60AD: CC                          -  int 3
+"GameAssembly.dll"+FE60AE: CC                          -  int 3
+"GameAssembly.dll"+FE60AF: CC                          -  int 3
+// ---------- INJECTING HERE ----------
+"GameAssembly.dll"+FE60B0: 57                          -  push rdi
+"GameAssembly.dll"+FE60B1: 48 83 EC 40                 -  sub rsp,40
+// ---------- DONE INJECTING  ----------
+"GameAssembly.dll"+FE60B5: 90                          -  nop
+"GameAssembly.dll"+FE60B6: 48 C7 44 24 20 FE FF FF FF  -  mov qword ptr [rsp+20],FFFFFFFE
+"GameAssembly.dll"+FE60BF: 48 89 5C 24 50              -  mov [rsp+50],rbx
+"GameAssembly.dll"+FE60C4: 48 8B F9                    -  mov rdi,rcx
+"GameAssembly.dll"+FE60C7: 33 DB                       -  xor ebx,ebx
+"GameAssembly.dll"+FE60C9: 38 1D 09 74 46 03           -  cmp [GameAssembly.dll+444D4D8],bl
+"GameAssembly.dll"+FE60CF: 75 4D                       -  jne GameAssembly.dll+FE611E
+"GameAssembly.dll"+FE60D1: 48 8B 05 68 FC 45 03        -  mov rax,[GameAssembly.dll+4445D40]
+"GameAssembly.dll"+FE60D8: 48 63 90 B8 00 00 00        -  movsxd  rdx,dword ptr [rax+000000B8]
+"GameAssembly.dll"+FE60DF: 48 8B 05 32 FC 45 03        -  mov rax,[GameAssembly.dll+4445D18]
+}
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>9085</ID>
+                  <Description>"Remove Sprained Wrist"</Description>
+                  <LastState/>
+                  <Color>008000</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{ Game   : tld.exe
+  Version: 2.22
+  Date   : 2023-08-28
+  Author : sub1to
+}
+
+[ENABLE]
+alloc(newmem,$ff,GameAssembly.dll)
+label(returnhere)
+label(code)
+label(sprained_wrist_update_hook)
+label(sprained_wrist_update_bytes)
+registersymbol(sprained_wrist_update_hook)
+registersymbol(sprained_wrist_update_bytes)
+
+//  class: SprainedWrist
+//  public void Update() { }
+aobScanModule(hook,GameAssembly.dll,40 57 48 83 ec ? 80 3d ? ? ? ? ? 48 8b f9 75 ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? c6 05 ? ? ? ? ? 48 8b 0d ? ? ? ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 48 8b 0d ? ? ? ? 48 8b 81 ? ? ? ? 80 78 ? ? 0f 85 ? ? ? ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 48 8b 0d ? ? ? ? 48 8b 81 ? ? ? ? 80 b8 ? ? ? ? ? 75 ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 48 89 5c 24 ? e8 ? ? ? ? 48 85 c0 74 ? 80 b8 ? ? ? ? ? 75 ? 48 8b 47)
+
+//  class: SprainedWrist
+//  public void SprainedWristEnd(int index) { }
+aobScanModule(sprained_wrist_end,GameAssembly.dll,AD FF CC CC CC CC CC CC CC CC CC CC 48 89 5C 24 10)
+
+newmem:
+sprained_wrist_update_bytes:
+  readMem(hook, 6)
+  jmp returnhere
+
+code:
+  lea rsp, [rsp-38]
+  mov [rsp+30], rcx
+  xor rdx, rdx
+  call sprained_wrist_end+C
+  mov rcx, [rsp+30]
+  lea rsp, [rsp+38]
+  jmp sprained_wrist_update_bytes
+
+hook:
+sprained_wrist_update_hook:
+  jmp code
+  nop
+  returnhere:
+
+
+
+[DISABLE]
+sprained_wrist_update_hook:
+  readMem(sprained_wrist_update_bytes, 6)
+
+unregistersymbol(sprained_wrist_update_hook)
+unregistersymbol(sprained_wrist_update_bytes)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+811480
+
+GameAssembly.dll+811476: CC                    - int 3
+GameAssembly.dll+811477: CC                    - int 3
+GameAssembly.dll+811478: CC                    - int 3
+GameAssembly.dll+811479: CC                    - int 3
+GameAssembly.dll+81147A: CC                    - int 3
+GameAssembly.dll+81147B: CC                    - int 3
+GameAssembly.dll+81147C: CC                    - int 3
+GameAssembly.dll+81147D: CC                    - int 3
+GameAssembly.dll+81147E: CC                    - int 3
+GameAssembly.dll+81147F: CC                    - int 3
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+811480: 40 57                 - push rdi
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+811482: 48 83 EC 20           - sub rsp,20
+GameAssembly.dll+811486: 80 3D 67 38 03 04 00  - cmp byte ptr [GameAssembly.dll+4844CF4],00
+GameAssembly.dll+81148D: 48 8B F9              - mov rdi,rcx
+GameAssembly.dll+811490: 75 1F                 - jne GameAssembly.dll+8114B1
+GameAssembly.dll+811492: 48 8D 0D 9F 6C E4 03  - lea rcx,[GameAssembly.dll+4658138]
+GameAssembly.dll+811499: E8 B2 E9 B5 FF        - call GameAssembly.dll+36FE50
+GameAssembly.dll+81149E: 48 8D 0D EB D2 E4 03  - lea rcx,[GameAssembly.dll+465E790]
+GameAssembly.dll+8114A5: E8 A6 E9 B5 FF        - call GameAssembly.dll+36FE50
+GameAssembly.dll+8114AA: C6 05 43 38 03 04 01  - mov byte ptr [GameAssembly.dll+4844CF4],01
+GameAssembly.dll+8114B1: 48 8B 0D 80 6C E4 03  - mov rcx,[GameAssembly.dll+4658138]
+}
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>9086</ID>
+                  <Description>"Remove Sprain Pain"</Description>
+                  <LastState/>
+                  <Color>008000</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{ Game   : tld.exe
+  Version: 2.22
+  Date   : 2023-08-28
+  Author : sub1to
+}
+
+[ENABLE]
+alloc(newmem,$ff,GameAssembly.dll)
+label(returnhere)
+label(code)
+label(sprain_pain_update_hook)
+label(sprain_pain_update_bytes)
+registersymbol(sprain_pain_update_hook)
+registersymbol(sprain_pain_update_bytes)
+
+//  class: SprainPain
+//  public void Update() { }
+aobScanModule(hook,GameAssembly.dll,40 57 48 81 ec ? ? ? ? 80 3d ? ? ? ? ? 48 8b f9 75 ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? c6 05 ? ? ? ? ? 48 8b 0d)
+
+//  class: SprainPain
+//  public void Cure() { }
+aobScanModule(sprain_pain_end,GameAssembly.dll,40 57 48 83 ec ? 80 3d ? ? ? ? ? 48 8b f9 75 ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? c6 05 ? ? ? ? ? 48 8b 47 ? 48 89 5c 24 ? 48 85 c0 74 ? 8b 58 ? 83 eb ? 78 ? 48 8b 47 ? 48 85 c0 74 ? 3b 58 ? 73 ? 48 8b 50)
+
+newmem:
+sprain_pain_update_bytes:
+  readMem(hook, 9)
+  jmp returnhere
+
+code:
+  lea rsp, [rsp-38]
+  mov [rsp+30], rcx
+  xor rdx, rdx
+  call sprain_pain_end
+  mov rcx, [rsp+30]
+  lea rsp, [rsp+38]
+  jmp sprain_pain_update_bytes
+
+hook:
+sprain_pain_update_hook:
+  jmp code
+  nop 4
+  returnhere:
+
+
+
+[DISABLE]
+sprain_pain_update_hook:
+  readMem(sprain_pain_update_bytes, 9)
+
+unregistersymbol(sprain_pain_update_hook)
+unregistersymbol(sprain_pain_update_bytes)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+8136D0
+
+GameAssembly.dll+8136BA: F0 48 0F B1 0A        - lock cmpxchg [rdx],rcx
+GameAssembly.dll+8136BF: 75 EF                 - jne GameAssembly.dll+8136B0
+GameAssembly.dll+8136C1: 48 83 C4 28           - add rsp,28
+GameAssembly.dll+8136C5: C3                    - ret
+GameAssembly.dll+8136C6: E8 65 56 AD FF        - call GameAssembly.il2cpp_value_box+50
+GameAssembly.dll+8136CB: CC                    - int 3
+GameAssembly.dll+8136CC: CC                    - int 3
+GameAssembly.dll+8136CD: CC                    - int 3
+GameAssembly.dll+8136CE: CC                    - int 3
+GameAssembly.dll+8136CF: CC                    - int 3
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+8136D0: 40 57                 - push rdi
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+8136D2: 48 81 EC 80 00 00 00  - sub rsp,00000080
+GameAssembly.dll+8136D9: 80 3D 29 16 03 04 00  - cmp byte ptr [GameAssembly.dll+4844D09],00
+GameAssembly.dll+8136E0: 48 8B F9              - mov rdi,rcx
+GameAssembly.dll+8136E3: 75 43                 - jne GameAssembly.dll+813728
+GameAssembly.dll+8136E5: 48 8D 0D 3C 7B E1 03  - lea rcx,[GameAssembly.dll+462B228]
+GameAssembly.dll+8136EC: E8 5F C7 B5 FF        - call GameAssembly.dll+36FE50
+GameAssembly.dll+8136F1: 48 8D 0D 68 49 E4 03  - lea rcx,[GameAssembly.dll+4658060]
+GameAssembly.dll+8136F8: E8 53 C7 B5 FF        - call GameAssembly.dll+36FE50
+GameAssembly.dll+8136FD: 48 8D 0D 34 4A E4 03  - lea rcx,[GameAssembly.dll+4658138]
+GameAssembly.dll+813704: E8 47 C7 B5 FF        - call GameAssembly.dll+36FE50
+}
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>8873</ID>
+                  <Description>"Remove Hypothermia (Risk)"</Description>
+                  <LastState/>
+                  <Color>008000</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{ Game   : tld.exe
+  Version: 2.22
+  Date   : 2023-08-28
+  Author : sub1to
+}
+
+[ENABLE]
+alloc(newmem,$ff,GameAssembly.dll)
+label(returnhere)
+label(code)
+label(code_call_end)
+label(hypothermia_update_hook)
+label(hypothermia_update_bytes)
+label(hypothermia_suppressed_hook)
+label(hypothermia_suppressed_bytes)
+label(hypothermia_base_ptr)
+registersymbol(hypothermia_update_hook)
+registersymbol(hypothermia_update_bytes)
+registersymbol(hypothermia_suppressed_hook)
+registersymbol(hypothermia_suppressed_bytes)
+registersymbol(hypothermia_base_ptr)
+
+//  class: Hypothermia
+//  RVA: 0x10F2F00 Offset: 0x10F1F00 VA: 0x7FFB0CAC2F00
+//  public void Update() { }
+aobScanModule(hook,GameAssembly.dll,40 53 48 83 ec ? 80 3d ? ? ? ? ? 48 8b d9 75 ? 48 8d 0d ? ? ? ? e8 ? ? ? ? c6 05 ? ? ? ? ? 48 8b 0d ? ? ? ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 48 8b 0d ? ? ? ? 48 8b 81 ? ? ? ? 80 78 ? ? 75 ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 48 8b 0d ? ? ? ? 48 8b 81 ? ? ? ? 80 b8 ? ? ? ? ? 75 ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? e8 ? ? ? ? 48 85 c0 74 ? 80 b8 ? ? ? ? ? 75 ? 33 d2)
+
+//  class: Hypothermia
+// 	RVA: 0x10F3BD0 Offset: 0x10F2BD0 VA: 0x7FFB0CAC3BD0
+//  private void CheckForHypothermia() { }
+aobScanModule(hook2,GameAssembly.dll,80 7b ? ? 0f 85 ? ? ? ? 48 8b 0d ? ? ? ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 48 89 b4 24)
+
+
+//  class: Hypothermia
+//  RVA: 0x10F35C0 Offset: 0x10F25C0 VA: 0x7FFB0CAC35C0
+//  public void HypothermiaEnd() { }
+aobScanModule(hypothermia_end,GameAssembly.dll,40 53 48 83 ec ? 80 3d ? ? ? ? ? 48 8b d9 75 ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? c6 05 ? ? ? ? ? 48 8b 43 ? 48 c7 44 24 ? ? ? ? ? c6 43 ? ? c7 43)
+
+
+newmem:
+hypothermia_update_bytes:
+  //push rbx
+  //sub rsp,40
+  readMem(hook, 6)
+  jmp returnhere
+
+hypothermia_suppressed_bytes:
+  //cmp byte ptr [rbx+61],00
+  readMem(hook2, 4)
+
+hypothermia_base_ptr:
+  dq 0
+
+code:
+  mov [hypothermia_base_ptr], rcx
+
+  // private bool m_Active; // 0x58
+  // If the affliction is active, call Hypothermia.HypothermiaEnd
+  cmp byte ptr [rcx+58], 0
+  jnz code_call_end
+
+  // private float m_ElapsedHours; // 0x5C
+  // If the elapsed time is higher than 0, we have hypothermia risk, so call Hypothermia.HypothermiaEnd
+  movss xmm1, [rcx+5C]
+  xorps xmm0, xmm0
+  comiss xmm1, xmm0
+  jbe hypothermia_update_bytes
+
+code_call_end:
+  lea rsp, [rsp-38]
+  mov [rsp+30], rcx
+  call hypothermia_end
+  mov rcx, [rsp+30]
+  lea rsp, [rsp+38]
+  jmp hypothermia_update_bytes
+
+hook:
+hypothermia_update_hook:
+  jmp code
+  nop
+  returnhere:
+
+
+// this patch is to prevent hypothermia immediately coming back
+hook2:
+hypothermia_suppressed_hook:
+  test rbx, rbx
+  nop
+
+
+
+[DISABLE]
+hypothermia_update_hook:
+  //40 53 48 83 EC 40
+  readMem(hypothermia_update_bytes, 6)
+
+hypothermia_suppressed_hook:
+  //80 7B 61 00
+  readMem(hypothermia_suppressed_bytes,4)
+
+unregistersymbol(hypothermia_update_hook)
+unregistersymbol(hypothermia_update_bytes)
+unregistersymbol(hypothermia_suppressed_hook)
+unregistersymbol(hypothermia_suppressed_bytes)
+unregistersymbol(hypothermia_base_ptr)
+dealloc(newmem)
+
+{
+hook+4 / hypothermia_update_hook
+// ORIGINAL CODE - INJECTION POINT: "GameAssembly.dll"+10F2F00
+
+"GameAssembly.dll"+10F2EEC: CC                          -  int 3
+"GameAssembly.dll"+10F2EED: CC                          -  int 3
+"GameAssembly.dll"+10F2EEE: CC                          -  int 3
+"GameAssembly.dll"+10F2EEF: CC                          -  int 3
+"GameAssembly.dll"+10F2EF0: 80 79 60 00                 -  cmp byte ptr [rcx+60],00
+"GameAssembly.dll"+10F2EF4: 75 08                       -  jne GameAssembly.dll+10F2EFE
+"GameAssembly.dll"+10F2EF6: C6 41 60 01                 -  mov byte ptr [rcx+60],01
+"GameAssembly.dll"+10F2EFA: C6 41 48 00                 -  mov byte ptr [rcx+48],00
+"GameAssembly.dll"+10F2EFE: C3                          -  ret
+"GameAssembly.dll"+10F2EFF: CC                          -  int 3
+// ---------- INJECTING HERE ----------
+"GameAssembly.dll"+10F2F00: 40 53                       -  push rbx
+"GameAssembly.dll"+10F2F02: 48 83 EC 40                 -  sub rsp,40
+// ---------- DONE INJECTING  ----------
+"GameAssembly.dll"+10F2F06: 48 C7 44 24 20 FE FF FF FF  -  mov qword ptr [rsp+20],FFFFFFFE
+"GameAssembly.dll"+10F2F0F: 48 8B D9                    -  mov rbx,rcx
+"GameAssembly.dll"+10F2F12: 80 3D 1A AB 35 03 00        -  cmp byte ptr [GameAssembly.dll+444DA33],00
+"GameAssembly.dll"+10F2F19: 75 50                       -  jne GameAssembly.dll+10F2F6B
+"GameAssembly.dll"+10F2F1B: 48 8B 05 1E 2E 35 03        -  mov rax,[GameAssembly.dll+4445D40]
+"GameAssembly.dll"+10F2F22: 48 63 90 B8 00 00 00        -  movsxd  rdx,dword ptr [rax+000000B8]
+"GameAssembly.dll"+10F2F29: 48 8B 05 E8 2D 35 03        -  mov rax,[GameAssembly.dll+4445D18]
+"GameAssembly.dll"+10F2F30: 8B 8C 02 D0 5B 04 00        -  mov ecx,[rdx+rax+00045BD0]
+"GameAssembly.dll"+10F2F37: 45 33 C0                    -  xor r8d,r8d
+"GameAssembly.dll"+10F2F3A: 4C 89 44 24 28              -  mov [rsp+28],r8
+}
+
+
+{
+hook2 / hypotherima_is_suppressed
+// ORIGINAL CODE - INJECTION POINT: "GameAssembly.dll"+10F3C5A
+
+"GameAssembly.dll"+10F3C31: 49 89 6B A0           -  mov [r11-60],rbp
+"GameAssembly.dll"+10F3C35: 49 89 6B A8           -  mov [r11-58],rbp
+"GameAssembly.dll"+10F3C39: 4D 8D 43 98           -  lea r8,[r11-68]
+"GameAssembly.dll"+10F3C3D: 8B 94 02 94 5B 04 00  -  mov edx,[rdx+rax+00045B94]
+"GameAssembly.dll"+10F3C44: E8 F7 DE F8 FE        -  call GameAssembly.dll+81B40
+"GameAssembly.dll"+10F3C49: 90                    -  nop
+"GameAssembly.dll"+10F3C4A: 33 C9                 -  xor ecx,ecx
+"GameAssembly.dll"+10F3C4C: FF 15 DE 74 06 03     -  call qword ptr [GameAssembly.dll+415B130]
+"GameAssembly.dll"+10F3C52: 90                    -  nop
+"GameAssembly.dll"+10F3C53: C6 05 1D 9D 35 03 01  -  mov byte ptr [GameAssembly.dll+444D977],01
+// ---------- INJECTING HERE ----------
+"GameAssembly.dll"+10F3C5A: 80 7B 61 00           -  cmp byte ptr [rbx+61],00
+// ---------- DONE INJECTING  ----------
+"GameAssembly.dll"+10F3C5E: 0F 85 19 03 00 00     -  jne GameAssembly.dll+10F3F7D
+"GameAssembly.dll"+10F3C64: 48 8B 0D 9D DB 3C 03  -  mov rcx,[GameAssembly.dll+44C1808]
+"GameAssembly.dll"+10F3C6B: F6 81 2F 01 00 00 02  -  test byte ptr [rcx+0000012F],02
+"GameAssembly.dll"+10F3C72: 74 0E                 -  je GameAssembly.dll+10F3C82
+"GameAssembly.dll"+10F3C74: 83 B9 E0 00 00 00 00  -  cmp dword ptr [rcx+000000E0],00
+"GameAssembly.dll"+10F3C7B: 75 05                 -  jne GameAssembly.dll+10F3C82
+"GameAssembly.dll"+10F3C7D: E8 4E 7A F9 FE        -  call GameAssembly.dll+8B6D0
+"GameAssembly.dll"+10F3C82: E8 69 09 D2 FF        -  call GameAssembly.dll+E145F0
+"GameAssembly.dll"+10F3C87: 48 85 C0              -  test rax,rax
+"GameAssembly.dll"+10F3C8A: 0F 84 20 03 00 00     -  je GameAssembly.dll+10F3FB0
+"GameAssembly.dll"+10F3C90: F3 0F 10 40 20        -  movss xmm0,[rax+20]
+}
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>8919</ID>
+                  <Description>"Remove Cabin Fever"</Description>
+                  <LastState/>
+                  <Color>0000FF</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{ Game   : tld.exe
+  Version: 1.97 85101 S
+  Date   : 2021-10-30
+  Author : sub1to
+
+
+  	// Fields
+	public float m_NumHoursToExitRisk; // 0x18
+	public float m_NumHoursToEnterRisk; // 0x1C
+	public float m_NumHoursRequiredIndoors; // 0x20
+	public float m_NumHoursToCheck; // 0x24
+	public float m_NumHoursToPreventIndoorRest; // 0x28
+	public int m_NumSafeDaysVoyageur; // 0x2C
+	public int m_NumSafeDaysStalker; // 0x30
+	[FormerlySerializedAsAttribute] // RVA: 0x185D20 Offset: 0x185120 VA: 0x7FFB0BB55D20
+	public int m_NumSafeDaysInterloper; // 0x34
+	public List&lt;ExperienceModeType&gt; m_XPModesToDisable; // 0x38
+	private bool m_Active; // 0x40
+	private bool m_RiskActive; // 0x41
+	private float m_ElapsedHours; // 0x44
+	private List&lt;float&gt; m_IndoorTimeTracked; // 0x48
+	private int m_HourLastFrame; // 0x50
+	private float m_HoursIndoorsExcludingLastHourCached; // 0x54
+	private bool m_StartHasBeenCalled; // 0x58
+	private static CabinFeverSaveDataProxy m_CabinFeverSaveDataProxy; // 0x0
+}
+
+[ENABLE]
+alloc(newmem,$ff,GameAssembly.dll)
+label(returnhere)
+label(code)
+label(cabin_fever_update_hook)
+label(cabin_fever_update_bytes)
+label(cabin_fever_check_hook)
+label(cabin_fever_start_bytes)
+registersymbol(cabin_fever_update_hook)
+registersymbol(cabin_fever_update_bytes)
+registersymbol(cabin_fever_check_hook)
+registersymbol(cabin_fever_start_bytes)
+
+//  class: CabinFever
+//  RVA: 0x15B8420 Offset: 0x15B7420 VA: 0x7FFB0CF88420
+//  public void Update() { }
+aobScanModule(hook,GameAssembly.dll,40 00 C3 CC 4C 8B DC 57 48 83 EC 50)
+
+//  class: CabinFever
+//  RVA: 0x15B99D0 Offset: 0x15B89D0 VA: 0x7FFB0CF899D0
+//  private void CheckForCabinFever() { }
+aobScanModule(hook2,GameAssembly.dll,4c 8b dc 57 48 81 ec ? ? ? ? 49 c7 43 ? ? ? ? ? 49 89 5b ? 0f 29 74 24 ? 0f 29 7c 24 ? 48 8b d9 33 ff 40 38 3d ? ? ? ? 75 ? 48 8b 05 ? ? ? ? 48 63 90 ? ? ? ? 48 8b 05 ? ? ? ? 8b 8c 02 ? ? ? ? 49 89 7b ? 49 89 7b ? 49 89 7b ? 4d 8d 43 ? 8b 94 02 ? ? ? ? e8 ? ? ? ? 90 33 c9 ff 15 ? ? ? ? 90 c6 05 ? ? ? ? ? f3 0f 10 73)
+
+//  class: CabinFever
+//  RVA: 0x15B9310 Offset: 0x15B8310 VA: 0x7FFB0CF89310
+//  public void CabinFeverEnd() { }
+aobScanModule(cabin_fever_end,GameAssembly.dll,40 57 48 83 ec ? 48 c7 44 24 ? ? ? ? ? 48 89 5c 24 ? 48 8b d9 33 ff 40 38 3d ? ? ? ? 75 ? 48 8b 05 ? ? ? ? 48 63 90 ? ? ? ? 48 8b 05 ? ? ? ? 8b 8c 02 ? ? ? ? 48 89 7c 24 ? 48 89 7c 24 ? 48 89 7c 24 ? 4c 8d 44 24 ? 8b 94 02 ? ? ? ? e8 ? ? ? ? 90 33 c9 ff 15 ? ? ? ? 90 c6 05 ? ? ? ? ? 66 c7 43 ? ? ? 89 7b)
+
+newmem:
+cabin_fever_update_bytes:
+  //mov r11,rsp
+  //push rdi
+  //sub rsp,50
+  readMem(hook+4, 8)
+  jmp returnhere
+
+cabin_fever_start_bytes:
+  //mov r11,rsp
+  //push rdi
+  readMem(hook2, 4)
+
+code:
+  lea rsp, [rsp-38]
+  mov [rsp+30], rcx
+  call cabin_fever_end
+  mov rcx, [rsp+30]
+  lea rsp, [rsp+38]
+  jmp cabin_fever_update_bytes
+
+hook+4:
+cabin_fever_update_hook:
+  jmp code
+  nop
+  nop
+  nop
+  returnhere:
+
+hook2:
+cabin_fever_check_hook:
+  db 48 31 c0 c3
+  //xor rax, rax
+  //ret
+
+
+
+[DISABLE]
+cabin_fever_update_hook:
+  //4C 8B DC 57 48 83 EC 50
+  readMem(cabin_fever_update_bytes, 8)
+
+cabin_fever_check_hook:
+  //4C 8B DC 57
+  readMem(cabin_fever_start_bytes, 4)
+
+unregistersymbol(cabin_fever_update_hook)
+unregistersymbol(cabin_fever_update_bytes)
+unregistersymbol(cabin_fever_check_hook)
+unregistersymbol(cabin_fever_start_bytes)
+dealloc(newmem)
+
+{
+hook / cabin_fever_update_hook
+// ORIGINAL CODE - INJECTION POINT: "GameAssembly.dll"+15B8420
+
+"GameAssembly.dll"+15B840C: C3                       -  ret
+"GameAssembly.dll"+15B840D: CC                       -  int 3
+"GameAssembly.dll"+15B840E: CC                       -  int 3
+"GameAssembly.dll"+15B840F: CC                       -  int 3
+"GameAssembly.dll"+15B8410: 80 79 58 00              -  cmp byte ptr [rcx+58],00
+"GameAssembly.dll"+15B8414: 75 08                    -  jne GameAssembly.dll+15B841E
+"GameAssembly.dll"+15B8416: C6 41 58 01              -  mov byte ptr [rcx+58],01
+"GameAssembly.dll"+15B841A: C6 41 40 00              -  mov byte ptr [rcx+40],00
+"GameAssembly.dll"+15B841E: C3                       -  ret
+"GameAssembly.dll"+15B841F: CC                       -  int 3
+// ---------- INJECTING HERE ----------
+"GameAssembly.dll"+15B8420: 4C 8B DC                 -  mov r11,rsp
+"GameAssembly.dll"+15B8423: 57                       -  push rdi
+"GameAssembly.dll"+15B8424: 48 83 EC 50              -  sub rsp,50
+// ---------- DONE INJECTING  ----------
+"GameAssembly.dll"+15B8428: 49 C7 43 C8 FE FF FF FF  -  mov qword ptr [r11-38],FFFFFFFE
+"GameAssembly.dll"+15B8430: 49 89 5B 08              -  mov [r11+08],rbx
+"GameAssembly.dll"+15B8434: 49 89 6B 10              -  mov [r11+10],rbp
+"GameAssembly.dll"+15B8438: 49 89 73 18              -  mov [r11+18],rsi
+"GameAssembly.dll"+15B843C: 0F 29 74 24 40           -  movaps [rsp+40],xmm6
+"GameAssembly.dll"+15B8441: 48 8B D9                 -  mov rbx,rcx
+"GameAssembly.dll"+15B8444: 33 ED                    -  xor ebp,ebp
+"GameAssembly.dll"+15B8446: 40 38 2D 06 C5 E9 02     -  cmp [GameAssembly.dll+4454953],bpl
+"GameAssembly.dll"+15B844D: 75 49                    -  jne GameAssembly.dll+15B8498
+"GameAssembly.dll"+15B844F: 48 8B 05 EA D8 E8 02     -  mov rax,[GameAssembly.dll+4445D40]
+}
+
+{
+hook2 / cabin_fever_check_hook
+// ORIGINAL CODE - INJECTION POINT: "GameAssembly.dll"+15B99D0
+
+"GameAssembly.dll"+15B99C2: CC                       -  int 3
+"GameAssembly.dll"+15B99C3: E8 38 0A B1 FE           -  call GameAssembly.dll+CA400
+"GameAssembly.dll"+15B99C8: CC                       -  int 3
+"GameAssembly.dll"+15B99C9: CC                       -  int 3
+"GameAssembly.dll"+15B99CA: CC                       -  int 3
+"GameAssembly.dll"+15B99CB: CC                       -  int 3
+"GameAssembly.dll"+15B99CC: CC                       -  int 3
+"GameAssembly.dll"+15B99CD: CC                       -  int 3
+"GameAssembly.dll"+15B99CE: CC                       -  int 3
+"GameAssembly.dll"+15B99CF: CC                       -  int 3
+// ---------- INJECTING HERE ----------
+"GameAssembly.dll"+15B99D0: 4C 8B DC                 -  mov r11,rsp
+"GameAssembly.dll"+15B99D3: 57                       -  push rdi
+// ---------- DONE INJECTING  ----------
+"GameAssembly.dll"+15B99D4: 48 81 EC 80 00 00 00     -  sub rsp,00000080
+"GameAssembly.dll"+15B99DB: 49 C7 43 A8 FE FF FF FF  -  mov qword ptr [r11-58],FFFFFFFE
+"GameAssembly.dll"+15B99E3: 49 89 5B 08              -  mov [r11+08],rbx
+"GameAssembly.dll"+15B99E7: 0F 29 74 24 70           -  movaps [rsp+70],xmm6
+"GameAssembly.dll"+15B99EC: 0F 29 7C 24 60           -  movaps [rsp+60],xmm7
+"GameAssembly.dll"+15B99F1: 48 8B D9                 -  mov rbx,rcx
+"GameAssembly.dll"+15B99F4: 33 FF                    -  xor edi,edi
+"GameAssembly.dll"+15B99F6: 40 38 3D CF AE E9 02     -  cmp [GameAssembly.dll+44548CC],dil
+"GameAssembly.dll"+15B99FD: 75 49                    -  jne GameAssembly.dll+15B9A48
+"GameAssembly.dll"+15B99FF: 48 8B 05 3A C3 E8 02     -  mov rax,[GameAssembly.dll+4445D40]
+"GameAssembly.dll"+15B9A06: 48 63 90 B8 00 00 00     -  movsxd  rdx,dword ptr [rax+000000B8]
+}
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>9008</ID>
+                  <Description>"Remove Frostbite"</Description>
+                  <LastState/>
+                  <Color>008000</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>{ Game   : tld.exe
+  Version: 2.22
+  Date   : 2023-08-28
+  Author : sub1to
+
+}
+
+[ENABLE]
+alloc(newmem,$ff,GameAssembly.dll)
+label(returnhere)
+label(code)
+label(frostbite_update_hook)
+label(frostbite_update_bytes)
+registersymbol(frostbite_update_hook)
+registersymbol(frostbite_update_bytes)
+
+//  class: Frostbite
+//  RVA: 0x104CD20 Offset: 0x104BD20 VA: 0x7FFB0CA1CD20
+//	public void Update() { }
+aobScanModule(hook,GameAssembly.dll,40 53 48 83 ec ? 80 3d ? ? ? ? ? 48 8b d9 75 ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? c6 05 ? ? ? ? ? 48 8b 0d ? ? ? ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 48 8b 0d ? ? ? ? 48 8b 81 ? ? ? ? 80 78 ? ? 75)
+
+//  class: Frostbite
+//  RVA: 0x104D9D0 Offset: 0x104C9D0 VA: 0x7FFB0CA1D9D0
+//  public void FrostbiteEnd() { }
+aobScanModule(frostbite_end,GameAssembly.dll,40 53 48 83 ec ? 80 3d ? ? ? ? ? 48 8b d9 75 ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? c6 05 ? ? ? ? ? 48 8b 43 ? 48 85 c0 74 ? ff 40)
+
+newmem:
+frostbite_update_bytes:
+  //push rbx
+  //sub rsp,40
+  readMem(hook, 6)
+  jmp returnhere
+
+code:
+  lea rsp, [rsp-38]
+  mov [rsp+30], rcx
+  xor rdx, rdx
+  call frostbite_end
+  mov rcx, [rsp+30]
+  lea rsp, [rsp+38]
+  jmp frostbite_update_bytes
+
+hook:
+frostbite_update_hook:
+  jmp code
+  nop
+  returnhere:
+
+
+
+[DISABLE]
+frostbite_update_hook:
+  //40 53 48 83 EC 40
+  readMem(frostbite_update_bytes, 6)
+
+unregistersymbol(frostbite_update_hook)
+unregistersymbol(frostbite_update_bytes)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: "GameAssembly.dll"+104CD20
+
+"GameAssembly.dll"+104CD0B: CC                          -  int 3
+"GameAssembly.dll"+104CD0C: E8 BF E3 02 FF              -  call GameAssembly.dll+7B0D0
+"GameAssembly.dll"+104CD11: 48 8B C8                    -  mov rcx,rax
+"GameAssembly.dll"+104CD14: 33 D2                       -  xor edx,edx
+"GameAssembly.dll"+104CD16: E8 D5 D6 07 FF              -  call GameAssembly.dll+CA3F0
+"GameAssembly.dll"+104CD1B: CC                          -  int 3
+"GameAssembly.dll"+104CD1C: CC                          -  int 3
+"GameAssembly.dll"+104CD1D: CC                          -  int 3
+"GameAssembly.dll"+104CD1E: CC                          -  int 3
+"GameAssembly.dll"+104CD1F: CC                          -  int 3
+// ---------- INJECTING HERE ----------
+"GameAssembly.dll"+104CD20: 40 53                       -  push rbx
+"GameAssembly.dll"+104CD22: 48 83 EC 40                 -  sub rsp,40
+// ---------- DONE INJECTING  ----------
+"GameAssembly.dll"+104CD26: 48 C7 44 24 20 FE FF FF FF  -  mov qword ptr [rsp+20],FFFFFFFE
+"GameAssembly.dll"+104CD2F: 48 8B D9                    -  mov rbx,rcx
+"GameAssembly.dll"+104CD32: 80 3D 1E 09 40 03 00        -  cmp byte ptr [GameAssembly.dll+444D657],00
+"GameAssembly.dll"+104CD39: 75 50                       -  jne GameAssembly.dll+104CD8B
+"GameAssembly.dll"+104CD3B: 48 8B 05 FE 8F 3F 03        -  mov rax,[GameAssembly.dll+4445D40]
+"GameAssembly.dll"+104CD42: 48 63 90 B8 00 00 00        -  movsxd  rdx,dword ptr [rax+000000B8]
+"GameAssembly.dll"+104CD49: 48 8B 05 C8 8F 3F 03        -  mov rax,[GameAssembly.dll+4445D18]
+"GameAssembly.dll"+104CD50: 8B 8C 02 D0 B1 03 00        -  mov ecx,[rdx+rax+0003B1D0]
+"GameAssembly.dll"+104CD57: 45 33 C0                    -  xor r8d,r8d
+"GameAssembly.dll"+104CD5A: 4C 89 44 24 28              -  mov [rsp+28],r8
+}
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>8879</ID>
+                  <Description>"Haven't done other afflictions yet.."</Description>
+                  <LastState Value="" RealAddress="00000000"/>
+                  <Color>0080FF</Color>
+                  <GroupHeader>1</GroupHeader>
                 </CheatEntry>
               </CheatEntries>
             </CheatEntry>
@@ -2235,7 +2957,6 @@ panel_map_auto_survey_toggle:
                     <CheatEntry>
                       <ID>8859</ID>
                       <Description>"Range"</Description>
-                      <LastState Value="Nan" RealAddress="7FF810400013"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>panel_map_auto_survey_range</Address>
@@ -2260,7 +2981,6 @@ panel_map_show_player_toggle:
                 <CheatEntry>
                   <ID>8854</ID>
                   <Description>"Base"</Description>
-                  <LastState Value="0028000000000000" RealAddress="7FF81040000A"/>
                   <ShowAsHex>1</ShowAsHex>
                   <Color>FF8080</Color>
                   <VariableType>8 Bytes</VariableType>
@@ -2823,7 +3543,7 @@ aim_fatigue_bow_toggle:
           <ID>8707</ID>
           <Description>"Inventory"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" RealAddress="00000000"/>
+          <LastState Value="" Activated="1" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -3626,9 +4346,6 @@ code:
 hook:
 container_open_progress_hook:
   jmp code
-  nop
-  nop
-  nop
   returnhere:
 
 
@@ -4914,7 +5631,6 @@ fire_burn_temp_toggle:
                     <CheatEntry>
                       <ID>8706</ID>
                       <Description>"Temp"</Description>
-                      <LastState Value="-2.079225681E-12" RealAddress="7FF810450017"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>fire_burn_temp_value</Address>
@@ -5396,7 +6112,6 @@ GameAssembly.dll+DEB936: 75 13                 - jne GameAssembly.dll+DEB94B
 9:ToxicFog
 255:None
 </DropDownList>
-                  <LastState Value="0" RealAddress="7FF81043000A"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>800080</Color>
                   <VariableType>Byte</VariableType>
@@ -6449,609 +7164,6 @@ dealloc(newmem)
 </AssemblerScript>
         </CheatEntry>
         <CheatEntry>
-          <ID>8863</ID>
-          <Description>"Afflictions"</Description>
-          <LastState Value="" RealAddress="00000000"/>
-          <Color>C08000</Color>
-          <GroupHeader>1</GroupHeader>
-          <CheatEntries>
-            <CheatEntry>
-              <ID>8861</ID>
-              <Description>"Remove Sprained Ankle"</Description>
-              <LastState/>
-              <Color>008000</Color>
-              <VariableType>Auto Assembler Script</VariableType>
-              <AssemblerScript>{ Game   : tld.exe
-  Version: 1.97 85101 S
-  Date   : 2021-10-30
-  Author : sub1to
-}
-
-[ENABLE]
-alloc(newmem,$ff,GameAssembly.dll)
-label(returnhere)
-label(code)
-label(sprained_ankle_update_hook)
-label(sprained_ankle_update_bytes)
-registersymbol(sprained_ankle_update_hook)
-registersymbol(sprained_ankle_update_bytes)
-
-//  class: SprainedAnkle
-//  RVA: 0xFE60B0 Offset: 0xFE50B0 VA: 0x7FFB0C9B60B0
-//  public void Update() { }
-aobScanModule(hook,GameAssembly.dll,4c 8b dc 56 57 41 56 48 83 ec ? 49 c7 43 ? ? ? ? ? 49 89 5b ? 49 89 6b ? 0f 29 74 24 ? 48 8b e9 45 33 f6)
-
-//  class: SprainedAnkle
-//  RVA: 0xFE7B80 Offset: 0xFE6B80 VA: 0x7FFB0C9B7B80
-//  public void SprainedAnkleEnd(int index) { }
-aobScanModule(sprained_ankle_end,GameAssembly.dll,4c 8b dc 57 48 83 ec ? 49 c7 43 ? ? ? ? ? 49 89 5b ? 49 89 6b ? 49 89 73 ? 8b da 48 8b f1 33 ed 40 38 2d ? ? ? ? 75 ? 48 8b 05 ? ? ? ? 4c 63 80 ? ? ? ? 48 8b 05 ? ? ? ? 41 8b 8c 00 ? ? ? ? 41 8b 94 00 ? ? ? ? 49 89 6b ? 49 89 6b ? 49 89 6b ? 4d 8d 43 ? e8 ? ? ? ? 90 33 c9 ff 15 ? ? ? ? 90 c6 05 ? ? ? ? ? 85 db 0f 88 ? ? ? ? 48 8b 8e)
-
-newmem:
-sprained_ankle_update_bytes:
-  //push rdi
-  //sub rsp,40
-  readMem(hook, 5)
-  jmp returnhere
-
-code:
-  lea rsp, [rsp-38]
-  mov [rsp+30], rcx
-  xor rdx, rdx
-  call sprained_ankle_end
-  mov rcx, [rsp+30]
-  lea rsp, [rsp+38]
-  jmp sprained_ankle_update_bytes
-
-hook:
-sprained_ankle_update_hook:
-  jmp code
-  returnhere:
-
-
-
-[DISABLE]
-sprained_ankle_update_hook:
-  //57 48 83 EC 40
-  readMem(sprained_ankle_update_bytes, 5)
-
-unregistersymbol(sprained_ankle_update_hook)
-unregistersymbol(sprained_ankle_update_bytes)
-dealloc(newmem)
-
-{
-// ORIGINAL CODE - INJECTION POINT: "GameAssembly.dll"+FE60B0
-
-"GameAssembly.dll"+FE60A6: CC                          -  int 3
-"GameAssembly.dll"+FE60A7: CC                          -  int 3
-"GameAssembly.dll"+FE60A8: CC                          -  int 3
-"GameAssembly.dll"+FE60A9: CC                          -  int 3
-"GameAssembly.dll"+FE60AA: CC                          -  int 3
-"GameAssembly.dll"+FE60AB: CC                          -  int 3
-"GameAssembly.dll"+FE60AC: CC                          -  int 3
-"GameAssembly.dll"+FE60AD: CC                          -  int 3
-"GameAssembly.dll"+FE60AE: CC                          -  int 3
-"GameAssembly.dll"+FE60AF: CC                          -  int 3
-// ---------- INJECTING HERE ----------
-"GameAssembly.dll"+FE60B0: 57                          -  push rdi
-"GameAssembly.dll"+FE60B1: 48 83 EC 40                 -  sub rsp,40
-// ---------- DONE INJECTING  ----------
-"GameAssembly.dll"+FE60B5: 90                          -  nop
-"GameAssembly.dll"+FE60B6: 48 C7 44 24 20 FE FF FF FF  -  mov qword ptr [rsp+20],FFFFFFFE
-"GameAssembly.dll"+FE60BF: 48 89 5C 24 50              -  mov [rsp+50],rbx
-"GameAssembly.dll"+FE60C4: 48 8B F9                    -  mov rdi,rcx
-"GameAssembly.dll"+FE60C7: 33 DB                       -  xor ebx,ebx
-"GameAssembly.dll"+FE60C9: 38 1D 09 74 46 03           -  cmp [GameAssembly.dll+444D4D8],bl
-"GameAssembly.dll"+FE60CF: 75 4D                       -  jne GameAssembly.dll+FE611E
-"GameAssembly.dll"+FE60D1: 48 8B 05 68 FC 45 03        -  mov rax,[GameAssembly.dll+4445D40]
-"GameAssembly.dll"+FE60D8: 48 63 90 B8 00 00 00        -  movsxd  rdx,dword ptr [rax+000000B8]
-"GameAssembly.dll"+FE60DF: 48 8B 05 32 FC 45 03        -  mov rax,[GameAssembly.dll+4445D18]
-}
-</AssemblerScript>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>8873</ID>
-              <Description>"Remove Hypothermia (Risk)"</Description>
-              <LastState/>
-              <Color>008000</Color>
-              <VariableType>Auto Assembler Script</VariableType>
-              <AssemblerScript>{ Game   : tld.exe
-  Version: 1.97 85101 S
-  Date   : 2021-10-30
-  Author : sub1to
-
-	// Fields
-	public LocalizedString m_LocalizedDisplayName; // 0x18
-	public LocalizedString m_LocalizedDescription; // 0x20
-	public float m_HoursSpentFreezingRequired; // 0x28
-	public float m_HPDrainPerHour; // 0x2C
-	public float m_FatigueIncreasePerHour; // 0x30
-	public float m_NumHoursWarmForCure; // 0x34
-	[TooltipAttribute] // RVA: 0x185D90 Offset: 0x185190 VA: 0x7FFB0BB55D90
-	public float m_HypothermiaRatePercentIncreasePerInnerWetItem; // 0x38
-	[HeaderAttribute] // RVA: 0x1764B0 Offset: 0x1758B0 VA: 0x7FFB0BB464B0
-	public string m_HypothermiaVO; // 0x40
-	private bool m_Active; // 0x48
-	private float m_ElapsedHours; // 0x4C
-	private float m_ElapsedWarmTime; // 0x50
-	private string m_CauseLocID; // 0x58
-	private bool m_StartHasBeenCalled; // 0x60
-	private bool m_SuppressHypothermia; // 0x61
-	private static HypothermiaSaveDataProxy m_HypothermiaSaveDataProxy; // 0x0
-}
-
-[ENABLE]
-alloc(newmem,$ff,GameAssembly.dll)
-label(returnhere)
-label(code)
-label(code_call_end)
-label(hypothermia_update_hook)
-label(hypothermia_update_bytes)
-label(hypothermia_suppressed_hook)
-label(hypothermia_suppressed_bytes)
-label(hypothermia_base_ptr)
-registersymbol(hypothermia_update_hook)
-registersymbol(hypothermia_update_bytes)
-registersymbol(hypothermia_suppressed_hook)
-registersymbol(hypothermia_suppressed_bytes)
-registersymbol(hypothermia_base_ptr)
-
-//  class: Hypothermia
-//  RVA: 0x10F2F00 Offset: 0x10F1F00 VA: 0x7FFB0CAC2F00
-//  public void Update() { }
-aobScanModule(hook,GameAssembly.dll,48 00 C3 CC 40 53 48 83 EC 40)
-
-//  class: Hypothermia
-// 	RVA: 0x10F3BD0 Offset: 0x10F2BD0 VA: 0x7FFB0CAC3BD0
-//  private void CheckForHypothermia() { }
-aobScanModule(hook2,GameAssembly.dll,80 7b ? ? 0f 85 ? ? ? ? 48 8b 0d ? ? ? ? f6 81 ? ? ? ? ? 74 ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? e8 ? ? ? ? 48 85 c0 0f 84 ? ? ? ? f3 0f 10 40)
-
-
-//  class: Hypothermia
-//  RVA: 0x10F35C0 Offset: 0x10F25C0 VA: 0x7FFB0CAC35C0
-//  public void HypothermiaEnd() { }
-aobScanModule(hypothermia_end,GameAssembly.dll,40 57 48 83 ec ? 48 c7 44 24 ? ? ? ? ? 48 89 5c 24 ? 48 8b d9 33 ff 40 38 3d ? ? ? ? 75 ? 48 8b 05 ? ? ? ? 48 63 90 ? ? ? ? 48 8b 05 ? ? ? ? 8b 8c 02 ? ? ? ? 48 89 7c 24 ? 48 89 7c 24 ? 48 89 7c 24 ? 4c 8d 44 24 ? 8b 94 02 ? ? ? ? e8 ? ? ? ? 90 33 c9 ff 15 ? ? ? ? 90 c6 05 ? ? ? ? ? c6 43 ? ? 89 7b ? 48 8b 43)
-
-
-newmem:
-hypothermia_update_bytes:
-  //push rbx
-  //sub rsp,40
-  readMem(hook+4, 6)
-  jmp returnhere
-
-hypothermia_suppressed_bytes:
-  //cmp byte ptr [rbx+61],00
-  readMem(hook2, 4)
-
-hypothermia_base_ptr:
-  dq 0
-
-code:
-  mov [hypothermia_base_ptr], rcx
-
-  // private bool m_Active; // 0x48
-  // If the affliction is active, call Hypothermia.HypothermiaEnd
-  cmp byte ptr [rcx+48], 0
-  jnz code_call_end
-
-  // private float m_ElapsedHours; // 0x4C
-  // If the elapsed time is higher than 0, we have hypothermia risk, so call Hypothermia.HypothermiaEnd
-  movss xmm1, [rcx+4C]
-  xorps xmm0, xmm0
-  comiss xmm1, xmm0
-  jbe hypothermia_update_bytes
-
-code_call_end:
-  lea rsp, [rsp-38]
-  mov [rsp+30], rcx
-  call hypothermia_end
-  mov rcx, [rsp+30]
-  lea rsp, [rsp+38]
-  jmp hypothermia_update_bytes
-
-hook+4:
-hypothermia_update_hook:
-  jmp code
-  nop
-  returnhere:
-
-
-// this patch is to prevent hypothermia immediately coming back
-hook2:
-hypothermia_suppressed_hook:
-  test rbx, rbx
-  nop
-
-
-
-[DISABLE]
-hypothermia_update_hook:
-  //40 53 48 83 EC 40
-  readMem(hypothermia_update_bytes, 6)
-
-hypothermia_suppressed_hook:
-  //80 7B 61 00
-  readMem(hypothermia_suppressed_bytes,4)
-
-unregistersymbol(hypothermia_update_hook)
-unregistersymbol(hypothermia_update_bytes)
-unregistersymbol(hypothermia_suppressed_hook)
-unregistersymbol(hypothermia_suppressed_bytes)
-unregistersymbol(hypothermia_base_ptr)
-dealloc(newmem)
-
-{
-hook+4 / hypothermia_update_hook
-// ORIGINAL CODE - INJECTION POINT: "GameAssembly.dll"+10F2F00
-
-"GameAssembly.dll"+10F2EEC: CC                          -  int 3
-"GameAssembly.dll"+10F2EED: CC                          -  int 3
-"GameAssembly.dll"+10F2EEE: CC                          -  int 3
-"GameAssembly.dll"+10F2EEF: CC                          -  int 3
-"GameAssembly.dll"+10F2EF0: 80 79 60 00                 -  cmp byte ptr [rcx+60],00
-"GameAssembly.dll"+10F2EF4: 75 08                       -  jne GameAssembly.dll+10F2EFE
-"GameAssembly.dll"+10F2EF6: C6 41 60 01                 -  mov byte ptr [rcx+60],01
-"GameAssembly.dll"+10F2EFA: C6 41 48 00                 -  mov byte ptr [rcx+48],00
-"GameAssembly.dll"+10F2EFE: C3                          -  ret
-"GameAssembly.dll"+10F2EFF: CC                          -  int 3
-// ---------- INJECTING HERE ----------
-"GameAssembly.dll"+10F2F00: 40 53                       -  push rbx
-"GameAssembly.dll"+10F2F02: 48 83 EC 40                 -  sub rsp,40
-// ---------- DONE INJECTING  ----------
-"GameAssembly.dll"+10F2F06: 48 C7 44 24 20 FE FF FF FF  -  mov qword ptr [rsp+20],FFFFFFFE
-"GameAssembly.dll"+10F2F0F: 48 8B D9                    -  mov rbx,rcx
-"GameAssembly.dll"+10F2F12: 80 3D 1A AB 35 03 00        -  cmp byte ptr [GameAssembly.dll+444DA33],00
-"GameAssembly.dll"+10F2F19: 75 50                       -  jne GameAssembly.dll+10F2F6B
-"GameAssembly.dll"+10F2F1B: 48 8B 05 1E 2E 35 03        -  mov rax,[GameAssembly.dll+4445D40]
-"GameAssembly.dll"+10F2F22: 48 63 90 B8 00 00 00        -  movsxd  rdx,dword ptr [rax+000000B8]
-"GameAssembly.dll"+10F2F29: 48 8B 05 E8 2D 35 03        -  mov rax,[GameAssembly.dll+4445D18]
-"GameAssembly.dll"+10F2F30: 8B 8C 02 D0 5B 04 00        -  mov ecx,[rdx+rax+00045BD0]
-"GameAssembly.dll"+10F2F37: 45 33 C0                    -  xor r8d,r8d
-"GameAssembly.dll"+10F2F3A: 4C 89 44 24 28              -  mov [rsp+28],r8
-}
-
-
-{
-hook2 / hypotherima_is_suppressed
-// ORIGINAL CODE - INJECTION POINT: "GameAssembly.dll"+10F3C5A
-
-"GameAssembly.dll"+10F3C31: 49 89 6B A0           -  mov [r11-60],rbp
-"GameAssembly.dll"+10F3C35: 49 89 6B A8           -  mov [r11-58],rbp
-"GameAssembly.dll"+10F3C39: 4D 8D 43 98           -  lea r8,[r11-68]
-"GameAssembly.dll"+10F3C3D: 8B 94 02 94 5B 04 00  -  mov edx,[rdx+rax+00045B94]
-"GameAssembly.dll"+10F3C44: E8 F7 DE F8 FE        -  call GameAssembly.dll+81B40
-"GameAssembly.dll"+10F3C49: 90                    -  nop
-"GameAssembly.dll"+10F3C4A: 33 C9                 -  xor ecx,ecx
-"GameAssembly.dll"+10F3C4C: FF 15 DE 74 06 03     -  call qword ptr [GameAssembly.dll+415B130]
-"GameAssembly.dll"+10F3C52: 90                    -  nop
-"GameAssembly.dll"+10F3C53: C6 05 1D 9D 35 03 01  -  mov byte ptr [GameAssembly.dll+444D977],01
-// ---------- INJECTING HERE ----------
-"GameAssembly.dll"+10F3C5A: 80 7B 61 00           -  cmp byte ptr [rbx+61],00
-// ---------- DONE INJECTING  ----------
-"GameAssembly.dll"+10F3C5E: 0F 85 19 03 00 00     -  jne GameAssembly.dll+10F3F7D
-"GameAssembly.dll"+10F3C64: 48 8B 0D 9D DB 3C 03  -  mov rcx,[GameAssembly.dll+44C1808]
-"GameAssembly.dll"+10F3C6B: F6 81 2F 01 00 00 02  -  test byte ptr [rcx+0000012F],02
-"GameAssembly.dll"+10F3C72: 74 0E                 -  je GameAssembly.dll+10F3C82
-"GameAssembly.dll"+10F3C74: 83 B9 E0 00 00 00 00  -  cmp dword ptr [rcx+000000E0],00
-"GameAssembly.dll"+10F3C7B: 75 05                 -  jne GameAssembly.dll+10F3C82
-"GameAssembly.dll"+10F3C7D: E8 4E 7A F9 FE        -  call GameAssembly.dll+8B6D0
-"GameAssembly.dll"+10F3C82: E8 69 09 D2 FF        -  call GameAssembly.dll+E145F0
-"GameAssembly.dll"+10F3C87: 48 85 C0              -  test rax,rax
-"GameAssembly.dll"+10F3C8A: 0F 84 20 03 00 00     -  je GameAssembly.dll+10F3FB0
-"GameAssembly.dll"+10F3C90: F3 0F 10 40 20        -  movss xmm0,[rax+20]
-}
-</AssemblerScript>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>8919</ID>
-              <Description>"Remove Cabin Fever"</Description>
-              <LastState/>
-              <Color>008000</Color>
-              <VariableType>Auto Assembler Script</VariableType>
-              <AssemblerScript>{ Game   : tld.exe
-  Version: 1.97 85101 S
-  Date   : 2021-10-30
-  Author : sub1to
-
-
-  	// Fields
-	public float m_NumHoursToExitRisk; // 0x18
-	public float m_NumHoursToEnterRisk; // 0x1C
-	public float m_NumHoursRequiredIndoors; // 0x20
-	public float m_NumHoursToCheck; // 0x24
-	public float m_NumHoursToPreventIndoorRest; // 0x28
-	public int m_NumSafeDaysVoyageur; // 0x2C
-	public int m_NumSafeDaysStalker; // 0x30
-	[FormerlySerializedAsAttribute] // RVA: 0x185D20 Offset: 0x185120 VA: 0x7FFB0BB55D20
-	public int m_NumSafeDaysInterloper; // 0x34
-	public List&lt;ExperienceModeType&gt; m_XPModesToDisable; // 0x38
-	private bool m_Active; // 0x40
-	private bool m_RiskActive; // 0x41
-	private float m_ElapsedHours; // 0x44
-	private List&lt;float&gt; m_IndoorTimeTracked; // 0x48
-	private int m_HourLastFrame; // 0x50
-	private float m_HoursIndoorsExcludingLastHourCached; // 0x54
-	private bool m_StartHasBeenCalled; // 0x58
-	private static CabinFeverSaveDataProxy m_CabinFeverSaveDataProxy; // 0x0
-}
-
-[ENABLE]
-alloc(newmem,$ff,GameAssembly.dll)
-label(returnhere)
-label(code)
-label(cabin_fever_update_hook)
-label(cabin_fever_update_bytes)
-label(cabin_fever_check_hook)
-label(cabin_fever_start_bytes)
-registersymbol(cabin_fever_update_hook)
-registersymbol(cabin_fever_update_bytes)
-registersymbol(cabin_fever_check_hook)
-registersymbol(cabin_fever_start_bytes)
-
-//  class: CabinFever
-//  RVA: 0x15B8420 Offset: 0x15B7420 VA: 0x7FFB0CF88420
-//  public void Update() { }
-aobScanModule(hook,GameAssembly.dll,40 00 C3 CC 4C 8B DC 57 48 83 EC 50)
-
-//  class: CabinFever
-//  RVA: 0x15B99D0 Offset: 0x15B89D0 VA: 0x7FFB0CF899D0
-//  private void CheckForCabinFever() { }
-aobScanModule(hook2,GameAssembly.dll,4c 8b dc 57 48 81 ec ? ? ? ? 49 c7 43 ? ? ? ? ? 49 89 5b ? 0f 29 74 24 ? 0f 29 7c 24 ? 48 8b d9 33 ff 40 38 3d ? ? ? ? 75 ? 48 8b 05 ? ? ? ? 48 63 90 ? ? ? ? 48 8b 05 ? ? ? ? 8b 8c 02 ? ? ? ? 49 89 7b ? 49 89 7b ? 49 89 7b ? 4d 8d 43 ? 8b 94 02 ? ? ? ? e8 ? ? ? ? 90 33 c9 ff 15 ? ? ? ? 90 c6 05 ? ? ? ? ? f3 0f 10 73)
-
-//  class: CabinFever
-//  RVA: 0x15B9310 Offset: 0x15B8310 VA: 0x7FFB0CF89310
-//  public void CabinFeverEnd() { }
-aobScanModule(cabin_fever_end,GameAssembly.dll,40 57 48 83 ec ? 48 c7 44 24 ? ? ? ? ? 48 89 5c 24 ? 48 8b d9 33 ff 40 38 3d ? ? ? ? 75 ? 48 8b 05 ? ? ? ? 48 63 90 ? ? ? ? 48 8b 05 ? ? ? ? 8b 8c 02 ? ? ? ? 48 89 7c 24 ? 48 89 7c 24 ? 48 89 7c 24 ? 4c 8d 44 24 ? 8b 94 02 ? ? ? ? e8 ? ? ? ? 90 33 c9 ff 15 ? ? ? ? 90 c6 05 ? ? ? ? ? 66 c7 43 ? ? ? 89 7b)
-
-newmem:
-cabin_fever_update_bytes:
-  //mov r11,rsp
-  //push rdi
-  //sub rsp,50
-  readMem(hook+4, 8)
-  jmp returnhere
-
-cabin_fever_start_bytes:
-  //mov r11,rsp
-  //push rdi
-  readMem(hook2, 4)
-
-code:
-  lea rsp, [rsp-38]
-  mov [rsp+30], rcx
-  call cabin_fever_end
-  mov rcx, [rsp+30]
-  lea rsp, [rsp+38]
-  jmp cabin_fever_update_bytes
-
-hook+4:
-cabin_fever_update_hook:
-  jmp code
-  nop
-  nop
-  nop
-  returnhere:
-
-hook2:
-cabin_fever_check_hook:
-  db 48 31 c0 c3
-  //xor rax, rax
-  //ret
-
-
-
-[DISABLE]
-cabin_fever_update_hook:
-  //4C 8B DC 57 48 83 EC 50
-  readMem(cabin_fever_update_bytes, 8)
-
-cabin_fever_check_hook:
-  //4C 8B DC 57
-  readMem(cabin_fever_start_bytes, 4)
-
-unregistersymbol(cabin_fever_update_hook)
-unregistersymbol(cabin_fever_update_bytes)
-unregistersymbol(cabin_fever_check_hook)
-unregistersymbol(cabin_fever_start_bytes)
-dealloc(newmem)
-
-{
-hook / cabin_fever_update_hook
-// ORIGINAL CODE - INJECTION POINT: "GameAssembly.dll"+15B8420
-
-"GameAssembly.dll"+15B840C: C3                       -  ret
-"GameAssembly.dll"+15B840D: CC                       -  int 3
-"GameAssembly.dll"+15B840E: CC                       -  int 3
-"GameAssembly.dll"+15B840F: CC                       -  int 3
-"GameAssembly.dll"+15B8410: 80 79 58 00              -  cmp byte ptr [rcx+58],00
-"GameAssembly.dll"+15B8414: 75 08                    -  jne GameAssembly.dll+15B841E
-"GameAssembly.dll"+15B8416: C6 41 58 01              -  mov byte ptr [rcx+58],01
-"GameAssembly.dll"+15B841A: C6 41 40 00              -  mov byte ptr [rcx+40],00
-"GameAssembly.dll"+15B841E: C3                       -  ret
-"GameAssembly.dll"+15B841F: CC                       -  int 3
-// ---------- INJECTING HERE ----------
-"GameAssembly.dll"+15B8420: 4C 8B DC                 -  mov r11,rsp
-"GameAssembly.dll"+15B8423: 57                       -  push rdi
-"GameAssembly.dll"+15B8424: 48 83 EC 50              -  sub rsp,50
-// ---------- DONE INJECTING  ----------
-"GameAssembly.dll"+15B8428: 49 C7 43 C8 FE FF FF FF  -  mov qword ptr [r11-38],FFFFFFFE
-"GameAssembly.dll"+15B8430: 49 89 5B 08              -  mov [r11+08],rbx
-"GameAssembly.dll"+15B8434: 49 89 6B 10              -  mov [r11+10],rbp
-"GameAssembly.dll"+15B8438: 49 89 73 18              -  mov [r11+18],rsi
-"GameAssembly.dll"+15B843C: 0F 29 74 24 40           -  movaps [rsp+40],xmm6
-"GameAssembly.dll"+15B8441: 48 8B D9                 -  mov rbx,rcx
-"GameAssembly.dll"+15B8444: 33 ED                    -  xor ebp,ebp
-"GameAssembly.dll"+15B8446: 40 38 2D 06 C5 E9 02     -  cmp [GameAssembly.dll+4454953],bpl
-"GameAssembly.dll"+15B844D: 75 49                    -  jne GameAssembly.dll+15B8498
-"GameAssembly.dll"+15B844F: 48 8B 05 EA D8 E8 02     -  mov rax,[GameAssembly.dll+4445D40]
-}
-
-{
-hook2 / cabin_fever_check_hook
-// ORIGINAL CODE - INJECTION POINT: "GameAssembly.dll"+15B99D0
-
-"GameAssembly.dll"+15B99C2: CC                       -  int 3
-"GameAssembly.dll"+15B99C3: E8 38 0A B1 FE           -  call GameAssembly.dll+CA400
-"GameAssembly.dll"+15B99C8: CC                       -  int 3
-"GameAssembly.dll"+15B99C9: CC                       -  int 3
-"GameAssembly.dll"+15B99CA: CC                       -  int 3
-"GameAssembly.dll"+15B99CB: CC                       -  int 3
-"GameAssembly.dll"+15B99CC: CC                       -  int 3
-"GameAssembly.dll"+15B99CD: CC                       -  int 3
-"GameAssembly.dll"+15B99CE: CC                       -  int 3
-"GameAssembly.dll"+15B99CF: CC                       -  int 3
-// ---------- INJECTING HERE ----------
-"GameAssembly.dll"+15B99D0: 4C 8B DC                 -  mov r11,rsp
-"GameAssembly.dll"+15B99D3: 57                       -  push rdi
-// ---------- DONE INJECTING  ----------
-"GameAssembly.dll"+15B99D4: 48 81 EC 80 00 00 00     -  sub rsp,00000080
-"GameAssembly.dll"+15B99DB: 49 C7 43 A8 FE FF FF FF  -  mov qword ptr [r11-58],FFFFFFFE
-"GameAssembly.dll"+15B99E3: 49 89 5B 08              -  mov [r11+08],rbx
-"GameAssembly.dll"+15B99E7: 0F 29 74 24 70           -  movaps [rsp+70],xmm6
-"GameAssembly.dll"+15B99EC: 0F 29 7C 24 60           -  movaps [rsp+60],xmm7
-"GameAssembly.dll"+15B99F1: 48 8B D9                 -  mov rbx,rcx
-"GameAssembly.dll"+15B99F4: 33 FF                    -  xor edi,edi
-"GameAssembly.dll"+15B99F6: 40 38 3D CF AE E9 02     -  cmp [GameAssembly.dll+44548CC],dil
-"GameAssembly.dll"+15B99FD: 75 49                    -  jne GameAssembly.dll+15B9A48
-"GameAssembly.dll"+15B99FF: 48 8B 05 3A C3 E8 02     -  mov rax,[GameAssembly.dll+4445D40]
-"GameAssembly.dll"+15B9A06: 48 63 90 B8 00 00 00     -  movsxd  rdx,dword ptr [rax+000000B8]
-}
-</AssemblerScript>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>9008</ID>
-              <Description>"Remove Frostbite"</Description>
-              <LastState/>
-              <Color>008000</Color>
-              <VariableType>Auto Assembler Script</VariableType>
-              <AssemblerScript>{ Game   : tld.exe
-  Version: 1.97 85101 S
-  Date   : 2021-11-01
-  Author : sub1to
-
-  public class Frostbite : MonoBehaviour // TypeDefIndex: 8463
-	// Fields
-	public LocalizedString m_LocalizedDisplayName; // 0x18
-	public LocalizedString m_LocalizedDescription; // 0x20
-	public float m_TemperatureToBeginFrostbiteDamage; // 0x28
-	public float m_DamagePerHourBase; // 0x2C
-	public float m_DamagePerHourIncreasePerDegree; // 0x30
-	public float m_MaxDamagePerHour; // 0x34
-	public float m_DamageMultiplierInnerFrozenClothing; // 0x38
-	public float m_PilgrimDamageMultiplier; // 0x3C
-	public float m_VoyageurDamageMultiplier; // 0x40
-	public float m_StalkerDamageMultiplier; // 0x44
-	public float m_InterloperDamageMultiplier; // 0x48
-	public float m_TemperatureToBeginFrostbiteHeal; // 0x4C
-	public float m_HealPerHourBase; // 0x50
-	public float m_HealPerHourIncreasePerDegree; // 0x54
-	public float m_MaxHealPerHour; // 0x58
-	public Frostbite.BodyAreaFrostbiteHP[] m_BodyAreaFrostbiteMaxHPList; // 0x60
-	public float m_HPPercentThresholdToStartRisk; // 0x68
-	public float m_MaxPlayerHPReductionPerInstance; // 0x6C
-	[HeaderAttribute] // RVA: 0x1764B0 Offset: 0x1758B0 VA: 0x7FFB0BB464B0
-	public string m_FrostbiteVO; // 0x70
-	private List&lt;int&gt; m_LocationsWithActiveFrostbite; // 0x78
-	private List&lt;int&gt; m_LocationsWithFrostbiteRisk; // 0x80
-	private List&lt;float&gt; m_LocationsCurrentFrostbiteDamage; // 0x88
-	private bool m_StartHasBeenCalled; // 0x90
-	private bool m_SuppressFrostbite; // 0x91
-	private float[] m_MaxHPList; // 0x98
-	private static FrostbiteSaveDataProxy m_FrostbiteSaveDataProxy; // 0x0
-}
-
-[ENABLE]
-alloc(newmem,$ff,GameAssembly.dll)
-label(returnhere)
-label(code)
-label(frostbite_update_hook)
-label(frostbite_update_bytes)
-registersymbol(frostbite_update_hook)
-registersymbol(frostbite_update_bytes)
-
-//  class: Frostbite
-//  RVA: 0x104CD20 Offset: 0x104BD20 VA: 0x7FFB0CA1CD20
-//	public void Update() { }
-aobScanModule(hook,GameAssembly.dll,40 53 48 83 ec ? 48 c7 44 24 ? ? ? ? ? 48 8b d9 80 3d ? ? ? ? ? 75 ? 48 8b 05 ? ? ? ? 48 63 90 ? ? ? ? 48 8b 05 ? ? ? ? 8b 8c 02 ? ? ? ? 45 33 c0 4c 89 44 24 ? 4c 89 44 24 ? 4c 89 44 24 ? 4c 8d 44 24 ? 8b 94 02 ? ? ? ? e8 ? ? ? ? 90 33 c9 ff 15 ? ? ? ? 90 c6 05 ? ? ? ? ? 48 8b 0d ? ? ? ? f6 81 ? ? ? ? ? 74 ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 48 8b 0d ? ? ? ? 48 8b 81 ? ? ? ? 80 78 ? ? 0f 85 ? ? ? ? f6 81 ? ? ? ? ? 74 ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 48 8b 0d)
-
-//  class: Frostbite
-//  RVA: 0x104D9D0 Offset: 0x104C9D0 VA: 0x7FFB0CA1D9D0
-//  public void FrostbiteEnd() { }
-aobScanModule(frostbite_end,GameAssembly.dll,4c 8b dc 57 48 83 ec ? 49 c7 43 ? ? ? ? ? 49 89 5b ? 49 89 73 ? 48 8b f9 33 f6 40 38 35 ? ? ? ? 75 ? 48 8b 05 ? ? ? ? 48 63 90 ? ? ? ? 48 8b 05 ? ? ? ? 8b 8c 02 ? ? ? ? 49 89 73 ? 49 89 73 ? 49 89 73 ? 4d 8d 43 ? 8b 94 02 ? ? ? ? e8 ? ? ? ? 90 33 c9 ff 15 ? ? ? ? 90 c6 05 ? ? ? ? ? 48 8b 5f ? 48 85 db 0f 84 ? ? ? ? 44 8b 43 ? 45 85 c0 7e ? 45 33 c9 33 d2 48 8b 4b ? e8 ? ? ? ? 89 73 ? ff 43 ? 48 8b 9f)
-
-newmem:
-frostbite_update_bytes:
-  //push rbx
-  //sub rsp,40
-  readMem(hook, 6)
-  jmp returnhere
-
-code:
-  lea rsp, [rsp-38]
-  mov [rsp+30], rcx
-  xor rdx, rdx
-  call frostbite_end
-  mov rcx, [rsp+30]
-  lea rsp, [rsp+38]
-  jmp frostbite_update_bytes
-
-hook:
-frostbite_update_hook:
-  jmp code
-  nop
-  returnhere:
-
-
-
-[DISABLE]
-frostbite_update_hook:
-  //40 53 48 83 EC 40
-  readMem(frostbite_update_bytes, 6)
-
-unregistersymbol(frostbite_update_hook)
-unregistersymbol(frostbite_update_bytes)
-dealloc(newmem)
-
-{
-// ORIGINAL CODE - INJECTION POINT: "GameAssembly.dll"+104CD20
-
-"GameAssembly.dll"+104CD0B: CC                          -  int 3
-"GameAssembly.dll"+104CD0C: E8 BF E3 02 FF              -  call GameAssembly.dll+7B0D0
-"GameAssembly.dll"+104CD11: 48 8B C8                    -  mov rcx,rax
-"GameAssembly.dll"+104CD14: 33 D2                       -  xor edx,edx
-"GameAssembly.dll"+104CD16: E8 D5 D6 07 FF              -  call GameAssembly.dll+CA3F0
-"GameAssembly.dll"+104CD1B: CC                          -  int 3
-"GameAssembly.dll"+104CD1C: CC                          -  int 3
-"GameAssembly.dll"+104CD1D: CC                          -  int 3
-"GameAssembly.dll"+104CD1E: CC                          -  int 3
-"GameAssembly.dll"+104CD1F: CC                          -  int 3
-// ---------- INJECTING HERE ----------
-"GameAssembly.dll"+104CD20: 40 53                       -  push rbx
-"GameAssembly.dll"+104CD22: 48 83 EC 40                 -  sub rsp,40
-// ---------- DONE INJECTING  ----------
-"GameAssembly.dll"+104CD26: 48 C7 44 24 20 FE FF FF FF  -  mov qword ptr [rsp+20],FFFFFFFE
-"GameAssembly.dll"+104CD2F: 48 8B D9                    -  mov rbx,rcx
-"GameAssembly.dll"+104CD32: 80 3D 1E 09 40 03 00        -  cmp byte ptr [GameAssembly.dll+444D657],00
-"GameAssembly.dll"+104CD39: 75 50                       -  jne GameAssembly.dll+104CD8B
-"GameAssembly.dll"+104CD3B: 48 8B 05 FE 8F 3F 03        -  mov rax,[GameAssembly.dll+4445D40]
-"GameAssembly.dll"+104CD42: 48 63 90 B8 00 00 00        -  movsxd  rdx,dword ptr [rax+000000B8]
-"GameAssembly.dll"+104CD49: 48 8B 05 C8 8F 3F 03        -  mov rax,[GameAssembly.dll+4445D18]
-"GameAssembly.dll"+104CD50: 8B 8C 02 D0 B1 03 00        -  mov ecx,[rdx+rax+0003B1D0]
-"GameAssembly.dll"+104CD57: 45 33 C0                    -  xor r8d,r8d
-"GameAssembly.dll"+104CD5A: 4C 89 44 24 28              -  mov [rsp+28],r8
-}
-</AssemblerScript>
-            </CheatEntry>
-            <CheatEntry>
-              <ID>8879</ID>
-              <Description>"Haven't done other afflictions yet.."</Description>
-              <LastState Value="" RealAddress="00000000"/>
-              <Color>0080FF</Color>
-              <GroupHeader>1</GroupHeader>
-            </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-        <CheatEntry>
           <ID>8827</ID>
           <Description>"No Rope Required To Deploy A Rope (Requires at least one stackable item in inventory)"</Description>
           <LastState/>
@@ -7224,7 +7336,6 @@ hook2 / rope_deploy_hook_finalize
         <CheatEntry>
           <ID>8940</ID>
           <Description>"tmp"</Description>
-          <LastState Value="32726F746365562E" RealAddress="7FF8104A0000"/>
           <ShowAsHex>1</ShowAsHex>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>8 Bytes</VariableType>
