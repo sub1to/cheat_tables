@@ -2335,7 +2335,7 @@ GameAssembly.dll+9EBC1C: F3 0F 10 3D 44 F8 88 03  - movss xmm7,[GameAssembly.dll
           <ID>8627</ID>
           <Description>"Light"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" RealAddress="00000000"/>
+          <LastState Value="" Activated="1" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -3731,7 +3731,7 @@ aobScanModule(hook,GameAssembly.dll,f3 0f 10 80 ? ? ? ? 41 0f 2e c1 7a ? 74)
 newmem:
 item_wet_bytes:
   //movss xmm0,[rax+74]
-  readMem(hook, 5)
+  readMem(hook, 8)
   jmp returnhere
 
 item_wet_base_ptr:
@@ -3758,6 +3758,7 @@ code:
 hook:
 item_wet_hook:
   jmp code
+  nop 3
   returnhere:
 
 
@@ -3765,7 +3766,7 @@ item_wet_hook:
 [DISABLE]
 item_wet_hook:
   //db F3 0F 10 40 74
-  readMem(item_wet_bytes, 5)
+  readMem(item_wet_bytes, 8)
 
 unregistersymbol(item_wet_hook)
 unregistersymbol(item_wet_bytes)
@@ -5476,7 +5477,7 @@ GEAR_WorkPants:GEAR_WorkPants
           <ID>8708</ID>
           <Description>"Fire"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" RealAddress="00000000"/>
+          <LastState Value="" Activated="1" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -5710,7 +5711,7 @@ fire_burn_temp_toggle:
           <ID>8891</ID>
           <Description>"Weather / Time"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" RealAddress="00000000"/>
+          <LastState Value="" Activated="1" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -6125,7 +6126,7 @@ GameAssembly.dll+DEB936: 75 13                 - jne GameAssembly.dll+DEB94B
           <ID>8975</ID>
           <Description>"Crafting"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" RealAddress="00000000"/>
+          <LastState Value="" Activated="1" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
