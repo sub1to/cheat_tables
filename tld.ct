@@ -71,7 +71,7 @@
           <ID>8710</ID>
           <Description>"Player"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" Activated="1" RealAddress="00000000"/>
+          <LastState Value="" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -2335,7 +2335,7 @@ GameAssembly.dll+9EBC1C: F3 0F 10 3D 44 F8 88 03  - movss xmm7,[GameAssembly.dll
           <ID>8627</ID>
           <Description>"Light"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" Activated="1" RealAddress="00000000"/>
+          <LastState Value="" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -3543,7 +3543,7 @@ aim_fatigue_bow_toggle:
           <ID>8707</ID>
           <Description>"Inventory"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" Activated="1" RealAddress="00000000"/>
+          <LastState Value="" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -5477,7 +5477,7 @@ GEAR_WorkPants:GEAR_WorkPants
           <ID>8708</ID>
           <Description>"Fire"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" Activated="1" RealAddress="00000000"/>
+          <LastState Value="" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -5711,7 +5711,7 @@ fire_burn_temp_toggle:
           <ID>8891</ID>
           <Description>"Weather / Time"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" Activated="1" RealAddress="00000000"/>
+          <LastState Value="" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -6126,7 +6126,7 @@ GameAssembly.dll+DEB936: 75 13                 - jne GameAssembly.dll+DEB94B
           <ID>8975</ID>
           <Description>"Crafting"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" Activated="1" RealAddress="00000000"/>
+          <LastState Value="" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
@@ -6232,6 +6232,232 @@ GameAssembly.dll+127D883: 74 3D                 - je GameAssembly.dll+127D8C2
 GameAssembly.dll+127D885: 33 D2                 - xor edx,edx
 }
 </AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>9092</ID>
+          <Description>"Misc"</Description>
+          <Options moHideChildren="1"/>
+          <LastState Value="" Activated="1" RealAddress="00000000"/>
+          <Color>C08000</Color>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>9087</ID>
+              <Description>"Misc Actions"</Description>
+              <LastState Activated="1"/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : tld.exe
+  Version: 2.22
+  Date   : 2023-09-03
+  Author : sub1to
+}
+
+[ENABLE]
+alloc(newmem,$ff,GameAssembly.dll)
+label(returnhere)
+label(code)
+label(code_save)
+label(code_feat_unlock)
+label(code_recipe_unlock)
+label(code_achievement_unlock)
+label(gamemanager_update_hook)
+label(gamemanager_update_bytes)
+label(game_update_save_toggle)
+label(game_update_feat_unlock_toggle)
+label(game_update_recipe_unlock_toggle)
+label(game_update_achievement_unlock_toggle)
+registersymbol(gamemanager_update_hook)
+registersymbol(gamemanager_update_bytes)
+registersymbol(game_update_save_toggle)
+registersymbol(game_update_feat_unlock_toggle)
+registersymbol(game_update_recipe_unlock_toggle)
+registersymbol(game_update_achievement_unlock_toggle)
+
+//  GameManager::Update()
+aobScanModule(hook,GameAssembly.dll,48 8b 05 ? ? ? ? 33 f6 48 89 74 24 ? 48 85 c0 75 ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 85 c0 0f 84 ? ? ? ? 48 89 05 ? ? ? ? ff d0 33 c9)
+
+define(hook_offset, 0F9)
+ASSERT(hook-hook_offset,48 89 74 24)
+
+// ConsoleManager::CONSOLE_save
+aobScanModule(CONSOLE_save,GameAssembly.dll,48 83 ec ? 80 3d ? ? ? ? ? 75 ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? c6 05 ? ? ? ? ? 48 8b 0d ? ? ? ? 48 c7 44 24 ? ? ? ? ? 83 b9 ? ? ? ? ? 75 ? e8 ? ? ? ? 33 c9 e8 ? ? ? ? 48 8b 0d ? ? ? ? 83 b9)
+
+// ConsoleManager::CONSOLE_feat_unlock_all
+aobScanModule(CONSOLE_feat_unlock_all,GameAssembly.dll,48 89 5c 24 ? 56 57 41 56 48 83 ec ? 0f 29 74 24 ? 80 3d)
+
+// ConsoleManager::CONSOLE_recipe_unlock_all
+aobScanModule(CONSOLE_recipe_unlock_all,GameAssembly.dll,40 53 48 83 ec ? 80 3d ? ? ? ? ? 75 ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? c6 05 ? ? ? ? ? 80 3d)
+
+// ConsoleManager::CONSOLE_achievement_unlock
+aobScanModule(CONSOLE_achievement_unlock,GameAssembly.dll,40 53 56 57 48 83 ec ? 80 3d ? ? ? ? ? 75 ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d)
+
+
+newmem:
+gamemanager_update_bytes:
+  readMem(hook-hook_offset, 5)
+  jmp returnhere
+
+game_update_save_toggle:
+  db 0
+
+game_update_feat_unlock_toggle:
+  db 0
+
+game_update_recipe_unlock_toggle:
+  db 0
+
+game_update_achievement_unlock_toggle:
+  db 0
+
+code:
+code_save:
+  cmp byte ptr [game_update_save_toggle], 0
+  jz code_feat_unlock
+  mov byte ptr [game_update_save_toggle], 0
+
+  // save game
+  lea rsp, [rsp-28]
+  mov [rsp+20], rcx
+  call CONSOLE_save
+  mov rcx, [rsp+20]
+  lea rsp, [rsp+28]
+
+code_feat_unlock:
+  cmp byte ptr [game_update_feat_unlock_toggle], 0
+  jz code_recipe_unlock
+  mov byte ptr [game_update_feat_unlock_toggle], 0
+
+  // unlock all feats
+  lea rsp, [rsp-28]
+  mov [rsp+20], rcx
+  call CONSOLE_feat_unlock_all
+  mov rcx, [rsp+20]
+  lea rsp, [rsp+28]
+
+code_recipe_unlock:
+  cmp byte ptr [game_update_recipe_unlock_toggle], 0
+  jz code_achievement_unlock
+  mov byte ptr [game_update_recipe_unlock_toggle], 0
+
+  // unlock all recipes
+  lea rsp, [rsp-28]
+  mov [rsp+20], rcx
+  call CONSOLE_recipe_unlock_all
+  mov rcx, [rsp+20]
+  lea rsp, [rsp+28]
+
+code_achievement_unlock:
+  cmp byte ptr [game_update_achievement_unlock_toggle], 0
+  jz gamemanager_update_bytes
+  mov byte ptr [game_update_achievement_unlock_toggle], 0
+
+  // unlock all achievements
+  lea rsp, [rsp-28]
+  mov [rsp+20], rcx
+  call CONSOLE_achievement_unlock
+  mov rcx, [rsp+20]
+  lea rsp, [rsp+28]
+
+  jmp gamemanager_update_bytes
+
+hook-hook_offset:
+gamemanager_update_hook:
+  jmp code
+  returnhere:
+
+[DISABLE]
+gamemanager_update_hook:
+  readMem(gamemanager_update_bytes, 5)
+
+unregistersymbol(gamemanager_update_hook)
+unregistersymbol(gamemanager_update_bytes)
+unregistersymbol(game_update_save_toggle)
+unregistersymbol(game_update_feat_unlock_toggle)
+unregistersymbol(game_update_recipe_unlock_toggle)
+unregistersymbol(game_update_achievement_unlock_toggle)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: gamemanager_update_hook
+
+GameAssembly.dll+B64662: E8 79 53 7A FF        - call GameAssembly.DllCanUnloadNow+8A0
+GameAssembly.dll+B64667: CC                    - int 3
+GameAssembly.dll+B64668: CC                    - int 3
+GameAssembly.dll+B64669: CC                    - int 3
+GameAssembly.dll+B6466A: CC                    - int 3
+GameAssembly.dll+B6466B: CC                    - int 3
+GameAssembly.dll+B6466C: CC                    - int 3
+GameAssembly.dll+B6466D: CC                    - int 3
+GameAssembly.dll+B6466E: CC                    - int 3
+GameAssembly.dll+B6466F: CC                    - int 3
+// ---------- INJECTING HERE ----------
+gamemanager_update_hook: 48 89 74 24 10        - mov [rsp+10],rsi
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+B64675: 57                    - push rdi
+GameAssembly.dll+B64676: 48 83 EC 50           - sub rsp,50
+GameAssembly.dll+B6467A: 80 3D C5 19 CE 03 00  - cmp byte ptr [GameAssembly.dll+4846046],00
+GameAssembly.dll+B64681: 48 8B F9              - mov rdi,rcx
+GameAssembly.dll+B64684: 0F 85 DF 00 00 00     - jne GameAssembly.dll+B64769
+GameAssembly.dll+B6468A: 48 8D 0D D7 55 B0 03  - lea rcx,[GameAssembly.dll+4669C68]
+GameAssembly.dll+B64691: E8 BA B7 80 FF        - call GameAssembly.dll+36FE50
+GameAssembly.dll+B64696: 48 8D 0D 1B 73 AC 03  - lea rcx,[GameAssembly.dll+462B9B8]
+GameAssembly.dll+B6469D: E8 AE B7 80 FF        - call GameAssembly.dll+36FE50
+GameAssembly.dll+B646A2: 48 8D 0D 37 3C A7 03  - lea rcx,[GameAssembly.dll+45D82E0]
+}
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>9088</ID>
+                  <Description>"Save Game"</Description>
+                  <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:Idle/Done
+1:Save Game
+</DropDownList>
+                  <LastState Value="0" RealAddress="7FFA6C53000A"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>800080</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>game_update_save_toggle</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>9089</ID>
+                  <Description>"Unlock All Feats"</Description>
+                  <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:Idle/Done
+1:Unlock
+</DropDownList>
+                  <LastState Value="0" RealAddress="7FFA6C53000B"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>800080</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>game_update_feat_unlock_toggle</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>9091</ID>
+                  <Description>"Unlock All Recipes"</Description>
+                  <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:Idle/Done
+1:Unlock
+</DropDownList>
+                  <LastState Value="0" RealAddress="7FFA6C53000C"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>800080</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>game_update_recipe_unlock_toggle</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>9090</ID>
+                  <Description>"Unlock All Achievements"</Description>
+                  <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:Idle/Done
+1:Unlock
+</DropDownList>
+                  <LastState Value="0" RealAddress="7FFA6C53000D"/>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>800080</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>game_update_achievement_unlock_toggle</Address>
+                </CheatEntry>
+              </CheatEntries>
             </CheatEntry>
           </CheatEntries>
         </CheatEntry>
