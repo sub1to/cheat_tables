@@ -6239,14 +6239,14 @@ GameAssembly.dll+127D885: 33 D2                 - xor edx,edx
           <ID>9092</ID>
           <Description>"Misc"</Description>
           <Options moHideChildren="1"/>
-          <LastState Value="" Activated="1" RealAddress="00000000"/>
+          <LastState Value="" RealAddress="00000000"/>
           <Color>C08000</Color>
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
               <ID>9087</ID>
               <Description>"Misc Actions"</Description>
-              <LastState Activated="1"/>
+              <LastState/>
               <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : tld.exe
@@ -6415,7 +6415,6 @@ GameAssembly.dll+B646A2: 48 8D 0D 37 3C A7 03  - lea rcx,[GameAssembly.dll+45D82
                   <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:Idle/Done
 1:Save Game
 </DropDownList>
-                  <LastState Value="0" RealAddress="7FFA6C53000A"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>800080</Color>
                   <VariableType>Byte</VariableType>
@@ -6427,7 +6426,6 @@ GameAssembly.dll+B646A2: 48 8D 0D 37 3C A7 03  - lea rcx,[GameAssembly.dll+45D82
                   <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:Idle/Done
 1:Unlock
 </DropDownList>
-                  <LastState Value="0" RealAddress="7FFA6C53000B"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>800080</Color>
                   <VariableType>Byte</VariableType>
@@ -6439,7 +6437,6 @@ GameAssembly.dll+B646A2: 48 8D 0D 37 3C A7 03  - lea rcx,[GameAssembly.dll+45D82
                   <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:Idle/Done
 1:Unlock
 </DropDownList>
-                  <LastState Value="0" RealAddress="7FFA6C53000C"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>800080</Color>
                   <VariableType>Byte</VariableType>
@@ -6451,13 +6448,186 @@ GameAssembly.dll+B646A2: 48 8D 0D 37 3C A7 03  - lea rcx,[GameAssembly.dll+45D82
                   <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:Idle/Done
 1:Unlock
 </DropDownList>
-                  <LastState Value="0" RealAddress="7FFA6C53000D"/>
                   <ShowAsSigned>0</ShowAsSigned>
                   <Color>800080</Color>
                   <VariableType>Byte</VariableType>
                   <Address>game_update_achievement_unlock_toggle</Address>
                 </CheatEntry>
               </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>9093</ID>
+              <Description>"Instant Body Harvest"</Description>
+              <LastState/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : tld.exe
+  Version: 2.22
+  Date   : 2023-09-25
+  Author : sub1to
+
+  Panel_BodyHarvest::UpdateHarvest
+
+	private float m_ElapsedProgressBarSeconds; // 0x188
+	private float m_ProgressBarTimeSeconds; // 0x18C
+	private float m_DayLengthScaleBeforeHarvest; // 0x190
+	private float m_MeatHarvestAmountBefore; // 0x194
+	private int m_HideHarvestAmountBefore; // 0x198
+	private int m_GutHarvestAmountBefore; // 0x19C
+}
+
+[ENABLE]
+alloc(newmem,$100,GameAssembly.dll)
+label(returnhere)
+label(code)
+label(bodyharvest_hook)
+label(bodyharvest_bytes)
+label(bodyharvest_base_ptr)
+registersymbol(bodyharvest_hook)
+registersymbol(bodyharvest_bytes)
+registersymbol(bodyharvest_base_ptr)
+aobscanmodule(hook,GameAssembly.dll,33 d2 48 8b cb e8 ? ? ? ? 33 d2 48 8b cb e8 ? ? ? ? 33 d2 48 8b cb e8 ? ? ? ? 33 d2 48 8b cb 48 8b 7c 24)
+
+newmem:
+bodyharvest_bytes:
+  readMem(hook, 5)
+  jmp returnhere
+
+bodyharvest_base_ptr:
+  dq 0
+
+code:
+  mov [bodyharvest_base_ptr], rbx
+  mov ecx, [rbx+18C]
+  mov [rbx+188], ecx
+  jmp bodyharvest_bytes
+
+hook:
+bodyharvest_hook:
+  jmp code
+  returnhere:
+
+[DISABLE]
+bodyharvest_hook:
+  readMem(bodyharvest_bytes, 5)
+
+unregistersymbol(bodyharvest_hook)
+unregistersymbol(bodyharvest_bytes)
+unregistersymbol(bodyharvest_base_ptr)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+8F2E4F
+
+GameAssembly.dll+8F2E2C: E8 BF 13 00 00  - call GameAssembly.dll+8F41F0
+GameAssembly.dll+8F2E31: 33 D2           - xor edx,edx
+GameAssembly.dll+8F2E33: 48 8B CB        - mov rcx,rbx
+GameAssembly.dll+8F2E36: E8 95 E9 FF FF  - call GameAssembly.dll+8F17D0
+GameAssembly.dll+8F2E3B: 33 D2           - xor edx,edx
+GameAssembly.dll+8F2E3D: 48 8B CB        - mov rcx,rbx
+GameAssembly.dll+8F2E40: E8 8B EE FF FF  - call GameAssembly.dll+8F1CD0
+GameAssembly.dll+8F2E45: 33 D2           - xor edx,edx
+GameAssembly.dll+8F2E47: 48 8B CB        - mov rcx,rbx
+GameAssembly.dll+8F2E4A: E8 61 F0 FF FF  - call GameAssembly.dll+8F1EB0
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+8F2E4F: 33 D2           - xor edx,edx
+GameAssembly.dll+8F2E51: 48 8B CB        - mov rcx,rbx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+8F2E54: E8 37 03 00 00  - call GameAssembly.dll+8F3190	// call Panel_BodyHarvest::UpdateHarvest
+GameAssembly.dll+8F2E59: 33 D2           - xor edx,edx
+GameAssembly.dll+8F2E5B: 48 8B CB        - mov rcx,rbx
+GameAssembly.dll+8F2E5E: E8 3D 06 00 00  - call GameAssembly.dll+8F34A0
+GameAssembly.dll+8F2E63: 33 D2           - xor edx,edx
+GameAssembly.dll+8F2E65: 48 8B CB        - mov rcx,rbx
+GameAssembly.dll+8F2E68: E8 73 17 00 00  - call GameAssembly.dll+8F45E0
+GameAssembly.dll+8F2E6D: 33 D2           - xor edx,edx
+GameAssembly.dll+8F2E6F: 48 8B CB        - mov rcx,rbx
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>9097</ID>
+              <Description>"Instant Breakdown"</Description>
+              <LastState/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : tld.exe
+  Version: 2.22
+  Date   : 2023-09-25
+  Author : sub1to
+
+  Panel_BreakDown::Update
+
+  private float m_TimeSpentBreakingDown; // 0x10C
+}
+
+[ENABLE]
+alloc(newmem,$100,GameAssembly.dll)
+label(returnhere)
+label(code)
+label(breakdown_hook)
+label(breakdown_bytes)
+label(breakdown_base_ptr)
+registersymbol(breakdown_hook)
+registersymbol(breakdown_bytes)
+registersymbol(breakdown_base_ptr)
+aobscanmodule(hook,GameAssembly.dll,48 8b 13 33 f6 48 89 74 24 ? 48 8b cb 48 8b 82 ? ? ? ? 48 8b 92 ? ? ? ? ff d0 84 c0 0f 84 ? ? ? ? 48 8b 0d)
+
+newmem:
+breakdown_bytes:
+  readMem(hook, 5)
+  jmp returnhere
+
+breakdown_base_ptr:
+  dq 0
+
+code:
+  mov [breakdown_base_ptr], rbx
+  mov [rbx+10C], (float)99999
+  jmp breakdown_bytes
+
+hook:
+breakdown_hook:
+  jmp code
+  returnhere:
+
+[DISABLE]
+breakdown_hook:
+  readMem(breakdown_bytes, 5)
+
+unregistersymbol(breakdown_hook)
+unregistersymbol(breakdown_bytes)
+unregistersymbol(breakdown_base_ptr)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+8F7E6D
+
+GameAssembly.dll+8F7E31: E8 1A 80 A7 FF        - call GameAssembly.dll+36FE50
+GameAssembly.dll+8F7E36: 48 8D 0D 03 34 D3 03  - lea rcx,[GameAssembly.dll+462B240]
+GameAssembly.dll+8F7E3D: E8 0E 80 A7 FF        - call GameAssembly.dll+36FE50
+GameAssembly.dll+8F7E42: 48 8D 0D B7 E7 D6 03  - lea rcx,[GameAssembly.dll+4666600]
+GameAssembly.dll+8F7E49: E8 02 80 A7 FF        - call GameAssembly.dll+36FE50
+GameAssembly.dll+8F7E4E: 48 8D 0D C3 02 D6 03  - lea rcx,[GameAssembly.dll+4658118]
+GameAssembly.dll+8F7E55: E8 F6 7F A7 FF        - call GameAssembly.dll+36FE50
+GameAssembly.dll+8F7E5A: 48 8D 0D 17 D7 D1 03  - lea rcx,[GameAssembly.dll+4615578]
+GameAssembly.dll+8F7E61: E8 EA 7F A7 FF        - call GameAssembly.dll+36FE50
+GameAssembly.dll+8F7E66: C6 05 BB D3 F4 03 01  - mov byte ptr [GameAssembly.dll+4845228],01
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+8F7E6D: 48 8B 13              - mov rdx,[rbx]
+GameAssembly.dll+8F7E70: 33 F6                 - xor esi,esi
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+8F7E72: 48 89 74 24 60        - mov [rsp+60],rsi
+GameAssembly.dll+8F7E77: 48 8B CB              - mov rcx,rbx
+GameAssembly.dll+8F7E7A: 48 8B 82 88 01 00 00  - mov rax,[rdx+00000188]
+GameAssembly.dll+8F7E81: 48 8B 92 90 01 00 00  - mov rdx,[rdx+00000190]
+GameAssembly.dll+8F7E88: FF D0                 - call rax
+GameAssembly.dll+8F7E8A: 84 C0                 - test al,al
+GameAssembly.dll+8F7E8C: 0F 84 D1 07 00 00     - je GameAssembly.dll+8F8663
+GameAssembly.dll+8F7E92: 48 8B 0D F7 FC D5 03  - mov rcx,[GameAssembly.dll+4657B90]
+GameAssembly.dll+8F7E99: 39 B1 E0 00 00 00     - cmp [rcx+000000E0],esi
+}
+</AssemblerScript>
             </CheatEntry>
           </CheatEntries>
         </CheatEntry>
@@ -7556,13 +7726,14 @@ hook2 / rope_deploy_hook_finalize
       <ID>8959</ID>
       <Description>"Dev"</Description>
       <Options moHideChildren="1"/>
-      <LastState Value="" RealAddress="00000000"/>
+      <LastState Value="" Activated="1" RealAddress="00000000"/>
       <Color>0080FF</Color>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>8940</ID>
           <Description>"tmp"</Description>
+          <LastState Value="0000000000000000" RealAddress="7FFA71400000"/>
           <ShowAsHex>1</ShowAsHex>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>8 Bytes</VariableType>
@@ -7574,7 +7745,7 @@ hook2 / rope_deploy_hook_finalize
   <UserdefinedSymbols>
     <SymbolEntry>
       <Name>tmp</Name>
-      <Address>7FF8104A0000</Address>
+      <Address>7FFA71400000</Address>
     </SymbolEntry>
     <SymbolEntry>
       <Name>day_length_ptr</Name>
