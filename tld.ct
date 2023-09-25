@@ -6123,8 +6123,8 @@ GameAssembly.dll+DEB936: 75 13                 - jne GameAssembly.dll+DEB94B
           </CheatEntries>
         </CheatEntry>
         <CheatEntry>
-          <ID>8975</ID>
-          <Description>"Crafting"</Description>
+          <ID>9092</ID>
+          <Description>"Misc"</Description>
           <Options moHideChildren="1"/>
           <LastState Value="" RealAddress="00000000"/>
           <Color>C08000</Color>
@@ -6233,16 +6233,6 @@ GameAssembly.dll+127D885: 33 D2                 - xor edx,edx
 }
 </AssemblerScript>
             </CheatEntry>
-          </CheatEntries>
-        </CheatEntry>
-        <CheatEntry>
-          <ID>9092</ID>
-          <Description>"Misc"</Description>
-          <Options moHideChildren="1"/>
-          <LastState Value="" RealAddress="00000000"/>
-          <Color>C08000</Color>
-          <GroupHeader>1</GroupHeader>
-          <CheatEntries>
             <CheatEntry>
               <ID>9087</ID>
               <Description>"Misc Actions"</Description>
@@ -6256,25 +6246,28 @@ GameAssembly.dll+127D885: 33 D2                 - xor edx,edx
 }
 
 [ENABLE]
-alloc(newmem,$ff,GameAssembly.dll)
+alloc(newmem,$1000,GameAssembly.dll)
 label(returnhere)
 label(code)
 label(code_save)
 label(code_feat_unlock)
 label(code_recipe_unlock)
 label(code_achievement_unlock)
+label(code_fly)
 label(gamemanager_update_hook)
 label(gamemanager_update_bytes)
 label(game_update_save_toggle)
 label(game_update_feat_unlock_toggle)
 label(game_update_recipe_unlock_toggle)
 label(game_update_achievement_unlock_toggle)
+label(game_update_fly_toggle)
 registersymbol(gamemanager_update_hook)
 registersymbol(gamemanager_update_bytes)
 registersymbol(game_update_save_toggle)
 registersymbol(game_update_feat_unlock_toggle)
 registersymbol(game_update_recipe_unlock_toggle)
 registersymbol(game_update_achievement_unlock_toggle)
+registersymbol(game_update_fly_toggle)
 
 //  GameManager::Update()
 aobScanModule(hook,GameAssembly.dll,48 8b 05 ? ? ? ? 33 f6 48 89 74 24 ? 48 85 c0 75 ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 85 c0 0f 84 ? ? ? ? 48 89 05 ? ? ? ? ff d0 33 c9)
@@ -6294,6 +6287,9 @@ aobScanModule(CONSOLE_recipe_unlock_all,GameAssembly.dll,40 53 48 83 ec ? 80 3d 
 // ConsoleManager::CONSOLE_achievement_unlock
 aobScanModule(CONSOLE_achievement_unlock,GameAssembly.dll,40 53 56 57 48 83 ec ? 80 3d ? ? ? ? ? 75 ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d)
 
+//ConsoleManager::CONSOLE_fly
+aobScanModule(CONSOLE_fly,GameAssembly.dll,48 83 ec ? 80 3d ? ? ? ? ? 75 ? 48 8d 0d ? ? ? ? e8 ? ? ? ? 48 8d 0d ? ? ? ? e8 ? ? ? ? c6 05 ? ? ? ? ? 48 8b 05 ? ? ? ? 48 8b 88 ? ? ? ? 80 39)
+
 
 newmem:
 gamemanager_update_bytes:
@@ -6310,6 +6306,9 @@ game_update_recipe_unlock_toggle:
   db 0
 
 game_update_achievement_unlock_toggle:
+  db 0
+
+game_update_fly_toggle:
   db 0
 
 code:
@@ -6351,13 +6350,25 @@ code_recipe_unlock:
 
 code_achievement_unlock:
   cmp byte ptr [game_update_achievement_unlock_toggle], 0
-  jz gamemanager_update_bytes
+  jz code_fly
   mov byte ptr [game_update_achievement_unlock_toggle], 0
 
   // unlock all achievements
   lea rsp, [rsp-28]
   mov [rsp+20], rcx
   call CONSOLE_achievement_unlock
+  mov rcx, [rsp+20]
+  lea rsp, [rsp+28]
+
+code_fly:
+  cmp byte ptr [game_update_fly_toggle], 0
+  jz gamemanager_update_bytes
+  mov byte ptr [game_update_fly_toggle], 0
+
+  // fly
+  lea rsp, [rsp-28]
+  mov [rsp+20], rcx
+  call CONSOLE_fly
   mov rcx, [rsp+20]
   lea rsp, [rsp+28]
 
@@ -6378,6 +6389,7 @@ unregistersymbol(game_update_save_toggle)
 unregistersymbol(game_update_feat_unlock_toggle)
 unregistersymbol(game_update_recipe_unlock_toggle)
 unregistersymbol(game_update_achievement_unlock_toggle)
+unregistersymbol(game_update_fly_toggle)
 dealloc(newmem)
 
 {
@@ -6452,6 +6464,17 @@ GameAssembly.dll+B646A2: 48 8D 0D 37 3C A7 03  - lea rcx,[GameAssembly.dll+45D82
                   <Color>800080</Color>
                   <VariableType>Byte</VariableType>
                   <Address>game_update_achievement_unlock_toggle</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>9103</ID>
+                  <Description>"Fly Mode"</Description>
+                  <DropDownList ReadOnly="1" DisplayValueAsItem="1">0:Idle/Done
+1:Unlock
+</DropDownList>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>800080</Color>
+                  <VariableType>Byte</VariableType>
+                  <Address>game_update_fly_toggle</Address>
                 </CheatEntry>
               </CheatEntries>
             </CheatEntry>
@@ -6626,6 +6649,96 @@ GameAssembly.dll+8F7E8A: 84 C0                 - test al,al
 GameAssembly.dll+8F7E8C: 0F 84 D1 07 00 00     - je GameAssembly.dll+8F8663
 GameAssembly.dll+8F7E92: 48 8B 0D F7 FC D5 03  - mov rcx,[GameAssembly.dll+4657B90]
 GameAssembly.dll+8F7E99: 39 B1 E0 00 00 00     - cmp [rcx+000000E0],esi
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>9102</ID>
+              <Description>"Skip Hold Interactions"</Description>
+              <LastState/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : tld.exe
+  Version: 2.22
+  Date   : 2023-09-25
+  Author : sub1to
+
+  class HarvestableInteraction : TimedHoldInteraction
+
+  private float &lt;HoldTime&gt;k__BackingField; // 0x54
+  private float m_Timer; // 0x58
+}
+
+[ENABLE]
+alloc(newmem,$100,GameAssembly.dll)
+label(returnhere)
+label(code)
+label(time_hold_interaction__hook)
+label(time_hold_interaction__bytes)
+label(time_hold_interaction__base_ptr)
+registersymbol(time_hold_interaction__hook)
+registersymbol(time_hold_interaction__bytes)
+registersymbol(time_hold_interaction__base_ptr)
+
+// TimeHoldInteraction::UpdateHoldInteraction
+aobscanmodule(hook,GameAssembly.dll,40 53 48 83 ec ? f3 0f 10 41 ? 48 8b d9 0f 2f 41)
+
+newmem:
+time_hold_interaction__bytes:
+  readMem(hook, 6)
+  jmp returnhere
+
+time_hold_interaction__base_ptr:
+  dq 0
+
+code:
+  mov [time_hold_interaction__base_ptr], rcx
+  //*(float *)(a1 + 0x58) &gt;= *(float *)(a1 + 0x54)
+  mov eax, [rcx+58]
+  mov [rcx+54], eax
+  jmp time_hold_interaction__bytes
+
+hook:
+time_hold_interaction__hook:
+  jmp code
+  nop
+  returnhere:
+
+[DISABLE]
+time_hold_interaction__hook:
+  readMem(time_hold_interaction__bytes, 6)
+
+unregistersymbol(time_hold_interaction__hook)
+unregistersymbol(time_hold_interaction__bytes)
+unregistersymbol(time_hold_interaction__base_ptr)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+11CC9C0
+
+GameAssembly.dll+11CC9A3: 48 89 7C 24 20        - mov [rsp+20],rdi
+GameAssembly.dll+11CC9A8: E8 03 C7 7C FF        - call GameAssembly.dll+9990B0
+GameAssembly.dll+11CC9AD: 48 8B 5C 24 48        - mov rbx,[rsp+48]
+GameAssembly.dll+11CC9B2: 48 83 C4 30           - add rsp,30
+GameAssembly.dll+11CC9B6: 5F                    - pop rdi
+GameAssembly.dll+11CC9B7: C3                    - ret
+GameAssembly.dll+11CC9B8: E8 73 C3 11 FF        - call GameAssembly.il2cpp_value_box+50
+GameAssembly.dll+11CC9BD: CC                    - int 3
+GameAssembly.dll+11CC9BE: CC                    - int 3
+GameAssembly.dll+11CC9BF: CC                    - int 3
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+11CC9C0: 40 53                 - push rbx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+11CC9C2: 48 83 EC 30           - sub rsp,30
+GameAssembly.dll+11CC9C6: F3 0F 10 41 58        - movss xmm0,[rcx+58]
+GameAssembly.dll+11CC9CB: 48 8B D9              - mov rbx,rcx
+GameAssembly.dll+11CC9CE: 0F 2F 41 54           - comiss xmm0,[rcx+54]
+GameAssembly.dll+11CC9D2: 0F 29 74 24 20        - movaps [rsp+20],xmm6
+GameAssembly.dll+11CC9D7: 0F 28 F1              - movaps xmm6,xmm1
+GameAssembly.dll+11CC9DA: 72 23                 - jb GameAssembly.dll+11CC9FF
+GameAssembly.dll+11CC9DC: 48 8B 01              - mov rax,[rcx]
+GameAssembly.dll+11CC9DF: 48 8B 90 50 02 00 00  - mov rdx,[rax+00000250]
+GameAssembly.dll+11CC9E6: FF 90 48 02 00 00     - call qword ptr [rax+00000248]
 }
 </AssemblerScript>
             </CheatEntry>
@@ -7726,14 +7839,13 @@ hook2 / rope_deploy_hook_finalize
       <ID>8959</ID>
       <Description>"Dev"</Description>
       <Options moHideChildren="1"/>
-      <LastState Value="" Activated="1" RealAddress="00000000"/>
+      <LastState Value="" RealAddress="00000000"/>
       <Color>0080FF</Color>
       <GroupHeader>1</GroupHeader>
       <CheatEntries>
         <CheatEntry>
           <ID>8940</ID>
           <Description>"tmp"</Description>
-          <LastState Value="0000000000000000" RealAddress="7FFA71400000"/>
           <ShowAsHex>1</ShowAsHex>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>8 Bytes</VariableType>
@@ -7745,7 +7857,7 @@ hook2 / rope_deploy_hook_finalize
   <UserdefinedSymbols>
     <SymbolEntry>
       <Name>tmp</Name>
-      <Address>7FFA71400000</Address>
+      <Address>7FFA71470000</Address>
     </SymbolEntry>
     <SymbolEntry>
       <Name>day_length_ptr</Name>
