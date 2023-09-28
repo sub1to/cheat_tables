@@ -1099,6 +1099,7 @@ backpack_weight_toggle:
                     <CheatEntry>
                       <ID>8649</ID>
                       <Description>"Weight Value"</Description>
+                      <LastState Value="248751.7344" RealAddress="7FFA71990014"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>backpack_weight_value</Address>
@@ -1123,6 +1124,7 @@ backpack_scent_toggle:
                     <CheatEntry>
                       <ID>8639</ID>
                       <Description>"Scent Value"</Description>
+                      <LastState Value="2.283166276E-38" RealAddress="7FFA71990018"/>
                       <Color>800080</Color>
                       <VariableType>Float</VariableType>
                       <Address>backpack_scent_value</Address>
@@ -6971,6 +6973,93 @@ GameAssembly.dll+53CC88: 0F 28 D8                 - movaps xmm3,xmm0
 }
 </AssemblerScript>
             </CheatEntry>
+            <CheatEntry>
+              <ID>9110</ID>
+              <Description>"Instant Inventory Examine Actions"</Description>
+              <LastState/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : tld.exe
+  Version: 2.23 120705 S
+  Date   : 2023-09-28
+  Author : sub1to
+
+	private float m_ElapsedProgressBarSeconds; // 0x4E4
+	private float m_ProgressBarTimeSeconds; // 0x4E8
+}
+
+[ENABLE]
+alloc(newmem,$100,GameAssembly.dll)
+label(returnhere)
+label(code)
+label(inventory_examine_hook)
+label(inventory_examine_bytes)
+label(inventory_examine_base_ptr)
+registersymbol(inventory_examine_hook)
+registersymbol(inventory_examine_bytes)
+registersymbol(inventory_examine_base_ptr)
+
+//Panel_Inventory_Examine::UpdateActionProgressBar
+aobscanmodule(hook,GameAssembly.dll,80 bb ? ? ? ? ? 48 c7 44 24 ? ? ? ? ? 75 ? 80 bb)
+
+newmem:
+inventory_examine_bytes:
+  readMem(hook, 7)
+  jmp returnhere
+
+inventory_examine_base_ptr:
+  dq 0
+
+code:
+  mov [inventory_examine_base_ptr], rbx
+  mov ecx, [rbx+4e8]
+  mov [rbx+4e4], ecx
+  jmp inventory_examine_bytes
+
+hook:
+inventory_examine_hook:
+  jmp code
+  nop 2
+  returnhere:
+
+[DISABLE]
+inventory_examine_hook:
+  readMem(inventory_examine_bytes, 7)
+
+unregistersymbol(inventory_examine_hook)
+unregistersymbol(inventory_examine_bytes)
+unregistersymbol(inventory_examine_base_ptr)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+998BB9
+
+GameAssembly.dll+998B7D: E8 0E D5 9B FF              - call GameAssembly.dll+356090
+GameAssembly.dll+998B82: 48 8D 0D C7 86 7B 03        - lea rcx,[GameAssembly.dll+4151250]
+GameAssembly.dll+998B89: E8 02 D5 9B FF              - call GameAssembly.dll+356090
+GameAssembly.dll+998B8E: 48 8D 0D E3 62 7A 03        - lea rcx,[GameAssembly.dll+413EE78]
+GameAssembly.dll+998B95: E8 F6 D4 9B FF              - call GameAssembly.dll+356090
+GameAssembly.dll+998B9A: 48 8D 0D 0F 40 77 03        - lea rcx,[GameAssembly.dll+410CBB0]
+GameAssembly.dll+998BA1: E8 EA D4 9B FF              - call GameAssembly.dll+356090
+GameAssembly.dll+998BA6: 48 8D 0D BB 3F 77 03        - lea rcx,[GameAssembly.dll+410CB68]
+GameAssembly.dll+998BAD: E8 DE D4 9B FF              - call GameAssembly.dll+356090
+GameAssembly.dll+998BB2: C6 05 BB C1 96 03 01        - mov byte ptr [GameAssembly.dll+4304D74],01
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+998BB9: 80 BB F9 04 00 00 00        - cmp byte ptr [rbx+000004F9],00
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+998BC0: 48 C7 44 24 60 00 00 00 00  - mov qword ptr [rsp+60],00000000
+GameAssembly.dll+998BC9: 75 28                       - jne GameAssembly.dll+998BF3
+GameAssembly.dll+998BCB: 80 BB FC 04 00 00 00        - cmp byte ptr [rbx+000004FC],00
+GameAssembly.dll+998BD2: 75 1F                       - jne GameAssembly.dll+998BF3
+GameAssembly.dll+998BD4: 80 BB F1 04 00 00 00        - cmp byte ptr [rbx+000004F1],00
+GameAssembly.dll+998BDB: 75 16                       - jne GameAssembly.dll+998BF3
+GameAssembly.dll+998BDD: 80 BB D9 04 00 00 00        - cmp byte ptr [rbx+000004D9],00
+GameAssembly.dll+998BE4: 75 0D                       - jne GameAssembly.dll+998BF3
+GameAssembly.dll+998BE6: 80 BB F2 04 00 00 00        - cmp byte ptr [rbx+000004F2],00
+GameAssembly.dll+998BED: 0F 84 DE 02 00 00           - je GameAssembly.dll+998ED1
+}
+</AssemblerScript>
+            </CheatEntry>
           </CheatEntries>
         </CheatEntry>
       </CheatEntries>
@@ -8075,6 +8164,7 @@ hook2 / rope_deploy_hook_finalize
         <CheatEntry>
           <ID>8940</ID>
           <Description>"tmp"</Description>
+          <LastState Value="8B48C08B4CC93345" RealAddress="7FFA719F0000"/>
           <ShowAsHex>1</ShowAsHex>
           <ShowAsSigned>0</ShowAsSigned>
           <VariableType>8 Bytes</VariableType>
