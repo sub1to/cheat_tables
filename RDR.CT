@@ -524,6 +524,74 @@ RDR.exe+2FF4CD: 0F 84 84 00 00 00     - je RDR.exe+2FF557
 }
 </AssemblerScript>
         </CheatEntry>
+        <CheatEntry>
+          <ID>514</ID>
+          <Description>"Custom Timescale"</Description>
+          <Color>008000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : RDR.exe
+  Version: 
+  Date   : 2024-11-12
+  Author : sub1to
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(_WRITE_TIMESCALE,RDR.exe,C7 05 CB FF 10 02 00 00 80 3F) // should be unique
+registersymbol(_WRITE_TIMESCALE)
+
+_WRITE_TIMESCALE:
+  db 90 90 90 90 90 90 90 90 90 90
+
+[DISABLE]
+
+_WRITE_TIMESCALE:
+  db C7 05 CB FF 10 02 00 00 80 3F
+
+unregistersymbol(_WRITE_TIMESCALE)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: RDR.exe+1F5D7F
+
+RDR.exe+1F5D56: 0F B7 C0                       - movzx eax,ax
+RDR.exe+1F5D59: 48 03 C0                       - add rax,rax
+RDR.exe+1F5D5C: 49 8B 04 C0                    - mov rax,[r8+rax*8]
+RDR.exe+1F5D60: 48 8B 88 B0 00 00 00           - mov rcx,[rax+000000B0]
+RDR.exe+1F5D67: 48 8B 51 18                    - mov rdx,[rcx+18]
+RDR.exe+1F5D6B: 48 8B 0D AE 02 8C 02           - mov rcx,[RDR.exe+2AB6020]
+RDR.exe+1F5D72: 48 83 C2 30                    - add rdx,30
+RDR.exe+1F5D76: E8 35 E6 3B 00                 - call RDR.exe+5B43B0
+RDR.exe+1F5D7B: 84 C0                          - test al,al
+RDR.exe+1F5D7D: 74 0C                          - je RDR.exe+1F5D8B
+// ---------- INJECTING HERE ----------
+RDR.exe+1F5D7F: C7 05 CB FF 10 02 00 00 80 3F  - mov [RDR.exe+2305D54],3F800000
+// ---------- DONE INJECTING  ----------
+RDR.exe+1F5D89: EB 10                          - jmp RDR.exe+1F5D9B
+RDR.exe+1F5D8B: F3 0F 10 05 75 C6 B6 01        - movss xmm0,[RDR.exe+1D62408]
+RDR.exe+1F5D93: F3 0F 11 05 B9 FF 10 02        - movss [RDR.exe+2305D54],xmm0
+RDR.exe+1F5D9B: 48 8B 0D 2E 09 A4 02           - mov rcx,[RDR.exe+2C366D0]
+RDR.exe+1F5DA2: 48 63 41 48                    - movsxd  rax,dword ptr [rcx+48]
+RDR.exe+1F5DA6: 48 8B 54 C1 08                 - mov rdx,[rcx+rax*8+08]
+RDR.exe+1F5DAB: 48 8B 0D 16 D3 8C 02           - mov rcx,[RDR.exe+2AC30C8]
+RDR.exe+1F5DB2: F3 0F 10 82 00 02 00 00        - movss xmm0,[rdx+00000200]
+RDR.exe+1F5DBA: 48 8B 49 08                    - mov rcx,[rcx+08]
+RDR.exe+1F5DBE: F3 0F 11 45 00                 - movss [rbp+00],xmm0
+}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>510</ID>
+              <Description>"m_TimeScale"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <Color>008000</Color>
+              <VariableType>Float</VariableType>
+              <Address>rdr.exe+2305d50+4</Address>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
       </CheatEntries>
     </CheatEntry>
     <CheatEntry>
@@ -926,6 +994,9 @@ RDR.exe+656413: C3                       - ret
             <CheatEntry>
               <ID>484</ID>
               <Description>"Invulnerability"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Off
+1:On
+</DropDownList>
               <ShowAsSigned>0</ShowAsSigned>
               <Color>008000</Color>
               <VariableType>Byte</VariableType>
@@ -948,6 +1019,9 @@ RDR.exe+656413: C3                       - ret
             <CheatEntry>
               <ID>486</ID>
               <Description>"Infinite Deadeye"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Off
+1:On
+</DropDownList>
               <ShowAsSigned>0</ShowAsSigned>
               <Color>008000</Color>
               <VariableType>Byte</VariableType>
@@ -959,6 +1033,9 @@ RDR.exe+656413: C3                       - ret
             <CheatEntry>
               <ID>493</ID>
               <Description>"Deadeye Disabled"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Not Disabled
+1:Disabled
+</DropDownList>
               <ShowAsSigned>0</ShowAsSigned>
               <Color>008000</Color>
               <VariableType>Binary</VariableType>
@@ -973,6 +1050,9 @@ RDR.exe+656413: C3                       - ret
             <CheatEntry>
               <ID>496</ID>
               <Description>"Multilock Enabled"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
               <ShowAsSigned>0</ShowAsSigned>
               <Color>008000</Color>
               <VariableType>Byte</VariableType>
@@ -984,6 +1064,9 @@ RDR.exe+656413: C3                       - ret
             <CheatEntry>
               <ID>485</ID>
               <Description>"Target Paint Enabled"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Disabled
+1:Enabled
+</DropDownList>
               <ShowAsSigned>0</ShowAsSigned>
               <Color>008000</Color>
               <VariableType>Byte</VariableType>
@@ -1045,6 +1128,38 @@ RDR.exe+656413: C3                       - ret
               <Address>rdr.exe+22cbf00</Address>
               <Offsets>
                 <Offset>3D8</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>500</ID>
+          <Description>"m_pUnknown"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <Color>808080</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>rdr.exe+2ad17f8</Address>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>499</ID>
+              <Description>"Population Density Multiplier"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <Color>008000</Color>
+              <VariableType>Float</VariableType>
+              <Address>rdr.exe+2ad17f8</Address>
+              <Offsets>
+                <Offset>17B0</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>498</ID>
+              <Description>"Ambient Spawning Enabled"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <Color>008000</Color>
+              <VariableType>4 Bytes</VariableType>
+              <Address>rdr.exe+2ad17f8</Address>
+              <Offsets>
+                <Offset>17ef</Offset>
               </Offsets>
             </CheatEntry>
           </CheatEntries>
@@ -2269,7 +2384,7 @@ RDR.exe+1E4024: 49 63 46 1C              - movsxd  rax,dword ptr [r14+1C]
     </SymbolEntry>
     <SymbolEntry>
       <Name>tmp</Name>
-      <Address>7FF799590000</Address>
+      <Address>7FF7995A0000</Address>
     </SymbolEntry>
     <SymbolEntry>
       <Name>itemname</Name>
