@@ -366,7 +366,7 @@ RDR.exe+68D912: 83 EA 01                    - sub edx,01
 }
 
 [ENABLE]
-aobscanmodule(_ENABLE_BLAZING_GUNS,RDR.exe,41 0F B6 80 18 01 00 00 48 8B E9 0F B6 0D D4 92 43 02 24 03 41 8B F1 49 8B F8 4C 8B F2 3C 03 74 08 84 C9 0F 84 CB 01 00 00 80 3D 03 B4 43 02 00 0F 85 CF 01 00 00 84 C9 0F 85 C7 01 00 00 38 8D 88 5B 00 00)
+aobscanmodule(_ENABLE_BLAZING_GUNS,RDR.exe,41 0f b6 80 18 01 00 00 48 8b e9 0f b6 0d a4 85 44 02 24 03 41 8b f1 49 8b f8 4c 8b f2 3c 03 74 08 84 c9 0f 84 cb 01 00 00 80 3d d3 a6 44 02 00 0f 85 cf 01 00 00 84 c9 0f 85 c7 01 00 00 38 8d 88 5b 00 00)
 registersymbol(_ENABLE_BLAZING_GUNS)
 
 aobscanmodule(_NO_RNG_BLAZING_GUNS,RDR.exe,0F 2F CA 0F 86 3F 01 00 00)
@@ -382,9 +382,9 @@ _NO_RNG_BLAZING_GUNS:
 
 [DISABLE]
 _ENABLE_BLAZING_GUNS:
-  db 41 0F B6 80 18 01 00 00 48 8B E9 0F B6 0D D4 92 43 02 24 03 41 8B F1 49 8B
-  db F8 4C 8B F2 3C 03 74 08 84 C9 0F 84 CB 01 00 00 80 3D 03 B4 43 02 00 0F 85
-  db CF 01 00 00 84 C9 0F 85 C7 01 00 00 38 8D 88 5B 00 00
+  db 41 0f b6 80 18 01 00 00 48 8b e9 0f b6 0d a4 85 44 02 24 03 41 8b f1 49 8b
+  db f8 4c 8b f2 3c 03 74 08 84 c9 0f 84 cb 01 00 00 80 3d d3 a6 44 02 00 0f 85
+  db cf 01 00 00 84 c9 0f 85 c7 01 00 00 38 8d 88 5b 00 00
 
 _NO_RNG_BLAZING_GUNS:
   db 0F 2F CA 0F 86 3F 01 00 00
@@ -539,7 +539,7 @@ RDR.exe+2FF4CD: 0F 84 84 00 00 00     - je RDR.exe+2FF557
 
 [ENABLE]
 
-aobscanmodule(_WRITE_TIMESCALE,RDR.exe,C7 05 CB FF 10 02 00 00 80 3F) // should be unique
+aobscanmodule(_WRITE_TIMESCALE,RDR.exe,C7 05 8B F3 11 02 00 00 80 3F) // should be unique
 registersymbol(_WRITE_TIMESCALE)
 
 _WRITE_TIMESCALE:
@@ -548,7 +548,7 @@ _WRITE_TIMESCALE:
 [DISABLE]
 
 _WRITE_TIMESCALE:
-  db C7 05 CB FF 10 02 00 00 80 3F
+  db C7 05 8B F3 11 02 00 00 80 3F
 
 unregistersymbol(_WRITE_TIMESCALE)
 dealloc(newmem)
@@ -588,7 +588,7 @@ RDR.exe+1F5DBE: F3 0F 11 45 00                 - movss [rbp+00],xmm0
               <ShowAsSigned>0</ShowAsSigned>
               <Color>008000</Color>
               <VariableType>Float</VariableType>
-              <Address>rdr.exe+2305d50+4</Address>
+              <Address>rdr.exe+2314d80+4</Address>
             </CheatEntry>
           </CheatEntries>
         </CheatEntry>
@@ -2442,6 +2442,8 @@ RDR.exe+1E4024: 49 63 46 1C              - movsxd  rax,dword ptr [r14+1C]
   <Comments>Global_54086 = gRDR2_Stats
 
 m_globalBase - 48 89 05 ? ? ? ? b8 ? ? ? ? 48 f7 e1
+
+m_TimeScale - c7 05 ? ? ? ? ? ? ? ? eb ? f3 0f 10 05 ? ? ? ? f3 0f 11 05 ? ? ? ? 48 8b 0d
 
 DeadEye - 48 8b 05 ? ? ? ? 48 85 c0 74 ? 0f b7 88 ? ? ? ? ba
 Regeneration Rate - f3 0f 10 05 ? ? ? ? eb ? 45 84 c9
