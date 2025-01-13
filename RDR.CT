@@ -846,6 +846,33 @@ RDR.exe+656413: C3                       - ret
             </CheatEntry>
             <CheatEntry>
               <ID>482</ID>
+              <Description>"NPC To Actor Damage Scale Enable"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <Color>008000</Color>
+              <VariableType>Float</VariableType>
+              <Address>m_pLocalPlayerPed</Address>
+              <Offsets>
+                <Offset>164</Offset>
+                <Offset>60</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>520</ID>
+              <Description>"NPC To Actor Damage Scale Enable"</Description>
+              <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Off
+1:On
+</DropDownList>
+              <ShowAsSigned>0</ShowAsSigned>
+              <Color>008000</Color>
+              <VariableType>Byte</VariableType>
+              <Address>m_pLocalPlayerPed</Address>
+              <Offsets>
+                <Offset>171</Offset>
+                <Offset>60</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>519</ID>
               <Description>"Drunk"</Description>
               <DropDownList ReadOnly="1" DescriptionOnly="1" DisplayValueAsItem="1">0:Off
 1:On
@@ -965,7 +992,7 @@ RDR.exe+656413: C3                       - ret
           <ShowAsSigned>0</ShowAsSigned>
           <Color>808080</Color>
           <VariableType>8 Bytes</VariableType>
-          <Address>rdr.exe+22cbf00</Address>
+          <Address>rdr.exe+22daf30</Address>
           <CheatEntries>
             <CheatEntry>
               <ID>488</ID>
@@ -973,7 +1000,7 @@ RDR.exe+656413: C3                       - ret
               <ShowAsSigned>0</ShowAsSigned>
               <Color>008000</Color>
               <VariableType>Float</VariableType>
-              <Address>rdr.exe+2ab5748</Address>
+              <Address>rdr.exe+2ac47cc</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>490</ID>
@@ -981,7 +1008,7 @@ RDR.exe+656413: C3                       - ret
               <ShowAsSigned>0</ShowAsSigned>
               <Color>008000</Color>
               <VariableType>Float</VariableType>
-              <Address>rdr.exe+226692c</Address>
+              <Address>rdr.exe+227557c</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>489</ID>
@@ -989,7 +1016,7 @@ RDR.exe+656413: C3                       - ret
               <ShowAsSigned>0</ShowAsSigned>
               <Color>808080</Color>
               <VariableType>Float</VariableType>
-              <Address>rdr.exe+2ab574c</Address>
+              <Address>rdr.exe+2ac47c8</Address>
             </CheatEntry>
             <CheatEntry>
               <ID>484</ID>
@@ -1000,7 +1027,7 @@ RDR.exe+656413: C3                       - ret
               <ShowAsSigned>0</ShowAsSigned>
               <Color>008000</Color>
               <VariableType>Byte</VariableType>
-              <Address>rdr.exe+22cbf00</Address>
+              <Address>rdr.exe+22daf30</Address>
               <Offsets>
                 <Offset>0x398</Offset>
               </Offsets>
@@ -1011,7 +1038,7 @@ RDR.exe+656413: C3                       - ret
               <ShowAsSigned>0</ShowAsSigned>
               <Color>008000</Color>
               <VariableType>Float</VariableType>
-              <Address>rdr.exe+22cbf00</Address>
+              <Address>rdr.exe+22daf30</Address>
               <Offsets>
                 <Offset>0x39C</Offset>
               </Offsets>
@@ -1025,7 +1052,7 @@ RDR.exe+656413: C3                       - ret
               <ShowAsSigned>0</ShowAsSigned>
               <Color>008000</Color>
               <VariableType>Byte</VariableType>
-              <Address>rdr.exe+22cbf00</Address>
+              <Address>rdr.exe+22daf30</Address>
               <Offsets>
                 <Offset>3a1</Offset>
               </Offsets>
@@ -1042,7 +1069,7 @@ RDR.exe+656413: C3                       - ret
               <BitStart>7</BitStart>
               <BitLength>1</BitLength>
               <ShowAsBinary>0</ShowAsBinary>
-              <Address>rdr.exe+22cbf00</Address>
+              <Address>rdr.exe+22daf30</Address>
               <Offsets>
                 <Offset>3Bc</Offset>
               </Offsets>
@@ -1056,7 +1083,7 @@ RDR.exe+656413: C3                       - ret
               <ShowAsSigned>0</ShowAsSigned>
               <Color>008000</Color>
               <VariableType>Byte</VariableType>
-              <Address>rdr.exe+22cbf00</Address>
+              <Address>rdr.exe+22daf30</Address>
               <Offsets>
                 <Offset>0x3BD</Offset>
               </Offsets>
@@ -1070,7 +1097,7 @@ RDR.exe+656413: C3                       - ret
               <ShowAsSigned>0</ShowAsSigned>
               <Color>008000</Color>
               <VariableType>Byte</VariableType>
-              <Address>rdr.exe+22cbf00</Address>
+              <Address>rdr.exe+22daf30</Address>
               <Offsets>
                 <Offset>0x3BE</Offset>
               </Offsets>
@@ -1081,7 +1108,7 @@ RDR.exe+656413: C3                       - ret
               <ShowAsSigned>0</ShowAsSigned>
               <Color>008000</Color>
               <VariableType>Float</VariableType>
-              <Address>rdr.exe+22cbf00</Address>
+              <Address>rdr.exe+22daf30</Address>
               <Offsets>
                 <Offset>3C0</Offset>
               </Offsets>
@@ -1092,7 +1119,7 @@ RDR.exe+656413: C3                       - ret
               <ShowAsSigned>0</ShowAsSigned>
               <Color>008000</Color>
               <VariableType>Float</VariableType>
-              <Address>rdr.exe+22cbf00</Address>
+              <Address>rdr.exe+22daf30</Address>
               <Offsets>
                 <Offset>3C4</Offset>
               </Offsets>
@@ -1103,7 +1130,7 @@ RDR.exe+656413: C3                       - ret
               <ShowAsSigned>0</ShowAsSigned>
               <Color>008000</Color>
               <VariableType>Float</VariableType>
-              <Address>rdr.exe+22cbf00</Address>
+              <Address>rdr.exe+22daf30</Address>
               <Offsets>
                 <Offset>3CC</Offset>
               </Offsets>
@@ -1114,7 +1141,7 @@ RDR.exe+656413: C3                       - ret
               <ShowAsSigned>0</ShowAsSigned>
               <Color>808080</Color>
               <VariableType>Float</VariableType>
-              <Address>rdr.exe+22cbf00</Address>
+              <Address>rdr.exe+22daf30</Address>
               <Offsets>
                 <Offset>3D4</Offset>
               </Offsets>
@@ -1125,7 +1152,7 @@ RDR.exe+656413: C3                       - ret
               <ShowAsSigned>0</ShowAsSigned>
               <Color>008000</Color>
               <VariableType>Float</VariableType>
-              <Address>rdr.exe+22cbf00</Address>
+              <Address>rdr.exe+22daf30</Address>
               <Offsets>
                 <Offset>3D8</Offset>
               </Offsets>
@@ -1134,11 +1161,11 @@ RDR.exe+656413: C3                       - ret
         </CheatEntry>
         <CheatEntry>
           <ID>500</ID>
-          <Description>"m_pUnknown"</Description>
+          <Description>"m_ambientSettings"</Description>
           <ShowAsSigned>0</ShowAsSigned>
           <Color>808080</Color>
           <VariableType>4 Bytes</VariableType>
-          <Address>rdr.exe+2ad17f8</Address>
+          <Address>rdr.exe+2ae0878</Address>
           <CheatEntries>
             <CheatEntry>
               <ID>499</ID>
@@ -1146,7 +1173,7 @@ RDR.exe+656413: C3                       - ret
               <ShowAsSigned>0</ShowAsSigned>
               <Color>008000</Color>
               <VariableType>Float</VariableType>
-              <Address>rdr.exe+2ad17f8</Address>
+              <Address>rdr.exe+2ae0878</Address>
               <Offsets>
                 <Offset>17B0</Offset>
               </Offsets>
@@ -1157,7 +1184,7 @@ RDR.exe+656413: C3                       - ret
               <ShowAsSigned>0</ShowAsSigned>
               <Color>008000</Color>
               <VariableType>4 Bytes</VariableType>
-              <Address>rdr.exe+2ad17f8</Address>
+              <Address>rdr.exe+2ae0878</Address>
               <Offsets>
                 <Offset>17ef</Offset>
               </Offsets>
@@ -1206,6 +1233,7 @@ alloc(mem_globals,$1000,rdr.exe)
 globalalloc(tmp,$10,rdr.exe)
 
 label(hook)
+label(hook_run)
 label(hook_teleport_static)
 //label(hook_gold_bar)
 label(hook_cleanup)
@@ -1448,7 +1476,7 @@ COORD_TABLE:
 
 
 ITEM_STRING:
-  db 'sn_h_ds', 0
+  db 'HORSE_WAR_Z', 0
   // allocate more space for longer strings
   dq 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 
@@ -1466,8 +1494,14 @@ hook:
   // $/content/scripting/designerdefined/player
   // only execute as the player thread.
   cmp r15d, $e47d3366
-  jnz hook_cleanup
+  jz hook_run
 
+  // $/content/dlc/zombiepack/system/player_z
+  cmp r15d, $9c3e926b
+  jz hook_run
+  jmp hook_cleanup
+
+hook_run:
   call reset_native_context
 
   call give_all_achievements
@@ -2266,7 +2300,7 @@ RDR.exe+1E4024: 49 63 46 1C              - movsxd  rax,dword ptr [r14+1C]
           <ShowAsSigned>0</ShowAsSigned>
           <Color>808080</Color>
           <VariableType>8 Bytes</VariableType>
-          <Address>rdr.exe+2ab38a0</Address>
+          <Address>rdr.exe+2ac2918</Address>
         </CheatEntry>
         <CheatEntry>
           <ID>439</ID>
@@ -2274,7 +2308,7 @@ RDR.exe+1E4024: 49 63 46 1C              - movsxd  rax,dword ptr [r14+1C]
           <ShowAsSigned>0</ShowAsSigned>
           <Color>008000</Color>
           <VariableType>Float</VariableType>
-          <Address>rdr.exe+2ab38a0</Address>
+          <Address>rdr.exe+2ac2918</Address>
           <Offsets>
             <Offset>D346 * 4 + 8</Offset>
           </Offsets>
@@ -2285,7 +2319,7 @@ RDR.exe+1E4024: 49 63 46 1C              - movsxd  rax,dword ptr [r14+1C]
           <ShowAsSigned>0</ShowAsSigned>
           <Color>008000</Color>
           <VariableType>Float</VariableType>
-          <Address>rdr.exe+2ab38a0</Address>
+          <Address>rdr.exe+2ac2918</Address>
           <Offsets>
             <Offset>D346 * 4 + 8 + 8</Offset>
           </Offsets>
@@ -2296,7 +2330,7 @@ RDR.exe+1E4024: 49 63 46 1C              - movsxd  rax,dword ptr [r14+1C]
           <ShowAsSigned>0</ShowAsSigned>
           <Color>008000</Color>
           <VariableType>Float</VariableType>
-          <Address>rdr.exe+2ab38a0</Address>
+          <Address>rdr.exe+2ac2918</Address>
           <Offsets>
             <Offset>D346 * 4 + 8 + 8 * 3</Offset>
           </Offsets>
@@ -2310,7 +2344,7 @@ RDR.exe+1E4024: 49 63 46 1C              - movsxd  rax,dword ptr [r14+1C]
           <ShowAsSigned>0</ShowAsSigned>
           <Color>008000</Color>
           <VariableType>4 Bytes</VariableType>
-          <Address>rdr.exe+2ab38a0</Address>
+          <Address>rdr.exe+2ac2918</Address>
           <Offsets>
             <Offset>19DD * 4</Offset>
           </Offsets>
@@ -2321,7 +2355,7 @@ RDR.exe+1E4024: 49 63 46 1C              - movsxd  rax,dword ptr [r14+1C]
           <ShowAsSigned>0</ShowAsSigned>
           <Color>008000</Color>
           <VariableType>Float</VariableType>
-          <Address>rdr.exe+2ab38a0</Address>
+          <Address>rdr.exe+2ac2918</Address>
           <Offsets>
             <Offset>35410</Offset>
           </Offsets>
@@ -2332,7 +2366,7 @@ RDR.exe+1E4024: 49 63 46 1C              - movsxd  rax,dword ptr [r14+1C]
           <ShowAsSigned>0</ShowAsSigned>
           <Color>008000</Color>
           <VariableType>Float</VariableType>
-          <Address>rdr.exe+2ab38a0</Address>
+          <Address>rdr.exe+2ac2918</Address>
           <Offsets>
             <Offset>35418</Offset>
           </Offsets>
@@ -2343,7 +2377,7 @@ RDR.exe+1E4024: 49 63 46 1C              - movsxd  rax,dword ptr [r14+1C]
           <ShowAsSigned>0</ShowAsSigned>
           <Color>008000</Color>
           <VariableType>Float</VariableType>
-          <Address>rdr.exe+2ab38a0</Address>
+          <Address>rdr.exe+2ac2918</Address>
           <Offsets>
             <Offset>35500</Offset>
           </Offsets>
@@ -2354,7 +2388,7 @@ RDR.exe+1E4024: 49 63 46 1C              - movsxd  rax,dword ptr [r14+1C]
           <ShowAsSigned>0</ShowAsSigned>
           <Color>008000</Color>
           <VariableType>4 Bytes</VariableType>
-          <Address>rdr.exe+2ab38a0</Address>
+          <Address>rdr.exe+2ac2918</Address>
           <Offsets>
             <Offset>271F8</Offset>
           </Offsets>
@@ -2376,6 +2410,20 @@ RDR.exe+1E4024: 49 63 46 1C              - movsxd  rax,dword ptr [r14+1C]
       <Description>""</Description>
       <GroupHeader>1</GroupHeader>
     </CheatEntry>
+    <CheatEntry>
+      <ID>521</ID>
+      <Description>"Player to Player Damage Scale"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Float</VariableType>
+      <Address>rdr.exe+2295de8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>522</ID>
+      <Description>"NPC to NPC Damage Scale"</Description>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>Float</VariableType>
+      <Address>rdr.exe+2295dec</Address>
+    </CheatEntry>
   </CheatEntries>
   <UserdefinedSymbols>
     <SymbolEntry>
@@ -2384,7 +2432,7 @@ RDR.exe+1E4024: 49 63 46 1C              - movsxd  rax,dword ptr [r14+1C]
     </SymbolEntry>
     <SymbolEntry>
       <Name>tmp</Name>
-      <Address>7FF7995A0000</Address>
+      <Address>7FF6532C0000</Address>
     </SymbolEntry>
     <SymbolEntry>
       <Name>itemname</Name>
@@ -2392,5 +2440,16 @@ RDR.exe+1E4024: 49 63 46 1C              - movsxd  rax,dword ptr [r14+1C]
     </SymbolEntry>
   </UserdefinedSymbols>
   <Comments>Global_54086 = gRDR2_Stats
-</Comments>
+
+m_globalBase - 48 89 05 ? ? ? ? b8 ? ? ? ? 48 f7 e1
+
+DeadEye - 48 8b 05 ? ? ? ? 48 85 c0 74 ? 0f b7 88 ? ? ? ? ba
+Regeneration Rate - f3 0f 10 05 ? ? ? ? eb ? 45 84 c9
+Regen  Rate Mult - f3 0f 59 05 ? ? ? ? f3 0f 59 05 ? ? ? ? 48 85 d2
+Time Limit - f3 0f 10 05 ? ? ? ? 0f 57 c9 0f 2f c1 76
+
+m_ambientSettings - 48 8b 0d ? ? ? ? 48 8d 46
+
+Player to Player Damage - f3 0f 10 05 00 00 00 00 0f 2e c6 7a 00 75 00 0f b7 4b
+NPC to NPC Damage - f3 0f 59 35 ? ? ? ? f3 0f 59 b7</Comments>
 </CheatTable>
