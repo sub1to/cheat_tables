@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>21</ID>
+      <Description>"_get_base_ptr"</Description>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : FindTheNeedle.exe
+  Version: 
+  Date   : 2026-10-12
+  Author : root
+
+  This script does blah blah blah
+}
+
+[ENABLE]
+
+aobscanmodule(_get_base_ptr,FindTheNeedle.exe,48 8B 96 90 02 00 00 45) // should be unique
+alloc(newmem,$1000,_get_base_ptr)
+
+label(code)
+label(return)
+label(pBasePtr)
+
+registersymbol(_get_base_ptr)
+registersymbol(pBasePtr)
+
+newmem:
+  mov rdx,[rsi+00000290]
+  mov [pBasePtr], rdx
+
+code:
+  //mov rdx,[rsi+00000290]
+  jmp return
+
+pBasePtr:
+  dq 0
+
+_get_base_ptr:
+  jmp newmem
+  nop 2
+return:
+
+
+[DISABLE]
+
+_get_base_ptr:
+  db 48 8B 96 90 02 00 00
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: FindTheNeedle.exe+16E5EAF
+
+FindTheNeedle.exe+16E5E88: E8 F3 B1 FE FF        - call FindTheNeedle.exe+16D1080
+FindTheNeedle.exe+16E5E8D: 8B 05 ED 99 B7 04     - mov eax,[FindTheNeedle.exe+625F880]
+FindTheNeedle.exe+16E5E93: 85 C0                 - test eax,eax
+FindTheNeedle.exe+16E5E95: 7E 18                 - jle FindTheNeedle.exe+16E5EAF
+FindTheNeedle.exe+16E5E97: 31 DB                 - xor ebx,ebx
+FindTheNeedle.exe+16E5E99: 48 8D 3D 00 9A B7 04  - lea rdi,[FindTheNeedle.exe+625F8A0]
+FindTheNeedle.exe+16E5EA0: FF 14 DF              - call qword ptr [rdi+rbx*8]
+FindTheNeedle.exe+16E5EA3: 48 83 C3 01           - add rbx,01
+FindTheNeedle.exe+16E5EA7: 39 1D D3 99 B7 04     - cmp [FindTheNeedle.exe+625F880],ebx
+FindTheNeedle.exe+16E5EAD: 7F F1                 - jg FindTheNeedle.exe+16E5EA0
+// ---------- INJECTING HERE ----------
+FindTheNeedle.exe+16E5EAF: 48 8B 96 90 02 00 00  - mov rdx,[rsi+00000290]
+// ---------- DONE INJECTING  ----------
+FindTheNeedle.exe+16E5EB6: 45 31 C0              - xor r8d,r8d
+FindTheNeedle.exe+16E5EB9: 48 89 E9              - mov rcx,rbp
+FindTheNeedle.exe+16E5EBC: E8 3F 4F 00 00        - call FindTheNeedle.exe+16EAE00
+FindTheNeedle.exe+16E5EC1: 80 3D E1 A1 B7 04 00  - cmp byte ptr [FindTheNeedle.exe+62600A9],00
+FindTheNeedle.exe+16E5EC8: 0F 85 92 00 00 00     - jne FindTheNeedle.exe+16E5F60
+FindTheNeedle.exe+16E5ECE: 0F B6 86 D8 02 00 00  - movzx eax,byte ptr [rsi+000002D8]
+FindTheNeedle.exe+16E5ED5: 0F 28 74 24 40        - movaps xmm6,[rsp+40]
+FindTheNeedle.exe+16E5EDA: 48 83 C4 58           - add rsp,58
+FindTheNeedle.exe+16E5EDE: 5B                    - pop rbx
+FindTheNeedle.exe+16E5EDF: 5E                    - pop rsi
+}
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>22</ID>
+          <Description>"pBasePtr"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>8 Bytes</VariableType>
+          <Address>pBasePtr</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>23</ID>
+          <Description>"Stats Base"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>8 Bytes</VariableType>
+          <Address>pBasePtr</Address>
+          <Offsets>
+            <Offset>28</Offset>
+            <Offset>60</Offset>
+            <Offset>10</Offset>
+            <Offset>140</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>29</ID>
+          <Description>"Money"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>Double</VariableType>
+          <Address>pBasePtr</Address>
+          <Offsets>
+            <Offset>1a0</Offset>
+            <Offset>28</Offset>
+            <Offset>60</Offset>
+            <Offset>10</Offset>
+            <Offset>140</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>24</ID>
+          <Description>"Contracts Completed"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>pBasePtr</Address>
+          <Offsets>
+            <Offset>548</Offset>
+            <Offset>28</Offset>
+            <Offset>60</Offset>
+            <Offset>10</Offset>
+            <Offset>140</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>25</ID>
+          <Description>"Contract Num Items (Save and reload)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>pBasePtr</Address>
+          <Offsets>
+            <Offset>560</Offset>
+            <Offset>28</Offset>
+            <Offset>60</Offset>
+            <Offset>10</Offset>
+            <Offset>140</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>26</ID>
+      <Description>"pointerscan"</Description>
+      <Options moHideChildren="1"/>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>8</ID>
+          <Description>"pointerscan result"</Description>
+          <VariableType>Double</VariableType>
+          <Address>"FindTheNeedle.exe"+06269EC0</Address>
+          <Offsets>
+            <Offset>1A0</Offset>
+            <Offset>28</Offset>
+            <Offset>8</Offset>
+            <Offset>328</Offset>
+            <Offset>18</Offset>
+            <Offset>D18</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>9</ID>
+          <Description>"pointerscan result"</Description>
+          <VariableType>Double</VariableType>
+          <Address>"FindTheNeedle.exe"+06269EC0</Address>
+          <Offsets>
+            <Offset>1A0</Offset>
+            <Offset>28</Offset>
+            <Offset>8</Offset>
+            <Offset>320</Offset>
+            <Offset>18</Offset>
+            <Offset>D18</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>11</ID>
+          <Description>"Money Base Base Base Base Base"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>8 Bytes</VariableType>
+          <Address>"FindTheNeedle.exe"+062600A0</Address>
+          <Offsets>
+            <Offset>290</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>20</ID>
+          <Description>"Money Base Base Base Base"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>8 Bytes</VariableType>
+          <Address>"FindTheNeedle.exe"+062600A0</Address>
+          <Offsets>
+            <Offset>140</Offset>
+            <Offset>290</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>19</ID>
+          <Description>"Money Base Base Base"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>8 Bytes</VariableType>
+          <Address>"FindTheNeedle.exe"+062600A0</Address>
+          <Offsets>
+            <Offset>10</Offset>
+            <Offset>140</Offset>
+            <Offset>290</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>16</ID>
+          <Description>"Money Base Base"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>8 Bytes</VariableType>
+          <Address>"FindTheNeedle.exe"+062600A0</Address>
+          <Offsets>
+            <Offset>60</Offset>
+            <Offset>10</Offset>
+            <Offset>140</Offset>
+            <Offset>290</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>15</ID>
+          <Description>"Money Base"</Description>
+          <ShowAsHex>1</ShowAsHex>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>8 Bytes</VariableType>
+          <Address>"FindTheNeedle.exe"+062600A0</Address>
+          <Offsets>
+            <Offset>28</Offset>
+            <Offset>60</Offset>
+            <Offset>10</Offset>
+            <Offset>140</Offset>
+            <Offset>290</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>10</ID>
+          <Description>"Money"</Description>
+          <VariableType>Double</VariableType>
+          <Address>"FindTheNeedle.exe"+062600A0</Address>
+          <Offsets>
+            <Offset>1A0</Offset>
+            <Offset>28</Offset>
+            <Offset>60</Offset>
+            <Offset>10</Offset>
+            <Offset>140</Offset>
+            <Offset>290</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>13</ID>
+          <Description>"Contracts Completed"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FindTheNeedle.exe"+062600A0</Address>
+          <Offsets>
+            <Offset>548</Offset>
+            <Offset>28</Offset>
+            <Offset>60</Offset>
+            <Offset>10</Offset>
+            <Offset>140</Offset>
+            <Offset>290</Offset>
+          </Offsets>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>14</ID>
+          <Description>"Contract Num Items (Save and reload)"</Description>
+          <ShowAsSigned>0</ShowAsSigned>
+          <VariableType>4 Bytes</VariableType>
+          <Address>"FindTheNeedle.exe"+062600A0</Address>
+          <Offsets>
+            <Offset>560</Offset>
+            <Offset>28</Offset>
+            <Offset>60</Offset>
+            <Offset>10</Offset>
+            <Offset>140</Offset>
+            <Offset>290</Offset>
+          </Offsets>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+  <Comments>Info about this table:
+</Comments>
+</CheatTable>

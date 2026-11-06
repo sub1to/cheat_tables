@@ -1,0 +1,4079 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>52</ID>
+      <Description>"Enable Mono"</Description>
+      <Options moHideChildren="1"/>
+      <Color>008000</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>[ENABLE]
+{$lua}
+if syntaxcheck then return end
+
+if process and readInteger(process) ~= 0 then
+    mono_initialize()
+    LaunchMonoDataCollector()
+else
+    local msg = 'No process detected.'
+    print(msg)
+    error(msg)
+end
+{$asm}
+
+[DISABLE]
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>35</ID>
+          <Description>"Player"</Description>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>45</ID>
+              <Description>"God Mode"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-16
+  Author : root
+
+  ScheduleOne.PlayerScripts.Health.PlayerHealth.get_CanTakeDamage
+  ScheduleOne.PlayerScripts.Health.PlayerHealth.RpcWriter___Observers_TakeDamage_3505310624
+}
+define(hook_1,ScheduleOne.PlayerScripts.Health.PlayerHealth.get_CanTakeDamage)
+define(bytes_1,40 53 48 83 EC 20)
+
+define(hook_2,ScheduleOne.PlayerScripts.Health.PlayerHealth.RpcWriter___Observers_TakeDamage_3505310624)
+define(bytes_2,48 89 5C 24 10)
+
+[ENABLE]
+assert(hook_1,bytes_1)
+alloc(newmem,$1000,hook_1)
+
+label(PlayerHealth_get_CanTakeDamage_bytes)
+registersymbol(PlayerHealth_get_CanTakeDamage_bytes)
+
+label(PlayerHealth_RpcWriter_Observers_TakeDamage_bytes)
+registersymbol(PlayerHealth_RpcWriter_Observers_TakeDamage_bytes)
+
+newmem:
+PlayerHealth_get_CanTakeDamage_bytes:
+  readMem(hook_1,6)
+
+PlayerHealth_RpcWriter_Observers_TakeDamage_bytes:
+  readMem(hook_2,5)
+
+hook_1:
+  xor al, al
+  ret
+  nop 3
+
+hook_2:
+  ret
+  nop 4
+
+[DISABLE]
+hook_1:
+  readMem(PlayerHealth_get_CanTakeDamage_bytes,6)
+
+hook_2:
+  readMem(PlayerHealth_RpcWriter_Observers_TakeDamage_bytes,5)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.PlayerScripts.Health.PlayerHealth.get_CanTakeDamage
+
+GameAssembly.dll+670919: C7 81 1C 01 00 00 00 00 C8 42  - mov [rcx+0000011C],42C80000
+GameAssembly.dll+670923: E9 38 A3 65 00                 - jmp FishNet.Object.NetworkBehaviour..ctor
+GameAssembly.dll+670928: CC                             - int 3 
+GameAssembly.dll+670929: CC                             - int 3 
+GameAssembly.dll+67092A: CC                             - int 3 
+GameAssembly.dll+67092B: CC                             - int 3 
+GameAssembly.dll+67092C: CC                             - int 3 
+GameAssembly.dll+67092D: CC                             - int 3 
+GameAssembly.dll+67092E: CC                             - int 3 
+GameAssembly.dll+67092F: CC                             - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.PlayerScripts.Health.PlayerHealth.get_CanTakeDamage: 40 53                          - push rbx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+670932: 48 83 EC 20                    - sub rsp,20
+GameAssembly.dll+670936: 80 3D 72 B4 58 03 00           - cmp byte ptr [GameAssembly.dll+3BFBDAF],00
+GameAssembly.dll+67093D: 48 8B D9                       - mov rbx,rcx
+GameAssembly.dll+670940: 75 13                          - jne GameAssembly.dll+670955
+GameAssembly.dll+670942: 48 8D 0D 87 A9 38 03           - lea rcx,[GameAssembly.dll+39FB2D0]
+GameAssembly.dll+670949: E8 52 6F CA FF                 - call GameAssembly.il2cpp_get_exception_argument_null+4C0
+GameAssembly.dll+67094E: C6 05 5A B4 58 03 01           - mov byte ptr [GameAssembly.dll+3BFBDAF],01
+GameAssembly.dll+670955: 80 BB 18 01 00 00 00           - cmp byte ptr [rbx+00000118],00
+GameAssembly.dll+67095C: 74 6A                          - je GameAssembly.dll+6709C8
+GameAssembly.dll+67095E: 48 8B 0D 6B A9 38 03           - mov rcx,[GameAssembly.dll+39FB2D0]
+}
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.PlayerScripts.Health.PlayerHealth.RpcWriter___Observers_TakeDamage_3505310624
+
+GameAssembly.dll+66FD82: EB AC                 - jmp GameAssembly.dll+66FD30
+GameAssembly.dll+66FD84: 48 8B 15 E5 99 35 03  - mov rdx,[GameAssembly.dll+39C9770]
+GameAssembly.dll+66FD8B: 45 33 C0              - xor r8d,r8d
+GameAssembly.dll+66FD8E: 48 8B C8              - mov rcx,rax
+GameAssembly.dll+66FD91: E8 5A 84 68 00        - call FishNet.Managing.NetworkManager.LogWarning
+GameAssembly.dll+66FD96: EB 98                 - jmp GameAssembly.dll+66FD30
+GameAssembly.dll+66FD98: E8 E3 7D CA FF        - call GameAssembly.mono_method_get_class+B0
+GameAssembly.dll+66FD9D: CC                    - int 3
+GameAssembly.dll+66FD9E: CC                    - int 3
+GameAssembly.dll+66FD9F: CC                    - int 3
+// ---------- INJECTING HERE ----------
+ScheduleOne.PlayerScripts.Health.PlayerHealth.RpcWriter___Observers_TakeDamage_3505310624: 48 89 5C 24 10        - mov [rsp+10],rbx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+66FDA5: 48 89 6C 24 18        - mov [rsp+18],rbp
+GameAssembly.dll+66FDAA: 56                    - push rsi
+GameAssembly.dll+66FDAB: 48 83 EC 60           - sub rsp,60
+GameAssembly.dll+66FDAF: 80 3D FE BF 58 03 00  - cmp byte ptr [GameAssembly.dll+3BFBDB4],00
+GameAssembly.dll+66FDB6: 41 0F B6 F1           - movzx esi,r9b
+GameAssembly.dll+66FDBA: 0F 29 74 24 50        - movaps [rsp+50],xmm6
+GameAssembly.dll+66FDBF: 41 0F B6 E8           - movzx ebp,r8b
+GameAssembly.dll+66FDC3: 0F 28 F1              - movaps xmm6,xmm1
+GameAssembly.dll+66FDC6: 48 8B D9              - mov rbx,rcx
+GameAssembly.dll+66FDC9: 75 2B                 - jne GameAssembly.dll+66FDF6
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>10</ID>
+              <Description>"Get Cash (Open ATM)"</Description>
+              <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-14
+  Author : root
+
+  Grabs cash balance pointer when using ATM machine
+}
+
+define(hook,ScheduleOne.Money.MoneyManager.get_cashBalance+10)
+define(bytes,F3 0F 10 40 30)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+
+label(MoneyManager_get_cashBalance_bytes)
+registersymbol(MoneyManager_get_cashBalance_bytes)
+
+label(pCashBalance)
+registersymbol(pCashBalance)
+
+newmem:
+  mov [pCashBalance], rax
+
+code:
+  movss xmm0,[rax+30]
+  jmp return
+
+MoneyManager_get_cashBalance_bytes:
+  readMem(hook,5)
+
+pCashBalance:
+  dq 0
+
+hook:
+  jmp newmem
+return:
+
+[DISABLE]
+hook:
+  readMem(MoneyManager_get_cashBalance_bytes,5)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+5E7450
+
+GameAssembly.dll+5E743B: C3                    - ret 
+GameAssembly.dll+5E743C: CC                    - int 3 
+GameAssembly.dll+5E743D: CC                    - int 3 
+GameAssembly.dll+5E743E: CC                    - int 3 
+GameAssembly.dll+5E743F: CC                    - int 3 
+ScheduleOne.Money.MoneyManager.get_cashBalance: 48 83 EC 28           - sub rsp,28
+GameAssembly.dll+5E7444: 33 D2                 - xor edx,edx
+GameAssembly.dll+5E7446: E8 15 00 00 00        - call ScheduleOne.Money.MoneyManager.get_cashInstance
+GameAssembly.dll+5E744B: 48 85 C0              - test rax,rax
+GameAssembly.dll+5E744E: 74 0A                 - je GameAssembly.dll+5E745A
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+5E7450: F3 0F 10 40 30        - movss xmm0,[rax+30]
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+5E7455: 48 83 C4 28           - add rsp,28
+GameAssembly.dll+5E7459: C3                    - ret 
+GameAssembly.dll+5E745A: E8 21 07 D3 FF        - call GameAssembly.mono_method_get_class+B0
+GameAssembly.dll+5E745F: CC                    - int 3 
+ScheduleOne.Money.MoneyManager.get_cashInstance: 48 83 EC 28           - sub rsp,28
+GameAssembly.dll+5E7464: 80 3D E8 44 61 03 00  - cmp byte ptr [GameAssembly.dll+3BFB953],00
+GameAssembly.dll+5E746B: 75 13                 - jne GameAssembly.dll+5E7480
+GameAssembly.dll+5E746D: 48 8D 0D BC 9B 3D 03  - lea rcx,[GameAssembly.dll+39C1030]
+GameAssembly.dll+5E7474: E8 27 04 D3 FF        - call GameAssembly.il2cpp_get_exception_argument_null+4C0
+GameAssembly.dll+5E7479: C6 05 D3 44 61 03 01  - mov byte ptr [GameAssembly.dll+3BFB953],01
+}
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>11</ID>
+                  <Description>"pCashBalance"</Description>
+                  <ShowAsHex>1</ShowAsHex>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>808080</Color>
+                  <VariableType>8 Bytes</VariableType>
+                  <Address>pCashBalance</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>12</ID>
+                  <Description>"Cash Held"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>pCashBalance</Address>
+                  <Offsets>
+                    <Offset>30</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>65</ID>
+              <Description>"Get Bank Money (Open ATM)"</Description>
+              <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-18
+  Author : root
+
+  ScheduleOne.UI.ATMInterface.Update
+}
+
+define(hook,ScheduleOne.UI.ATMInterface.Update+147)
+define(bytes,F3 0F 10 B1 28 01 00 00)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+
+label(ATMInterface_Update_bytes)
+registersymbol(ATMInterface_Update_bytes)
+
+label(pBankBalance)
+registersymbol(pBankBalance)
+
+newmem:
+  mov [pBankBalance], rcx
+
+code:
+  movss xmm6,[rcx+00000128]
+  jmp return
+
+ATMInterface_Update_bytes:
+  readMem(hook,8)
+
+pBankBalance:
+  dq 0
+
+hook:
+  jmp newmem
+  nop 3
+return:
+
+[DISABLE]
+hook:
+  readMem(ATMInterface_Update_bytes,8)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+9A8AA7
+
+GameAssembly.dll+9A8A77: 48 8B C8                 - mov rcx,rax
+GameAssembly.dll+9A8A7A: E8 C1 3D 97 FF           - call GameAssembly.il2cpp_free+1830
+GameAssembly.dll+9A8A7F: 48 8B 80 B8 00 00 00     - mov rax,[rax+000000B8]
+GameAssembly.dll+9A8A86: 48 89 74 24 78           - mov [rsp+78],rsi
+GameAssembly.dll+9A8A8B: 0F 29 74 24 50           - movaps [rsp+50],xmm6
+GameAssembly.dll+9A8A90: 0F 29 7C 24 40           - movaps [rsp+40],xmm7
+GameAssembly.dll+9A8A95: 48 8B 08                 - mov rcx,[rax]
+GameAssembly.dll+9A8A98: 44 0F 29 44 24 30        - movaps [rsp+30],xmm8
+GameAssembly.dll+9A8A9E: 48 85 C9                 - test rcx,rcx
+GameAssembly.dll+9A8AA1: 0F 84 BC 05 00 00        - je GameAssembly.dll+9A9063
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+9A8AA7: F3 0F 10 B1 28 01 00 00  - movss xmm6,[rcx+00000128]
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+9A8AAF: 48 8B 0D FA 85 03 03     - mov rcx,[GameAssembly.dll+39E10B0]
+GameAssembly.dll+9A8AB6: 83 B9 E0 00 00 00 00     - cmp dword ptr [rcx+000000E0],00
+GameAssembly.dll+9A8ABD: 75 05                    - jne GameAssembly.dll+9A8AC4
+GameAssembly.dll+9A8ABF: E8 6C F1 96 FF           - call GameAssembly.il2cpp_runtime_class_init
+GameAssembly.dll+9A8AC4: 45 33 C9                 - xor r9d,r9d
+GameAssembly.dll+9A8AC7: 45 33 C0                 - xor r8d,r8d
+GameAssembly.dll+9A8ACA: 33 D2                    - xor edx,edx
+GameAssembly.dll+9A8ACC: 0F 28 C6                 - movaps xmm0,xmm6
+GameAssembly.dll+9A8ACF: E8 2C C0 C3 FF           - call ScheduleOne.Money.MoneyManager.FormatAmount
+GameAssembly.dll+9A8AD4: 48 85 DB                 - test rbx,rbx
+}
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>66</ID>
+                  <Description>"pBankBalance"</Description>
+                  <ShowAsHex>1</ShowAsHex>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>808080</Color>
+                  <VariableType>8 Bytes</VariableType>
+                  <Address>pBankBalance</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>67</ID>
+                  <Description>"Bank Balance"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>pBankBalance</Address>
+                  <Offsets>
+                    <Offset>128</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>60</ID>
+              <Description>"Reset ATM Deposit Limit"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-18
+  Author : root
+
+  ScheduleOne.UI.ATMInterface.Update
+}
+
+[ENABLE]
+
+aobscanmodule(_read_atm_weekly_deposit_limit,GameAssembly.dll,44 0F 2F 00 0F 97 C2) // should be unique
+alloc(newmem,$1000,_read_atm_weekly_deposit_limit)
+
+label(code)
+label(return)
+
+newmem:
+  mov dword ptr [rax], 0
+
+code:
+  comiss xmm8,[rax]
+  seta dl
+  jmp return
+
+_read_atm_weekly_deposit_limit:
+  jmp newmem
+  nop 2
+return:
+registersymbol(_read_atm_weekly_deposit_limit)
+
+[DISABLE]
+
+_read_atm_weekly_deposit_limit:
+  db 44 0F 2F 00 0F 97 C2
+
+unregistersymbol(_read_atm_weekly_deposit_limit)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+9A8FAC
+
+GameAssembly.dll+9A8F7D: 48 8B 5F 58           - mov rbx,[rdi+58]
+GameAssembly.dll+9A8F81: 83 B8 E0 00 00 00 00  - cmp dword ptr [rax+000000E0],00
+GameAssembly.dll+9A8F88: 75 0F                 - jne GameAssembly.dll+9A8F99
+GameAssembly.dll+9A8F8A: 48 8B C8              - mov rcx,rax
+GameAssembly.dll+9A8F8D: E8 9E EC 96 FF        - call GameAssembly.il2cpp_runtime_class_init
+GameAssembly.dll+9A8F92: 48 8B 05 07 85 02 03  - mov rax,[GameAssembly.dll+39D14A0]
+GameAssembly.dll+9A8F99: 48 85 DB              - test rbx,rbx
+GameAssembly.dll+9A8F9C: 0F 84 C1 00 00 00     - je GameAssembly.dll+9A9063
+GameAssembly.dll+9A8FA2: 48 8B 80 B8 00 00 00  - mov rax,[rax+000000B8]
+GameAssembly.dll+9A8FA9: 48 8B CB              - mov rcx,rbx
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+9A8FAC: 44 0F 2F 00           - comiss xmm8,[rax]
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+9A8FB0: 0F 97 C2              - seta dl
+GameAssembly.dll+9A8FB3: 45 33 C0              - xor r8d,r8d
+GameAssembly.dll+9A8FB6: E8 95 07 44 02        - call UnityEngine.UI.Selectable.set_interactable
+GameAssembly.dll+9A8FBB: 48 8B 0D 36 70 04 03  - mov rcx,[GameAssembly.dll+39EFFF8]
+GameAssembly.dll+9A8FC2: 48 8B 9F 18 01 00 00  - mov rbx,[rdi+00000118]
+GameAssembly.dll+9A8FC9: 48 8B B7 C8 00 00 00  - mov rsi,[rdi+000000C8]
+GameAssembly.dll+9A8FD0: 83 B9 E0 00 00 00 00  - cmp dword ptr [rcx+000000E0],00
+GameAssembly.dll+9A8FD7: 75 05                 - jne GameAssembly.dll+9A8FDE
+GameAssembly.dll+9A8FD9: E8 52 EC 96 FF        - call GameAssembly.il2cpp_runtime_class_init
+GameAssembly.dll+9A8FDE: 45 33 C0              - xor r8d,r8d
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>46</ID>
+              <Description>"Infinite Ammo"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-16
+  Author : root
+
+  ScheduleOne.ItemFramework.IntegerItemInstance.ChangeValue
+}
+define(hook,ScheduleOne.ItemFramework.IntegerItemInstance.ChangeValue)
+define(bytes,01 51 30 33 D2)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+
+label(IntegerItemInstance_ChangeValue_bytes)
+registersymbol(IntegerItemInstance_ChangeValue_bytes)
+
+newmem:
+  xor edx, edx
+  jmp return
+
+code:
+  add [rcx+30],edx
+  xor edx,edx
+  jmp return
+
+IntegerItemInstance_ChangeValue_bytes:
+  readMem(hook,5)
+
+hook:
+  jmp newmem
+return:
+
+[DISABLE]
+hook:
+  readMem(IntegerItemInstance_ChangeValue_bytes,5)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.ItemFramework.IntegerItemInstance.ChangeValue
+
+GameAssembly.dll+68A0FB: E8 E0 75 17 00  - call ScheduleOne.Storage.StorableItemInstance..ctor
+GameAssembly.dll+68A100: 48 8B C3        - mov rax,rbx
+GameAssembly.dll+68A103: 89 7B 30        - mov [rbx+30],edi
+GameAssembly.dll+68A106: 48 83 C4 28     - add rsp,28
+GameAssembly.dll+68A10A: 5F              - pop rdi
+GameAssembly.dll+68A10B: 5E              - pop rsi
+GameAssembly.dll+68A10C: 5D              - pop rbp
+GameAssembly.dll+68A10D: 5B              - pop rbx
+GameAssembly.dll+68A10E: C3              - ret 
+GameAssembly.dll+68A10F: CC              - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.ItemFramework.IntegerItemInstance.ChangeValue: 01 51 30        - add [rcx+30],edx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+68A113: 33 D2           - xor edx,edx
+GameAssembly.dll+68A115: E9 86 18 80 01  - jmp ScheduleOne.Core.Items.Framework.BaseItemInstance.InvokeDataChange
+GameAssembly.dll+68A11A: CC              - int 3 
+GameAssembly.dll+68A11B: CC              - int 3 
+GameAssembly.dll+68A11C: CC              - int 3 
+GameAssembly.dll+68A11D: CC              - int 3 
+GameAssembly.dll+68A11E: CC              - int 3 
+GameAssembly.dll+68A11F: CC              - int 3 
+ScheduleOne.ItemFramework.IntegerItemInstance.GetCopy: 40 53           - push rbx
+GameAssembly.dll+68A122: 55              - push rbp
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>94</ID>
+              <Description>"Infinite Stamina"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-21
+  Author : root
+
+  ScheduleOne.PlayerScripts.PlayerMovement.ChangeStamina
+}
+
+define(hook,ScheduleOne.PlayerScripts.PlayerMovement.ChangeStamina)
+define(bytes,0F 57 C0 0F 2F C1)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+
+label(PlayerMovement_ChangeStamina_bytes)
+registersymbol(PlayerMovement_ChangeStamina_bytes)
+
+newmem:
+  xorps xmm1, xmm1
+
+code:
+  xorps xmm0,xmm0
+  comiss xmm0,xmm1
+  jmp return
+
+PlayerMovement_ChangeStamina_bytes:
+  readMem(hook,6)
+
+hook:
+  jmp newmem
+  nop
+return:
+
+[DISABLE]
+hook:
+  readMem(PlayerMovement_ChangeStamina_bytes,6)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.PlayerScripts.PlayerMovement.ChangeStamina
+
+GameAssembly.dll+678EF5: 48 8B BC 24 10 01 00 00        - mov rdi,[rsp+00000110]
+GameAssembly.dll+678EFD: 44 0F 28 A4 24 90 00 00 00     - movaps xmm12,[rsp+00000090]
+GameAssembly.dll+678F06: 44 0F 28 9C 24 A0 00 00 00     - movaps xmm11,[rsp+000000A0]
+GameAssembly.dll+678F0F: 44 0F 28 94 24 B0 00 00 00     - movaps xmm10,[rsp+000000B0]
+GameAssembly.dll+678F18: 44 0F 28 8C 24 C0 00 00 00     - movaps xmm9,[rsp+000000C0]
+GameAssembly.dll+678F21: 48 81 C4 00 01 00 00           - add rsp,00000100
+GameAssembly.dll+678F28: 5B                             - pop rbx
+GameAssembly.dll+678F29: C3                             - ret 
+GameAssembly.dll+678F2A: E8 51 EC C9 FF                 - call GameAssembly.mono_method_get_class+B0
+GameAssembly.dll+678F2F: CC                             - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.PlayerScripts.PlayerMovement.ChangeStamina: 0F 57 C0                       - xorps xmm0,xmm0
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+678F33: 0F 2F C1                       - comiss xmm0,xmm1
+GameAssembly.dll+678F36: 76 0A                          - jna GameAssembly.dll+678F42
+GameAssembly.dll+678F38: C7 81 E0 00 00 00 00 00 00 00  - mov [rcx+000000E0],00000000
+GameAssembly.dll+678F42: F3 0F 58 49 4C                 - addss xmm1,[rcx+4C]
+GameAssembly.dll+678F47: 45 33 C9                       - xor r9d,r9d
+GameAssembly.dll+678F4A: E9 A1 30 00 00                 - jmp ScheduleOne.PlayerScripts.PlayerMovement.SetStamina
+GameAssembly.dll+678F4F: CC                             - int 3 
+ScheduleOne.PlayerScripts.PlayerMovement.ClampMovement: 40 53                          - push rbx
+GameAssembly.dll+678F52: 48 83 EC 70                    - sub rsp,70
+GameAssembly.dll+678F56: 80 3D 03 27 58 03 00           - cmp byte ptr [GameAssembly.dll+3BFB660],00
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>47</ID>
+              <Description>"Movement Speed Multiplier"</Description>
+              <Options moHideChildren="1"/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-16
+  Author : root
+
+  ScheduleOne.PlayerScripts.PlayerMovement.Update
+}
+
+define(hook,ScheduleOne.PlayerScripts.PlayerMovement.Update)
+define(bytes,40 53 48 83 EC 70)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+
+label(PlayerMovement_Update_bytes)
+registersymbol(PlayerMovement_Update_bytes)
+
+label(pPlayerMovement)
+registersymbol(pPlayerMovement)
+
+label(fMovementSpeedMult)
+registersymbol(fMovementSpeedMult)
+
+newmem:
+// class PlayerMovement:
+// public readonly FloatStack MoveSpeedMultiplierStack; // 0x68
+
+// class FloatStack:
+// private float &lt;Value&gt;k__BackingField; // 0x10
+
+  mov [pPlayerMovement], rcx
+  mov rax, [rcx+68]
+  mov r10d, [fMovementSpeedMult]
+  mov dword ptr [rax+10], r10d
+
+code:
+  push rbx
+  sub rsp,70
+  jmp return
+
+PlayerMovement_Update_bytes:
+  readMem(hook,6)
+
+pPlayerMovement:
+  dq 0
+
+fMovementSpeedMult:
+  dd (float)2
+
+hook:
+  jmp newmem
+  nop
+return:
+
+[DISABLE]
+hook:
+  readMem(PlayerMovement_Update_bytes,6)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.PlayerScripts.PlayerMovement.Update
+
+GameAssembly.dll+67D15F: 48 83 C4 60           - add rsp,60
+GameAssembly.dll+67D163: 5B                    - pop rbx
+GameAssembly.dll+67D164: C3                    - ret 
+GameAssembly.dll+67D165: E8 16 AA C9 FF        - call GameAssembly.mono_method_get_class+B0
+GameAssembly.dll+67D16A: CC                    - int 3 
+GameAssembly.dll+67D16B: CC                    - int 3 
+GameAssembly.dll+67D16C: CC                    - int 3 
+GameAssembly.dll+67D16D: CC                    - int 3 
+GameAssembly.dll+67D16E: CC                    - int 3 
+GameAssembly.dll+67D16F: CC                    - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.PlayerScripts.PlayerMovement.Update: 40 53                 - push rbx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+67D172: 48 83 EC 70           - sub rsp,70
+GameAssembly.dll+67D176: 80 3D 08 EC 57 03 00  - cmp byte ptr [GameAssembly.dll+3BFBD85],00
+GameAssembly.dll+67D17D: 48 8B D9              - mov rbx,rcx
+GameAssembly.dll+67D180: 0F 29 74 24 60        - movaps [rsp+60],xmm6
+GameAssembly.dll+67D185: 75 13                 - jne GameAssembly.dll+67D19A
+GameAssembly.dll+67D187: 48 8D 0D 82 EA 37 03  - lea rcx,[GameAssembly.dll+39FBC10]
+GameAssembly.dll+67D18E: E8 0D A7 C9 FF        - call GameAssembly.il2cpp_get_exception_argument_null+4C0
+GameAssembly.dll+67D193: C6 05 EB EB 57 03 01  - mov byte ptr [GameAssembly.dll+3BFBD85],01
+GameAssembly.dll+67D19A: 0F 29 7C 24 50        - movaps [rsp+50],xmm7
+GameAssembly.dll+67D19F: 33 D2                 - xor edx,edx
+}
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>54</ID>
+                  <Description>"fMovementSpeedMult"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>fMovementSpeedMult</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>95</ID>
+              <Description>"Infinite Watercan"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-21
+  Author : root
+
+  ScheduleOne.ItemFramework.WaterContainerInstance.ChangeFillAmount
+}
+
+define(hook,ScheduleOne.ItemFramework.WaterContainerInstance.ChangeFillAmount)
+define(bytes,40 53 48 83 EC 40)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+
+label(WaterContainerInstance_ChangeFillAmount_bytes)
+registersymbol(WaterContainerInstance_ChangeFillAmount_bytes)
+
+newmem:
+  mov eax, (float)1.0
+  movd xmm1, eax
+
+code:
+  push rbx
+  sub rsp,40
+  jmp return
+
+WaterContainerInstance_ChangeFillAmount_bytes:
+  readMem(hook,6)
+
+hook:
+  jmp newmem
+  nop
+return:
+
+[DISABLE]
+hook:
+  readMem(WaterContainerInstance_ChangeFillAmount_bytes,6)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.ItemFramework.WaterContainerInstance.ChangeFillAmount
+
+GameAssembly.dll+69B736: CC              - int 3 
+GameAssembly.dll+69B737: CC              - int 3 
+GameAssembly.dll+69B738: CC              - int 3 
+GameAssembly.dll+69B739: CC              - int 3 
+GameAssembly.dll+69B73A: CC              - int 3 
+GameAssembly.dll+69B73B: CC              - int 3 
+GameAssembly.dll+69B73C: CC              - int 3 
+GameAssembly.dll+69B73D: CC              - int 3 
+GameAssembly.dll+69B73E: CC              - int 3 
+GameAssembly.dll+69B73F: CC              - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.ItemFramework.WaterContainerInstance.ChangeFillAmount: 40 53           - push rbx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+69B742: 48 83 EC 40     - sub rsp,40
+GameAssembly.dll+69B746: 0F 29 74 24 30  - movaps [rsp+30],xmm6
+GameAssembly.dll+69B74B: 33 D2           - xor edx,edx
+GameAssembly.dll+69B74D: F3 0F 10 71 30  - movss xmm6,[rcx+30]
+GameAssembly.dll+69B752: 48 8B D9        - mov rbx,rcx
+GameAssembly.dll+69B755: 0F 29 7C 24 20  - movaps [rsp+20],xmm7
+GameAssembly.dll+69B75A: 0F 28 F9        - movaps xmm7,xmm1
+GameAssembly.dll+69B75D: E8 3E 02 00 00  - call ScheduleOne.ItemFramework.WaterContainerInstance.get_WaterContainerDefinition
+GameAssembly.dll+69B762: 48 85 C0        - test rax,rax
+GameAssembly.dll+69B765: 74 3F           - je GameAssembly.dll+69B7A6
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>53</ID>
+              <Description>"Easy Pickpocket"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-17
+  Author : root
+
+  ScheduleOne.UI.PickpocketScreen.Update
+}
+
+define(hook,ScheduleOne.UI.PickpocketScreen.Update)
+define(bytes,40 57 48 83 EC 50)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+
+label(PickpocketScreen_Update_bytes)
+registersymbol(PickpocketScreen_Update_bytes)
+
+newmem:
+//	public float GreenAreaMaxWidth; // 0x2C
+//	public float GreenAreaMinWidth; // 0x30
+//	public float SlideTime; // 0x34
+//	public float SlideTimeMaxMultiplier; // 0x38
+//	public float ValueDivisor; // 0x3C
+//	public float Tolerance; // 0x40
+  mov [rcx+2c], (float)500
+  mov [rcx+30], (float)500
+  mov [rcx+40], (float)999
+
+code:
+  push rdi
+  sub rsp,50
+  jmp return
+
+PickpocketScreen_Update_bytes:
+  readMem(hook,6)
+
+hook:
+  jmp newmem
+  nop
+return:
+
+[DISABLE]
+hook:
+  readMem(PickpocketScreen_Update_bytes,6)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.UI.PickpocketScreen.Update
+
+GameAssembly.dll+9FB626: C3                    - ret 
+GameAssembly.dll+9FB627: CC                    - int 3 
+GameAssembly.dll+9FB628: CC                    - int 3 
+GameAssembly.dll+9FB629: CC                    - int 3 
+GameAssembly.dll+9FB62A: CC                    - int 3 
+GameAssembly.dll+9FB62B: CC                    - int 3 
+GameAssembly.dll+9FB62C: CC                    - int 3 
+GameAssembly.dll+9FB62D: CC                    - int 3 
+GameAssembly.dll+9FB62E: CC                    - int 3 
+GameAssembly.dll+9FB62F: CC                    - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.UI.PickpocketScreen.Update: 40 57                 - push rdi
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+9FB632: 48 83 EC 50           - sub rsp,50
+GameAssembly.dll+9FB636: 80 79 28 00           - cmp byte ptr [rcx+28],00
+GameAssembly.dll+9FB63A: 48 8B F9              - mov rdi,rcx
+GameAssembly.dll+9FB63D: 0F 84 0C 03 00 00     - je GameAssembly.dll+9FB94F
+GameAssembly.dll+9FB643: 80 B9 F8 00 00 00 00  - cmp byte ptr [rcx+000000F8],00
+GameAssembly.dll+9FB64A: 0F 85 FF 02 00 00     - jne GameAssembly.dll+9FB94F
+GameAssembly.dll+9FB650: 48 89 74 24 68        - mov [rsp+68],rsi
+GameAssembly.dll+9FB655: 48 8B 89 C0 00 00 00  - mov rcx,[rcx+000000C0]
+GameAssembly.dll+9FB65C: 48 85 C9              - test rcx,rcx
+GameAssembly.dll+9FB65F: 0F 84 F0 02 00 00     - je GameAssembly.dll+9FB955
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>58</ID>
+              <Description>"XP Multiplier"</Description>
+              <Options moHideChildren="1"/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-18
+  Author : root
+
+  ScheduleOne.Levelling.LevelManager.AddXP
+}
+
+define(hook,ScheduleOne.Levelling.LevelManager.AddXP)
+define(bytes,48 89 5C 24 10)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+
+label(LevelingManager_AddXP_bytes)
+registersymbol(LevelingManager_AddXP_bytes)
+
+label(iXPMultiplier)
+registersymbol(iXPMultiplier)
+
+newmem:
+  mov eax, [iXPMultiplier]
+  mul edx
+  mov edx, eax
+
+code:
+  mov [rsp+10],rbx
+  jmp return
+
+LevelingManager_AddXP_bytes:
+  readMem(hook,5)
+
+iXPMultiplier:
+  dd 2
+
+hook:
+  jmp newmem
+return:
+
+[DISABLE]
+hook:
+  readMem(LevelingManager_AddXP_bytes,5)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.Levelling.LevelManager.AddXP
+
+GameAssembly.dll+60D657: 48 8B 5C 24 68        - mov rbx,[rsp+68]
+GameAssembly.dll+60D65C: 48 83 C4 50           - add rsp,50
+GameAssembly.dll+60D660: 5E                    - pop rsi
+GameAssembly.dll+60D661: E9 8A AB 6E 00        - jmp FishNet.Managing.NetworkManager.LogWarning
+GameAssembly.dll+60D666: E8 15 A5 D0 FF        - call GameAssembly.mono_method_get_class+B0
+GameAssembly.dll+60D66B: CC                    - int 3 
+GameAssembly.dll+60D66C: CC                    - int 3 
+GameAssembly.dll+60D66D: CC                    - int 3 
+GameAssembly.dll+60D66E: CC                    - int 3 
+GameAssembly.dll+60D66F: CC                    - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.Levelling.LevelManager.AddXP: 48 89 5C 24 10        - mov [rsp+10],rbx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+60D675: 56                    - push rsi
+GameAssembly.dll+60D676: 48 83 EC 30           - sub rsp,30
+GameAssembly.dll+60D67A: 80 3D B6 E4 5E 03 00  - cmp byte ptr [GameAssembly.dll+3BFBB37],00
+GameAssembly.dll+60D681: 48 8B D9              - mov rbx,rcx
+GameAssembly.dll+60D684: 48 63 F2              - movsxd  rsi,edx
+GameAssembly.dll+60D687: 75 2B                 - jne GameAssembly.dll+60D6B4
+GameAssembly.dll+60D689: 48 8D 0D 80 C5 3F 03  - lea rcx,[GameAssembly.dll+3A09C10]
+GameAssembly.dll+60D690: E8 0B A2 D0 FF        - call GameAssembly.il2cpp_get_exception_argument_null+4C0
+GameAssembly.dll+60D695: 48 8D 0D EC E1 3B 03  - lea rcx,[GameAssembly.dll+39CB888]
+GameAssembly.dll+60D69C: E8 FF A1 D0 FF        - call GameAssembly.il2cpp_get_exception_argument_null+4C0
+}
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>59</ID>
+                  <Description>"XP Multiplier"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>iXPMultiplier</Address>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>32</ID>
+          <Description>"Inventory"</Description>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>5</ID>
+              <Description>"Inventory Stack Max"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-14
+  Author : root
+
+  Sets stack items to max when quantity changes (your inventory)
+
+  ScheduleOne.Core.Items.Framework.BaseItemInstance.ChangeQuantity
+}
+
+define(hook,ScheduleOne.Core.Items.Framework.BaseItemInstance.ChangeQuantity+5B)
+define(bytes,3B F8 7F 24)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(BaseItemInstance_ChangeQuantity_bytes)
+registersymbol(BaseItemInstance_ChangeQuantity_bytes)
+
+newmem:
+BaseItemInstance_ChangeQuantity_bytes:
+  readMem(hook,4)
+
+hook:
+  mov edi, eax
+  nop 2
+
+
+[DISABLE]
+hook:
+  readMem(BaseItemInstance_ChangeQuantity_bytes,4)
+
+unregistersymbol(*)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+1E8B91B
+
+GameAssembly.dll+1E8B8EB: E8 B0 BF 48 FE        - call GameAssembly.il2cpp_get_exception_argument_null+4C0
+GameAssembly.dll+1E8B8F0: 48 8D 0D 89 3F B5 01  - lea rcx,[GameAssembly.dll+39DF880]
+GameAssembly.dll+1E8B8F7: E8 A4 BF 48 FE        - call GameAssembly.il2cpp_get_exception_argument_null+4C0
+GameAssembly.dll+1E8B8FC: C6 05 0C A3 D7 01 01  - mov byte ptr [GameAssembly.dll+3C05C0F],01
+GameAssembly.dll+1E8B903: 03 7B 10              - add edi,[rbx+10]
+GameAssembly.dll+1E8B906: 78 68                 - js GameAssembly.dll+1E8B970
+GameAssembly.dll+1E8B908: 48 8B 03              - mov rax,[rbx]
+GameAssembly.dll+1E8B90B: 48 8B CB              - mov rcx,rbx
+GameAssembly.dll+1E8B90E: 48 8B 90 C0 01 00 00  - mov rdx,[rax+000001C0]
+GameAssembly.dll+1E8B915: FF 90 B8 01 00 00     - call qword ptr [rax+000001B8]
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+1E8B91B: 3B F8                 - cmp edi,eax
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+1E8B91D: 7F 24                 - jg GameAssembly.dll+1E8B943
+GameAssembly.dll+1E8B91F: 48 83 7B 18 00        - cmp qword ptr [rbx+18],00
+GameAssembly.dll+1E8B924: 89 7B 10              - mov [rbx+10],edi
+GameAssembly.dll+1E8B927: 74 6A                 - je GameAssembly.dll+1E8B993
+GameAssembly.dll+1E8B929: 48 8B 43 18           - mov rax,[rbx+18]
+GameAssembly.dll+1E8B92D: 48 8B 50 28           - mov rdx,[rax+28]
+GameAssembly.dll+1E8B931: 48 8B 48 40           - mov rcx,[rax+40]
+GameAssembly.dll+1E8B935: 48 8B 5C 24 30        - mov rbx,[rsp+30]
+GameAssembly.dll+1E8B93A: 48 83 C4 20           - add rsp,20
+GameAssembly.dll+1E8B93E: 5F                    - pop rdi
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>20</ID>
+              <Description>"Storage Stack Max"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version:
+  Date   : 2026-10-15
+  Author : root
+
+  Sets stack items to max when quantity is set (storage)
+
+  ScheduleOne.Core.Items.Framework.BaseItemInstance.SetQuantity
+}
+
+define(hook,ScheduleOne.Core.Items.Framework.BaseItemInstance.SetQuantity+5A)
+define(bytes,3B F8 7E 3D)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(BaseItemInstance_SetQuantity_bytes)
+registersymbol(BaseItemInstance_SetQuantity_bytes)
+
+newmem:
+BaseItemInstance_SetQuantity_bytes:
+  readMem(hook,4)
+
+hook:
+  mov edi, eax
+  nop 2
+
+
+[DISABLE]
+hook:
+  readMem(BaseItemInstance_SetQuantity_bytes,4)
+
+unregistersymbol(*)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+1E8BAEA
+
+GameAssembly.dll+1E8BABB: E8 E0 BD 48 FE        - call GameAssembly.il2cpp_get_exception_argument_null+4C0
+GameAssembly.dll+1E8BAC0: 48 8D 0D 89 14 B4 01  - lea rcx,[GameAssembly.dll+39CCF50]
+GameAssembly.dll+1E8BAC7: E8 D4 BD 48 FE        - call GameAssembly.il2cpp_get_exception_argument_null+4C0
+GameAssembly.dll+1E8BACC: C6 05 3B A1 D7 01 01  - mov byte ptr [GameAssembly.dll+3C05C0E],01
+GameAssembly.dll+1E8BAD3: 85 FF                 - test edi,edi
+GameAssembly.dll+1E8BAD5: 78 78                 - js GameAssembly.dll+1E8BB4F
+GameAssembly.dll+1E8BAD7: 48 8B 03              - mov rax,[rbx]
+GameAssembly.dll+1E8BADA: 48 8B CB              - mov rcx,rbx
+GameAssembly.dll+1E8BADD: 48 8B 90 C0 01 00 00  - mov rdx,[rax+000001C0]
+GameAssembly.dll+1E8BAE4: FF 90 B8 01 00 00     - call qword ptr [rax+000001B8]
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+1E8BAEA: 3B F8                 - cmp edi,eax
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+1E8BAEC: 7E 3D                 - jle GameAssembly.dll+1E8BB2B
+GameAssembly.dll+1E8BAEE: 3B 7B 10              - cmp edi,[rbx+10]
+GameAssembly.dll+1E8BAF1: 7E 38                 - jle GameAssembly.dll+1E8BB2B
+GameAssembly.dll+1E8BAF3: 48 8B 0D 16 E1 B7 01  - mov rcx,[GameAssembly.dll+3A09C10]
+GameAssembly.dll+1E8BAFA: 83 B9 E0 00 00 00 00  - cmp dword ptr [rcx+000000E0],00
+GameAssembly.dll+1E8BB01: 75 05                 - jne GameAssembly.dll+1E8BB08
+GameAssembly.dll+1E8BB03: E8 28 C1 48 FE        - call GameAssembly.il2cpp_runtime_class_init
+GameAssembly.dll+1E8BB08: 48 8B 0D 61 13 B4 01  - mov rcx,[GameAssembly.dll+39CCE70]
+GameAssembly.dll+1E8BB0F: 33 D2                 - xor edx,edx
+GameAssembly.dll+1E8BB11: E8 0A 68 CB 00        - call UnityEngine.Debug.LogWarning
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>40</ID>
+              <Description>"Edit Clicked Item"</Description>
+              <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-16
+  Author : root
+
+  ScheduleOne.UI.Items.ItemUI.UpdateUI
+
+  public class ItemUI : MonoBehaviour // TypeDefIndex: 3697
+	protected ItemInstance itemInstance; // 0x20
+
+  public abstract class BaseItemInstance // TypeDefIndex: 17981
+    private int &lt;Quantity&gt;k__BackingField; // 0x10
+    protected BaseItemDefinition _definition; // 0x28
+
+  public class QualityItemInstance : StorableItemInstance // TypeDefIndex: 1528
+    public EQuality Quality; // 0x30
+
+  public abstract class BaseItemDefinition : ScriptableObject // TypeDefIndex: 17980
+    public int StackLimit; // 0x3C
+}
+
+define(hook,ScheduleOne.UI.Items.ItemUI.UpdateUI+44)
+define(bytes,48 8B 53 20 48 85 D2)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+
+label(ItemUI_UpdateUI_bytes)
+registersymbol(ItemUI_UpdateUI_bytes)
+
+label(pClickedItem)
+registersymbol(pClickedItem)
+
+newmem:
+  mov [pClickedItem], rbx
+
+code:
+  mov rdx,[rbx+20]
+  test rdx,rdx
+  jmp return
+
+ItemUI_UpdateUI_bytes:
+  readMem(hook,7)
+
+pClickedItem:
+  dq 0
+
+hook:
+  jmp newmem
+  nop 2
+return:
+
+[DISABLE]
+hook:
+  readMem(ItemUI_UpdateUI_bytes,7)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+A91304
+
+GameAssembly.dll+A912DD: 48 8B 01              - mov rax,[rcx]
+GameAssembly.dll+A912E0: 48 8B 7B 30           - mov rdi,[rbx+30]
+GameAssembly.dll+A912E4: 48 8B 90 A0 01 00 00  - mov rdx,[rax+000001A0]
+GameAssembly.dll+A912EB: FF 90 98 01 00 00     - call qword ptr [rax+00000198]
+GameAssembly.dll+A912F1: 48 85 FF              - test rdi,rdi
+GameAssembly.dll+A912F4: 74 38                 - je GameAssembly.dll+A9132E
+GameAssembly.dll+A912F6: 45 33 C0              - xor r8d,r8d
+GameAssembly.dll+A912F9: 48 8B D0              - mov rdx,rax
+GameAssembly.dll+A912FC: 48 8B CF              - mov rcx,rdi
+GameAssembly.dll+A912FF: E8 AC A0 1C 02        - call UnityEngine.UI.Image.set_sprite
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+A91304: 48 8B 53 20           - mov rdx,[rbx+20]
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+A91308: 48 85 D2              - test rdx,rdx
+GameAssembly.dll+A9130B: 74 21                 - je GameAssembly.dll+A9132E
+GameAssembly.dll+A9130D: 48 8B 03              - mov rax,[rbx]
+GameAssembly.dll+A91310: 48 8B CB              - mov rcx,rbx
+GameAssembly.dll+A91313: 8B 52 10              - mov edx,[rdx+10]
+GameAssembly.dll+A91316: 4C 8B 80 D0 01 00 00  - mov r8,[rax+000001D0]
+GameAssembly.dll+A9131D: FF 90 C8 01 00 00     - call qword ptr [rax+000001C8]
+GameAssembly.dll+A91323: 48 8B 7C 24 30        - mov rdi,[rsp+30]
+GameAssembly.dll+A91328: 48 83 C4 20           - add rsp,20
+GameAssembly.dll+A9132C: 5B                    - pop rbx
+}
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>41</ID>
+                  <Description>"pClickedItem"</Description>
+                  <ShowAsHex>1</ShowAsHex>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>808080</Color>
+                  <VariableType>8 Bytes</VariableType>
+                  <Address>pClickedItem</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>42</ID>
+                  <Description>"Quantity"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pClickedItem</Address>
+                  <Offsets>
+                    <Offset>10</Offset>
+                    <Offset>20</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>43</ID>
+                  <Description>"Quality"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pClickedItem</Address>
+                  <Offsets>
+                    <Offset>30</Offset>
+                    <Offset>20</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>96</ID>
+                  <Description>"Stack Limit"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pClickedItem</Address>
+                  <Offsets>
+                    <Offset>3c</Offset>
+                    <Offset>28</Offset>
+                    <Offset>20</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>97</ID>
+              <Description>"Stack Limit 9999"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-21
+  Author : root
+
+  ScheduleOne.Core.Items.Framework.BaseItemInstance.get_StackLimit
+}
+
+define(hook,ScheduleOne.Core.Items.Framework.BaseItemInstance.get_StackLimit+0D)
+define(bytes,8B 40 3C 48 83 C4 28)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+
+label(BaseItemInstance_get_StackLimit_bytes)
+registersymbol(BaseItemInstance_get_StackLimit_bytes)
+
+newmem:
+  mov dword ptr [rax+3C], #9999
+
+code:
+  mov eax,[rax+3C]
+  add rsp,28
+  jmp return
+
+BaseItemInstance_get_StackLimit_bytes:
+  readMem(hook,7)
+
+hook:
+  jmp newmem
+  nop 2
+return:
+
+[DISABLE]
+hook:
+  readMem(BaseItemInstance_get_StackLimit_bytes,7)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+1E8BD5D
+
+GameAssembly.dll+1E8BD46: E8 35 BE 48 FE  - call GameAssembly.mono_method_get_class+B0
+GameAssembly.dll+1E8BD4B: CC              - int 3 
+GameAssembly.dll+1E8BD4C: CC              - int 3 
+GameAssembly.dll+1E8BD4D: CC              - int 3 
+GameAssembly.dll+1E8BD4E: CC              - int 3 
+GameAssembly.dll+1E8BD4F: CC              - int 3 
+ScheduleOne.Core.Items.Framework.BaseItemInstance.get_StackLimit: 48 83 EC 28     - sub rsp,28
+GameAssembly.dll+1E8BD54: 48 8B 41 28     - mov rax,[rcx+28]
+GameAssembly.dll+1E8BD58: 48 85 C0        - test rax,rax
+GameAssembly.dll+1E8BD5B: 74 08           - je GameAssembly.dll+1E8BD65
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+1E8BD5D: 8B 40 3C        - mov eax,[rax+3C]
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+1E8BD60: 48 83 C4 28     - add rsp,28
+GameAssembly.dll+1E8BD64: C3              - ret 
+GameAssembly.dll+1E8BD65: E8 16 BE 48 FE  - call GameAssembly.mono_method_get_class+B0
+GameAssembly.dll+1E8BD6A: CC              - int 3 
+GameAssembly.dll+1E8BD6B: CC              - int 3 
+GameAssembly.dll+1E8BD6C: CC              - int 3 
+GameAssembly.dll+1E8BD6D: CC              - int 3 
+GameAssembly.dll+1E8BD6E: CC              - int 3 
+GameAssembly.dll+1E8BD6F: CC              - int 3 
+ScheduleOne.Core.Items.Framework.BaseItemInstance.remove_onDataChanged: 48 89 6C 24 10  - mov [rsp+10],rbp
+}
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>33</ID>
+          <Description>"World"</Description>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>6</ID>
+              <Description>"Time Management"</Description>
+              <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-14
+  Author : root
+
+  Grabs TimeManager pointer
+}
+define(hook,ScheduleOne.GameTime.TimeManager.FixedUpdate)
+define(bytes,48 83 B9 A8 01 00 00 00)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+
+label(TimeManager_FixedUpdate_bytes)
+registersymbol(TimeManager_FixedUpdate_bytes)
+
+label(pTimeManager)
+registersymbol(pTimeManager)
+
+newmem:
+  mov [pTimeManager], rcx
+
+code:
+  cmp qword ptr [rcx+000001A8],00
+  jmp return
+
+TimeManager_FixedUpdate_bytes:
+  readMem(hook,8)
+
+pTimeManager:
+  dq 0
+
+hook:
+  jmp newmem
+  nop 3
+return:
+
+[DISABLE]
+hook:
+  readMem(TimeManager_FixedUpdate_bytes,8)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.GameTime.TimeManager.FixedUpdate
+
+GameAssembly.dll+9C8FD6: CC                       - int 3 
+GameAssembly.dll+9C8FD7: CC                       - int 3 
+GameAssembly.dll+9C8FD8: CC                       - int 3 
+GameAssembly.dll+9C8FD9: CC                       - int 3 
+GameAssembly.dll+9C8FDA: CC                       - int 3 
+GameAssembly.dll+9C8FDB: CC                       - int 3 
+GameAssembly.dll+9C8FDC: CC                       - int 3 
+GameAssembly.dll+9C8FDD: CC                       - int 3 
+GameAssembly.dll+9C8FDE: CC                       - int 3 
+GameAssembly.dll+9C8FDF: CC                       - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.GameTime.TimeManager.FixedUpdate: 48 83 B9 A8 01 00 00 00  - cmp qword ptr [rcx+000001A8],00
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+9C8FE8: 74 13                    - je GameAssembly.dll+9C8FFD
+GameAssembly.dll+9C8FEA: 48 8B 81 A8 01 00 00     - mov rax,[rcx+000001A8]
+GameAssembly.dll+9C8FF1: 48 8B 50 28              - mov rdx,[rax+28]
+GameAssembly.dll+9C8FF5: 48 8B 48 40              - mov rcx,[rax+40]
+GameAssembly.dll+9C8FF9: 48 FF 60 18              - jmp qword ptr [rax+18]
+GameAssembly.dll+9C8FFD: C3                       - ret 
+GameAssembly.dll+9C8FFE: CC                       - int 3 
+GameAssembly.dll+9C8FFF: CC                       - int 3 
+ScheduleOne.GameTime.TimeManager.Get12HourTime: F3 0F 11 44 24 08        - movss [rsp+08],xmm0
+GameAssembly.dll+9C9006: 53                       - push rbx
+}
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>7</ID>
+                  <Description>"pTimeManager"</Description>
+                  <ShowAsHex>1</ShowAsHex>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>808080</Color>
+                  <VariableType>8 Bytes</VariableType>
+                  <Address>pTimeManager</Address>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>9</ID>
+                  <Description>"Current Time"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pTimeManager</Address>
+                  <Offsets>
+                    <Offset>128</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>8</ID>
+                  <Description>"Elapsed Days"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>4 Bytes</VariableType>
+                  <Address>pTimeManager</Address>
+                  <Offsets>
+                    <Offset>12c</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>26</ID>
+                  <Description>"Playtime"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>pTimeManager</Address>
+                  <Offsets>
+                    <Offset>130</Offset>
+                  </Offsets>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>27</ID>
+                  <Description>"Time Speed Multiplier"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
+                  <Color>FF8080</Color>
+                  <VariableType>Float</VariableType>
+                  <Address>pTimeManager</Address>
+                  <Offsets>
+                    <Offset>134</Offset>
+                  </Offsets>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>13</ID>
+              <Description>"Infinite Trash Can"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version:
+  Date   : 2026-10-14
+  Author : root
+
+  Prevent trash from being added to the trash can
+}
+
+define(hook,ScheduleOne.Trash.TrashContainer.AddTrash)
+define(bytes,40 53 55 56 57)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(TrashContainer_AddTrash_bytes)
+registersymbol(TrashContainer_AddTrash_bytes)
+
+newmem:
+TrashContainer_AddTrash_bytes:
+  readMem(hook,5)
+
+hook:
+  xor eax, eax
+  ret
+  nop 2
+
+[DISABLE]
+hook:
+  readMem(TrashContainer_AddTrash_bytes,5)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.Trash.TrashContainer.AddTrash
+
+GameAssembly.dll+7B979F: E8 FC 98 21 00  - call ScheduleOne.Variables.VariableDatabase.SetVariableValue
+GameAssembly.dll+7B97A4: 4C 8B 74 24 30  - mov r14,[rsp+30]
+GameAssembly.dll+7B97A9: 48 8B 74 24 60  - mov rsi,[rsp+60]
+GameAssembly.dll+7B97AE: 48 8B 6C 24 50  - mov rbp,[rsp+50]
+GameAssembly.dll+7B97B3: 48 83 C4 38     - add rsp,38
+GameAssembly.dll+7B97B7: 5F              - pop rdi
+GameAssembly.dll+7B97B8: 5B              - pop rbx
+GameAssembly.dll+7B97B9: C3              - ret
+GameAssembly.dll+7B97BA: E8 C1 E3 B5 FF  - call GameAssembly.mono_method_get_class+B0
+GameAssembly.dll+7B97BF: CC              - int 3
+// ---------- INJECTING HERE ----------
+ScheduleOne.Trash.TrashContainer.AddTrash: 40 53           - push rbx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+7B97C2: 55              - push rbp
+GameAssembly.dll+7B97C3: 56              - push rsi
+GameAssembly.dll+7B97C4: 57              - push rdi
+GameAssembly.dll+7B97C5: 41 56           - push r14
+GameAssembly.dll+7B97C7: 41 57           - push r15
+GameAssembly.dll+7B97C9: 48 83 EC 58     - sub rsp,58
+GameAssembly.dll+7B97CD: 4D 63 F1        - movsxd  r14,r9d
+GameAssembly.dll+7B97D0: 4D 8B F8        - mov r15,r8
+GameAssembly.dll+7B97D3: 48 8B EA        - mov rbp,rdx
+GameAssembly.dll+7B97D6: 48 8B D9        - mov rbx,rcx
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>123</ID>
+              <Description>"Sewer Always Open"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-22
+  Author : root
+
+  protected override bool CanPlayerAccess(EDoorSide side, out string reason)
+}
+
+define(hook,ScheduleOne.Doors.SewerDoorController.CanPlayerAccess)
+define(bytes,48 89 5C 24 08)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(SewerDoorController_CanPlayerAccess_bytes)
+registersymbol(SewerDoorController_CanPlayerAccess_bytes)
+
+newmem:
+SewerDoorController_CanPlayerAccess_bytes:
+  readMem(hook,5)
+
+hook:
+  mov al, 1
+  ret
+  nop 2
+
+[DISABLE]
+hook:
+  readMem(SewerDoorController_CanPlayerAccess_bytes,5)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.Doors.SewerDoorController.CanPlayerAccess
+
+GameAssembly.dll+709056: CC                    - int 3 
+GameAssembly.dll+709057: CC                    - int 3 
+GameAssembly.dll+709058: CC                    - int 3 
+GameAssembly.dll+709059: CC                    - int 3 
+GameAssembly.dll+70905A: CC                    - int 3 
+GameAssembly.dll+70905B: CC                    - int 3 
+GameAssembly.dll+70905C: CC                    - int 3 
+GameAssembly.dll+70905D: CC                    - int 3 
+GameAssembly.dll+70905E: CC                    - int 3 
+GameAssembly.dll+70905F: CC                    - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.Doors.SewerDoorController.CanPlayerAccess: 48 89 5C 24 08        - mov [rsp+08],rbx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+709065: 48 89 74 24 10        - mov [rsp+10],rsi
+GameAssembly.dll+70906A: 57                    - push rdi
+GameAssembly.dll+70906B: 48 83 EC 20           - sub rsp,20
+GameAssembly.dll+70906F: 80 3D 10 31 4F 03 00  - cmp byte ptr [GameAssembly.dll+3BFC186],00
+GameAssembly.dll+709076: 49 8B F8              - mov rdi,r8
+GameAssembly.dll+709079: 8B F2                 - mov esi,edx
+GameAssembly.dll+70907B: 48 8B D9              - mov rbx,rcx
+GameAssembly.dll+70907E: 75 37                 - jne GameAssembly.dll+7090B7
+GameAssembly.dll+709080: 48 8D 0D C9 C7 29 03  - lea rcx,[GameAssembly.dll+39A5850]
+GameAssembly.dll+709087: E8 14 E8 C0 FF        - call GameAssembly.il2cpp_get_exception_argument_null+4C0
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>132</ID>
+              <Description>"Doors Always Open (Casino + Dark Market + ?)"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-24
+  Author : root
+
+  ScheduleOne.Map.AccessZone.SetIsOpen
+}
+
+define(hook,ScheduleOne.Map.AccessZone.SetIsOpen)
+define(bytes,40 53 55 56 57)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+
+label(AccessZone_SetIsOpen_bytes)
+registersymbol(AccessZone_SetIsOpen_bytes)
+
+newmem:
+  mov edx, 1
+
+code:
+  push rbx
+  push rbp
+  push rsi
+  push rdi
+  jmp return
+
+AccessZone_SetIsOpen_bytes:
+  readMem(hook,5)
+
+hook:
+  jmp newmem
+return:
+
+[DISABLE]
+hook:
+  readMem(AccessZone_SetIsOpen_bytes,5)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.Map.AccessZone.SetIsOpen
+
+GameAssembly.dll+5D4250: 48 FF A0 88 01 00 00  - jmp qword ptr [rax+00000188]
+GameAssembly.dll+5D4257: CC                    - int 3 
+GameAssembly.dll+5D4258: CC                    - int 3 
+GameAssembly.dll+5D4259: CC                    - int 3 
+GameAssembly.dll+5D425A: CC                    - int 3 
+GameAssembly.dll+5D425B: CC                    - int 3 
+GameAssembly.dll+5D425C: CC                    - int 3 
+GameAssembly.dll+5D425D: CC                    - int 3 
+GameAssembly.dll+5D425E: CC                    - int 3 
+GameAssembly.dll+5D425F: CC                    - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.Map.AccessZone.SetIsOpen: 40 53                 - push rbx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+5D4262: 55                    - push rbp
+GameAssembly.dll+5D4263: 56                    - push rsi
+GameAssembly.dll+5D4264: 57                    - push rdi
+GameAssembly.dll+5D4265: 48 83 EC 68           - sub rsp,68
+GameAssembly.dll+5D4269: 4C 8B 41 28           - mov r8,[rcx+28]
+GameAssembly.dll+5D426D: 48 8B D9              - mov rbx,rcx
+GameAssembly.dll+5D4270: 0F B6 71 20           - movzx esi,byte ptr [rcx+20]
+GameAssembly.dll+5D4274: 0F 29 74 24 50        - movaps [rsp+50],xmm6
+GameAssembly.dll+5D4279: 0F 29 7C 24 40        - movaps [rsp+40],xmm7
+GameAssembly.dll+5D427E: 44 0F 29 44 24 30     - movaps [rsp+30],xmm8
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>129</ID>
+              <Description>"Casino Slots Always Win"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-23
+  Author : root
+
+  ScheduleOne.Casino.SlotMachine.EvaluateOutcome
+}
+
+define(hook,ScheduleOne.Casino.SlotMachine.EvaluateOutcome+23)
+define(bytes,7D 30)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(SlotMachine_EvaluateOutcome_bytes)
+registersymbol(SlotMachine_EvaluateOutcome_bytes)
+
+newmem:
+SlotMachine_EvaluateOutcome_bytes:
+  readMem(hook,2)
+
+hook:
+  db eb
+
+[DISABLE]
+hook:
+  readMem(SlotMachine_EvaluateOutcome_bytes,2)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+7577B3
+
+GameAssembly.dll+75778F: CC                 - int 3 
+ScheduleOne.Casino.SlotMachine.EvaluateOutcome: 48 83 EC 28        - sub rsp,28
+GameAssembly.dll+757794: 4C 8B C2           - mov r8,rdx
+GameAssembly.dll+757797: 48 85 D2           - test rdx,rdx
+GameAssembly.dll+75779A: 0F 84 AE 00 00 00  - je GameAssembly.dll+75784E
+GameAssembly.dll+7577A0: 44 8B 52 18        - mov r10d,[rdx+18]
+GameAssembly.dll+7577A4: B8 01 00 00 00     - mov eax,00000001
+GameAssembly.dll+7577A9: 44 8B C8           - mov r9d,eax
+GameAssembly.dll+7577AC: 0F 1F 40 00        - nop dword ptr [rax+00]
+GameAssembly.dll+7577B0: 41 3B C2           - cmp eax,r10d
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+7577B3: 7D 30              - jnl GameAssembly.dll+7577E5
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+7577B5: 45 3B CA           - cmp r9d,r10d
+GameAssembly.dll+7577B8: 0F 83 96 00 00 00  - jae GameAssembly.dll+757854
+GameAssembly.dll+7577BE: 41 8D 41 FF        - lea eax,[r9-01]
+GameAssembly.dll+7577C2: 41 3B C2           - cmp eax,r10d
+GameAssembly.dll+7577C5: 0F 83 89 00 00 00  - jae GameAssembly.dll+757854
+GameAssembly.dll+7577CB: 49 63 C1           - movsxd  rax,r9d
+GameAssembly.dll+7577CE: 49 63 D1           - movsxd  rdx,r9d
+GameAssembly.dll+7577D1: 41 8B 4C 80 1C     - mov ecx,[r8+rax*4+1C]
+GameAssembly.dll+7577D6: 41 39 4C 90 20     - cmp [r8+rdx*4+20],ecx
+GameAssembly.dll+7577DB: 75 22              - jne GameAssembly.dll+7577FF
+}
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>75</ID>
+          <Description>"Shopping"</Description>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>29</ID>
+              <Description>"Instant Deliveries"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-15
+  Author : root
+
+  ScheduleOne.Delivery.DeliveryInstance.GetTimeStatus
+}
+
+define(hook,ScheduleOne.Delivery.DeliveryInstance.GetTimeStatus)
+define(bytes,83 79 38 02 74 10 83 79 38 01 74 04 8B 41 3C C3 B8 FF FF FF FF C3)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+
+labeL(DeliveryInstance_GetTimeStatus_bytes)
+registersymbol(DeliveryInstance_GetTimeStatus_bytes)
+
+newmem:
+  mov [rcx+3c], 0 // 3c: TimeUntilArrival (int32)
+
+code:
+  cmp dword ptr [rcx+38],02 // 38: Status (ScheduleOne.Delivery.EDeliveryStatus)
+  je hook+16
+  jmp return
+
+DeliveryInstance_GetTimeStatus_bytes:
+  readMem(hook,6)
+
+hook:
+  jmp newmem
+  nop
+return:
+
+[DISABLE]
+hook:
+  readMem(DeliveryInstance_GetTimeStatus_bytes,6)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.Delivery.DeliveryInstance.GetTimeStatus
+
+GameAssembly.dll+738214: 41 5F           - pop r15
+GameAssembly.dll+738216: 41 5E           - pop r14
+GameAssembly.dll+738218: 5F              - pop rdi
+GameAssembly.dll+738219: 5E              - pop rsi
+GameAssembly.dll+73821A: 5D              - pop rbp
+GameAssembly.dll+73821B: 5B              - pop rbx
+GameAssembly.dll+73821C: C3              - ret 
+GameAssembly.dll+73821D: CC              - int 3 
+GameAssembly.dll+73821E: CC              - int 3 
+GameAssembly.dll+73821F: CC              - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.Delivery.DeliveryInstance.GetTimeStatus: 83 79 38 02     - cmp dword ptr [rcx+38],02
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+738224: 74 10           - je GameAssembly.dll+738236
+GameAssembly.dll+738226: 83 79 38 01     - cmp dword ptr [rcx+38],01
+GameAssembly.dll+73822A: 74 04           - je GameAssembly.dll+738230
+GameAssembly.dll+73822C: 8B 41 3C        - mov eax,[rcx+3C]
+GameAssembly.dll+73822F: C3              - ret 
+GameAssembly.dll+738230: B8 FF FF FF FF  - mov eax,FFFFFFFF
+GameAssembly.dll+738235: C3              - ret 
+GameAssembly.dll+738236: B8 FE FF FF FF  - mov eax,FFFFFFFE
+GameAssembly.dll+73823B: C3              - ret 
+GameAssembly.dll+73823C: CC              - int 3 
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>44</ID>
+              <Description>"Instant Dead Drops"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-16
+  Author : root
+
+  ScheduleOne.Economy.Supplier.MinPass
+  +2d0 = MinsUntilDeadropReady (int32)
+  +2f0 = _debt (float)
+}
+
+define(hook,ScheduleOne.Economy.Supplier.MinPass)
+define(bytes,40 53 48 83 EC 40)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+
+label(Supplier_MinPass_bytes)
+registersymbol(Supplier_MinPass_bytes)
+
+newmem:
+  mov dword ptr [rcx+2d0], 0
+  //mov dword ptr [rcx+2f0], 0
+
+code:
+  push rbx
+  sub rsp,40
+  jmp return
+
+Supplier_MinPass_bytes:
+  readMem(hook,6)
+
+hook:
+  jmp newmem
+  nop
+return:
+
+[DISABLE]
+hook:
+  readMem(Supplier_MinPass_bytes,6)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.Economy.Supplier.MinPass
+
+GameAssembly.dll+6EE196: CC                       - int 3 
+GameAssembly.dll+6EE197: CC                       - int 3 
+GameAssembly.dll+6EE198: CC                       - int 3 
+GameAssembly.dll+6EE199: CC                       - int 3 
+GameAssembly.dll+6EE19A: CC                       - int 3 
+GameAssembly.dll+6EE19B: CC                       - int 3 
+GameAssembly.dll+6EE19C: CC                       - int 3 
+GameAssembly.dll+6EE19D: CC                       - int 3 
+GameAssembly.dll+6EE19E: CC                       - int 3 
+GameAssembly.dll+6EE19F: CC                       - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.Economy.Supplier.MinPass: 40 53                    - push rbx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+6EE1A2: 48 83 EC 40              - sub rsp,40
+GameAssembly.dll+6EE1A6: 33 D2                    - xor edx,edx
+GameAssembly.dll+6EE1A8: C7 44 24 50 00 00 00 00  - mov [rsp+50],00000000
+GameAssembly.dll+6EE1B0: 48 8B D9                 - mov rbx,rcx
+GameAssembly.dll+6EE1B3: E8 08 1D D5 FF           - call CanvasSampleSaveFileImage.OnPointerDown
+GameAssembly.dll+6EE1B8: FF 83 00 03 00 00        - inc [rbx+00000300]
+GameAssembly.dll+6EE1BE: 83 BB C8 02 00 00 02     - cmp dword ptr [rbx+000002C8],02
+GameAssembly.dll+6EE1C5: 74 0B                    - je GameAssembly.dll+6EE1D2
+GameAssembly.dll+6EE1C7: FF 83 0C 03 00 00        - inc [rbx+0000030C]
+GameAssembly.dll+6EE1CD: E9 3B 01 00 00           - jmp GameAssembly.dll+6EE30D
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>112</ID>
+              <Description>"Auto Pay Supplier Debt"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-22
+  Author : root
+
+  // Namespace: ScheduleOne.Economy
+  public class Supplier : NPC // TypeDefIndex: 1659
+
+    public SupplierStash Stash; // 0x2E0
+    public float _debt; // 0x2F0
+
+    // RVA: 0x6F15B0 Offset: 0x6F07B0 VA: 0x1806F15B0
+    private void TryRecoverDebt()
+
+    // RVA: 0x6EEC40 Offset: 0x6EDE40 VA: 0x1806EEC40 Slot: 92
+    protected override void OnTick()
+
+
+  // Namespace: ScheduleOne.Economy
+  public class SupplierStash : MonoBehaviour // TypeDefIndex: 1662
+
+    private float &lt;CashAmount&gt;k__BackingField; // 0x50
+}
+
+define(hook,ScheduleOne.Economy.Supplier.OnTick)
+define(bytes,40 53 48 83 EC 20)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+
+label(Supplier_OnTick_bytes)
+registersymbol(Supplier_OnTick_bytes)
+
+newmem:
+  // get stash
+  mov rax, [rcx+2e0]
+  test rax, rax
+  jz code
+
+  // add debt amount to stash
+  mov r10d, [rcx+2f0]
+  mov [rax+50], r10d
+
+code:
+  push rbx
+  sub rsp,20
+  jmp return
+
+Supplier_OnTick_bytes:
+  readMem(hook,6)
+
+hook:
+  jmp newmem
+  nop
+return:
+
+[DISABLE]
+hook:
+  readMem(Supplier_OnTick_bytes,6)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.Economy.Supplier.OnTick
+
+GameAssembly.dll+6EEC2B: 48 8B 5C 24 40           - mov rbx,[rsp+40]
+GameAssembly.dll+6EEC30: 48 83 C4 30              - add rsp,30
+GameAssembly.dll+6EEC34: 5F                       - pop rdi
+GameAssembly.dll+6EEC35: C3                       - ret 
+GameAssembly.dll+6EEC36: E8 45 8F C2 FF           - call GameAssembly.mono_method_get_class+B0
+GameAssembly.dll+6EEC3B: CC                       - int 3 
+GameAssembly.dll+6EEC3C: CC                       - int 3 
+GameAssembly.dll+6EEC3D: CC                       - int 3 
+GameAssembly.dll+6EEC3E: CC                       - int 3 
+GameAssembly.dll+6EEC3F: CC                       - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.Economy.Supplier.OnTick: 40 53                    - push rbx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+6EEC42: 48 83 EC 20              - sub rsp,20
+GameAssembly.dll+6EEC46: 33 D2                    - xor edx,edx
+GameAssembly.dll+6EEC48: 48 8B D9                 - mov rbx,rcx
+GameAssembly.dll+6EEC4B: E8 70 12 D5 FF           - call CanvasSampleSaveFileImage.OnPointerDown
+GameAssembly.dll+6EEC50: 33 C9                    - xor ecx,ecx
+GameAssembly.dll+6EEC52: E8 19 6C 5B 00           - call FishNet.InstanceFinder.get_IsServer
+GameAssembly.dll+6EEC57: 84 C0                    - test al,al
+GameAssembly.dll+6EEC59: 74 62                    - je GameAssembly.dll+6EECBD
+GameAssembly.dll+6EEC5B: F3 0F 10 8B F0 02 00 00  - movss xmm1,[rbx+000002F0]
+GameAssembly.dll+6EEC63: 0F 57 C0                 - xorps xmm0,xmm0
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>101</ID>
+              <Description>"Dark Market Always Open"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-21
+  Author : root
+
+  ScheduleOne.Map.DarkMarketAccessZone.GetIsOpen
+}
+
+define(hook,ScheduleOne.Map.DarkMarketAccessZone.GetIsOpen)
+define(bytes,40 53 48 83 EC 20)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(DarkMarketAccessZone_GetIsOpen_bytes)
+registersymbol(DarkMarketAccessZone_GetIsOpen_bytes)
+
+newmem:
+DarkMarketAccessZone_GetIsOpen_bytes:
+  readMem(hook,6)
+
+hook:
+  mov al, 1
+  ret
+  nop 3
+
+[DISABLE]
+hook:
+  readMem(DarkMarketAccessZone_GetIsOpen_bytes,6)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.Map.DarkMarketAccessZone.GetIsOpen
+
+GameAssembly.dll+5D54C2: E9 49 5C 06 00        - jmp ScheduleOne.PlayerScripts.HotbarSlot..ctor
+GameAssembly.dll+5D54C7: CC                    - int 3 
+GameAssembly.dll+5D54C8: CC                    - int 3 
+GameAssembly.dll+5D54C9: CC                    - int 3 
+GameAssembly.dll+5D54CA: CC                    - int 3 
+GameAssembly.dll+5D54CB: CC                    - int 3 
+GameAssembly.dll+5D54CC: CC                    - int 3 
+GameAssembly.dll+5D54CD: CC                    - int 3 
+GameAssembly.dll+5D54CE: CC                    - int 3 
+GameAssembly.dll+5D54CF: CC                    - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.Map.DarkMarketAccessZone.GetIsOpen: 40 53                 - push rbx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+5D54D2: 48 83 EC 20           - sub rsp,20
+GameAssembly.dll+5D54D6: 80 3D A9 64 62 03 00  - cmp byte ptr [GameAssembly.dll+3BFB986],00
+GameAssembly.dll+5D54DD: 48 8B D9              - mov rbx,rcx
+GameAssembly.dll+5D54E0: 75 13                 - jne GameAssembly.dll+5D54F5
+GameAssembly.dll+5D54E2: 48 8D 0D E7 AF 3C 03  - lea rcx,[GameAssembly.dll+39A04D0]
+GameAssembly.dll+5D54E9: E8 B2 23 D4 FF        - call GameAssembly.il2cpp_get_exception_argument_null+4C0
+GameAssembly.dll+5D54EE: C6 05 91 64 62 03 01  - mov byte ptr [GameAssembly.dll+3BFB986],01
+GameAssembly.dll+5D54F5: 48 8B 05 D4 AF 3C 03  - mov rax,[GameAssembly.dll+39A04D0]
+GameAssembly.dll+5D54FC: 48 8B 40 20           - mov rax,[rax+20]
+GameAssembly.dll+5D5500: F6 80 35 01 00 00 01  - test byte ptr [rax+00000135],01
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>113</ID>
+              <Description>"Free Shopping (Bank)"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-22
+  Author : root
+
+  ScheduleOne.Money.MoneyManager.RpcLogic___ReceiveOnlineTransaction_1419830531
+
+  private void RpcLogic___ReceiveOnlineTransaction_1419830531(
+    string _transaction_Name,
+    float _unit_Amount,
+    float _quantity,
+    string _transaction_Note
+  )
+}
+
+define(hook,ScheduleOne.Money.MoneyManager.RpcLogic___ReceiveOnlineTransaction_1419830531)
+define(bytes,48 89 5C 24 10)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+
+label(fZero)
+
+label(MoneyManager_RpcLogic_ReceiveOnlineTransaction_bytes)
+registersymbol(MoneyManager_RpcLogic_ReceiveOnlineTransaction_bytes)
+
+newmem:
+  // just return if _unit_Amount is below zero
+  comiss xmm2, [fZero]
+  jnb code
+  ret
+
+code:
+  mov [rsp+10],rbx
+  jmp return
+
+fZero:
+  dd (float)0
+
+MoneyManager_RpcLogic_ReceiveOnlineTransaction_bytes:
+  readMem(hook,5)
+
+hook:
+  jmp newmem
+  return:
+
+[DISABLE]
+hook:
+  readMem(MoneyManager_RpcLogic_ReceiveOnlineTransaction_bytes,5)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.Money.MoneyManager.RpcLogic___ReceiveOnlineTransaction_1419830531
+
+GameAssembly.dll+5E6303: E8 98 CD 3E 00        - call ScheduleOne.Variables.VariableDatabase.SetVariableValue
+GameAssembly.dll+5E6308: 48 8B 7C 24 50        - mov rdi,[rsp+50]
+GameAssembly.dll+5E630D: 0F 28 74 24 30        - movaps xmm6,[rsp+30]
+GameAssembly.dll+5E6312: 48 83 C4 40           - add rsp,40
+GameAssembly.dll+5E6316: 5B                    - pop rbx
+GameAssembly.dll+5E6317: C3                    - ret 
+GameAssembly.dll+5E6318: E8 63 18 D3 FF        - call GameAssembly.mono_method_get_class+B0
+GameAssembly.dll+5E631D: CC                    - int 3 
+GameAssembly.dll+5E631E: CC                    - int 3 
+GameAssembly.dll+5E631F: CC                    - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.Money.MoneyManager.RpcLogic___ReceiveOnlineTransaction_1419830531: 48 89 5C 24 10        - mov [rsp+10],rbx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+5E6325: 48 89 74 24 18        - mov [rsp+18],rsi
+GameAssembly.dll+5E632A: 57                    - push rdi
+GameAssembly.dll+5E632B: 48 83 EC 60           - sub rsp,60
+GameAssembly.dll+5E632F: 80 3D 37 56 61 03 00  - cmp byte ptr [GameAssembly.dll+3BFB96D],00
+GameAssembly.dll+5E6336: 48 8B FA              - mov rdi,rdx
+GameAssembly.dll+5E6339: 0F 29 74 24 50        - movaps [rsp+50],xmm6
+GameAssembly.dll+5E633E: 48 8B F1              - mov rsi,rcx
+GameAssembly.dll+5E6341: 0F 29 7C 24 40        - movaps [rsp+40],xmm7
+GameAssembly.dll+5E6346: 0F 28 F3              - movaps xmm6,xmm3
+GameAssembly.dll+5E6349: 0F 28 FA              - movaps xmm7,xmm2
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>114</ID>
+              <Description>"Free Shopping (Cash)"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-22
+  Author : root
+
+  public void ChangeBalance(float amount)
+}
+
+define(hook,ScheduleOne.ItemFramework.CashInstance.ChangeBalance)
+define(bytes,40 53 48 83 EC 20)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+
+label(fZero)
+
+label(CashInstance_ChangeBalance_bytes)
+registersymbol(CashInstance_ChangeBalance_bytes)
+
+newmem:
+  // just return if amount is below zero
+  comiss xmm1, [fZero]
+  jnb code
+  ret
+
+code:
+  push rbx
+  sub rsp,20
+  jmp return
+
+fZero:
+  dd (float)0
+
+CashInstance_ChangeBalance_bytes:
+  readMem(hook,6)
+
+hook:
+  jmp newmem
+  nop
+return:
+
+[DISABLE]
+hook:
+  readMem(CashInstance_ChangeBalance_bytes,6)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.ItemFramework.CashInstance.ChangeBalance
+
+GameAssembly.dll+681766: CC                       - int 3 
+GameAssembly.dll+681767: CC                       - int 3 
+GameAssembly.dll+681768: CC                       - int 3 
+GameAssembly.dll+681769: CC                       - int 3 
+GameAssembly.dll+68176A: CC                       - int 3 
+GameAssembly.dll+68176B: CC                       - int 3 
+GameAssembly.dll+68176C: CC                       - int 3 
+GameAssembly.dll+68176D: CC                       - int 3 
+GameAssembly.dll+68176E: CC                       - int 3 
+GameAssembly.dll+68176F: CC                       - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.ItemFramework.CashInstance.ChangeBalance: 40 53                    - push rbx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+681772: 48 83 EC 20              - sub rsp,20
+GameAssembly.dll+681776: F3 0F 58 49 30           - addss xmm1,[rcx+30]
+GameAssembly.dll+68177B: 0F 57 C0                 - xorps xmm0,xmm0
+GameAssembly.dll+68177E: 48 8B D9                 - mov rbx,rcx
+GameAssembly.dll+681781: 0F 2F C1                 - comiss xmm0,xmm1
+GameAssembly.dll+681784: 77 12                    - ja GameAssembly.dll+681798
+GameAssembly.dll+681786: F3 0F 10 15 96 C2 7D 02  - movss xmm2,[GameAssembly.dll+2E5DA24]
+GameAssembly.dll+68178E: 0F 2F CA                 - comiss xmm1,xmm2
+GameAssembly.dll+681791: 76 08                    - jna GameAssembly.dll+68179B
+GameAssembly.dll+681793: 0F 28 CA                 - movaps xmm1,xmm2
+}
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>34</ID>
+          <Description>"Cops"</Description>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>28</ID>
+              <Description>"Body Search: Always Concealed"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-15
+  Author : root
+
+  ScheduleOne.UI.BodySearchScreen.IsSlotConcealed
+}
+
+define(hook,ScheduleOne.UI.BodySearchScreen.IsSlotConcealed)
+define(bytes,48 89 5C 24 08)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+
+label(BodySearchScreen_IsSlotConcealed_bytes)
+registersymbol(BodySearchScreen_IsSlotConcealed_bytes)
+
+newmem:
+  mov al, 1
+  ret
+
+code:
+  mov [rsp+08],rbx
+  jmp return
+
+BodySearchScreen_IsSlotConcealed_bytes:
+  readMem(hook,5)
+
+hook:
+  jmp newmem
+return:
+
+[DISABLE]
+hook:
+  readMem(BodySearchScreen_IsSlotConcealed_bytes,5)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.UI.BodySearchScreen.IsSlotConcealed
+
+GameAssembly.dll+9AA052: C3                    - ret 
+GameAssembly.dll+9AA053: E8 28 DB 96 FF        - call GameAssembly.mono_method_get_class+B0
+GameAssembly.dll+9AA058: CC                    - int 3 
+GameAssembly.dll+9AA059: CC                    - int 3 
+GameAssembly.dll+9AA05A: CC                    - int 3 
+GameAssembly.dll+9AA05B: CC                    - int 3 
+GameAssembly.dll+9AA05C: CC                    - int 3 
+GameAssembly.dll+9AA05D: CC                    - int 3 
+GameAssembly.dll+9AA05E: CC                    - int 3 
+GameAssembly.dll+9AA05F: CC                    - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.UI.BodySearchScreen.IsSlotConcealed: 48 89 5C 24 08        - mov [rsp+08],rbx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+9AA065: 57                    - push rdi
+GameAssembly.dll+9AA066: 48 83 EC 20           - sub rsp,20
+GameAssembly.dll+9AA06A: 80 3D B2 37 25 03 00  - cmp byte ptr [GameAssembly.dll+3BFD823],00
+GameAssembly.dll+9AA071: 48 8B FA              - mov rdi,rdx
+GameAssembly.dll+9AA074: 48 8B D9              - mov rbx,rcx
+GameAssembly.dll+9AA077: 75 13                 - jne GameAssembly.dll+9AA08C
+GameAssembly.dll+9AA079: 48 8D 0D 78 5F 04 03  - lea rcx,[GameAssembly.dll+39EFFF8]
+GameAssembly.dll+9AA080: E8 1B D8 96 FF        - call GameAssembly.il2cpp_get_exception_argument_null+4C0
+GameAssembly.dll+9AA085: C6 05 97 37 25 03 01  - mov byte ptr [GameAssembly.dll+3BFD823],01
+GameAssembly.dll+9AA08C: 48 8B 0D 65 5F 04 03  - mov rcx,[GameAssembly.dll+39EFFF8]
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>55</ID>
+              <Description>"Cops Ignore Player"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-17
+  Author : root
+
+  ScheduleOne.Police.PoliceOfficer.UpdateVision
+}
+
+define(hook,ScheduleOne.Police.PoliceOfficer.UpdateVision)
+define(bytes,48 89 74 24 18)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+
+label(PoliceOfficer_UpdateVision_bytes)
+registersymbol(PoliceOfficer_UpdateVision_bytes)
+
+newmem:
+// public bool &lt;IgnorePlayers&gt;k__BackingField; // 0x2C8
+  mov byte ptr [rcx+2c8], 1
+
+code:
+  mov [rsp+18],rsi
+  jmp return
+
+PoliceOfficer_UpdateVision_bytes:
+  readMem(hook,5)
+
+hook:
+  jmp newmem
+return:
+
+[DISABLE]
+hook:
+  readMem(PoliceOfficer_UpdateVision_bytes,5)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.Police.PoliceOfficer.UpdateVision
+
+GameAssembly.dll+751236: CC                    - int 3 
+GameAssembly.dll+751237: CC                    - int 3 
+GameAssembly.dll+751238: CC                    - int 3 
+GameAssembly.dll+751239: CC                    - int 3 
+GameAssembly.dll+75123A: CC                    - int 3 
+GameAssembly.dll+75123B: CC                    - int 3 
+GameAssembly.dll+75123C: CC                    - int 3 
+GameAssembly.dll+75123D: CC                    - int 3 
+GameAssembly.dll+75123E: CC                    - int 3 
+GameAssembly.dll+75123F: CC                    - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.Police.PoliceOfficer.UpdateVision: 48 89 74 24 18        - mov [rsp+18],rsi
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+751245: 48 89 7C 24 20        - mov [rsp+20],rdi
+GameAssembly.dll+75124A: 41 56                 - push r14
+GameAssembly.dll+75124C: 48 83 EC 40           - sub rsp,40
+GameAssembly.dll+751250: 80 3D 2C B2 4A 03 00  - cmp byte ptr [GameAssembly.dll+3BFC483],00
+GameAssembly.dll+751257: 48 8B F9              - mov rdi,rcx
+GameAssembly.dll+75125A: 0F 29 74 24 30        - movaps [rsp+30],xmm6
+GameAssembly.dll+75125F: 75 2B                 - jne GameAssembly.dll+75128C
+GameAssembly.dll+751261: 48 8D 0D 60 7B 24 03  - lea rcx,[GameAssembly.dll+3998DC8]
+GameAssembly.dll+751268: E8 33 66 BC FF        - call GameAssembly.il2cpp_get_exception_argument_null+4C0
+GameAssembly.dll+75126D: 48 8D 0D 2C 7C 24 03  - lea rcx,[GameAssembly.dll+3998EA0]
+}
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>135</ID>
+          <Description>"Properties"</Description>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>31</ID>
+              <Description>"Employees Work For Free"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-16
+  Author : root
+
+  Employees work for free
+}
+
+define(hook,ScheduleOne.Employees.Employee.IsPayAvailable)
+define(bytes,48 89 5C 24 08)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+
+label(Employee_IsPayAvailable_bytes)
+registersymbol(Employee_IsPayAvailable_bytes)
+
+newmem:
+  mov eax, 1
+  mov byte ptr [rcx+000002DC], al // PaidForToday
+
+code:
+  mov [rsp+08],rbx
+  jmp return
+
+Employee_IsPayAvailable_bytes:
+  readMem(hook,5)
+
+hook:
+  jmp newmem
+return:
+
+[DISABLE]
+hook:
+  readMem(Employee_IsPayAvailable_bytes,5)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.Employees.Employee.IsPayAvailable
+
+GameAssembly.dll+6D4446: CC                    - int 3 
+GameAssembly.dll+6D4447: CC                    - int 3 
+GameAssembly.dll+6D4448: CC                    - int 3 
+GameAssembly.dll+6D4449: CC                    - int 3 
+GameAssembly.dll+6D444A: CC                    - int 3 
+GameAssembly.dll+6D444B: CC                    - int 3 
+GameAssembly.dll+6D444C: CC                    - int 3 
+GameAssembly.dll+6D444D: CC                    - int 3 
+GameAssembly.dll+6D444E: CC                    - int 3 
+GameAssembly.dll+6D444F: CC                    - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.Employees.Employee.IsPayAvailable: 48 89 5C 24 08        - mov [rsp+08],rbx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+6D4455: 57                    - push rdi
+GameAssembly.dll+6D4456: 48 83 EC 20           - sub rsp,20
+GameAssembly.dll+6D445A: 80 3D 60 7B 52 03 00  - cmp byte ptr [GameAssembly.dll+3BFBFC1],00
+GameAssembly.dll+6D4461: 48 8B F9              - mov rdi,rcx
+GameAssembly.dll+6D4464: 75 13                 - jne GameAssembly.dll+6D4479
+GameAssembly.dll+6D4466: 48 8D 0D 8B BB 31 03  - lea rcx,[GameAssembly.dll+39EFFF8]
+GameAssembly.dll+6D446D: E8 2E 34 C4 FF        - call GameAssembly.il2cpp_get_exception_argument_null+4C0
+GameAssembly.dll+6D4472: C6 05 48 7B 52 03 01  - mov byte ptr [GameAssembly.dll+3BFBFC1],01
+GameAssembly.dll+6D4479: 48 8B 07              - mov rax,[rdi]
+GameAssembly.dll+6D447C: 48 8B CF              - mov rcx,rdi
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>134</ID>
+              <Description>"Max Employees 16"</Description>
+              <Color>0000FF</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-11-02
+  Author : root
+
+  // Namespace: ScheduleOne.Property
+  public class Property : NetworkBehaviour, ISaveable // TypeDefIndex: 757
+
+    private bool &lt;IsOwned&gt;k__BackingField; // 0x120
+    protected string propertyCode; // 0x150
+    public float Price; // 0x158
+    public int EmployeeCapacity; // 0x160
+
+    // RVA: 0x554740 Offset: 0x553940 VA: 0x180554740 Slot: 45
+    protected virtual void FixedUpdate()
+
+    // RVA: 0x557380 Offset: 0x556580 VA: 0x180557380
+    private void UpdateCulling()
+}
+
+define(hook,ScheduleOne.Property.Property.UpdateCulling)
+define(bytes,40 53 48 81 EC 90 00 00 00)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+
+label(Property_UpdateCulling_bytes)
+registersymbol(Property_UpdateCulling_bytes)
+
+
+newmem:
+  cmp dword ptr [rcx+160], 0
+  jz code
+  mov dword ptr [rcx+160], #16
+
+code:
+  push rbx
+  sub rsp,00000090
+  jmp return
+
+Property_UpdateCulling_bytes:
+  readMem(hook,9)
+
+hook:
+  jmp newmem
+  nop 4
+return:
+
+[DISABLE]
+hook:
+  readMem(Property_UpdateCulling_bytes,9)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.Property.Property.UpdateCulling
+
+GameAssembly.dll+557376: C3                    - ret 
+GameAssembly.dll+557377: CC                    - int 3 
+GameAssembly.dll+557378: CC                    - int 3 
+GameAssembly.dll+557379: CC                    - int 3 
+GameAssembly.dll+55737A: CC                    - int 3 
+GameAssembly.dll+55737B: CC                    - int 3 
+GameAssembly.dll+55737C: CC                    - int 3 
+GameAssembly.dll+55737D: CC                    - int 3 
+GameAssembly.dll+55737E: CC                    - int 3 
+GameAssembly.dll+55737F: CC                    - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.Property.Property.UpdateCulling: 40 53                 - push rbx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+557382: 48 81 EC 90 00 00 00  - sub rsp,00000090
+GameAssembly.dll+557389: 80 3D C6 41 6A 03 00  - cmp byte ptr [GameAssembly.dll+3BFB556],00
+GameAssembly.dll+557390: 48 8B D9              - mov rbx,rcx
+GameAssembly.dll+557393: 75 37                 - jne GameAssembly.dll+5573CC
+GameAssembly.dll+557395: 48 8D 0D 24 99 46 03  - lea rcx,[GameAssembly.dll+39C0CC0]
+GameAssembly.dll+55739C: E8 FF 04 DC FF        - call GameAssembly.il2cpp_get_exception_argument_null+4C0
+GameAssembly.dll+5573A1: 48 8D 0D 40 98 46 03  - lea rcx,[GameAssembly.dll+39C0BE8]
+GameAssembly.dll+5573A8: E8 F3 04 DC FF        - call GameAssembly.il2cpp_get_exception_argument_null+4C0
+GameAssembly.dll+5573AD: 48 8D 0D EC 50 49 03  - lea rcx,[GameAssembly.dll+39EC4A0]
+GameAssembly.dll+5573B4: E8 E7 04 DC FF        - call GameAssembly.il2cpp_get_exception_argument_null+4C0
+}
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>51</ID>
+          <Description>"Customers"</Description>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>50</ID>
+              <Description>"Max Customer Addiction"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-16
+  Author : root
+
+  ScheduleOne.Economy.Customer.OnMinPass
+}
+
+define(hook,ScheduleOne.Economy.Customer.OnMinPass)
+define(bytes,40 53 48 83 EC 60)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+
+label(Customer_OnMinPass_bytes)
+registersymbol(Customer_OnMinPass_bytes)
+
+newmem:
+  // public float &lt;CurrentAddiction&gt;k__BackingField; // 0x11C
+  mov dword ptr [rcx+11c], (float)1
+
+code:
+  push rbx
+  sub rsp,60
+  jmp return
+
+Customer_OnMinPass_bytes:
+  readMem(hook,6)
+
+hook:
+  jmp newmem
+  nop
+return:
+
+[DISABLE]
+hook:
+  readMem(Customer_OnMinPass_bytes,6)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.Economy.Customer.OnMinPass
+
+GameAssembly.dll+6C2BCF: 48 8B 7C 24 40        - mov rdi,[rsp+40]
+GameAssembly.dll+6C2BD4: 48 8B 6C 24 38        - mov rbp,[rsp+38]
+GameAssembly.dll+6C2BD9: 48 8B 5C 24 30        - mov rbx,[rsp+30]
+GameAssembly.dll+6C2BDE: 48 83 C4 20           - add rsp,20
+GameAssembly.dll+6C2BE2: 5E                    - pop rsi
+GameAssembly.dll+6C2BE3: E9 B8 57 21 01        - jmp GameAssembly.dll+18D83A0
+GameAssembly.dll+6C2BE8: E8 93 4F C5 FF        - call GameAssembly.mono_method_get_class+B0
+GameAssembly.dll+6C2BED: CC                    - int 3 
+GameAssembly.dll+6C2BEE: CC                    - int 3 
+GameAssembly.dll+6C2BEF: CC                    - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.Economy.Customer.OnMinPass: 40 53                 - push rbx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+6C2BF2: 48 83 EC 60           - sub rsp,60
+GameAssembly.dll+6C2BF6: 80 3D 13 94 53 03 00  - cmp byte ptr [GameAssembly.dll+3BFC010],00
+GameAssembly.dll+6C2BFD: 48 8B D9              - mov rbx,rcx
+GameAssembly.dll+6C2C00: 0F 85 AF 00 00 00     - jne GameAssembly.dll+6C2CB5
+GameAssembly.dll+6C2C06: 48 8D 0D 43 15 32 03  - lea rcx,[GameAssembly.dll+39E4150]
+GameAssembly.dll+6C2C0D: E8 8E 4C C5 FF        - call GameAssembly.il2cpp_get_exception_argument_null+4C0
+GameAssembly.dll+6C2C12: 48 8D 0D 4F 71 33 03  - lea rcx,[GameAssembly.dll+39F9D68]
+GameAssembly.dll+6C2C19: E8 82 4C C5 FF        - call GameAssembly.il2cpp_get_exception_argument_null+4C0
+GameAssembly.dll+6C2C1E: 48 8D 0D DB EE 33 03  - lea rcx,[GameAssembly.dll+3A01B00]
+GameAssembly.dll+6C2C25: E8 76 4C C5 FF        - call GameAssembly.il2cpp_get_exception_argument_null+4C0
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>69</ID>
+              <Description>"Max Customer Relationship"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-18
+  Author : root
+
+  This script does blah blah blah
+}
+
+define(hook,ScheduleOne.NPCs.Relation.NPCRelationData.SetRelationship)
+define(bytes,48 89 5C 24 08)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+
+label(NPCRelationData_SetRelationship_bytes)
+registersymbol(NPCRelationData_SetRelationship_bytes)
+
+newmem:
+  mov eax, (float)10
+  movd xmm1, eax
+
+code:
+  mov [rsp+08],rbx
+  jmp return
+
+NPCRelationData_SetRelationship_bytes:
+  readMem(hook,5)
+
+hook:
+  jmp newmem
+return:
+
+[DISABLE]
+hook:
+  readMem(NPCRelationData_SetRelationship_bytes,5)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.NPCs.Relation.NPCRelationData.SetRelationship
+
+GameAssembly.dll+909806: 48 8B 74 24 30  - mov rsi,[rsp+30]
+GameAssembly.dll+90980B: 32 C0           - xor al,al
+GameAssembly.dll+90980D: 48 8B 5C 24 38  - mov rbx,[rsp+38]
+GameAssembly.dll+909812: 48 83 C4 20     - add rsp,20
+GameAssembly.dll+909816: 5F              - pop rdi
+GameAssembly.dll+909817: C3              - ret 
+GameAssembly.dll+909818: E8 63 E3 A0 FF  - call GameAssembly.mono_method_get_class+B0
+GameAssembly.dll+90981D: CC              - int 3 
+GameAssembly.dll+90981E: CC              - int 3 
+GameAssembly.dll+90981F: CC              - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.NPCs.Relation.NPCRelationData.SetRelationship: 48 89 5C 24 08  - mov [rsp+08],rbx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+909825: 57              - push rdi
+GameAssembly.dll+909826: 48 83 EC 20     - sub rsp,20
+GameAssembly.dll+90982A: 0F 28 C1        - movaps xmm0,xmm1
+GameAssembly.dll+90982D: 41 0F B6 F8     - movzx edi,r8b
+GameAssembly.dll+909831: 0F 2E 41 10     - ucomiss xmm0,[rcx+10]
+GameAssembly.dll+909835: 48 8B D9        - mov rbx,rcx
+GameAssembly.dll+909838: 7A 02           - jp GameAssembly.dll+90983C
+GameAssembly.dll+90983A: 74 6A           - je GameAssembly.dll+9098A6
+GameAssembly.dll+90983C: F3 0F 10 59 10  - movss xmm3,[rcx+10]
+GameAssembly.dll+909841: 0F 57 D2        - xorps xmm2,xmm2
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>71</ID>
+              <Description>"Free Samples Always Accepted"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-20
+  Author : root
+
+  ScheduleOne.Economy.Customer.GetSampleSuccess
+}
+
+define(hook,ScheduleOne.Economy.Customer.GetSampleSuccess)
+define(bytes,48 8B C4 48 89 58 18)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+
+label(Customer_GetSampleSuccess_bytes)
+registersymbol(Customer_GetSampleSuccess_bytes)
+
+newmem:
+  mov eax, (float)1.0
+  movd xmm0, eax
+  ret
+
+code:
+  mov rax,rsp
+  mov [rax+18],rbx
+  jmp return
+
+Customer_GetSampleSuccess_bytes:
+  readMem(hook,7)
+
+hook:
+  jmp newmem
+  nop 2
+return:
+
+[DISABLE]
+hook:
+  readMem(Customer_GetSampleSuccess_bytes,7)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.Economy.Customer.GetSampleSuccess
+
+GameAssembly.dll+6BFA12: E8 69 81 C5 FF        - call GameAssembly.mono_method_get_class+B0
+GameAssembly.dll+6BFA17: CC                    - int 3 
+GameAssembly.dll+6BFA18: CC                    - int 3 
+GameAssembly.dll+6BFA19: CC                    - int 3 
+GameAssembly.dll+6BFA1A: CC                    - int 3 
+GameAssembly.dll+6BFA1B: CC                    - int 3 
+GameAssembly.dll+6BFA1C: CC                    - int 3 
+GameAssembly.dll+6BFA1D: CC                    - int 3 
+GameAssembly.dll+6BFA1E: CC                    - int 3 
+GameAssembly.dll+6BFA1F: CC                    - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.Economy.Customer.GetSampleSuccess: 48 8B C4              - mov rax,rsp
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+6BFA23: 48 89 58 18           - mov [rax+18],rbx
+GameAssembly.dll+6BFA27: 48 89 48 08           - mov [rax+08],rcx
+GameAssembly.dll+6BFA2B: 56                    - push rsi
+GameAssembly.dll+6BFA2C: 57                    - push rdi
+GameAssembly.dll+6BFA2D: 41 56                 - push r14
+GameAssembly.dll+6BFA2F: 48 81 EC C0 00 00 00  - sub rsp,000000C0
+GameAssembly.dll+6BFA36: 0F 29 70 D8           - movaps [rax-28],xmm6
+GameAssembly.dll+6BFA3A: 0F 29 78 C8           - movaps [rax-38],xmm7
+GameAssembly.dll+6BFA3E: 44 0F 29 40 B8        - movaps [rax-48],xmm8
+GameAssembly.dll+6BFA43: 44 0F 29 48 A8        - movaps [rax-58],xmm9
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>73</ID>
+              <Description>"Customer Accept Any Offer"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-20
+  Author : root
+
+  ScheduleOne.Economy.Customer.GetOfferSuccessChance
+
+  Any offer "Do you want to buy something?" will be accepted
+}
+
+define(hook,ScheduleOne.Economy.Customer.GetOfferSuccessChance)
+define(bytes,40 55 41 56 48 81 EC D8 00 00 00)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+
+label(Customer_GetOfferSuccessChance_bytes)
+registersymbol(Customer_GetOfferSuccessChance_bytes)
+
+newmem:
+  mov eax, (float)1.0
+  movd xmm0, eax
+  ret
+
+code:
+  push rbp
+  push r14
+  sub rsp,000000D8
+  jmp return
+
+Customer_GetOfferSuccessChance_bytes:
+  readMem(hook,11)
+
+hook:
+  jmp newmem
+  nop 6
+return:
+
+[DISABLE]
+hook:
+  readMem(Customer_GetOfferSuccessChance_bytes,11)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.Economy.Customer.GetOfferSuccessChance
+
+GameAssembly.dll+6BE1DB: 48 8B 5C 24 30        - mov rbx,[rsp+30]
+GameAssembly.dll+6BE1E0: 48 83 C4 20           - add rsp,20
+GameAssembly.dll+6BE1E4: 5F                    - pop rdi
+GameAssembly.dll+6BE1E5: C3                    - ret 
+GameAssembly.dll+6BE1E6: E8 95 99 C5 FF        - call GameAssembly.mono_method_get_class+B0
+GameAssembly.dll+6BE1EB: CC                    - int 3 
+GameAssembly.dll+6BE1EC: CC                    - int 3 
+GameAssembly.dll+6BE1ED: CC                    - int 3 
+GameAssembly.dll+6BE1EE: CC                    - int 3 
+GameAssembly.dll+6BE1EF: CC                    - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.Economy.Customer.GetOfferSuccessChance: 40 55                 - push rbp
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+6BE1F2: 41 56                 - push r14
+GameAssembly.dll+6BE1F4: 48 81 EC D8 00 00 00  - sub rsp,000000D8
+GameAssembly.dll+6BE1FB: 80 3D 3B DE 53 03 00  - cmp byte ptr [GameAssembly.dll+3BFC03D],00
+GameAssembly.dll+6BE202: 48 8B EA              - mov rbp,rdx
+GameAssembly.dll+6BE205: 44 0F 29 6C 24 50     - movaps [rsp+50],xmm13
+GameAssembly.dll+6BE20B: 4C 8B F1              - mov r14,rcx
+GameAssembly.dll+6BE20E: 44 0F 28 EA           - movaps xmm13,xmm2
+GameAssembly.dll+6BE212: 0F 85 AF 00 00 00     - jne GameAssembly.dll+6BE2C7
+GameAssembly.dll+6BE218: 48 8D 0D E1 38 34 03  - lea rcx,[GameAssembly.dll+3A01B00]
+GameAssembly.dll+6BE21F: E8 7C 96 C5 FF        - call GameAssembly.il2cpp_get_exception_argument_null+4C0
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>74</ID>
+              <Description>"Customer Accept Any Counter-Offer"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-20
+  Author : root
+
+  // RVA: 0x6BCEC0 Offset: 0x6BC0C0 VA: 0x1806BCEC0 Slot: 57
+  protected virtual bool EvaluateCounteroffer(ProductDefinition product, int quantity, float price)
+}
+
+define(hook,ScheduleOne.Economy.Customer.EvaluateCounteroffer)
+define(bytes,48 89 5C 24 18)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+
+label(Customer_EvaluateCounteroffer_bytes)
+registersymbol(Customer_EvaluateCounteroffer_bytes)
+
+newmem:
+  mov al, 1
+  ret
+
+code:
+  mov [rsp+18],rbx
+  jmp return
+
+Customer_EvaluateCounteroffer_bytes:
+  readMem(hook,5)
+
+hook:
+  jmp newmem
+return:
+
+[DISABLE]
+hook:
+  readMem(Customer_EvaluateCounteroffer_bytes,5)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.Economy.Customer.EvaluateCounteroffer
+
+GameAssembly.dll+6BCEAE: E9 0D C0 25 00        - jmp ScheduleOne.NPCs.Behaviour.Behaviour.Disable_Server
+GameAssembly.dll+6BCEB3: E8 C8 AC C5 FF        - call GameAssembly.mono_method_get_class+B0
+GameAssembly.dll+6BCEB8: CC                    - int 3 
+GameAssembly.dll+6BCEB9: CC                    - int 3 
+GameAssembly.dll+6BCEBA: CC                    - int 3 
+GameAssembly.dll+6BCEBB: CC                    - int 3 
+GameAssembly.dll+6BCEBC: CC                    - int 3 
+GameAssembly.dll+6BCEBD: CC                    - int 3 
+GameAssembly.dll+6BCEBE: CC                    - int 3 
+GameAssembly.dll+6BCEBF: CC                    - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.Economy.Customer.EvaluateCounteroffer: 48 89 5C 24 18        - mov [rsp+18],rbx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+6BCEC5: 48 89 6C 24 20        - mov [rsp+20],rbp
+GameAssembly.dll+6BCECA: 41 56                 - push r14
+GameAssembly.dll+6BCECC: 48 81 EC A0 00 00 00  - sub rsp,000000A0
+GameAssembly.dll+6BCED3: 80 3D 4C F1 53 03 00  - cmp byte ptr [GameAssembly.dll+3BFC026],00
+GameAssembly.dll+6BCEDA: 45 8B F0              - mov r14d,r8d
+GameAssembly.dll+6BCEDD: 44 0F 29 64 24 40     - movaps [rsp+40],xmm12
+GameAssembly.dll+6BCEE3: 48 8B EA              - mov rbp,rdx
+GameAssembly.dll+6BCEE6: 44 0F 28 E3           - movaps xmm12,xmm3
+GameAssembly.dll+6BCEEA: 48 8B D9              - mov rbx,rcx
+GameAssembly.dll+6BCEED: 75 4F                 - jne GameAssembly.dll+6BCF3E
+}
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>76</ID>
+          <Description>"Production"</Description>
+          <GroupHeader>1</GroupHeader>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>77</ID>
+              <Description>"Pots Infinite Water + Soil (add soil once)"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-20
+  Author : root
+
+  ScheduleOne.Growing.GrowContainer.OnMinPass
+
+  private float &lt;SoilCapacity&gt;k__BackingField; // 0x210
+  private float &lt;MoistureCapacity&gt;k__BackingField; // 0x214
+
+  private SoilDefinition &lt;CurrentSoil&gt;k__BackingField; // 0x2B0
+  private List&lt;AdditiveDefinition&gt; &lt;AppliedAdditives&gt;k__BackingField; // 0x2B8
+
+  protected float _currentSoilAmount; // 0x2F8
+  protected float _currentMoistureAmount; // 0x2FC
+  protected int _remainingSoilUses; // 0x300
+}
+
+define(hook,ScheduleOne.Growing.GrowContainer.OnMinPass)
+define(bytes,40 53 48 83 EC 20)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+label(set_moisture)
+
+label(GrowContainer_OnMinPass_bytes)
+registersymbol(GrowContainer_OnMinPass_bytes)
+
+newmem:
+  mov [rcx+300], 5   // soil remaining uses
+  //mov eax, [rcx+210] // soil capacity
+  //mov [rcx+2f8], eax // soil level
+
+set_moisture:
+  mov eax, [rcx+214] // moisture capacity
+  mov [rcx+2fc], eax // moisture level
+
+  mov [rcx+300], 5 // remaining uses
+
+code:
+  push rbx
+  sub rsp,20
+  jmp return
+
+GrowContainer_OnMinPass_bytes:
+  readMem(hook,6)
+
+hook:
+  jmp newmem
+  nop
+return:
+
+[DISABLE]
+hook:
+  readMem(GrowContainer_OnMinPass_bytes,6)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.Growing.GrowContainer.OnMinPass
+
+GameAssembly.dll+7E5C72: C3                       - ret 
+GameAssembly.dll+7E5C73: E8 08 1F B3 FF           - call GameAssembly.mono_method_get_class+B0
+GameAssembly.dll+7E5C78: CC                       - int 3 
+GameAssembly.dll+7E5C79: CC                       - int 3 
+GameAssembly.dll+7E5C7A: CC                       - int 3 
+GameAssembly.dll+7E5C7B: CC                       - int 3 
+GameAssembly.dll+7E5C7C: CC                       - int 3 
+GameAssembly.dll+7E5C7D: CC                       - int 3 
+GameAssembly.dll+7E5C7E: CC                       - int 3 
+GameAssembly.dll+7E5C7F: CC                       - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.Growing.GrowContainer.OnMinPass: 40 53                    - push rbx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+7E5C82: 48 83 EC 20              - sub rsp,20
+GameAssembly.dll+7E5C86: 80 3D 16 6D 41 03 00     - cmp byte ptr [GameAssembly.dll+3BFC9A3],00
+GameAssembly.dll+7E5C8D: 48 8B D9                 - mov rbx,rcx
+GameAssembly.dll+7E5C90: 75 13                    - jne GameAssembly.dll+7E5CA5
+GameAssembly.dll+7E5C92: 48 8D 0D DF 15 1C 03     - lea rcx,[GameAssembly.dll+39A7278]
+GameAssembly.dll+7E5C99: E8 02 1C B3 FF           - call GameAssembly.il2cpp_get_exception_argument_null+4C0
+GameAssembly.dll+7E5C9E: C6 05 FE 6C 41 03 01     - mov byte ptr [GameAssembly.dll+3BFC9A3],01
+GameAssembly.dll+7E5CA5: 48 83 BB E8 02 00 00 00  - cmp qword ptr [rbx+000002E8],00
+GameAssembly.dll+7E5CAD: 74 12                    - je GameAssembly.dll+7E5CC1
+GameAssembly.dll+7E5CAF: 48 8B 83 E8 02 00 00     - mov rax,[rbx+000002E8]
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>78</ID>
+              <Description>"Plant Modifiers"</Description>
+              <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-20
+  Author : root
+
+  ScheduleOne.Growing.Plant.MinPass
+
+  private float &lt;NormalizedGrowthProgress&gt;k__BackingField; // 0x28
+  private float &lt;YieldMultiplier&gt;k__BackingField; // 0x2C
+  private float &lt;QualityLevel&gt;k__BackingField; // 0x30
+
+  public int GrowthTime; // 0x80
+  public int BaseYieldQuantity; // 0x84
+}
+
+define(hook,ScheduleOne.Growing.Plant.MinPass)
+define(bytes,48 89 5C 24 10)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+label(set_yield)
+label(set_quality)
+label(set_instant_grow)
+
+label(Plant_MinPass_bytes)
+registersymbol(Plant_MinPass_bytes)
+
+label(bPlantModYield)
+registersymbol(bPlantModYield)
+
+label(bPlantModQuality)
+registersymbol(bPlantModQuality)
+
+label(bPlantModInstantGrow)
+registersymbol(bPlantModInstantGrow)
+
+newmem:
+set_yield:
+  // YieldMultiplier (max 16 units?)
+  cmp byte ptr [bPlantModYield], 0
+  jz set_quality
+  mov dword ptr [rcx+2c], (float)10
+
+set_quality:
+  cmp byte ptr [bPlantModQuality], 0
+  jz set_instant_grow
+  mov dword ptr [rcx+30], (float)1.0 // QualityLevel -&gt; Heavenly
+
+set_instant_grow:
+  cmp byte ptr [bPlantModInstantGrow], 0
+  jz code
+
+  // only set GrowthTime to 0 once NormalizedGrowthProgress is not zero
+  // to prevent glitch with negative percent grown
+  mov eax, [rcx+28]
+  test eax, eax
+  jz code
+  mov dword ptr [rcx+80], 0 // GrowthTime
+
+code:
+  mov [rsp+10],rbx
+  jmp return
+
+Plant_MinPass_bytes:
+  readMem(hook,5)
+
+bPlantModYield:
+  db 0
+
+bPlantModQuality:
+  db 0
+
+bPlantModInstantGrow:
+  db 0
+
+hook:
+  jmp newmem
+return:
+
+[DISABLE]
+hook:
+  readMem(Plant_MinPass_bytes,5)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.Growing.Plant.MinPass
+
+GameAssembly.dll+7FC1E6: CC                    - int 3 
+GameAssembly.dll+7FC1E7: CC                    - int 3 
+GameAssembly.dll+7FC1E8: CC                    - int 3 
+GameAssembly.dll+7FC1E9: CC                    - int 3 
+GameAssembly.dll+7FC1EA: CC                    - int 3 
+GameAssembly.dll+7FC1EB: CC                    - int 3 
+GameAssembly.dll+7FC1EC: CC                    - int 3 
+GameAssembly.dll+7FC1ED: CC                    - int 3 
+GameAssembly.dll+7FC1EE: CC                    - int 3 
+GameAssembly.dll+7FC1EF: CC                    - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.Growing.Plant.MinPass: 48 89 5C 24 10        - mov [rsp+10],rbx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+7FC1F5: 57                    - push rdi
+GameAssembly.dll+7FC1F6: 48 83 EC 60           - sub rsp,60
+GameAssembly.dll+7FC1FA: 80 3D D2 07 40 03 00  - cmp byte ptr [GameAssembly.dll+3BFC9D3],00
+GameAssembly.dll+7FC201: 8B FA                 - mov edi,edx
+GameAssembly.dll+7FC203: 0F 29 7C 24 40        - movaps [rsp+40],xmm7
+GameAssembly.dll+7FC208: 48 8B D9              - mov rbx,rcx
+GameAssembly.dll+7FC20B: 44 0F 29 44 24 30     - movaps [rsp+30],xmm8
+GameAssembly.dll+7FC211: 75 13                 - jne GameAssembly.dll+7FC226
+GameAssembly.dll+7FC213: 48 8D 0D 5E B0 1A 03  - lea rcx,[GameAssembly.dll+39A7278]
+GameAssembly.dll+7FC21A: E8 81 B6 B1 FF        - call GameAssembly.il2cpp_get_exception_argument_null+4C0
+}
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>80</ID>
+                  <Description>"Max Yield"</Description>
+                  <Color>FF8080</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+bPlantModYield:
+  db 1
+
+[DISABLE]
+bPlantModYield:
+  db 0
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>81</ID>
+                  <Description>"Max Quality"</Description>
+                  <Color>FF8080</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+bPlantModQuality:
+  db 1
+
+[DISABLE]
+bPlantModQuality:
+  db 0
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>82</ID>
+                  <Description>"Instant Grow"</Description>
+                  <Color>FF8080</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+bPlantModInstantGrow:
+  db 1
+
+[DISABLE]
+bPlantModInstantGrow:
+  db 0
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>102</ID>
+              <Description>"Cauldron Modifiers"</Description>
+              <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-21
+  Author : root
+
+  ScheduleOne.ObjectScripts.Cauldron.OnMinPass
+
+  // Namespace: ScheduleOne.ObjectScripts
+  public class Cauldron : GridItem, IUsable, IItemSlotOwner, ITransitEntity, IConfigurable // TypeDefIndex: 2536
+
+    public int RemainingCookTime; // 0x338
+	public EQuality InputQuality; // 0x33C
+
+    // RVA: 0x85D7C0 Offset: 0x85C9C0 VA: 0x18085D7C0
+    private void OnMinPass()
+}
+
+define(hook,ScheduleOne.ObjectScripts.Cauldron.OnMinPass)
+define(bytes,45 33 C0 BA 01 00 00 00)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+label(mod_quality)
+label(mod_instant)
+
+label(Cauldron_OnMinPass_bytes)
+registersymbol(Cauldron_OnMinPass_bytes)
+
+label(bCauldronModQuality)
+registersymbol(bCauldronModQuality)
+
+label(bCauldronModInstantCook)
+registersymbol(bCauldronModInstantCook)
+
+newmem:
+mod_instant:
+  cmp byte ptr [bCauldronModInstantCook], 0
+  jz mod_quality
+  mov eax, [rcx+338]
+  cmp eax, 0
+  jz mod_quality
+  mov dword ptr [rcx+338], 1
+
+mod_quality:
+  cmp byte ptr [bCauldronModQuality], 0
+  jz code
+  mov [rcx+33c], 4
+
+code:
+  xor r8d,r8d
+  mov edx,00000001
+  jmp return
+
+Cauldron_OnMinPass_bytes:
+  readMem(hook,8)
+
+bCauldronModQuality:
+  db 0
+
+bCauldronModInstantCook:
+  db 0
+
+hook:
+  jmp newmem
+  nop 3
+return:
+
+[DISABLE]
+hook:
+  readMem(Cauldron_OnMinPass_bytes,8)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.ObjectScripts.Cauldron.OnMinPass
+
+GameAssembly.dll+85D7B6: CC              - int 3 
+GameAssembly.dll+85D7B7: CC              - int 3 
+GameAssembly.dll+85D7B8: CC              - int 3 
+GameAssembly.dll+85D7B9: CC              - int 3 
+GameAssembly.dll+85D7BA: CC              - int 3 
+GameAssembly.dll+85D7BB: CC              - int 3 
+GameAssembly.dll+85D7BC: CC              - int 3 
+GameAssembly.dll+85D7BD: CC              - int 3 
+GameAssembly.dll+85D7BE: CC              - int 3 
+GameAssembly.dll+85D7BF: CC              - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.ObjectScripts.Cauldron.OnMinPass: 45 33 C0        - xor r8d,r8d
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+85D7C3: BA 01 00 00 00  - mov edx,00000001
+GameAssembly.dll+85D7C8: E9 93 01 00 00  - jmp ScheduleOne.ObjectScripts.Cauldron.OnTimePass
+GameAssembly.dll+85D7CD: CC              - int 3 
+GameAssembly.dll+85D7CE: CC              - int 3 
+GameAssembly.dll+85D7CF: CC              - int 3 
+ScheduleOne.ObjectScripts.Cauldron.OnSpawnServer: 48 89 5C 24 08  - mov [rsp+08],rbx
+GameAssembly.dll+85D7D5: 48 89 74 24 10  - mov [rsp+10],rsi
+GameAssembly.dll+85D7DA: 57              - push rdi
+GameAssembly.dll+85D7DB: 48 83 EC 30     - sub rsp,30
+GameAssembly.dll+85D7DF: 45 33 C0        - xor r8d,r8d
+}
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>104</ID>
+                  <Description>"Max Quality"</Description>
+                  <Color>FF8080</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+bCauldronModQuality:
+  db 1
+
+[DISABLE]
+bCauldronModQuality:
+  db 0
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>105</ID>
+                  <Description>"Instant Cook"</Description>
+                  <Color>FF8080</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+bCauldronModInstantCook:
+  db 1
+
+[DISABLE]
+bCauldronModInstantCook:
+  db 0
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>128</ID>
+              <Description>"Cauldron Doesn't Consume Gasoline"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-23
+  Author : root
+
+  ScheduleOne.ObjectScripts.Cauldron.RemoveIngredients
+}
+
+[ENABLE]
+aobscanmodule(_cauldron_remove_ingredients,GameAssembly.dll,e8 ? ? ? ? 48 8b 9f ? ? ? ? 48 85 db 0f 84 ? ? ? ? 8b 5b)
+registersymbol(_cauldron_remove_ingredients)
+alloc(newmem,$1000,_cauldron_remove_ingredients)
+
+label(Cauldron_RemoveIngredients_bytes)
+registersymbol(Cauldron_RemoveIngredients_bytes)
+
+newmem:
+Cauldron_RemoveIngredients_bytes:
+  readMem(_cauldron_remove_ingredients,5)
+
+_cauldron_remove_ingredients:
+  nop 5
+
+
+[DISABLE]
+_cauldron_remove_ingredients:
+  readMem(Cauldron_RemoveIngredients_bytes,5)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+85DDC4
+
+GameAssembly.dll+85DD95: 48 8B 8F 18 02 00 00  - mov rcx,[rdi+00000218]
+GameAssembly.dll+85DD9C: 48 89 5C 24 30        - mov [rsp+30],rbx
+GameAssembly.dll+85DDA1: 48 89 6C 24 38        - mov [rsp+38],rbp
+GameAssembly.dll+85DDA6: 48 89 74 24 40        - mov [rsp+40],rsi
+GameAssembly.dll+85DDAB: 4C 89 74 24 48        - mov [rsp+48],r14
+GameAssembly.dll+85DDB0: 48 85 C9              - test rcx,rcx
+GameAssembly.dll+85DDB3: 0F 84 84 01 00 00     - je GameAssembly.dll+85DF3D
+GameAssembly.dll+85DDB9: 45 33 C9              - xor r9d,r9d
+GameAssembly.dll+85DDBC: 45 33 C0              - xor r8d,r8d
+GameAssembly.dll+85DDBF: BA FF FF FF FF        - mov edx,FFFFFFFF
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+85DDC4: E8 A7 EF E2 FF        - call ScheduleOne.ItemFramework.ItemSlot.ChangeQuantity
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+85DDC9: 48 8B 9F 10 02 00 00  - mov rbx,[rdi+00000210]
+GameAssembly.dll+85DDD0: 48 85 DB              - test rbx,rbx
+GameAssembly.dll+85DDD3: 0F 84 64 01 00 00     - je GameAssembly.dll+85DF3D
+GameAssembly.dll+85DDD9: 8B 5B 18              - mov ebx,[rbx+18]
+GameAssembly.dll+85DDDC: BE 04 00 00 00        - mov esi,00000004
+GameAssembly.dll+85DDE1: 83 EB 01              - sub ebx,01
+GameAssembly.dll+85DDE4: 41 BE 14 00 00 00     - mov r14d,00000014
+GameAssembly.dll+85DDEA: 0F 88 31 01 00 00     - js GameAssembly.dll+85DF21
+GameAssembly.dll+85DDF0: 45 85 F6              - test r14d,r14d
+GameAssembly.dll+85DDF3: 0F 8E 28 01 00 00     - jng GameAssembly.dll+85DF21
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>103</ID>
+              <Description>"Lab Oven Modifiers"</Description>
+              <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-21
+  Author : root
+
+  // Namespace: ScheduleOne.ObjectScripts
+[Serializable]
+public class OvenCookOperation // TypeDefIndex: 2563
+
+	public EQuality IngredientQuality; // 0x30
+	public int IngredientQuantity; // 0x34
+	public string ProductID; // 0x38
+	public int CookProgress; // 0x40
+	[CodegenExclude]
+	private int cookDuration; // 0x44
+
+	// RVA: 0x88BC90 Offset: 0x88AE90 VA: 0x18088BC90
+	public bool IsReady()
+}
+
+define(hook,ScheduleOne.ObjectScripts.OvenCookOperation.IsReady)
+define(bytes,48 89 5C 24 08)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+label(mod_quality)
+label(mod_instant)
+
+label(OvenCookOperation_IsReady_bytes)
+registersymbol(OvenCookOperation_IsReady_bytes)
+
+label(bOvenModQuality)
+registersymbol(bOvenModQuality)
+
+label(bOvenModInstant)
+registersymbol(bOvenModInstant)
+
+newmem:
+mod_instant:
+  cmp byte ptr [bOvenModInstant], 0
+  jz mod_quality
+  mov eax, [rcx+44]
+  mov [rcx+40], eax
+
+mod_quality:
+  cmp byte ptr [bOvenModQuality], 0
+  jz code
+  mov [rcx+30], 4
+
+code:
+  mov [rsp+08],rbx
+  jmp return
+
+OvenCookOperation_IsReady_bytes:
+  readMem(hook,5)
+
+bOvenModQuality:
+  db 0
+
+bOvenModInstant:
+  db 0
+
+hook:
+  jmp newmem
+return:
+
+[DISABLE]
+hook:
+  readMem(OvenCookOperation_IsReady_bytes,5)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.ObjectScripts.OvenCookOperation.IsReady
+
+GameAssembly.dll+88BC6F: 49 0F 45 C1           - cmovne rax,r9
+GameAssembly.dll+88BC73: 44 89 50 30           - mov [rax+30],r10d
+GameAssembly.dll+88BC77: 48 8B 5C 24 30        - mov rbx,[rsp+30]
+GameAssembly.dll+88BC7C: 49 8B C1              - mov rax,r9
+GameAssembly.dll+88BC7F: 48 8B 74 24 38        - mov rsi,[rsp+38]
+GameAssembly.dll+88BC84: 48 83 C4 20           - add rsp,20
+GameAssembly.dll+88BC88: 5F                    - pop rdi
+GameAssembly.dll+88BC89: C3                    - ret 
+GameAssembly.dll+88BC8A: E8 F1 BE A8 FF        - call GameAssembly.mono_method_get_class+B0
+GameAssembly.dll+88BC8F: CC                    - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.ObjectScripts.OvenCookOperation.IsReady: 48 89 5C 24 08        - mov [rsp+08],rbx
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+88BC95: 57                    - push rdi
+GameAssembly.dll+88BC96: 48 83 EC 20           - sub rsp,20
+GameAssembly.dll+88BC9A: 80 3D 0A 11 37 03 00  - cmp byte ptr [GameAssembly.dll+3BFCDAB],00
+GameAssembly.dll+88BCA1: 48 8B D9              - mov rbx,rcx
+GameAssembly.dll+88BCA4: 8B 79 40              - mov edi,[rcx+40]
+GameAssembly.dll+88BCA7: 75 13                 - jne GameAssembly.dll+88BCBC
+GameAssembly.dll+88BCA9: 48 8D 0D B8 DC 13 03  - lea rcx,[GameAssembly.dll+39C9968]
+GameAssembly.dll+88BCB0: E8 EB BB A8 FF        - call GameAssembly.il2cpp_get_exception_argument_null+4C0
+GameAssembly.dll+88BCB5: C6 05 EF 10 37 03 01  - mov byte ptr [GameAssembly.dll+3BFCDAB],01
+GameAssembly.dll+88BCBC: 83 7B 44 FF           - cmp dword ptr [rbx+44],-01
+}
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>106</ID>
+                  <Description>"Max Quality"</Description>
+                  <Color>FF8080</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+bOvenModQuality:
+  db 1
+
+[DISABLE]
+bOvenModQuality:
+  db 0
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>107</ID>
+                  <Description>"Instant Cook"</Description>
+                  <Color>FF8080</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+bOvenModInstant:
+  db 1
+
+[DISABLE]
+bOvenModInstant:
+  db 0
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>108</ID>
+              <Description>"Chemistry Modifiers"</Description>
+              <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-21
+  Author : root
+
+  ScheduleOne.ObjectScripts.ChemistryStation.OnTimePass
+
+  // Namespace: ScheduleOne.ObjectScripts
+  public class ChemistryStation : GridItem, IUsable, IItemSlotOwner, ITransitEntity, IConfigurable // TypeDefIndex: 2545
+
+    private ChemistryCookOperation &lt;CurrentCookOperation&gt;k__BackingField; // 0x228
+
+    // RVA: 0x865D10 Offset: 0x864F10 VA: 0x180865D10
+    private void OnTimePass(int minutes)
+
+  // Namespace: ScheduleOne.ObjectScripts
+  public class ChemistryCookOperation // TypeDefIndex: 2541
+
+    private StationRecipe recipe; // 0x10
+    public string RecipeID; // 0x18
+    public EQuality ProductQuality; // 0x20
+    public Color StartLiquidColor; // 0x24
+    public float LiquidLevel; // 0x34
+    public int CurrentTime; // 0x38
+}
+
+define(hook,ScheduleOne.ObjectScripts.ChemistryStation.OnTimePass)
+define(bytes,48 8B C4 48 89 58 08)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+label(mod_quality)
+label(mod_instant)
+
+label(ChemistryStation_OnTimePass_bytes)
+registersymbol(ChemistryStation_OnTimePass_bytes)
+
+label(bChemistryModQuality)
+registersymbol(bChemistryModQuality)
+
+label(bChemistryModInstant)
+registersymbol(bChemistryModInstant)
+
+newmem:
+  mov rax, [rcx+228]
+  test rax, rax
+  jz code
+
+mod_quality:
+  cmp byte ptr [bChemistryModQuality], 0
+  jz mod_instant
+  mov [rax+20], 4
+
+mod_instant:
+  cmp byte ptr [bChemistryModInstant], 0
+  jz code
+  mov [rax+38], 400
+
+code:
+  mov rax,rsp
+  mov [rax+08],rbx
+  jmp return
+
+ChemistryStation_OnTimePass_bytes:
+  readMem(hook,7)
+
+bChemistryModQuality:
+  db 0
+
+bChemistryModInstant:
+  db 0
+
+hook:
+  jmp newmem
+  nop 2
+return:
+
+[DISABLE]
+hook:
+  readMem(ChemistryStation_OnTimePass_bytes,7)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.ObjectScripts.ChemistryStation.OnTimePass
+
+GameAssembly.dll+865D06: CC                    - int 3 
+GameAssembly.dll+865D07: CC                    - int 3 
+GameAssembly.dll+865D08: CC                    - int 3 
+GameAssembly.dll+865D09: CC                    - int 3 
+GameAssembly.dll+865D0A: CC                    - int 3 
+GameAssembly.dll+865D0B: CC                    - int 3 
+GameAssembly.dll+865D0C: CC                    - int 3 
+GameAssembly.dll+865D0D: CC                    - int 3 
+GameAssembly.dll+865D0E: CC                    - int 3 
+GameAssembly.dll+865D0F: CC                    - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.ObjectScripts.ChemistryStation.OnTimePass: 48 8B C4              - mov rax,rsp
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+865D13: 48 89 58 08           - mov [rax+08],rbx
+GameAssembly.dll+865D17: 48 89 70 10           - mov [rax+10],rsi
+GameAssembly.dll+865D1B: 57                    - push rdi
+GameAssembly.dll+865D1C: 48 81 EC D0 00 00 00  - sub rsp,000000D0
+GameAssembly.dll+865D23: 0F 29 70 E8           - movaps [rax-18],xmm6
+GameAssembly.dll+865D27: 8B F2                 - mov esi,edx
+GameAssembly.dll+865D29: 0F 29 78 D8           - movaps [rax-28],xmm7
+GameAssembly.dll+865D2D: 48 8B D9              - mov rbx,rcx
+GameAssembly.dll+865D30: 44 0F 29 40 C8        - movaps [rax-38],xmm8
+GameAssembly.dll+865D35: 44 0F 29 48 B8        - movaps [rax-48],xmm9
+}
+</AssemblerScript>
+              <CheatEntries>
+                <CheatEntry>
+                  <ID>109</ID>
+                  <Description>"Max Quality"</Description>
+                  <Color>FF8080</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+bChemistryModQuality:
+  db 1
+
+[DISABLE]
+bChemistryModQuality:
+  db 0
+</AssemblerScript>
+                </CheatEntry>
+                <CheatEntry>
+                  <ID>110</ID>
+                  <Description>"Instant Cook"</Description>
+                  <Color>FF8080</Color>
+                  <VariableType>Auto Assembler Script</VariableType>
+                  <AssemblerScript>[ENABLE]
+bChemistryModInstant:
+  db 1
+
+[DISABLE]
+bChemistryModInstant:
+  db 0
+</AssemblerScript>
+                </CheatEntry>
+              </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>118</ID>
+              <Description>"Drynig Rack Instant Complete"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-22
+  Author : root
+
+  ScheduleOne.ObjectScripts.DryingRack.OnTimePass
+}
+
+[ENABLE]
+
+aobscanmodule(_drying_rack_on_time_pass,GameAssembly.dll,F3 0F 11 43 20 72) // should be unique
+alloc(newmem,$1000,_drying_rack_on_time_pass)
+
+label(code)
+label(return)
+
+newmem:
+  mov dword ptr [rbx+20], (float)999
+  jmp return
+
+code:
+  movss [rbx+20],xmm0
+  jmp return
+
+_drying_rack_on_time_pass:
+  jmp newmem
+return:
+registersymbol(_drying_rack_on_time_pass)
+
+[DISABLE]
+
+_drying_rack_on_time_pass:
+  db F3 0F 11 43 20
+
+unregistersymbol(_drying_rack_on_time_pass)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+871494
+
+GameAssembly.dll+871469: 0F 8D A4 00 00 00  - jnl GameAssembly.dll+871513
+GameAssembly.dll+87146F: 3B 7E 18           - cmp edi,[rsi+18]
+GameAssembly.dll+871472: 0F 83 BF 00 00 00  - jae GameAssembly.dll+871537
+GameAssembly.dll+871478: 48 63 C7           - movsxd  rax,edi
+GameAssembly.dll+87147B: 48 8B 5C C6 20     - mov rbx,[rsi+rax*8+20]
+GameAssembly.dll+871480: 48 85 DB           - test rbx,rbx
+GameAssembly.dll+871483: 0F 84 B4 00 00 00  - je GameAssembly.dll+87153D
+GameAssembly.dll+871489: 0F 28 C6           - movaps xmm0,xmm6
+GameAssembly.dll+87148C: F3 0F 58 43 20     - addss xmm0,[rbx+20]
+GameAssembly.dll+871491: 0F 2F C7           - comiss xmm0,xmm7
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+871494: F3 0F 11 43 20     - movss [rbx+20],xmm0
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+871499: 72 6F              - jb GameAssembly.dll+87150A
+GameAssembly.dll+87149B: 83 7B 1C 03        - cmp dword ptr [rbx+1C],03
+GameAssembly.dll+87149F: 7D 17              - jnl GameAssembly.dll+8714B8
+GameAssembly.dll+8714A1: FF 43 1C           - inc [rbx+1C]
+GameAssembly.dll+8714A4: 33 D2              - xor edx,edx
+GameAssembly.dll+8714A6: 48 8B CD           - mov rcx,rbp
+GameAssembly.dll+8714A9: 44 89 73 20        - mov [rbx+20],r14d
+GameAssembly.dll+8714AD: E8 3E 04 00 00     - call ScheduleOne.ObjectScripts.DryingRack.RefreshDryingEffects
+GameAssembly.dll+8714B2: FF C7              - inc edi
+GameAssembly.dll+8714B4: 8B C7              - mov eax,edi
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>124</ID>
+              <Description>"Mixing Station Instant Complete"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-22
+  Author : root
+
+  // Namespace: ScheduleOne.ObjectScripts
+  public class MixingStation : GridItem, IUsable, IItemSlotOwner, ITransitEntity, IConfigurable // TypeDefIndex: 2567
+
+    private MixOperation &lt;CurrentMixOperation&gt;k__BackingField; // 0x218
+    private int &lt;CurrentMixTime&gt;k__BackingField; // 0x220
+    public int MixTimePerItem; // 0x290
+
+    // RVA: 0x8859D0 Offset: 0x884BD0 VA: 0x1808859D0 Slot: 136
+    protected virtual void OnMinPass()
+
+  public class MixOperation // TypeDefIndex: 2569
+
+    public string ProductID; // 0x10
+    public EQuality ProductQuality; // 0x18
+    public string IngredientID; // 0x20
+    public int Quantity; // 0x28
+}
+
+define(hook,ScheduleOne.ObjectScripts.MixingStation.OnMinPass)
+define(bytes,48 8B 01 BA 01 00 00 00)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$1000,hook)
+
+label(code)
+label(return)
+
+label(MixingStation_OnMinPass_bytes)
+registersymbol(MixingStation_OnMinPass_bytes)
+
+newmem:
+  mov rax, [rcx+218]
+  test rax, rax
+  jz code
+  mov r10d, [rax+28]
+  mov eax, [rcx+290]
+  mul r10d
+  dec eax
+
+  cmp dword ptr [rcx+220], 0
+  jz code
+  mov dword ptr [rcx+220], eax
+
+code:
+  mov rax,[rcx]
+  mov edx,00000001
+  jmp return
+
+MixingStation_OnMinPass_bytes:
+  readMem(hook,8)
+
+hook:
+  jmp newmem
+  nop 3
+return:
+
+[DISABLE]
+hook:
+  readMem(MixingStation_OnMinPass_bytes,8)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: ScheduleOne.ObjectScripts.MixingStation.OnMinPass
+
+GameAssembly.dll+8859BB: 48 8B 7C 24 30        - mov rdi,[rsp+30]
+GameAssembly.dll+8859C0: 48 83 C4 20           - add rsp,20
+GameAssembly.dll+8859C4: 5B                    - pop rbx
+GameAssembly.dll+8859C5: C3                    - ret 
+GameAssembly.dll+8859C6: E8 B5 21 A9 FF        - call GameAssembly.mono_method_get_class+B0
+GameAssembly.dll+8859CB: CC                    - int 3 
+GameAssembly.dll+8859CC: CC                    - int 3 
+GameAssembly.dll+8859CD: CC                    - int 3 
+GameAssembly.dll+8859CE: CC                    - int 3 
+GameAssembly.dll+8859CF: CC                    - int 3 
+// ---------- INJECTING HERE ----------
+ScheduleOne.ObjectScripts.MixingStation.OnMinPass: 48 8B 01              - mov rax,[rcx]
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+8859D3: BA 01 00 00 00        - mov edx,00000001
+GameAssembly.dll+8859D8: 4C 8B 80 D0 09 00 00  - mov r8,[rax+000009D0]
+GameAssembly.dll+8859DF: 48 FF A0 C8 09 00 00  - jmp qword ptr [rax+000009C8]
+GameAssembly.dll+8859E6: CC                    - int 3 
+GameAssembly.dll+8859E7: CC                    - int 3 
+GameAssembly.dll+8859E8: CC                    - int 3 
+GameAssembly.dll+8859E9: CC                    - int 3 
+GameAssembly.dll+8859EA: CC                    - int 3 
+GameAssembly.dll+8859EB: CC                    - int 3 
+GameAssembly.dll+8859EC: CC                    - int 3 
+}
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>126</ID>
+              <Description>"Mixing Station Doesn't Consume Mixer Ingredient"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : Schedule I.exe
+  Version: 
+  Date   : 2026-10-23
+  Author : root
+
+  ScheduleOne.UI.Stations.MixingStationInterface.BeginButtonPressed
+  &lt;&lt;StartCook&gt;g__CookRoutine|13_0&gt;d.MoveNext
+}
+
+[ENABLE]
+aobscanmodule(_mixing_station_button_pressed_change_item_quantity,GameAssembly.dll,e8 ? ? ? ? 48 85 ed 0f 84 ? ? ? ? 4c 8b 7b)
+aobscanmodule(_mixing_station_cook_routine_start,GameAssembly.dll,e8 ? ? ? ? 49 8b 4e ? 48 85 c9 0f 84 ? ? ? ? 33 d2 e8 ? ? ? ? 49 8b 76)
+registersymbol(_mixing_station_button_pressed_change_item_quantity)
+registersymbol(_mixing_station_cook_routine_start)
+alloc(newmem,$1000,_mixing_station_button_pressed_change_item_quantity)
+
+label(MixingStationInterface_BeginButtonPressed_bytes)
+registersymbol(MixingStationInterface_BeginButtonPressed_bytes)
+
+label(g_CookRoutine_StartCook_MoveNext_bytes)
+registersymbol(g_CookRoutine_StartCook_MoveNext_bytes)
+
+newmem:
+MixingStationInterface_BeginButtonPressed_bytes:
+  readMem(_mixing_station_button_pressed_change_item_quantity,5)
+
+g_CookRoutine_StartCook_MoveNext_bytes:
+  readMem(_mixing_station_cook_routine_start,5)
+
+_mixing_station_button_pressed_change_item_quantity:
+  nop 5
+
+_mixing_station_cook_routine_start:
+  nop 5
+
+
+[DISABLE]
+_mixing_station_button_pressed_change_item_quantity:
+  readMem(MixingStationInterface_BeginButtonPressed_bytes,5)
+
+_mixing_station_cook_routine_start:
+  readMem(g_CookRoutine_StartCook_MoveNext_bytes,5)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+A239B6
+
+GameAssembly.dll+A2398E: 48 8B 4B 48           - mov rcx,[rbx+48]
+GameAssembly.dll+A23992: 48 85 C9              - test rcx,rcx
+GameAssembly.dll+A23995: 0F 84 DB 01 00 00     - je GameAssembly.dll+A23B76
+GameAssembly.dll+A2399B: 48 8B 89 30 02 00 00  - mov rcx,[rcx+00000230]
+GameAssembly.dll+A239A2: 48 85 C9              - test rcx,rcx
+GameAssembly.dll+A239A5: 0F 84 CB 01 00 00     - je GameAssembly.dll+A23B76
+GameAssembly.dll+A239AB: 41 8B D6              - mov edx,r14d
+GameAssembly.dll+A239AE: 45 33 C9              - xor r9d,r9d
+GameAssembly.dll+A239B1: F7 DA                 - neg edx
+GameAssembly.dll+A239B3: 45 33 C0              - xor r8d,r8d
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+A239B6: E8 B5 93 C6 FF        - call ScheduleOne.ItemFramework.ItemSlot.ChangeQuantity
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+A239BB: 48 85 ED              - test rbp,rbp
+GameAssembly.dll+A239BE: 0F 84 B2 01 00 00     - je GameAssembly.dll+A23B76
+GameAssembly.dll+A239C4: 4C 8B 7B 48           - mov r15,[rbx+48]
+GameAssembly.dll+A239C8: 33 D2                 - xor edx,edx
+GameAssembly.dll+A239CA: 48 8B CD              - mov rcx,rbp
+GameAssembly.dll+A239CD: E8 9E 2D 30 01        - call Newtonsoft.Json.Converters.XmlDeclarationWrapper.get_Version
+GameAssembly.dll+A239D2: 48 8B 0D 37 C8 FB 02  - mov rcx,[GameAssembly.dll+39E0210]
+GameAssembly.dll+A239D9: 48 8B F8              - mov rdi,rax
+GameAssembly.dll+A239DC: 8B 5D 30              - mov ebx,[rbp+30]
+GameAssembly.dll+A239DF: E8 3C 41 8F FF        - call GameAssembly.mono_method_get_class+50
+}
+
+{
+// ORIGINAL CODE - INJECTION POINT: GameAssembly.dll+945B95
+
+GameAssembly.dll+945B69: 48 8B 8D 70 01 00 00  - mov rcx,[rbp+00000170]
+GameAssembly.dll+945B70: 48 85 C9              - test rcx,rcx
+GameAssembly.dll+945B73: 0F 84 8A 01 00 00     - je GameAssembly.dll+945D03
+GameAssembly.dll+945B79: 48 8B 89 30 02 00 00  - mov rcx,[rcx+00000230]
+GameAssembly.dll+945B80: 48 85 C9              - test rcx,rcx
+GameAssembly.dll+945B83: 0F 84 7A 01 00 00     - je GameAssembly.dll+945D03
+GameAssembly.dll+945B89: 41 8B 56 38           - mov edx,[r14+38]
+GameAssembly.dll+945B8D: 45 33 C9              - xor r9d,r9d
+GameAssembly.dll+945B90: F7 DA                 - neg edx
+GameAssembly.dll+945B92: 45 33 C0              - xor r8d,r8d
+// ---------- INJECTING HERE ----------
+GameAssembly.dll+945B95: E8 D6 71 D4 FF        - call ScheduleOne.ItemFramework.ItemSlot.ChangeQuantity
+// ---------- DONE INJECTING  ----------
+GameAssembly.dll+945B9A: 49 8B 4E 28           - mov rcx,[r14+28]
+GameAssembly.dll+945B9E: 48 85 C9              - test rcx,rcx
+GameAssembly.dll+945BA1: 0F 84 5C 01 00 00     - je GameAssembly.dll+945D03
+GameAssembly.dll+945BA7: 33 D2                 - xor edx,edx
+GameAssembly.dll+945BA9: E8 C2 0B 3E 01        - call Newtonsoft.Json.Converters.XmlDeclarationWrapper.get_Version
+GameAssembly.dll+945BAE: 49 8B 76 28           - mov rsi,[r14+28]
+GameAssembly.dll+945BB2: 4C 8B F8              - mov r15,rax
+GameAssembly.dll+945BB5: 48 85 F6              - test rsi,rsi
+GameAssembly.dll+945BB8: 0F 84 45 01 00 00     - je GameAssembly.dll+945D03
+GameAssembly.dll+945BBE: 49 8B 4E 30           - mov rcx,[r14+30]
+}
+</AssemblerScript>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>133</ID>
+      <Description>"Game Version: v0.4.7f12"</Description>
+      <GroupHeader>1</GroupHeader>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols>
+    <SymbolEntry>
+      <Name>struct_update_status</Name>
+      <Address>27444560000</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>_tmp</Name>
+      <Address>1E372080000</Address>
+    </SymbolEntry>
+  </UserdefinedSymbols>
+</CheatTable>
