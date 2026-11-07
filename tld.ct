@@ -1484,6 +1484,66 @@ dealloc(newmem)
 </AssemblerScript>
             </CheatEntry>
             <CheatEntry>
+              <ID>9152</ID>
+              <Description>"Remove Intestinal Parasites"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : tld.exe
+  Version: 2.60
+  Date   : 2026-11-07
+  Author : sub1to
+
+  public class IntestinalParasites : MonoBehaviour // TypeDefIndex: 1339
+
+    // RVA: 0x8D1E50 Offset: 0x8D0E50 VA: 0x1808D1E50
+	public void Update()
+
+    // RVA: 0x8D28A0 Offset: 0x8D18A0 VA: 0x1808D28A0
+	public void IntestinalParasitesEnd(bool nofx = False)
+}
+
+define(hook,IntestinalParasites.Update)
+define(bytes,40 53 48 83 ec ?)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$ff,GameAssembly.dll)
+label(returnhere)
+label(code)
+label(intestinal_parasites_update_bytes)
+registersymbol(intestinal_parasites_update_bytes)
+
+newmem:
+intestinal_parasites_update_bytes:
+  readMem(hook, 6)
+  jmp returnhere
+
+code:
+  lea rsp, [rsp-38]
+  mov [rsp+30], rcx
+  mov dl, 1 // nofx, prevent cured notification spam
+  call IntestinalParasites.IntestinalParasitesEnd
+  mov rcx, [rsp+30]
+  lea rsp, [rsp+38]
+  jmp intestinal_parasites_update_bytes
+
+hook:
+  jmp code
+  nop
+  returnhere:
+
+
+
+[DISABLE]
+hook:
+  readMem(intestinal_parasites_update_bytes, 6)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
               <ID>8879</ID>
               <Description>"Haven't done other afflictions yet.."</Description>
               <Color>0080FF</Color>
@@ -3605,6 +3665,8 @@ container_is_locked_base_ptr:
 code:
   mov rax, [rcx+70]
   mov [container_is_locked_base_ptr], rax
+  test rax, rax
+  jz container_is_locked_bytes
   mov dword ptr [rax+88], 1  // m_LockState = LockState.Unlocked;
   jmp container_is_locked_bytes
 
@@ -5302,6 +5364,192 @@ dealloc(newmem)
 </AssemblerScript>
             </CheatEntry>
             <CheatEntry>
+              <ID>9151</ID>
+              <Description>"Unlock uConsole"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : tld.exe
+  Version: 2.60
+  Date   : 2021-12-09
+  Author : sub1to
+
+  // Namespace: UnityEngine.AddressableAssets
+  public static class Addressables // TypeDefIndex: 18266
+
+    // RVA: -1 Offset: -1
+	public static AsyncOperationHandle&lt;IList&lt;TObject&gt;&gt; LoadAssetsAsync&lt;TObject&gt;(string key, Action&lt;TObject&gt; callback)
+	/* GenericInstMethod :
+	|
+	|-RVA: 0x180B900 Offset: 0x180A900 VA: 0x18180B900
+	|-Addressables.LoadAssetsAsync&lt;__Il2CppFullySharedGenericType&gt;
+	*/
+
+  // Namespace: UnityEngine
+  public class Object // TypeDefIndex: 10632
+
+    // RVA: 0x3D2D340 Offset: 0x3D2C340 VA: 0x183D2D340
+    public static Object Instantiate(Object original)
+
+  public class uConsole : MonoBehaviour // TypeDefIndex: 2737
+
+    public static uConsole m_Instance; // 0x0
+    private static bool m_On; // 0x3C
+
+    public KeyCode m_Activate; // 0xA8
+}
+
+define(hook,GameManager.EarlyUpdate)
+define(bytes,40 53 48 83 ec ?)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$400,GameAssembly.dll)
+alloc(string,$100,GameAssembly.dll)
+globalalloc(_uconsole_init,1,GameAssembly.dll)
+label(returnhere)
+label(code)
+label(code_return)
+label(find_loop)
+label(string_assembly string_namespace string_class string_key)
+label(GameManager_Update_bytes)
+registersymbol(GameManager_Update_bytes)
+
+string:
+string_assembly:
+  db 'Unity.Addressables.dll', 0
+string_namespace:
+  db 'UnityEngine.AddressableAssets', 0
+string_class:
+  db 'Addressables', 0
+string_key:
+  db 'uConsole', 0
+
+newmem:
+GameManager_Update_bytes:
+  readMem(hook, 6)
+  jmp returnhere
+
+code:
+  mov al, [_uconsole_init]
+  test al, al
+  jnz GameManager_Update_bytes
+  mov byte ptr [_uconsole_init], 1
+
+  // frame 0x98: keeps rsp 16-byte aligned for calls
+  // locals: 28 saved rcx | 30 class | 38 iterator | 40 method | 48 string
+  //         50..6F args[4] | 70 false | 78 true | 80 exception
+  lea rsp, [rsp-98]
+  mov [rsp+28], rcx
+
+  call il2cpp_domain_get
+  test rax, rax
+  jz code_return
+  mov rcx, rax
+  lea rdx, [string_assembly]
+  call il2cpp_domain_assembly_open
+  test rax, rax
+  jz code_return
+  mov rcx, rax
+  call il2cpp_assembly_get_image
+  test rax, rax
+  jz code_return
+  mov rcx, rax
+  lea rdx, [string_namespace]
+  lea r8, [string_class]
+  call il2cpp_class_from_name
+  test rax, rax
+  jz code_return
+  mov [rsp+30], rax
+  mov rcx, rax
+  call il2cpp_runtime_class_init
+
+  // find InstantiateAsync with 4 params where param 0 is `object`
+  mov qword ptr [rsp+38], 0
+find_loop:
+  mov rcx, [rsp+30]
+  lea rdx, [rsp+38]
+  call il2cpp_class_get_methods
+  test rax, rax
+  jz code_return
+  mov [rsp+40], rax
+
+  mov rcx, rax
+  call il2cpp_method_get_name
+  mov rdx, 69746E6174736E49        // "Instanti"
+  cmp [rax], rdx
+  jne find_loop
+  mov rdx, 636E797341657461        // "ateAsync"
+  cmp [rax+8], rdx
+  jne find_loop
+  cmp byte ptr [rax+10], 0
+  jne find_loop
+
+  mov rcx, [rsp+40]
+  call il2cpp_method_get_param_count
+  cmp eax, 4
+  jne find_loop
+
+  mov rcx, [rsp+40]
+  xor edx, edx
+  call il2cpp_method_get_param
+  test rax, rax
+  jz find_loop
+  mov rcx, rax
+  call il2cpp_type_get_type
+  cmp eax, 1C                       // IL2CPP_TYPE_OBJECT
+  jne find_loop
+
+  mov byte ptr [_uconsole_init], 2  // method found
+
+  // Il2CppString "uConsole"
+  lea rcx, [string_key]
+  call il2cpp_string_new
+  test rax, rax
+  jz code_return
+  mov [rsp+48], rax
+
+  // args: refs passed directly, value types as pointers to the value
+  mov [rsp+50], rax                 // key
+  mov qword ptr [rsp+58], 0         // parent = null
+  mov qword ptr [rsp+70], 0
+  mov qword ptr [rsp+78], 1
+  lea rax, [rsp+70]
+  mov [rsp+60], rax                 // instantiateInWorldSpace = false
+  lea rax, [rsp+78]
+  mov [rsp+68], rax                 // trackHandle = true
+  mov qword ptr [rsp+80], 0         // exception out
+
+  mov rcx, [rsp+40]
+  xor edx, edx                      // static =&gt; obj = null
+  lea r8, [rsp+50]
+  lea r9, [rsp+80]
+  call il2cpp_runtime_invoke
+
+  mov byte ptr [_uconsole_init], 3  // invoked ok
+  cmp qword ptr [rsp+80], 0
+  je code_return
+  mov byte ptr [_uconsole_init], 4  // managed exception thrown
+
+code_return:
+  mov rcx, [rsp+28]
+  lea rsp, [rsp+98]
+  jmp GameManager_Update_bytes
+
+hook:
+  jmp code
+  nop
+  returnhere:
+
+[DISABLE]
+hook:
+  readMem(GameManager_Update_bytes, 6)
+
+unregistersymbol(*)
+dealloc(newmem)
+dealloc(string)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
               <ID>9087</ID>
               <Description>"Misc Actions"</Description>
               <Color>008000</Color>
@@ -5921,7 +6169,11 @@ dealloc(newmem)
     </SymbolEntry>
     <SymbolEntry>
       <Name>_uconsole_init</Name>
-      <Address>7FF8179E0000</Address>
+      <Address>7FFCA02B0000</Address>
+    </SymbolEntry>
+    <SymbolEntry>
+      <Name>_uconsole_instance</Name>
+      <Address>7FFCA1530010</Address>
     </SymbolEntry>
   </UserdefinedSymbols>
   <Comments>https://github.com/Perfare/Il2CppDumper
