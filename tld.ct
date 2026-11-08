@@ -53,26 +53,171 @@
     </CheatEntry>
     <CheatEntry>
       <ID>9111</ID>
-      <Description>"Enable Mono"</Description>
+      <Description>"Enable"</Description>
       <Options moHideChildren="1"/>
       <Color>C08000</Color>
       <VariableType>Auto Assembler Script</VariableType>
-      <AssemblerScript>[ENABLE]
+      <AssemblerScript>{ Game   : tld.exe
+  Version:
+  Date   : 2026-11-08
+  Author : sub1to
+}
+
+[ENABLE]
 {$lua}
-if syntaxcheck then return end
+if syntaxcheck then
+    return
+end
 
 if process and readInteger(process) ~= 0 then
     mono_initialize()
     LaunchMonoDataCollector()
 else
-    local msg = 'No process detected.'
-    print(msg)
-    error(msg)
+    print("No process detected")
+    error("No process detected")
 end
+
+local structNames = {
+    -- player
+    "Freezing",
+    "Fatigue",
+    "Thirst",
+    "Hunger",
+    "PlayerMovement",
+    "Condition",
+    "Inventory",
+
+    -- skills
+    "Skill",
+
+    -- light
+    "TLD.Gear.KeroseneLampItem",
+    "FlareItem",
+    "TorchItem",
+
+    -- navigation
+    "Panel_Map",
+
+    -- guns
+    "GunItem",
+    "BowItem",
+
+    -- inventory
+    "GearItem",
+    "GearItemData",
+    "ClothingItem",
+    "InventoryGridDataItem",
+    "StackableItem",
+    "EvolveItem",
+    "WaterSupply",
+    "FoodItem",
+    "LiquidItem",
+    "PowderItem",
+    "SafeCracking",
+    "LockedInteraction",
+    "Lock",
+    "TimedHoldInteraction",
+    "Container",
+
+    -- fire
+    "Fire",
+
+    -- weather / time
+    "UniStormWeatherSystem",
+    "TimeOfDay",
+
+    -- misc
+    "BlueprintData",
+    "Panel_BodyHarvest",
+    "Panel_BreakDown",
+    "Panel_Inventory_Examine",
+}
+
+function getStructByName(structName)
+	local n = getStructureCount() - 1
+
+	for i = 0, n do
+		local struct = getStructure(i)
+		if struct.Name == structName then
+            return struct
+        end
+	end
+
+	return nil
+end
+
+function getNamespaceAndName(fullName)
+    local ns, name = fullName:match("^(.*)%.([^%.]+)$")
+    if ns then
+        return ns, name
+    end
+    return "", fullName
+end
+
+function sanitizeStructName(fullName)
+    local result = fullName:gsub("%.", "$")
+    return result
+end
+
+function resolveStruct(fullName)
+    local sanitizedName = sanitizeStructName(fullName)
+    local struct = getStructByName(sanitizedName)
+
+    if struct then
+        struct.removeFromGlobalStructureList()
+    end
+
+    struct = createStructure(sanitizedName)
+
+    local ns, name = getNamespaceAndName(fullName)
+    local classId = mono_findClass(ns, name)
+
+    if classId == nil then
+        local msg = "Class " .. fullName .. " (" .. sanitizedName .. ") not found"
+        print(msg)
+        error(msg)
+    end
+
+    local fields = mono_class_enumFields(classId, true)
+    for i, field in pairs(fields) do
+      if not field.isStatic then
+          local element = struct.addElement()
+          element.Offset = field.offset
+          element.Name = field.name
+          element.Vartype = field.type
+      end
+    end
+
+    struct.addToGlobalStructureList()
+    print("Updated struct " .. sanitizedName)
+end
+
+print("\nUpdating structs..")
+for i, structName in pairs(structNames) do
+    resolveStruct(structName)
+end
+
 {$asm}
 
 [DISABLE]
 
+{$lua}
+if syntaxcheck then
+    return
+end
+
+local n = getStructureCount() - 1
+
+for i = n, 0, -1 do
+    local struct = getStructure(i)
+    if struct then
+        struct.removeFromGlobalStructureList()
+    end
+end
+
+print("Removed all structs")
+
+{$asm}
 
 </AssemblerScript>
       <CheatEntries>
@@ -139,7 +284,7 @@ code:
   cmp byte ptr [player_temp_toggle], 0
   jz player_temp_bytes
   mov eax, [player_temp_value]
-  mov [rcx+28], eax
+  mov [rcx+Freezing.m_CurrentFreezing], eax
   jmp player_temp_bytes
 
 hook:
@@ -187,7 +332,7 @@ player_temp_toggle:
                   <VariableType>Float</VariableType>
                   <Address>player_temp_base_ptr</Address>
                   <Offsets>
-                    <Offset>28</Offset>
+                    <Offset>Freezing.m_CurrentFreezing</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -198,7 +343,7 @@ player_temp_toggle:
                   <VariableType>Float</VariableType>
                   <Address>player_temp_base_ptr</Address>
                   <Offsets>
-                    <Offset>2C</Offset>
+                    <Offset>Freezing.m_MaxFreezing</Offset>
                   </Offsets>
                 </CheatEntry>
               </CheatEntries>
@@ -259,7 +404,7 @@ code:
   cmp byte ptr [player_fatigue_toggle], 0
   jz player_fatigue_bytes
   mov eax, [player_fatigue_value]
-  mov [rcx+24], eax
+  mov [rcx+Fatigue.m_CurrentFatigue], eax
   jmp player_fatigue_bytes
 
 hook:
@@ -307,7 +452,7 @@ player_fatigue_toggle:
                   <VariableType>Float</VariableType>
                   <Address>player_fatigue_base_ptr</Address>
                   <Offsets>
-                    <Offset>24</Offset>
+                    <Offset>Fatigue.m_CurrentFatigue</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -318,7 +463,7 @@ player_fatigue_toggle:
                   <VariableType>Float</VariableType>
                   <Address>player_fatigue_base_ptr</Address>
                   <Offsets>
-                    <Offset>28</Offset>
+                    <Offset>Fatigue.m_MaxFatigue</Offset>
                   </Offsets>
                 </CheatEntry>
               </CheatEntries>
@@ -380,7 +525,7 @@ code:
   cmp byte ptr [player_thirst_toggle], 0
   jz player_thirst_bytes
   mov eax, [player_thirst_value]
-  mov [rcx+24], eax
+  mov [rcx+Thirst.m_CurrentThirst], eax
   jmp player_thirst_bytes
 
 hook:
@@ -428,7 +573,7 @@ player_thirst_toggle:
                   <VariableType>Float</VariableType>
                   <Address>player_thirst_base_ptr</Address>
                   <Offsets>
-                    <Offset>24</Offset>
+                    <Offset>Thirst.m_CurrentThirst</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -439,7 +584,7 @@ player_thirst_toggle:
                   <VariableType>Float</VariableType>
                   <Address>player_thirst_base_ptr</Address>
                   <Offsets>
-                    <Offset>28</Offset>
+                    <Offset>Thirst.m_MaxThirst</Offset>
                   </Offsets>
                 </CheatEntry>
               </CheatEntries>
@@ -503,7 +648,7 @@ code:
   cmp byte ptr [player_hunger_toggle], 0
   jz player_hunger_bytes
   mov eax, [player_hunger_value]
-  mov [rcx+20], eax
+  mov [rcx+Hunger.m_CurrentReserveCalories], eax
   jmp player_hunger_bytes
 
 hook:
@@ -551,17 +696,18 @@ player_hunger_toggle:
                   <VariableType>Float</VariableType>
                   <Address>player_hunger_base_ptr</Address>
                   <Offsets>
-                    <Offset>20</Offset>
+                    <Offset>Hunger.m_CurrentReserveCalories</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
                   <ID>8729</ID>
                   <Description>"Hunger Max"</Description>
+                  <ShowAsSigned>0</ShowAsSigned>
                   <Color>808080</Color>
                   <VariableType>Float</VariableType>
                   <Address>player_hunger_base_ptr</Address>
                   <Offsets>
-                    <Offset>78</Offset>
+                    <Offset>Hunger.m_MaxReserveCalories</Offset>
                   </Offsets>
                 </CheatEntry>
               </CheatEntries>
@@ -623,7 +769,7 @@ code:
   cmp byte ptr [player_sprint_toggle], 0
   jz player_sprint_bytes
   mov eax, [player_sprint_value]
-  mov [rcx+80], eax
+  mov [rcx+PlayerMovement.m_SprintStamina], eax
   jmp player_sprint_bytes
 
 hook:
@@ -671,7 +817,7 @@ player_sprint_toggle:
                   <VariableType>Float</VariableType>
                   <Address>player_sprint_base_ptr</Address>
                   <Offsets>
-                    <Offset>80</Offset>
+                    <Offset>PlayerMovement.m_SprintStamina</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -682,7 +828,7 @@ player_sprint_toggle:
                   <VariableType>Float</VariableType>
                   <Address>player_sprint_base_ptr</Address>
                   <Offsets>
-                    <Offset>7c</Offset>
+                    <Offset>PlayerMovement.m_MaxSprintStamina</Offset>
                   </Offsets>
                 </CheatEntry>
               </CheatEntries>
@@ -744,7 +890,7 @@ code:
   cmp byte ptr [player_health_toggle], 0
   jz player_health_bytes
   mov eax, [player_health_value]
-  mov [rcx+20], eax
+  mov [rcx+Condition.m_CurrentHP], eax
   jmp player_health_bytes
 
 hook:
@@ -792,7 +938,7 @@ player_health_toggle:
                   <VariableType>Float</VariableType>
                   <Address>player_health_base_ptr</Address>
                   <Offsets>
-                    <Offset>20</Offset>
+                    <Offset>Condition.m_CurrentHP</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -803,7 +949,7 @@ player_health_toggle:
                   <VariableType>Float</VariableType>
                   <Address>player_health_base_ptr</Address>
                   <Offsets>
-                    <Offset>24</Offset>
+                    <Offset>Condition.m_MaxHP</Offset>
                   </Offsets>
                 </CheatEntry>
               </CheatEntries>
@@ -989,7 +1135,7 @@ backpack_scent_toggle:
                   <VariableType>8 Bytes</VariableType>
                   <Address>backpack_base_ptr</Address>
                   <Offsets>
-                    <Offset>A8</Offset>
+                    <Offset>Inventory.m_TotalWeight</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -1000,7 +1146,7 @@ backpack_scent_toggle:
                   <VariableType>Byte</VariableType>
                   <Address>backpack_base_ptr</Address>
                   <Offsets>
-                    <Offset>D1</Offset>
+                    <Offset>Inventory.m_ForceOverrideWeight</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -1011,7 +1157,7 @@ backpack_scent_toggle:
                   <VariableType>8 Bytes</VariableType>
                   <Address>backpack_base_ptr</Address>
                   <Offsets>
-                    <Offset>D8</Offset>
+                    <Offset>Inventory.m_OverridedWeight</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -1022,7 +1168,7 @@ backpack_scent_toggle:
                   <VariableType>Float</VariableType>
                   <Address>backpack_base_ptr</Address>
                   <Offsets>
-                    <Offset>E0</Offset>
+                    <Offset>Inventory.m_TotalScentIntensity</Offset>
                   </Offsets>
                 </CheatEntry>
               </CheatEntries>
@@ -1766,7 +1912,7 @@ dealloc(newmem)
                   <VariableType>4 Bytes</VariableType>
                   <Address>fire_skill_base_ptr</Address>
                   <Offsets>
-                    <Offset>60</Offset>
+                    <Offset>Skill.m_CurrentPoints</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -1777,7 +1923,7 @@ dealloc(newmem)
                   <VariableType>4 Bytes</VariableType>
                   <Address>carcass_skill_base_ptr</Address>
                   <Offsets>
-                    <Offset>60</Offset>
+                    <Offset>Skill.m_CurrentPoints</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -1788,7 +1934,7 @@ dealloc(newmem)
                   <VariableType>4 Bytes</VariableType>
                   <Address>fish_skill_base_ptr</Address>
                   <Offsets>
-                    <Offset>60</Offset>
+                    <Offset>Skill.m_CurrentPoints</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -1799,7 +1945,7 @@ dealloc(newmem)
                   <VariableType>4 Bytes</VariableType>
                   <Address>cook_skill_base_ptr</Address>
                   <Offsets>
-                    <Offset>60</Offset>
+                    <Offset>Skill.m_CurrentPoints</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -1810,7 +1956,7 @@ dealloc(newmem)
                   <VariableType>4 Bytes</VariableType>
                   <Address>rifle_skill_base_ptr</Address>
                   <Offsets>
-                    <Offset>60</Offset>
+                    <Offset>Skill.m_CurrentPoints</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -1821,7 +1967,7 @@ dealloc(newmem)
                   <VariableType>4 Bytes</VariableType>
                   <Address>archery_skill_base_ptr</Address>
                   <Offsets>
-                    <Offset>60</Offset>
+                    <Offset>Skill.m_CurrentPoints</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -1832,7 +1978,7 @@ dealloc(newmem)
                   <VariableType>4 Bytes</VariableType>
                   <Address>mending_skill_base_ptr</Address>
                   <Offsets>
-                    <Offset>60</Offset>
+                    <Offset>Skill.m_CurrentPoints</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -1843,7 +1989,7 @@ dealloc(newmem)
                   <VariableType>4 Bytes</VariableType>
                   <Address>revolver_skill_base_ptr</Address>
                   <Offsets>
-                    <Offset>60</Offset>
+                    <Offset>Skill.m_CurrentPoints</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -1854,7 +2000,7 @@ dealloc(newmem)
                   <VariableType>4 Bytes</VariableType>
                   <Address>gunsmith_skill_base_ptr</Address>
                   <Offsets>
-                    <Offset>60</Offset>
+                    <Offset>Skill.m_CurrentPoints</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -1865,7 +2011,7 @@ dealloc(newmem)
                   <VariableType>4 Bytes</VariableType>
                   <Address>shotgun_skill_base_ptr</Address>
                   <Offsets>
-                    <Offset>60</Offset>
+                    <Offset>Skill.m_CurrentPoints</Offset>
                   </Offsets>
                 </CheatEntry>
               </CheatEntries>
@@ -2054,6 +2200,7 @@ code:
   cmp byte ptr [lamp_oil_inf_toggle], 0
   jz lamp_oil_bytes
   xorps xmm1, xmm1
+  //mov [rcx+TLD$Gear$KeroseneLampItem.m_CurrentFuelLiters], #1000000000
   jmp lamp_oil_bytes
 
 hook:
@@ -2095,7 +2242,7 @@ lamp_oil_inf_toggle:
                   <VariableType>8 Bytes</VariableType>
                   <Address>lamp_oil_base_ptr</Address>
                   <Offsets>
-                    <Offset>20</Offset>
+                    <Offset>TLD$Gear$KeroseneLampItem.m_MaxFuel</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -2106,7 +2253,7 @@ lamp_oil_inf_toggle:
                   <VariableType>8 Bytes</VariableType>
                   <Address>lamp_oil_base_ptr</Address>
                   <Offsets>
-                    <Offset>70</Offset>
+                    <Offset>TLD$Gear$KeroseneLampItem.m_CurrentFuelLiters</Offset>
                   </Offsets>
                 </CheatEntry>
               </CheatEntries>
@@ -2166,7 +2313,7 @@ code:
 
   cmp byte ptr [flare_burn_toggle], 0
   jz flare_burn_bytes
-  mov dword ptr [rcx+AC], 0
+  mov dword ptr [rcx+FlareItem.m_ElapsedBurnMinutes], 0
   jmp flare_burn_bytes
 
 hook:
@@ -2205,7 +2352,7 @@ flare_burn_toggle:
                   <VariableType>Float</VariableType>
                   <Address>flare_burn_base_ptr</Address>
                   <Offsets>
-                    <Offset>ac</Offset>
+                    <Offset>FlareItem.m_ElapsedBurnMinutes</Offset>
                   </Offsets>
                 </CheatEntry>
               </CheatEntries>
@@ -2265,7 +2412,7 @@ code:
 
   cmp byte ptr [torch_burn_toggle], 0
   jz torch_burn_bytes
-  mov dword ptr [rcx+c4], 0
+  mov dword ptr [rcx+TorchItem.m_ElapsedBurnMinutes], 0
   jmp torch_burn_bytes
 
 hook:
@@ -2306,7 +2453,7 @@ torch_burn_toggle:
                   <VariableType>Float</VariableType>
                   <Address>torch_burn_base_ptr</Address>
                   <Offsets>
-                    <Offset>c4</Offset>
+                    <Offset>TorchItem.m_ElapsedBurnMinutes</Offset>
                   </Offsets>
                 </CheatEntry>
               </CheatEntries>
@@ -2420,24 +2567,24 @@ code_survey:
   jnz code_resetopt
   mov byte ptr [rlock], 1
 
-  //save rcx, rdx and [rcx+F0]
+  //save rcx, rdx and [rcx+Panel_Map.m_DetailSurveyRadiusMeters]
   lea rsp, [rsp-48]
   mov [rsp+30], rcx
   mov [rsp+28], rdx
-  mov edx, [rcx+F8]
+  mov edx, [rcx+Panel_Map.m_DetailSurveyRadiusMeters]
   mov [rsp+38], edx
 
   //survey the map
   mov edx, [panel_map_auto_survey_range]
-  mov dword ptr [rcx+F8], edx
+  mov dword ptr [rcx+Panel_Map.m_DetailSurveyRadiusMeters], edx
   xor rdx, rdx
   xor r8, r8
   call Panel_Map.DoDetailSurvey
 
-  //restore rcx, rdx and [rcx+F8]
+  //restore rcx, rdx and [rcx+Panel_Map.m_DetailSurveyRadiusMeters]
   mov rcx, [rsp+30]
   mov edx, [rsp+38]
-  mov [rcx+F8], edx
+  mov [rcx+Panel_Map.m_DetailSurveyRadiusMeters], edx
   mov rdx, [rsp+28]
   lea rsp, [rsp+48]
 
@@ -2511,7 +2658,7 @@ panel_map_show_player_toggle:
                   <ID>8854</ID>
                   <Description>"Base"</Description>
                   <ShowAsHex>1</ShowAsHex>
-                  <Color>FF8080</Color>
+                  <Color>808080</Color>
                   <VariableType>8 Bytes</VariableType>
                   <Address>panel_map_base_ptr</Address>
                 </CheatEntry>
@@ -2523,7 +2670,7 @@ panel_map_show_player_toggle:
                   <VariableType>Float</VariableType>
                   <Address>panel_map_base_ptr</Address>
                   <Offsets>
-                    <Offset>f8</Offset>
+                    <Offset>Panel_Map.m_DetailSurveyRadiusMeters</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -2534,7 +2681,7 @@ panel_map_show_player_toggle:
                   <VariableType>Float</VariableType>
                   <Address>panel_map_base_ptr</Address>
                   <Offsets>
-                    <Offset>fc</Offset>
+                    <Offset>Panel_Map.m_DetailSurveyRockCacheRadiusMeters</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -2545,7 +2692,7 @@ panel_map_show_player_toggle:
                   <VariableType>Float</VariableType>
                   <Address>panel_map_base_ptr</Address>
                   <Offsets>
-                    <Offset>100</Offset>
+                    <Offset>Panel_Map.m_DetailSurveySprayPaintRadiusMeters</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -2556,7 +2703,7 @@ panel_map_show_player_toggle:
                   <VariableType>Float</VariableType>
                   <Address>panel_map_base_ptr</Address>
                   <Offsets>
-                    <Offset>104</Offset>
+                    <Offset>Panel_Map.m_DetailSurvayPolaroidRadiusMeters</Offset>
                   </Offsets>
                 </CheatEntry>
               </CheatEntries>
@@ -2790,7 +2937,7 @@ code:
   cmp byte ptr [aim_fatigue_toggle], 0
   jz aim_fatigue_bytes
   xorps xmm8, xmm8
-  movd [rbx+130], xmm8
+  movd [rbx+GunItem.m_SwayValue], xmm8
   jmp returnhere
 
 hook:
@@ -2859,7 +3006,7 @@ aim_fatigue_toggle:
                   <VariableType>Float</VariableType>
                   <Address>aim_fatigue_base_ptr</Address>
                   <Offsets>
-                    <Offset>130</Offset>
+                    <Offset>GunItem.m_SwayValue</Offset>
                   </Offsets>
                 </CheatEntry>
               </CheatEntries>
@@ -2914,7 +3061,7 @@ code:
   cmp byte ptr [aim_fatigue_bow_toggle], 0
   jz aim_fatigue_bow_bytes
   xorps xmm8, xmm8
-  movd [rbx+80], xmm8
+  movd [rbx+BowItem.m_SwayValue], xmm8
   jmp returnhere
 
 hook:
@@ -2955,7 +3102,7 @@ aim_fatigue_bow_toggle:
                   <VariableType>Float</VariableType>
                   <Address>aim_fatigue_bow_base_ptr</Address>
                   <Offsets>
-                    <Offset>78</Offset>
+                    <Offset>BowItem.m_SwayValue</Offset>
                   </Offsets>
                 </CheatEntry>
               </CheatEntries>
@@ -3042,10 +3189,10 @@ code_max:
   cmp byte ptr [item_degrade_max_toggle], 0
   jz item_degrade_bytes
   push rax
-  mov rax, [rbx+350]   //m_GearItemData
-  movss xmm3, [rax+50] //m_MaxHP
+  mov rax, [rbx+GearItem.m_GearItemData]
+  movss xmm3, [rax+GearItemData.m_MaxHP]
   pop rax
-  mov byte ptr [rbx+381], 0       //m_WornOut
+  mov byte ptr [rbx+GearItem.m_WornOut], 0
   jmp item_degrade_bytes+4
 
 hook:
@@ -3147,7 +3294,8 @@ code:
 
   cmp byte ptr [item_wet_toggle], 0
   jz item_wet_bytes
-  mov qword ptr [rax+a0], 0
+  mov dword ptr [rax+ClothingItem.m_PercentWet], 0
+  mov dword ptr [rax+ClothingItem.m_PercentFrozen], 0
   jmp item_wet_bytes
 
 hook:
@@ -3267,7 +3415,7 @@ code:
   test rax, rax
   jz item_update_bytes
 
-  mov rax, [rax+10]
+  mov rax, [rax+InventoryGridDataItem.m_GearItem]
   mov [item_select_base_ptr], rax
   jmp item_update_bytes
 
@@ -3307,8 +3455,8 @@ dealloc(newmem)
                   <Offsets>
                     <Offset>14</Offset>
                     <Offset>10</Offset>
-                    <Offset>68</Offset>
-                    <Offset>350</Offset>
+                    <Offset>GearItemData.m_LocalizedName</Offset>
+                    <Offset>GearItem.m_GearItemData</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -3325,8 +3473,8 @@ dealloc(newmem)
                   <Offsets>
                     <Offset>14</Offset>
                     <Offset>10</Offset>
-                    <Offset>70</Offset>
-                    <Offset>350</Offset>
+                    <Offset>GearItemData.m_LocalizedDescription</Offset>
+                    <Offset>GearItem.m_GearItemData</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -3337,8 +3485,8 @@ dealloc(newmem)
                   <VariableType>4 Bytes</VariableType>
                   <Address>item_select_base_ptr</Address>
                   <Offsets>
-                    <Offset>20</Offset>
-                    <Offset>230</Offset>
+                    <Offset>StackableItem.m_Units</Offset>
+                    <Offset>GearItem.m_StackableItem</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -3349,8 +3497,8 @@ dealloc(newmem)
                   <VariableType>Float</VariableType>
                   <Address>item_select_base_ptr</Address>
                   <Offsets>
-                    <Offset>a0</Offset>
-                    <Offset>b0</Offset>
+                    <Offset>ClothingItem.m_PercentWet</Offset>
+                    <Offset>GearItem.m_ClothingItem</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -3361,8 +3509,8 @@ dealloc(newmem)
                   <VariableType>Float</VariableType>
                   <Address>item_select_base_ptr</Address>
                   <Offsets>
-                    <Offset>a4</Offset>
-                    <Offset>b0</Offset>
+                    <Offset>ClothingItem.m_PercentFrozen</Offset>
+                    <Offset>GearItem.m_ClothingItem</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -3373,7 +3521,7 @@ dealloc(newmem)
                   <VariableType>Float</VariableType>
                   <Address>item_select_base_ptr</Address>
                   <Offsets>
-                    <Offset>348</Offset>
+                    <Offset>GearItem.m_CurrentHP</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -3384,8 +3532,8 @@ dealloc(newmem)
                   <VariableType>Float</VariableType>
                   <Address>item_select_base_ptr</Address>
                   <Offsets>
-                    <Offset>50</Offset>
-                    <Offset>350</Offset>
+                    <Offset>GearItemData.m_MaxHP</Offset>
+                    <Offset>GearItem.m_GearItemData</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -3399,7 +3547,7 @@ dealloc(newmem)
                   <VariableType>Byte</VariableType>
                   <Address>item_select_base_ptr</Address>
                   <Offsets>
-                    <Offset>381</Offset>
+                    <Offset>GearItem.m_WornOut</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -3416,8 +3564,8 @@ dealloc(newmem)
                       <VariableType>Float</VariableType>
                       <Address>item_select_base_ptr</Address>
                       <Offsets>
-                        <Offset>34</Offset>
-                        <Offset>f0</Offset>
+                        <Offset>EvolveItem.m_TimeToEvolveGameDays</Offset>
+                        <Offset>GearItem.m_EvolveItem</Offset>
                       </Offsets>
                     </CheatEntry>
                     <CheatEntry>
@@ -3431,8 +3579,8 @@ dealloc(newmem)
                       <VariableType>Byte</VariableType>
                       <Address>item_select_base_ptr</Address>
                       <Offsets>
-                        <Offset>38</Offset>
-                        <Offset>f0</Offset>
+                        <Offset>EvolveItem.m_RequireIndoors</Offset>
+                        <Offset>GearItem.m_EvolveItem</Offset>
                       </Offsets>
                     </CheatEntry>
                     <CheatEntry>
@@ -3443,8 +3591,8 @@ dealloc(newmem)
                       <VariableType>Float</VariableType>
                       <Address>item_select_base_ptr</Address>
                       <Offsets>
-                        <Offset>3c</Offset>
-                        <Offset>f0</Offset>
+                        <Offset>EvolveItem.m_TimeSpentEvolvingGameHours</Offset>
+                        <Offset>GearItem.m_EvolveItem</Offset>
                       </Offsets>
                     </CheatEntry>
                   </CheatEntries>
@@ -3463,8 +3611,8 @@ dealloc(newmem)
                       <VariableType>8 Bytes</VariableType>
                       <Address>item_select_base_ptr</Address>
                       <Offsets>
-                        <Offset>28</Offset>
-                        <Offset>260</Offset>
+                        <Offset>WaterSupply.m_VolumeInLiters</Offset>
+                        <Offset>GearItem.m_WaterSupply</Offset>
                       </Offsets>
                     </CheatEntry>
                     <CheatEntry>
@@ -3475,8 +3623,8 @@ dealloc(newmem)
                       <VariableType>Float</VariableType>
                       <Address>item_select_base_ptr</Address>
                       <Offsets>
-                        <Offset>28</Offset>
-                        <Offset>130</Offset>
+                        <Offset>FoodItem.m_CaloriesRemaining</Offset>
+                        <Offset>GearItem.m_FoodItem</Offset>
                       </Offsets>
                     </CheatEntry>
                     <CheatEntry>
@@ -3487,8 +3635,8 @@ dealloc(newmem)
                       <VariableType>Float</VariableType>
                       <Address>item_select_base_ptr</Address>
                       <Offsets>
-                        <Offset>2c</Offset>
-                        <Offset>130</Offset>
+                        <Offset>FoodItem.m_CaloriesTotal</Offset>
+                        <Offset>GearItem.m_FoodItem</Offset>
                       </Offsets>
                     </CheatEntry>
                     <CheatEntry>
@@ -3499,8 +3647,8 @@ dealloc(newmem)
                       <VariableType>8 Bytes</VariableType>
                       <Address>item_select_base_ptr</Address>
                       <Offsets>
-                        <Offset>28</Offset>
-                        <Offset>1a0</Offset>
+                        <Offset>LiquidItem.m_Liquid</Offset>
+                        <Offset>GearItem.m_LiquidItem</Offset>
                       </Offsets>
                     </CheatEntry>
                     <CheatEntry>
@@ -3511,8 +3659,8 @@ dealloc(newmem)
                       <VariableType>8 Bytes</VariableType>
                       <Address>item_select_base_ptr</Address>
                       <Offsets>
-                        <Offset>30</Offset>
-                        <Offset>1a0</Offset>
+                        <Offset>LiquidItem.m_LiquidCapacity</Offset>
+                        <Offset>GearItem.m_LiquidItem</Offset>
                       </Offsets>
                     </CheatEntry>
                     <CheatEntry>
@@ -3523,8 +3671,8 @@ dealloc(newmem)
                       <VariableType>8 Bytes</VariableType>
                       <Address>item_select_base_ptr</Address>
                       <Offsets>
-                        <Offset>28</Offset>
-                        <Offset>1D0</Offset>
+                        <Offset>PowderItem.m_Weight</Offset>
+                        <Offset>GearItem.m_PowderItem</Offset>
                       </Offsets>
                     </CheatEntry>
                     <CheatEntry>
@@ -3535,8 +3683,8 @@ dealloc(newmem)
                       <VariableType>8 Bytes</VariableType>
                       <Address>item_select_base_ptr</Address>
                       <Offsets>
-                        <Offset>30</Offset>
-                        <Offset>1D0</Offset>
+                        <Offset>PowderItem.m_WeightLimit</Offset>
+                        <Offset>GearItem.m_PowderItem</Offset>
                       </Offsets>
                     </CheatEntry>
                   </CheatEntries>
@@ -3592,7 +3740,7 @@ code:
 
   cmp byte ptr [safe_open_toggle], 0
   jz safe_open_bytes
-  mov byte ptr [rcx+24], 1         // m_Cracked
+  mov byte ptr [rcx+SafeCracking.m_Cracked], 1
   jmp safe_open_bytes
 
 hook:
@@ -3663,7 +3811,7 @@ container_is_locked_base_ptr:
   dq 0
 
 code:
-  mov rax, [rcx+70]
+  mov rax, [rcx+LockedInteraction.&lt;Lock&gt;k__BackingField]
   mov [container_is_locked_base_ptr], rax
   test rax, rax
   jz container_is_locked_bytes
@@ -3735,8 +3883,8 @@ code:
   mov [container_open_progress_base_ptr], rbx
   //TimedHoldInteraction::UpdateHoldInteraction:
   //*(float *)(a1 + 0x60) &gt;= *(float *)(a1 + 0x5c)
-  mov eax, [rcx+60]
-  mov [rcx+5c], eax
+  mov eax, [rcx+TimedHoldInteraction.m_Timer]
+  mov [rcx+TimedHoldInteraction.&lt;HoldTime&gt;k__BackingField], eax
   jmp container_open_progress_bytes
 
 hook:
@@ -3822,14 +3970,13 @@ code:
 code_searched:
   cmp byte ptr [container_open_always_searched_toggle], 0
   jz code_capacity
-  mov byte ptr [rcx+120], 1	// m_Inspected
+  mov byte ptr [rcx+Container.m_Inspected], 1
 
 code_capacity:
   cmp byte ptr [container_open_capacity_toggle], 0
   jz container_open_bytes
-  // m_Capacity = container_open_capacity_value;
   mov rax, [container_open_capacity_value]
-  mov [rcx+70], rax
+  mov [rcx+Container.m_Capacity], rax
   jmp container_open_bytes
 
 hook:
@@ -3893,7 +4040,7 @@ container_open_capacity_toggle:
                   <VariableType>8 Bytes</VariableType>
                   <Address>container_open_base_ptr</Address>
                   <Offsets>
-                    <Offset>70</Offset>
+                    <Offset>Container.m_Capacity</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -3907,7 +4054,7 @@ container_open_capacity_toggle:
                   <VariableType>Byte</VariableType>
                   <Address>container_open_base_ptr</Address>
                   <Offsets>
-                    <Offset>120</Offset>
+                    <Offset>Container.m_Inspected</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -3927,8 +4074,8 @@ container_open_capacity_toggle:
                       <VariableType>Byte</VariableType>
                       <Address>container_open_base_ptr</Address>
                       <Offsets>
-                        <Offset>24</Offset>
-                        <Offset>130</Offset>
+                        <Offset>SafeCracking.m_Cracked</Offset>
+                        <Offset>Container.m_Safe</Offset>
                       </Offsets>
                     </CheatEntry>
                   </CheatEntries>
@@ -3951,8 +4098,8 @@ container_open_capacity_toggle:
                       <VariableType>Byte</VariableType>
                       <Address>container_open_base_ptr</Address>
                       <Offsets>
-                        <Offset>88</Offset>
-                        <Offset>128</Offset>
+                        <Offset>Lock.m_LockState</Offset>
+                        <Offset>Container.m_Lock</Offset>
                       </Offsets>
                     </CheatEntry>
                   </CheatEntries>
@@ -4004,11 +4151,11 @@ _1f:
 
 code:
   movd xmm0, [_24f]
-  movd xmm1, [rbx+34]	// m_TimeToEvolveGameDays
+  movd xmm1, [rbx+EvolveItem.m_TimeToEvolveGameDays]
   mulss xmm1, xmm0
   movd xmm0, [_1f]
   addss xmm1, xmm0
-  movd [rcx+3C], xmm1   // m_TimeSpentEvolvingGameHours
+  movd [rcx+EvolveItem.m_TimeSpentEvolvingGameHours], xmm1
 
   jmp evolve_item_bytes
 
@@ -4847,13 +4994,13 @@ code:
 
   cmp byte ptr [fire_burn_infinite_toggle], 0
   jz code_temp
-  mov qword ptr [rcx+CC], 0 // m_ElapsedOnTODSeconds
+  mov qword ptr [rcx+Fire.m_ElapsedOnTODSeconds], 0
 
 code_temp:
   cmp byte ptr [fire_burn_temp_toggle], 0
   jz fire_burn_bytes
   mov eax, [fire_burn_temp_value]
-  mov [rcx+E0], eax // m_FuelHeatIncrease
+  mov [rcx+Fire.m_FuelHeatIncrease], eax
 
   jmp fire_burn_bytes
 
@@ -5003,7 +5150,7 @@ dealloc(newmem)
                   <VariableType>4 Bytes</VariableType>
                   <Address>weather_base_ptr</Address>
                   <Offsets>
-                    <Offset>88</Offset>
+                    <Offset>UniStormWeatherSystem.m_MinuteCounter</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -5014,7 +5161,7 @@ dealloc(newmem)
                   <VariableType>4 Bytes</VariableType>
                   <Address>weather_base_ptr</Address>
                   <Offsets>
-                    <Offset>8c</Offset>
+                    <Offset>UniStormWeatherSystem.m_HourCounter</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -5025,7 +5172,7 @@ dealloc(newmem)
                   <VariableType>4 Bytes</VariableType>
                   <Address>weather_base_ptr</Address>
                   <Offsets>
-                    <Offset>90</Offset>
+                    <Offset>UniStormWeatherSystem.m_DayCounter</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -5036,7 +5183,7 @@ dealloc(newmem)
                   <VariableType>4 Bytes</VariableType>
                   <Address>weather_base_ptr</Address>
                   <Offsets>
-                    <Offset>94</Offset>
+                    <Offset>UniStormWeatherSystem.m_Temperature</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -5047,7 +5194,7 @@ dealloc(newmem)
                   <VariableType>Float</VariableType>
                   <Address>weather_base_ptr</Address>
                   <Offsets>
-                    <Offset>98</Offset>
+                    <Offset>UniStormWeatherSystem.m_DayLength</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -5058,7 +5205,7 @@ dealloc(newmem)
                   <VariableType>Float</VariableType>
                   <Address>weather_base_ptr</Address>
                   <Offsets>
-                    <Offset>9c</Offset>
+                    <Offset>UniStormWeatherSystem.m_NormalizedTime</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -5080,7 +5227,7 @@ dealloc(newmem)
                   <VariableType>4 Bytes</VariableType>
                   <Address>weather_base_ptr</Address>
                   <Offsets>
-                    <Offset>f4</Offset>
+                    <Offset>UniStormWeatherSystem.m_CurrentWeatherStage</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -5091,7 +5238,7 @@ dealloc(newmem)
                   <VariableType>Float</VariableType>
                   <Address>weather_base_ptr</Address>
                   <Offsets>
-                    <Offset>15c</Offset>
+                    <Offset>UniStormWeatherSystem.m_FogDensity</Offset>
                   </Offsets>
                 </CheatEntry>
                 <CheatEntry>
@@ -5102,7 +5249,7 @@ dealloc(newmem)
                   <VariableType>Float</VariableType>
                   <Address>weather_base_ptr</Address>
                   <Offsets>
-                    <Offset>2c0</Offset>
+                    <Offset>UniStormWeatherSystem.m_DayLengthScale</Offset>
                   </Offsets>
                 </CheatEntry>
               </CheatEntries>
@@ -5175,7 +5322,7 @@ dealloc(newmem)
                   <VariableType>Float</VariableType>
                   <Address>time_of_day_base_ptr</Address>
                   <Offsets>
-                    <Offset>98</Offset>
+                    <Offset>TimeOfDay.m_DayLengthScale</Offset>
                   </Offsets>
                 </CheatEntry>
               </CheatEntries>
@@ -5322,32 +5469,21 @@ code:
   xor rax, rax
 
   // CraftingLocation.Anywhere
-  // m_RequiredCraftingLocation
-  mov dword ptr [rcx+88], 0
+  mov dword ptr [rcx+BlueprintData.m_RequiredCraftingLocation], 0
+  mov byte ptr [rcx+BlueprintData.m_RequiresLitFire], 0
+  mov byte ptr [rcx+BlueprintData.m_RequiresLight], 0
+  mov qword ptr [rcx+BlueprintData.m_RequiredTool], 0
 
-  // m_RequiresLitFire
-  mov byte ptr [rcx+8C], 0
-
-  // m_RequiresLight
-  mov byte ptr [rcx+78], 0
-
-  // m_RequiredTool
-  mov qword ptr [rcx+28], 0
-
-  // m_RequiredGear
-  mov rax, [rcx+20]
+  mov rax, [rcx+BlueprintData.m_RequiredGear]
   mov dword ptr [rax+18], 0
 
-  // public BlueprintData.RequiredPowder[] m_RequiredPowder; // 0x38
-  mov rax, [rcx+38]
+  mov rax, [rcx+BlueprintData.m_RequiredPowder]
   mov dword ptr [rax+18], 0
 
-  // public BlueprintData.RequiredLiquid[] m_RequiredLiquid; // 0x40
-  mov rax, [rcx+40]
+  mov rax, [rcx+BlueprintData.m_RequiredLiquid]
   mov dword ptr [rax+18], 0
 
-  //public int m_DurationMinutes; // 0x54
-  mov dword ptr [rcx+6C], 1
+  mov dword ptr [rcx+BlueprintData.m_DurationMinutes], 1
 
   jmp blueprint_item_can_craft_blueprint_bytes
 
@@ -5838,8 +5974,8 @@ bodyharvest_base_ptr:
 
 code:
   mov [bodyharvest_base_ptr], rcx
-  mov eax, [rcx+1BC] // m_TotalHarvestTimeSeconds
-  mov [rcx+1B8], eax // m_HarvestTimeSeconds
+  mov eax, [rcx+Panel_BodyHarvest.m_TotalHarvestTimeSeconds]
+  mov [rcx+Panel_BodyHarvest.m_HarvestTimeSeconds], eax
   jmp bodyharvest_bytes
 
 hook:
@@ -5898,7 +6034,7 @@ breakdown_base_ptr:
 
 code:
   mov [breakdown_base_ptr], rcx
-  mov [rcx+16C], (float)99999
+  mov [rcx+Panel_BreakDown.m_TimeSpentBreakingDown], (float)99999
   jmp breakdown_bytes
 
 hook:
@@ -5959,8 +6095,8 @@ time_hold_interaction__base_ptr:
 
 code:
   mov [time_hold_interaction__base_ptr], rcx
-  mov eax, [rcx+60]
-  mov [rcx+5C], eax
+  mov eax, [rcx+TimedHoldInteraction.m_Timer]
+  mov [rcx+TimedHoldInteraction.&lt;HoldTime&gt;k__BackingField], eax
   jmp time_hold_interaction__bytes
 
 hook:
@@ -6101,8 +6237,8 @@ inventory_examine_base_ptr:
 
 code:
   mov [inventory_examine_base_ptr], rcx
-  mov eax, [rcx+4d0] // m_ProgressBarTimeSeconds
-  mov [rcx+4cc], eax // m_ElapsedProgressBarSeconds
+  mov eax, [rcx+Panel_Inventory_Examine.m_ProgressBarTimeSeconds]
+  mov [rcx+Panel_Inventory_Examine.m_ElapsedProgressBarSeconds], eax
   jmp inventory_examine_bytes
 
 hook:
@@ -6155,7 +6291,39 @@ dealloc(newmem)
     <CheatEntry>
       <ID>8669</ID>
       <Description>"--------------------------"</Description>
+      <Options moHideChildren="1"/>
       <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>9153</ID>
+          <Description>"Force Player Map Icon"</Description>
+          <Color>0000FF</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>[ENABLE]
+{$lua}
+if syntaxcheck then return end
+
+mono_initialize()
+LaunchMonoDataCollector()
+
+local classId = mono_findClass('Assembly-CSharp.dll', 'Panel_Map')
+if classId == nil then print('class not found') return end
+print(classId)
+local fields = mono_class_enumFields(classId, true)
+for i in pairs(fields) do
+  if fields[i].isStatic and fields[i].name == 's_ForceShowPlayerIcon' then
+    print('s_ForceShowPlayerIcon: ' .. mono_class_getStaticFieldValue(classId, fields[i].field))
+    mono_class_setStaticFieldValue(classId, fields[i].field, 1)
+  end
+end
+
+{$asm}
+
+[DISABLE]
+
+</AssemblerScript>
+        </CheatEntry>
+      </CheatEntries>
     </CheatEntry>
   </CheatEntries>
   <UserdefinedSymbols>
