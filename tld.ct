@@ -94,6 +94,7 @@ local structNames = {
     "TLD.Gear.KeroseneLampItem",
     "FlareItem",
     "TorchItem",
+    "FlashlightItem",
 
     -- navigation
     "Panel_Map",
@@ -1690,6 +1691,74 @@ dealloc(newmem)
 </AssemblerScript>
             </CheatEntry>
             <CheatEntry>
+              <ID>9154</ID>
+              <Description>"Remove Severe Lacerations"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : tld.exe
+  Version: 2.60
+  Date   : 2026-11-09
+  Author : sub1to
+
+  public class SevereLacerations : MonoBehaviour // TypeDefIndex: 1349
+
+    // RVA: 0x8D88F0 Offset: 0x8D78F0 VA: 0x1808D88F0
+	private void Update()
+
+    // RVA: 0x8D8EA0 Offset: 0x8D7EA0 VA: 0x1808D8EA0
+	public void Cure(AfflictionOptions options = 4)
+
+  public enum AfflictionOptions // TypeDefIndex: 473
+
+    public const AfflictionOptions None = 0;
+	public const AfflictionOptions PlayFX = 1;
+	public const AfflictionOptions DoAutoSave = 2;
+	public const AfflictionOptions DisplayIcon = 4;
+	public const AfflictionOptions Stumble = 8;
+}
+
+define(hook,SevereLacerations.Update)
+define(bytes,40 53 48 83 ec ?)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$ff,GameAssembly.dll)
+label(returnhere)
+label(code)
+label(severe_lacerations_update_bytes)
+registersymbol(severe_lacerations_update_bytes)
+
+newmem:
+severe_lacerations_update_bytes:
+  readMem(hook, 6)
+  jmp returnhere
+
+code:
+  lea rsp, [rsp-38]
+  mov [rsp+30], rcx
+  xor edx, edx
+  call SevereLacerations.Cure
+  mov rcx, [rsp+30]
+  lea rsp, [rsp+38]
+  jmp severe_lacerations_update_bytes
+
+hook:
+  jmp code
+  nop
+  returnhere:
+
+
+
+[DISABLE]
+hook:
+  readMem(severe_lacerations_update_bytes, 6)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
               <ID>8879</ID>
               <Description>"Haven't done other afflictions yet.."</Description>
               <Color>0080FF</Color>
@@ -2257,6 +2326,87 @@ lamp_oil_inf_toggle:
                   </Offsets>
                 </CheatEntry>
               </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>9155</ID>
+              <Description>"Flashlight Always Works"</Description>
+              <Options moHideChildren="1" moDeactivateChildrenAsWell="1"/>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : tld.exe
+  Version: 2.59
+  Date   : 2021-10-18
+  Author : sub1to
+
+  public class FlashlightItem : MonoBehaviour // TypeDefIndex: 1187
+
+    private float m_RechargeTime; // 0x88
+    private FlashlightItem.State m_State; // 0xA8
+    private float m_CurrentBatteryCharge; // 0xB4
+
+    // RVA: 0x854C00 Offset: 0x853C00 VA: 0x180854C00
+	public void Update()
+
+    // RVA: 0x8557D0 Offset: 0x8547D0 VA: 0x1808557D0
+	public float GetNormalizedCharge()
+}
+
+define(hook,FlashlightItem.GetNormalizedCharge)
+define(bytes,40 53 48 83 ec ?)
+
+define(hook2,FlashlightItem.IsLit)
+define(bytes2,40 53 48 83 ec ?)
+
+[ENABLE]
+assert(hook,bytes)
+assert(hook2,bytes2)
+alloc(newmem,$ff,GameAssembly.dll)
+label(code_get_norm_charge)
+label(code_is_lit code_is_lit_zero)
+label(flashlight_get_norm_charge_bytes)
+registersymbol(flashlight_get_norm_charge_bytes)
+registersymbol(flashlight_is_lit_bytes)
+
+newmem:
+flashlight_get_norm_charge_bytes:
+  readMem(hook, 6)
+
+flashlight_is_lit_bytes:
+  readMem(hook2,6)
+
+code_get_norm_charge:
+  mov eax, (float)1
+  movd xmm0, eax
+  ret
+
+code_is_lit:
+  cmp dword ptr [rcx+FlashlightItem.m_State], 0
+  je code_is_lit_zero
+  mov al, 1
+  ret
+code_is_lit_zero:
+  xor al, al
+  ret
+
+hook:
+  jmp code_get_norm_charge
+  nop
+
+hook2:
+  jmp code_is_lit
+  nop
+
+[DISABLE]
+hook:
+  readMem(flashlight_get_norm_charge_bytes, 6)
+
+hook2:
+  readMem(flashlight_is_lit_bytes,6)
+
+unregistersymbol(*)
+dealloc(newmem)
+
+</AssemblerScript>
             </CheatEntry>
             <CheatEntry>
               <ID>8768</ID>
@@ -6337,7 +6487,7 @@ end
     </SymbolEntry>
     <SymbolEntry>
       <Name>_uconsole_init</Name>
-      <Address>7FFCA02B0000</Address>
+      <Address>7FFCA0490000</Address>
     </SymbolEntry>
     <SymbolEntry>
       <Name>_uconsole_instance</Name>
