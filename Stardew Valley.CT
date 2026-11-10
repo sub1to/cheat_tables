@@ -4408,10 +4408,10 @@ StardewValley.TerrainFeatures.ResourceClump::performToolAction+56D: 4C 8B F8    
           <GroupHeader>1</GroupHeader>
           <CheatEntries>
             <CheatEntry>
-              <ID>8955</ID>
+              <ID>9016</ID>
               <Description>"enable chatbox debug commands"</Description>
               <Options moHideChildren="1"/>
-              <Color>0080FF</Color>
+              <Color>008000</Color>
               <VariableType>Auto Assembler Script</VariableType>
               <AssemblerScript>{ Game   : Stardew Valley.exe
   Version: 
@@ -4425,101 +4425,101 @@ StardewValley.TerrainFeatures.ResourceClump::performToolAction+56D: 4C 8B F8    
 {$lua}
 if syntaxcheck then return end
 checkDotNetSymbol('StardewValley.Menus.ChatBox::runCommand')
+checkDotNetSymbol('StardewValley.ChatCommands::get_AllowCheats')
 
 {$asm}
-define(hook,StardewValley.Menus.ChatBox::runCommand)
+define(hook1,StardewValley.Menus.ChatBox::runCommand)
+assert(hook1,57 56 48 83 ec ?)
 
-alloc(newmem,$1000,hook)
+define(hook2,StardewValley.ChatCommands::get_AllowCheats)
+assert(hook2,56 48 83 ec ?)
 
-label(code)
-label(returnhere)
+alloc(newmem,$1000,hook1)
+
+label(code1 code2)
+label(returnhere1 returnhere2)
+
+label(overwrite_allow_cheats)
 
 label(chatbox_run_cmd_bytes)
 registersymbol(chatbox_run_cmd_bytes)
 
+label(chat_cmd_allow_cheats_bytes)
+registersymbol(chat_cmd_allow_cheats_bytes)
+
 newmem:
 chatbox_run_cmd_bytes:
-  readMem(hook, 6)
-  jmp returnhere
+  readMem(hook1,6)
+  jmp returnhere1
 
-code:
-  mov byte ptr [rcx+ChatBox.enableCheats], 1
+chat_cmd_allow_cheats_bytes:
+  readMem(hook2,5)
+  jmp returnhere2
+
+overwrite_allow_cheats:
+  db 0
+
+code1:
+  mov byte ptr [overwrite_allow_cheats], 1
 
   push rbp
   mov rbp, rsp
   sub rsp, 30
-  mov [rsp+28], rcx
-  mov [rsp+20], rdx
 
   call chatbox_run_cmd_bytes
 
-  mov rcx, [rsp+28]
-  mov byte ptr [rcx+ChatBox.enableCheats], 0
+  mov byte ptr [overwrite_allow_cheats], 0
   mov rsp, rbp
   pop rbp
   ret
 
-hook:
-  jmp code
+code2:
+  cmp byte ptr [overwrite_allow_cheats], 0
+  je chat_cmd_allow_cheats_bytes
+  mov al, 1
+  ret
+
+hook1:
+  jmp code1
   nop
-  returnhere:
+  returnhere1:
+
+hook2:
+  jmp code2
+  returnhere2:
 
 [DISABLE]
-hook:
-  readMem(chatbox_run_cmd_bytes, 6)
+hook1:
+  readMem(chatbox_run_cmd_bytes,6)
 
-unregistersymbol(chatbox_run_cmd_bytes)
+hook2:
+  readMem(chat_cmd_allow_cheats_bytes,5)
+
+unregistersymbol(*)
 dealloc(newmem)
 
-{
-// ORIGINAL CODE - INJECTION POINT: StardewValley.Menus.ChatBox::runCommand
-
-7FFEEECEAA5D: 60                             - pushad (invalid) 
-7FFEEECEAA5E: 01 70 40                       - add [rax+40],esi
-7FFEEECEAA61: 00 00                          - add [rax],al
-7FFEEECEAA63: 00 00                          - add [rax],al
-7FFEEECEAA65: 00 00                          - add [rax],al
-7FFEEECEAA67: 00 50 18                       - add [rax+18],dl
-7FFEEECEAA6A: EB EE                          - jmp 7FFEEECEAA5A
-7FFEEECEAA6C: FE                             - db -02
-7FFEEECEAA6D: 7F 00                          - jg 7FFEEECEAA6F
-7FFEEECEAA6F: 00                             - db 00 
-// ---------- INJECTING HERE ----------
-StardewValley.Menus.ChatBox::runCommand: 41 57                          - push r15
-// ---------- DONE INJECTING  ----------
-StardewValley.Menus.ChatBox::runCommand+2: 41 56                          - push r14
-StardewValley.Menus.ChatBox::runCommand+4: 41 54                          - push r12
-StardewValley.Menus.ChatBox::runCommand+6: 57                             - push rdi
-StardewValley.Menus.ChatBox::runCommand+7: 56                             - push rsi
-StardewValley.Menus.ChatBox::runCommand+8: 55                             - push rbp
-StardewValley.Menus.ChatBox::runCommand+9: 53                             - push rbx
-StardewValley.Menus.ChatBox::runCommand+A: 48 81 EC 50 01 00 00           - sub rsp,00000150
-StardewValley.Menus.ChatBox::runCommand+11: C5 F8 77                       - vzeroupper 
-StardewValley.Menus.ChatBox::runCommand+14: C5 D8 57 E4                    - vxorps xmm4,xmm4,xmm4
-StardewValley.Menus.ChatBox::runCommand+18: 48 B8 E0 FE FF FF FF FF FF FF  - mov rax,FFFFFFFFFFFFFEE0
-}
 </AssemblerScript>
               <CheatEntries>
                 <CheatEntry>
-                  <ID>8956</ID>
+                  <ID>9017</ID>
                   <Description>"type a command in chat; examples:"</Description>
                   <GroupHeader>1</GroupHeader>
                   <CheatEntries>
                     <CheatEntry>
-                      <ID>8961</ID>
-                      <Description>"/everythingshop"</Description>
+                      <ID>9018</ID>
+                      <Description>"/money 99999"</Description>
                       <GroupHeader>1</GroupHeader>
                     </CheatEntry>
                     <CheatEntry>
-                      <ID>8962</ID>
+                      <ID>9019</ID>
                       <Description>"/item 74 1 4"</Description>
                       <GroupHeader>1</GroupHeader>
                     </CheatEntry>
                   </CheatEntries>
                 </CheatEntry>
                 <CheatEntry>
-                  <ID>8960</ID>
-                  <Description>"https://stardewcommunitywiki.com/Modding:Debug_commands#General_item_search_and_spawning"</Description>
+                  <ID>9020</ID>
+                  <Description>"https://stardewvalleywiki.com/Modding:Console_commands"</Description>
                   <GroupHeader>1</GroupHeader>
                 </CheatEntry>
               </CheatEntries>
@@ -4874,7 +4874,7 @@ StardewValley.Tools.MeleeWeapon::tickUpdate+24: E8 67 1A 2C FF        - call 7FF
     </SymbolEntry>
     <SymbolEntry>
       <Name>struct_update_status</Name>
-      <Address>288E8250000</Address>
+      <Address>1F8102D0000</Address>
     </SymbolEntry>
   </UserdefinedSymbols>
 </CheatTable>
