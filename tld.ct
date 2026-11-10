@@ -122,6 +122,7 @@ local structNames = {
 
     -- fire
     "Fire",
+    "Panel_FireStart",
 
     -- weather / time
     "UniStormWeatherSystem",
@@ -2364,6 +2365,7 @@ alloc(newmem,$ff,GameAssembly.dll)
 label(code_get_norm_charge)
 label(code_is_lit code_is_lit_zero)
 label(flashlight_get_norm_charge_bytes)
+label(flashlight_is_lit_bytes)
 registersymbol(flashlight_get_norm_charge_bytes)
 registersymbol(flashlight_is_lit_bytes)
 
@@ -5209,6 +5211,103 @@ fire_burn_temp_toggle:
                   </CheatEntries>
                 </CheatEntry>
               </CheatEntries>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>9158</ID>
+              <Description>"Start Fire In 1 Second"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : tld.exe
+  Version: 2.60
+  Date   : 2026-11-10
+  Author : sub1to
+
+  public class FireManager : MonoBehaviour // TypeDefIndex: 1883
+
+	public float m_StartFireTimeSeconds; // 0x30
+	public float m_StartFireTimeSecondsWet; // 0x34
+
+	// RVA: 0xC52980 Offset: 0xC51980 VA: 0x180C52980
+	public void PlayerStartFire(Fire fire, FireStarterItem starter, FuelSourceItem tinder, FuelSourceItem fuel, FireStarterItem accelerant, Action&lt;bool&gt; onDoneStartingFire)
+
+	// RVA: 0xC546C0 Offset: 0xC536C0 VA: 0x180C546C0
+	private float PlayerCalculateFireStartTime(FireStarterItem starter, FuelSourceItem fuel, FireStarterItem accelerant)
+}
+
+define(hook,FireManager.PlayerCalculateFireStartTime)
+define(bytes,48 89 5c 24 ?)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$ff,GameAssembly.dll)
+label(returnhere)
+label(code)
+label(fire_manager_player_calc_fire_start_time_bytes)
+registersymbol(fire_manager_player_calc_fire_start_time_bytes)
+
+newmem:
+fire_manager_player_calc_fire_start_time_bytes:
+  readMem(hook, 5)
+  jmp returnhere
+
+code:
+  mov eax, (float)1
+  movd xmm0, eax
+  ret
+
+hook:
+  jmp code
+  returnhere:
+
+[DISABLE]
+hook:
+  readMem(fire_manager_player_calc_fire_start_time_bytes, 5)
+
+unregistersymbol(*)
+dealloc(newmem)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>9157</ID>
+              <Description>"Magnifying Lens Always Works"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : tld.exe
+  Version: 2.60
+  Date   : 2026-11-10
+  Author : sub1to
+
+  public class Panel_FireStart : Panel_AutoReferenced // TypeDefIndex: 1645
+
+	// RVA: 0xA3A7E0 Offset: 0xA397E0 VA: 0x180A3A7E0
+	private bool HasDirectSunlight()
+}
+
+define(hook,Panel_FireStart.HasDirectSunlight)
+define(bytes,40 53 48 83 ec ?)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$ff,GameAssembly.dll)
+label(panel_firestart_has_direct_sunlight_bytes)
+registersymbol(panel_firestart_has_direct_sunlight_bytes)
+
+newmem:
+panel_firestart_has_direct_sunlight_bytes:
+  readMem(hook, 6)
+
+hook:
+  mov al, 1
+  ret
+  nop 3
+
+[DISABLE]
+hook:
+  readMem(panel_firestart_has_direct_sunlight_bytes, 6)
+
+unregistersymbol(*)
+dealloc(newmem)
+</AssemblerScript>
             </CheatEntry>
           </CheatEntries>
         </CheatEntry>
