@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"Enable"</Description>
+      <Options moHideChildren="1"/>
+      <Color>C08000</Color>
+      <VariableType>Auto Assembler Script</VariableType>
+      <AssemblerScript>{ Game   : tld.exe
+  Version:
+  Date   : 2026-11-08
+  Author : sub1to
+}
+
+[ENABLE]
+{$lua}
+if syntaxcheck then
+    return
+end
+
+if process and readInteger(process) ~= 0 then
+    mono_initialize()
+    LaunchMonoDataCollector()
+else
+    print("No process detected")
+    error("No process detected")
+end
+
+local structNames = {
+    "EconomyManager",
+    --"Unity.Netcode.NetworkVariable`1",
+    "BipolarReputationManager",
+    "TimeManager",
+    "ProgressionManager",
+}
+
+function getStructByName(structName)
+	local n = getStructureCount() - 1
+
+	for i = 0, n do
+		local struct = getStructure(i)
+		if struct.Name == structName then
+            return struct
+        end
+	end
+
+	return nil
+end
+
+function getNamespaceAndName(fullName)
+    local ns, name = fullName:match("^(.*)%.([^%.]+)$")
+    if ns then
+        return ns, name
+    end
+    return "", fullName
+end
+
+function sanitizeStructName(fullName)
+    local result = fullName:gsub("%.", "$")
+    return result:gsub("`", "$")
+end
+
+function resolveStruct(fullName)
+    local sanitizedName = sanitizeStructName(fullName)
+    local struct = getStructByName(sanitizedName)
+
+    if struct then
+        struct.removeFromGlobalStructureList()
+    end
+
+    struct = createStructure(sanitizedName)
+
+    local ns, name = getNamespaceAndName(fullName)
+    local classId = mono_findClass(ns, name)
+
+    if classId == nil then
+        local msg = "Class " .. fullName .. " (" .. sanitizedName .. ") not found"
+        print(msg)
+        error(msg)
+    end
+
+    local fields = mono_class_enumFields(classId, true)
+    for i, field in pairs(fields) do
+      if not field.isStatic then
+          local element = struct.addElement()
+          element.Offset = field.offset
+          element.Name = field.name
+          element.Vartype = field.type
+      end
+    end
+
+    struct.addToGlobalStructureList()
+    print("Updated struct " .. sanitizedName)
+end
+
+print("\nUpdating structs..")
+for i, structName in pairs(structNames) do
+    resolveStruct(structName)
+end
+
+{$asm}
+
+[DISABLE]
+
+{$lua}
+if syntaxcheck then
+    return
+end
+
+local n = getStructureCount() - 1
+
+for i = n, 0, -1 do
+    local struct = getStructure(i)
+    if struct then
+        struct.removeFromGlobalStructureList()
+    end
+end
+
+print("Removed all structs")
+
+{$asm}
+
+
+</AssemblerScript>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>20</ID>
+          <Description>"EconomyManager"</Description>
+          <Options moHideChildren="1"/>
+          <Color>008000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : I Know a Guy.exe
+  Version:
+  Date   : 2026-11-10
+  Author : sub1to
+
+  class EconomyManager : public ::Unity::Netcode::NetworkBehaviour
+
+    ::Unity::Netcode::NetworkVariable_1* networkMoney; // Offset: 0xd0
+    ::Unity::Netcode::NetworkVariable_1* networkCrypto; // Offset: 0xd8
+}
+[ENABLE]
+{$lua}
+if syntaxcheck then return end
+if economy_manager_mem then
+  unregisterSymbol("economy_manager_ptr")
+  deAlloc(economy_manager_mem)
+  economy_manager_mem = nil
+end
+
+local classId = mono_findClass("", "EconomyManager")
+if classId == nil then
+  error("EconomyManager not found")
+end
+
+economy_manager_mem = allocateMemory(8)
+registerSymbol("economy_manager_ptr", economy_manager_mem)
+
+local fields = mono_class_enumFields(classId, true)
+for i in pairs(fields) do
+  if fields[i].isStatic and fields[i].name == "_instance" then
+    local val = mono_class_getStaticFieldValue(classId, fields[i].field)
+    writeQword(economy_manager_mem, val or 0)
+    return
+  end
+end
+error("_instance not found")
+
+{$asm}
+[DISABLE]
+{$lua}
+if syntaxcheck then return end
+
+unregisterSymbol("economy_manager_ptr")
+if economy_manager_mem then
+  deAlloc(economy_manager_mem)
+  economy_manager_mem = nil
+end
+{$asm}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>35</ID>
+              <Description>"economy_manager_ptr"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <ShowAsSigned>0</ShowAsSigned>
+              <Color>808080</Color>
+              <VariableType>8 Bytes</VariableType>
+              <Address>economy_manager_ptr</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>36</ID>
+              <Description>"networkMoney"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <Color>FF8080</Color>
+              <VariableType>Float</VariableType>
+              <Address>economy_manager_ptr</Address>
+              <Offsets>
+                <Offset>68</Offset>
+                <Offset>EconomyManager.networkMoney</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>37</ID>
+              <Description>"networkCrypto"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <Color>FF8080</Color>
+              <VariableType>Float</VariableType>
+              <Address>economy_manager_ptr</Address>
+              <Offsets>
+                <Offset>68</Offset>
+                <Offset>EconomyManager.networkCrypto</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>32</ID>
+          <Description>"BipolarReputationManager"</Description>
+          <Options moHideChildren="1"/>
+          <Color>008000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : I Know a Guy.exe
+  Version:
+  Date   : 2026-11-10
+  Author : sub1to
+
+  class BipolarReputationManager : public ::Unity::Netcode::NetworkBehaviour
+
+    ::Unity::Netcode::NetworkVariable_1* networkScore; // Offset: 0xd8
+}
+[ENABLE]
+{$lua}
+if syntaxcheck then return end
+if bipolar_rep_man_mem then
+  unregisterSymbol("bipolar_rep_man_ptr")
+  deAlloc(bipolar_rep_man_mem)
+  bipolar_rep_man_mem = nil
+end
+
+local classId = mono_findClass("", "BipolarReputationManager")
+if classId == nil then
+  error("BipolarReputationManager not found")
+end
+
+bipolar_rep_man_mem = allocateMemory(8)
+registerSymbol("bipolar_rep_man_ptr", bipolar_rep_man_mem)
+
+local fields = mono_class_enumFields(classId, true)
+for i in pairs(fields) do
+  if fields[i].isStatic and fields[i].name == "_instance" then
+    local val = mono_class_getStaticFieldValue(classId, fields[i].field)
+    writeQword(bipolar_rep_man_mem, val or 0)
+    return
+  end
+end
+error("_instance not found")
+
+{$asm}
+[DISABLE]
+{$lua}
+if syntaxcheck then return end
+
+unregisterSymbol("bipolar_rep_man_ptr")
+if bipolar_rep_man_mem then
+  deAlloc(bipolar_rep_man_mem)
+  bipolar_rep_man_mem = nil
+end
+{$asm}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>33</ID>
+              <Description>"bipolar_rep_man_ptr"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <ShowAsSigned>0</ShowAsSigned>
+              <Color>808080</Color>
+              <VariableType>8 Bytes</VariableType>
+              <Address>bipolar_rep_man_ptr</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>34</ID>
+              <Description>"networkScore"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <Color>FF8080</Color>
+              <VariableType>Float</VariableType>
+              <Address>bipolar_rep_man_ptr</Address>
+              <Offsets>
+                <Offset>68</Offset>
+                <Offset>BipolarReputationManager.networkScore</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>38</ID>
+          <Description>"TimeManager"</Description>
+          <Options moHideChildren="1"/>
+          <Color>008000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : I Know a Guy.exe
+  Version:
+  Date   : 2026-11-10
+  Author : sub1to
+
+  class TimeManager : public ::Unity::Netcode::NetworkBehaviour
+
+    ::Unity::Netcode::NetworkVariable_1* networkCurrentTime; // Offset: 0xf8
+}
+[ENABLE]
+{$lua}
+if syntaxcheck then return end
+if time_manager_mem then
+  unregisterSymbol("time_manager_ptr")
+  deAlloc(time_manager_mem)
+  time_manager_mem = nil
+end
+
+local classId = mono_findClass("", "TimeManager")
+if classId == nil then
+  error("TimeManager not found")
+end
+
+time_manager_mem = allocateMemory(8)
+registerSymbol("time_manager_ptr", time_manager_mem)
+
+local fields = mono_class_enumFields(classId, true)
+for i in pairs(fields) do
+  if fields[i].isStatic and fields[i].name == "_instance" then
+    local val = mono_class_getStaticFieldValue(classId, fields[i].field)
+    writeQword(time_manager_mem, val or 0)
+    return
+  end
+end
+error("_instance not found")
+
+{$asm}
+[DISABLE]
+{$lua}
+if syntaxcheck then return end
+
+unregisterSymbol("time_manager_ptr")
+if time_manager_mem then
+  deAlloc(time_manager_mem)
+  time_manager_mem = nil
+end
+{$asm}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>24</ID>
+              <Description>"time_manager_ptr"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <ShowAsSigned>0</ShowAsSigned>
+              <Color>808080</Color>
+              <VariableType>8 Bytes</VariableType>
+              <Address>time_manager_ptr</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>30</ID>
+              <Description>"networkTimeFrozen"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <Color>FF8080</Color>
+              <VariableType>Byte</VariableType>
+              <Address>time_manager_ptr</Address>
+              <Offsets>
+                <Offset>68</Offset>
+                <Offset>TimeManager.networkTimeFrozen</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>31</ID>
+              <Description>"localTime"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <Color>FF8080</Color>
+              <VariableType>Float</VariableType>
+              <Address>time_manager_ptr</Address>
+              <Offsets>
+                <Offset>TimeManager.localTime</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>39</ID>
+          <Description>"ProgressionManager"</Description>
+          <Options moHideChildren="1"/>
+          <Color>008000</Color>
+          <VariableType>Auto Assembler Script</VariableType>
+          <AssemblerScript>{ Game   : I Know a Guy.exe
+  Version:
+  Date   : 2026-11-10
+  Author : sub1to
+
+  class ProgressionManager : public ::Unity::Netcode::NetworkBehaviour
+
+    ::Unity::Netcode::NetworkVariable_1* frontXP; // Offset: 0x720
+    ::Unity::Netcode::NetworkVariable_1* shadyXP; // Offset: 0x728
+}
+[ENABLE]
+{$lua}
+if syntaxcheck then return end
+if progression_man_mem then
+  unregisterSymbol("progression_man_ptr")
+  deAlloc(progression_man_mem)
+  progression_man_mem = nil
+end
+
+local classId = mono_findClass("", "ProgressionManager")
+if classId == nil then
+  error("ProgressionManager not found")
+end
+
+progression_man_mem = allocateMemory(8)
+registerSymbol("progression_man_ptr", progression_man_mem)
+
+local fields = mono_class_enumFields(classId, true)
+for i in pairs(fields) do
+  if fields[i].isStatic and fields[i].name == "_instance" then
+    local val = mono_class_getStaticFieldValue(classId, fields[i].field)
+    writeQword(progression_man_mem, val or 0)
+    return
+  end
+end
+error("_instance not found")
+
+{$asm}
+[DISABLE]
+{$lua}
+if syntaxcheck then return end
+
+unregisterSymbol("progression_man_ptr")
+if progression_man_mem then
+  deAlloc(progression_man_mem)
+  progression_man_mem = nil
+end
+{$asm}
+</AssemblerScript>
+          <CheatEntries>
+            <CheatEntry>
+              <ID>40</ID>
+              <Description>"progression_man_ptr"</Description>
+              <ShowAsHex>1</ShowAsHex>
+              <ShowAsSigned>0</ShowAsSigned>
+              <Color>808080</Color>
+              <VariableType>8 Bytes</VariableType>
+              <Address>progression_man_ptr</Address>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>41</ID>
+              <Description>"frontXP"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <Color>FF8080</Color>
+              <VariableType>Float</VariableType>
+              <Address>progression_man_ptr</Address>
+              <Offsets>
+                <Offset>68</Offset>
+                <Offset>ProgressionManager.frontXP</Offset>
+              </Offsets>
+            </CheatEntry>
+            <CheatEntry>
+              <ID>42</ID>
+              <Description>"shadyXP"</Description>
+              <ShowAsSigned>0</ShowAsSigned>
+              <Color>FF8080</Color>
+              <VariableType>Float</VariableType>
+              <Address>progression_man_ptr</Address>
+              <Offsets>
+                <Offset>68</Offset>
+                <Offset>ProgressionManager.shadyXP</Offset>
+              </Offsets>
+            </CheatEntry>
+          </CheatEntries>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
