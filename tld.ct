@@ -5268,6 +5268,55 @@ dealloc(newmem)
 </AssemblerScript>
             </CheatEntry>
             <CheatEntry>
+              <ID>9159</ID>
+              <Description>"Start Fire 100% Success"</Description>
+              <Color>008000</Color>
+              <VariableType>Auto Assembler Script</VariableType>
+              <AssemblerScript>{ Game   : tld.exe
+  Version: 2.60
+  Date   : 2026-11-10
+  Author : sub1to
+
+  public class FireManager : MonoBehaviour // TypeDefIndex: 1883
+
+	// RVA: 0xC531B0 Offset: 0xC521B0 VA: 0x180C531B0
+	public float CalculateFireStartSuccess(FireStarterItem starter, FuelSourceItem fuel, FireStarterItem accelerant)
+}
+
+define(hook,FireManager.CalculateFireStartSuccess)
+define(bytes,48 89 5c 24 ?)
+
+[ENABLE]
+assert(hook,bytes)
+alloc(newmem,$ff,GameAssembly.dll)
+label(returnhere)
+label(code)
+label(fire_manager_player_calc_fire_start_success_bytes)
+registersymbol(fire_manager_player_calc_fire_start_success_bytes)
+
+newmem:
+fire_manager_player_calc_fire_start_success_bytes:
+  readMem(hook, 5)
+  jmp returnhere
+
+code:
+  mov eax, (float)100
+  movd xmm0, eax
+  ret
+
+hook:
+  jmp code
+  returnhere:
+
+[DISABLE]
+hook:
+  readMem(fire_manager_player_calc_fire_start_success_bytes, 5)
+
+unregistersymbol(*)
+dealloc(newmem)
+</AssemblerScript>
+            </CheatEntry>
+            <CheatEntry>
               <ID>9157</ID>
               <Description>"Magnifying Lens Always Works"</Description>
               <Color>008000</Color>
